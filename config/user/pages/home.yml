@@ -4,7 +4,7 @@ categories:
   - name: "狗谍⚾🔪"
     slug: Cloak And Batter          # 可选，用于定位分类，通常自动生成
     sites:
-      - name: "are We any Different?"
+      - name: "我们有什么不同吗？"
         description: "红蓝狗谍＋谍水仙"
         url: https://shirasu224.github.io/menav/are_We_any Different.htm
       - name: "Overhand, Underhand"
@@ -15,7 +15,7 @@ categories:
   - name: "狙谍🎯🔪"
     slug: Bloody Suit
     sites:
-      - name: "Date Night" 
+      - name: "约会之夜" 
         description: 长篇连载
         url: /menav/sample.htm        
       - name: "The Curious Case of Sex, Denial, and Love"
@@ -25,8 +25,8 @@ categories:
   - name: "医谍💉🔪"
     slug: Gentle Surgery
     sites:
-      - name: 第一篇斯哈
-        description: 长篇连载
+      - name: "副作用"
+        description: "抓到直接入司"
         url: /menav/sample.htm
         
   - name: "谍水仙🔪🦀"
