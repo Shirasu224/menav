@@ -1,0 +1,8 @@
+template: normal
+title: 全部文章
+categories:
+  - name: 最新更新
+    sites:
+      - name: 第一篇翻译
+        description: 作者名
+        url: /your-article-file.html
