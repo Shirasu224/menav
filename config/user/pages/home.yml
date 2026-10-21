@@ -1,0 +1,7 @@
+template: home
+categories:
+  - name: 分类一
+    sites:
+      - name: 示例文章
+        description: 这是一个测试链接
+        url: https://www.baidu.com
