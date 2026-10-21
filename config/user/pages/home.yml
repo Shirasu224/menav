@@ -26,14 +26,14 @@ categories:
     slug: Gentle Surgery
     sites:
       - name: "副作用"
-        description: "抓到直接入司"
-        url: /menav/sample.htm
+        description: "潜入失败CG"
+        url: https://shirasu224.github.io/menav/Side_Effects.html
         
   - name: "谍水仙🔪🦀"
     slug: Double Agent
     sites:
       - name: "[the entropy of time]"
-        description: "有恨海擎天"
+        description: "恨海擎天"
         url: /menav/sample.htm
         
   - name: "工程谍🧰🔪"
