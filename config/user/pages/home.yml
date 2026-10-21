@@ -28,6 +28,7 @@ categories:
     sites:
       - name: "副作用"
         description: "潜入失败CG"
+        icon: https://shirasu224.github.io/menav/icons/rating-E.png
         url: https://shirasu224.github.io/menav/Side_Effects.htm
         
   - name: "谍水仙 - Double Agent"
