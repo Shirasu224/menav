@@ -1,7 +1,51 @@
 template: page
 categories:
-  - name: 我的分类
+  # 第一个分类：
+  - name: 狗谍⚾🔪
+    slug: Cloak And Batter          # 可选，用于定位分类，通常自动生成
     sites:
       - name: are We any Different?
-        description: 收录翻译与原文对照
-        url: https://shirasu224.github.io/menav/are_We_any_Different.html
+        description: 红蓝狗谍＋谍水仙
+        url: /menav/sample.htm
+      - name: Overhand, Underhand
+        description: 扑克之夜
+        url: /menav/sample.htm
+
+  # 第二个分类：
+  - name: 狙谍🎯🔪
+    slug: Bloody Suit
+    sites:
+      - name: Date Night 
+        description: 长篇连载
+        url: /menav/sample.htm        
+      - name: The Curious Case of Sex, Denial, and Love 
+        description: 扑克之夜
+        url: /menav/sample.htm
+
+  - name: 医谍💉🔪
+    slug: Gentle Surgery
+    sites:
+      - name: 第一篇斯哈
+        description: 长篇连载
+        url: /menav/sample.htm
+        
+  - name: 谍水仙🔪🦀
+    slug: Double Agent
+    sites:
+      - name: [the entropy of time] 
+        description: 长篇连载
+        url: /menav/sample.htm
+        
+  - name: 工程谍🧰🔪
+    slug: Napoleon Complex
+    sites:
+      - name: With Apologies To Pepper Coyote 
+        description: 长篇连载
+        url: /menav/sample.htm
+        
+  - name: All谍🦀💦
+    slug: Meet the Team
+    sites:
+      - name: little boy blue
+        description: 长篇连载
+        url: /menav/sample.htm
