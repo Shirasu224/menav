@@ -2,5 +2,6 @@ template: page
 categories:
   - name: 我的分类
     sites:
-      - name: 示例
+      - name: are We any Different?
+        description: 收录翻译与原文对照
         url: /are_We_any_Different.html
