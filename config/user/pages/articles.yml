@@ -1,8 +1,7 @@
-template: normal
+template: articles
 title: 全部文章
 categories:
-  - name: 最新更新
+  - name: 翻译合集
     sites:
-      - name: 第一篇翻译
-        description: 作者名
+      - name: 测试文章
         url: are_We_any_Different.html
