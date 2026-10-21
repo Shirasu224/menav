@@ -2,3 +2,13 @@ title: 自用同人文档库
 profile:
   title: 欢迎来到我的同人档案
   subtitle: 收录翻译与原文对照
+
+# 下面这部分就是导航菜单
+navigation:
+  - name: 首页
+    icon: fas fa-home
+    id: home
+    active: true
+  - name: 文章
+    icon: fas fa-book
+    id: articles
