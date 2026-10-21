@@ -1,7 +1,6 @@
 template: page
 categories:
-  - name: 哈利·波特
+  - name: 我的分类
     sites:
-      - name: 某篇同人
-        description: 双语对照
+      - name: 示例
         url: are_We_any_Different.html
