@@ -6,6 +6,7 @@ categories:
     sites:
       - name: "我们有什么不同吗？"
         description: "红蓝狗谍＋谍水仙"
+        icon: https://shirasu224.github.io/menav/icons/awad.png
         url: https://shirasu224.github.io//menav/are_We_any_Different/intro.html
       - name: "Overhand, Underhand"
         description: "扑克之夜"
