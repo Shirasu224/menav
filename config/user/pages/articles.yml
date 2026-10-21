@@ -1,0 +1,8 @@
+template: normal
+title: 文章
+categories:
+  - name: 最新文章
+    sites:
+      - name: 我的第一篇同人
+        description: 翻译好的文章
+        url: /你的文章文件名.html
