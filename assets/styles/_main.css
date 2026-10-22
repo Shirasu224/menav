@@ -218,39 +218,56 @@
   opacity: 1;
   visibility: visible;
 }
-/* 1. 只隐藏右边的统计格子（时钟和待办） */
-.dashboard-stats {
-    display: none !important;
+/* ==========================================
+   恢复原本的左右网格布局 (左文字，右图片)
+   ========================================== */
+.dashboard-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important; /* 左右各占一半 */
+    align-items: center !important; /* 垂直居中对齐 */
+    gap: 20px !important;
 }
 
-/* 2. 让左边的标题区重新占满整个屏幕宽度 */
+/* ==========================================
+   左侧：文字区域
+   ========================================== */
 .dashboard-intro {
     width: 100% !important;
-    max-width: 100% !important;
-    grid-column: 1 / -1 !important; /* 如果它是网格布局，让它跨满全宽 */
 }
 
-/* 3. 确保大盒子不再是隐藏状态 */
-.dashboard-grid {
-    display: flex !important; 
-    justify-content: center !important;
+/* ==========================================
+   右侧：隐藏原本的时钟和待办内容，换成你的大图
+   ========================================== */
+/* 1. 把右边格子里面的所有东西（时间、待办列表）全隐藏，连空间都不占 */
+.dashboard-stats > * {
+    display: none !important; 
 }
 
-/* 给变长的时钟格子加上宽度限制，并居中 */
-.dashboard-card, .clock-card, [class*="clock"] {
-    max-width: 400px !important; /* 限制最大宽度，你可以自己改数字 */
-    margin: 0 auto !important; /* 让它在页面中间居中 */
-    border-radius: 12px !important; /* 圆角保持好看 */
-}
-.dashboard-card, .clock-card, [class*="clock"] {
+/* 2. 直接把右侧的整个大框变成你的画作 */
+.dashboard-stats {
+    /* 你的画作链接 */
     background-image: url('https://shirasu224.github.io/menav/pics/the-spycrab2.png') !important;
-    background-size: cover !important; /* 铺满格子 */
+    background-size: contain !important; /* 保证图片完整显示，不变形 */
+    background-repeat: no-repeat !important;
     background-position: center !important;
-    border: none !important;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.5) !important;
+    background-color: transparent !important; /* 干掉原本的灰色底 */
+    border: none !important; /* 干掉边框 */
+    box-shadow: none !important; /* 干掉阴影 */
+    width: 100% !important;
+    min-height: 300px !important; /* 给图片留出足够的高度，让图大一点 */
 }
 
-/* 把里面的时间、文字隐藏掉，只留你的图 */
-.dashboard-card > *, .clock-card > *, [class*="clock"] > * {
-    opacity: 0 !important;
+/* ==========================================
+   手机端适配（解决手机上看不见的问题）
+   ========================================== */
+@media (max-width: 768px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr !important; /* 手机上变成上下排列 */
+        text-align: center !important; /* 文字居中 */
+    }
+    
+    .dashboard-stats {
+        min-height: 200px !important; /* 手机上给个合适的高度 */
+        margin-top: 20px !important; /* 和上面的文字拉开一点距离 */
+    }
 }
