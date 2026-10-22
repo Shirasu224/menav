@@ -218,7 +218,20 @@
   opacity: 1;
   visibility: visible;
 }
-/* 隐藏整个仪表盘区域（包含时钟和待办） */
-.dashboard-grid {
+/* 1. 只隐藏右边的统计格子（时钟和待办） */
+.dashboard-stats {
     display: none !important;
+}
+
+/* 2. 让左边的标题区重新占满整个屏幕宽度 */
+.dashboard-intro {
+    width: 100% !important;
+    max-width: 100% !important;
+    grid-column: 1 / -1 !important; /* 如果它是网格布局，让它跨满全宽 */
+}
+
+/* 3. 确保大盒子不再是隐藏状态 */
+.dashboard-grid {
+    display: flex !important; 
+    justify-content: center !important;
 }
