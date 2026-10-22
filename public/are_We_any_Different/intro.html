@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>作品导读</title>
+    <style>
+        :root {
+            --ao3-bg: #1a1a1a;
+            --ao3-text: #e0e0e0;
+            --ao3-link: #900;
+            --ao3-link-hover: #c00;
+            --ao3-border: #444;
+            --ao3-box-bg: #222;
+        }
+
+        body {
+            background-color: var(--ao3-bg);
+            color: var(--ao3-text);
+            font-family: "Lucida Grande", Arial, sans-serif;
+            font-size: 14px;
+            line-height: 1.5;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        a { color: var(--ao3-link); text-decoration: none; }
+        a:hover { color: var(--ao3-link-hover); text-decoration: underline; }
+
+        /* 头部排版 */
+        .work-header { border-bottom: 1px solid var(--ao3-border); padding-bottom: 15px; margin-bottom: 15px; }
+        .work-title { margin: 0 0 5px 0; font-size: 1.8em; font-weight: 700; color: #fff; }
+        .work-author { font-size: 1.1em; color: #999; }
+        
+        /* 标签网格系统 */
+        .work-meta dl { margin: 0; padding: 0; display: grid; grid-template-columns: 140px 1fr; gap: 8px 10px; margin-bottom: 15px; }
+        .work-meta dt { font-weight: bold; color: #fff; }
+        .work-meta dd { margin: 0; color: var(--ao3-text); }
+        
+        /* 原版分级图标样式 */
+        .rating-icon {
+            height: 24px; /* 控制图标大小 */
+            vertical-align: middle;
+            margin-right: 5px;
+            border-radius: 3px; /* 稍微加一点圆角看起来更贴合 */
+        }
+
+        /* 摘要框 */
+        .summary-box { background-color: var(--ao3-box-bg); border: 1px solid var(--ao3-border); padding: 15px; margin-bottom: 20px; border-radius: 4px; }
+        .summary-box h3 { margin-top: 0; font-size: 1em; color: #fff; }
+        .summary-box blockquote { margin: 0; padding-left: 10px; border-left: 3px solid #555; color: #aaa; font-style: italic; }
+
+        /* 底部统计栏 */
+        .stats-bar { text-align: right; font-size: 0.9em; color: #999; border-bottom: 1px solid var(--ao3-border); padding-bottom: 10px; margin-bottom: 20px; }
+        .stats-bar b { color: #fff; font-weight: normal; }
+
+        /* 阅读按钮 */
+        .navigation { margin-bottom: 30px; display: flex; gap: 10px; }
+        .ao3-btn { display: inline-block; padding: 6px 15px; background-color: var(--ao3-link); color: #fff; border-radius: 2px; font-weight: bold; cursor: pointer; }
+        .ao3-btn:hover { background-color: var(--ao3-link-hover); color: #fff; text-decoration: none; }
+        .ao3-btn-secondary { background-color: #444; }
+
+        /* 手机端适配 */
+        @media (max-width: 600px) {
+            .work-meta dl { grid-template-columns: 1fr; gap: 2px; }
+            .work-meta dt { margin-top: 10px; }
+            .stats-bar { text-align: left; display: flex; flex-direction: column; gap: 5px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 标题与作者 -->
+    <div class="work-header">
+        <h2 class="work-title">我们有什么不同吗？ | are We any Different?</h2>
+        <div class="work-author">
+            by <a href="#">匿名</a> | 翻译：<a href="#">Deepseek flash</a>
+        </div>
+    </div>
+
+    <!-- 标签信息区 -->
+    <div class="work-meta">
+        <dl>
+            <!-- 重点在这里：把之前转好的图片路径填进 src 里 -->
+            <dt>Rating:</dt>
+            <dd>
+                <img src="https://shirasu224.github.io/menav/icons/rating-E.png" class="rating-icon" alt="E"> 
+                <a href="#">Explicit</a> (限制级)
+            </dd>
+
+            <dt>Archive Warnings:</dt>
+            <dd><span style="color: #c00; font-weight: bold;"><a href="#" style="color: #c00;">强暴/非自愿性行为</a></span></dd>
+
+            <dt>Fandoms:</dt>
+            <dd><a href="#">Team Fortress 2 </a></dd>
+
+            <dt>Relationships:</dt>
+            <dd><a href="#">Spy/Spy，Scout/Spy</a></dd>
+
+            <dt>Additional Tags:</dt>
+            <dd>
+                <a href="#">情感操纵</a>, 
+                <a href="#">单相思</a>, 
+                <a href="#">权力动态</a>, 
+                <a href="#">奸尸</a>, 
+                <a href="#">儿童虐待</a>, 
+            </dd>
+
+            <dt>Language:</dt>
+            <dd>中英双语</dd>
+        </dl>
+    </div>
+
+    <!-- 摘要区 -->
+    <div class="summary-box">
+        <h3>Summary:</h3>
+        <blockquote>
+            n the ghettos of New Mexico lies a bar. Within the bar, two opposing enemies catches up with an old friend.<br>
+            新墨西哥州的贫民区里有一间酒吧。酒吧内，两个势不两立的敌人与一位老朋友重逢了。<br><br>
+            Things are more or less the same but a certain desire opens a door to an unexpected behavior.<br>
+            一切大体如旧，但某种欲望却为一种出人意料的举动打开了大门。
+        </blockquote>
+        <p style="margin-bottom: 0;"><strong>Notes:</strong><br>
+            怎么又是单相思不得的蓝谍，蓝狗谍也看得好胃痛；中毒了还想吃更多
+        </p>
+    </div>
+
+    <!-- 底部数据栏 -->
+    <div class="stats-bar">
+        <span>语言: <b>English</b></span> &nbsp;&nbsp;
+        <span>字数: <b>12,556</b></span> &nbsp;&nbsp;
+        <span>章节: <b>7/?</b></span> &nbsp;&nbsp;
+        <span>Kudos: <b>35</b></span> &nbsp;&nbsp;
+        <span>Hits: <b>764</b></span>
+    </div>
+
+        <div class="navigation" style="align-items: flex-start;">
+        <a href="are_We_any Different.htm" class="ao3-btn">📖 从头开始读</a>
+        
+        <!-- 折叠菜单替代下拉框 -->
+        <details class="custom-dropdown">
+            <summary class="ao3-btn-secondary">📑 章节列表</summary>
+            <div class="dropdown-content">
+                <a href="are_We_any Different.htm">第 1 章: 酒吧 [•]</a>
+                <a href="are_We_any Different2.htm">第 2 章: 外面 [•]</a>
+                <a href="are_We_any Different3.htm">第 3 章: stay true, sunday blues [•]</a>
+                <a href="are_We_any Different4.htm">第 4 章: 红酒，天堂之藤 [•]</a>
+                <a href="are_We_any Different5.htm">第 5 章: 战争 [○]</a>
+                <a href="are_We_any Different6.htm">第 6 章: 久违的第一次 [○]</a>
+                <a href="are_We_any Different7.htm">第 7 章: 吸烟室 [○]</a>
+            </div>
+        </details>
+    </div>
+
+    <!-- 配套的折叠菜单样式 -->
+        <style>
+        /* 给容器加上相对定位，作为下拉框的基准 */
+        .custom-dropdown { 
+            position: relative; 
+            display: inline-block; 
+        }
+        
+        /* 按钮的样式 */
+        .custom-dropdown summary {
+            list-style: none; /* 去掉默认的小三角 */
+            padding: 0 15px; 
+            background-color: #333; 
+            color: #fff; 
+            border: 1px solid #555;
+            border-radius: 2px; 
+            font-weight: bold; 
+            font-size: 14px;
+            cursor: pointer; 
+            height: 33px; 
+            box-sizing: border-box;
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            outline: none;
+        }
+        
+        .custom-dropdown summary:hover {
+            background-color: #444;
+        }
+
+        /* 去掉 Safari 默认的小三角 */
+        .custom-dropdown summary::-webkit-details-marker { display: none; }
+        
+        /* 自己画一个小倒三角 */
+                .custom-dropdown summary::after { 
+            content: "➤"; 
+            font-size: 12px; 
+            margin-left: 8px; 
+            display: inline-block;
+            transition: transform 0.2s ease;
+        }
+        .custom-dropdown[open] summary::after { 
+            transform: rotate(90deg); /* 点击时直接旋转90度变成向下 */
+        }
+        
+        /* 下拉框本体的核心修复 */
+        .dropdown-content {
+            position: absolute; 
+            top: 100%; 
+            left: 0; /* 强制左对齐 */
+            margin-top: 5px; /* 和按钮留一点点缝隙，更好看 */
+            min-width: 100%; /* 保证宽度至少和按钮一样宽 */
+            width: max-content; /* 如果章节名字太长，框会自动撑宽 */
+            background-color: #222; 
+            border: 1px solid #555; 
+            border-radius: 2px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5); /* 加一点高级阴影 */
+            z-index: 100; 
+            display: flex; 
+            flex-direction: column;
+        }
+        
+        .dropdown-content a {
+            padding: 10px 20px; 
+            color: #e0e0e0; 
+            text-align: left; /* 章节列表文字靠左看着更整齐 */
+            border-bottom: 1px solid #333; 
+            white-space: nowrap;
+            font-size: 14px;
+        }
+        
+        .dropdown-content a:last-child { 
+            border-bottom: none; 
+        }
+        
+        .dropdown-content a:hover { 
+            background-color: #900; /* 悬浮的时候变成AO3红，非常带感 */
+            color: #fff;
+            text-decoration: none; 
+        }
+    </style>
+</body>
+</html>
