@@ -242,3 +242,15 @@
     margin: 0 auto !important; /* 让它在页面中间居中 */
     border-radius: 12px !important; /* 圆角保持好看 */
 }
+.dashboard-card, .clock-card, [class*="clock"] {
+    background-image: url('https://shirasu224.github.io/menav/pics/the-spycrab2.png') !important;
+    background-size: cover !important; /* 铺满格子 */
+    background-position: center !important;
+    border: none !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5) !important;
+}
+
+/* 把里面的时间、文字隐藏掉，只留你的图 */
+.dashboard-card > *, .clock-card > *, [class*="clock"] > * {
+    opacity: 0 !important;
+}
