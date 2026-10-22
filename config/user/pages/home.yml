@@ -17,7 +17,7 @@ categories:
         url: /menav/sample.htm
       - name: "没有款待"
         description: "No treats"
-        icon: face-smile-wink
+        icon: fas fa-face-smile-wink
         url: /menav/sample.htm
 
   # 第二个分类：
@@ -53,7 +53,7 @@ categories:
     sites:
       - name: "With Apologies To Pepper Coyote"
         description: "机械＋马"
-        icon: fas fa-house-fire
+        icon: fas fa-gears
         url: /menav/sample.htm
         
   - name: "All谍 - Meet the Team"
