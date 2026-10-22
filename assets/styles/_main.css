@@ -218,50 +218,7 @@
   opacity: 1;
   visibility: visible;
 }
-
-/* ==========================================
-   1. 待办事项格子：替换为画作并隐藏内部文字
-   ========================================== */
-.dashboard-panel {
-    /* 替换为你的待办画作链接 */
-    background-image: url('https://shirasu224.github.io/menav/images/the-spycrab2.png') !important;
-    background-size: cover !important;
-    background-position: center !important;
-    border: none !important; 
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5) !important;
-    border-radius: 12px !important;
-    overflow: hidden !important; /* 圆角切平内部元素 */
-}
-
-/* 隐藏格子内部的所有菜单、输入框和文字 */
-.dashboard-panel .panel-sidebar,
-.dashboard-panel .panel-content-wrapper,
-.dashboard-panel #todo-list {
-    opacity: 0 !important; 
-    pointer-events: none !important; /* 让点击直接穿透到图片 */
-}
-
-/* ==========================================
-   2. 时钟格子：替换为画作并隐藏内部数字
-   ========================================== */
-/* 你的截图没展开时钟部分，这里推测它的类名为 dashboard-clock 或 clock-card */
-.dashboard-clock,
-.clock-card,
-.dashboard-stats > div:first-child {
-    /* 替换为你的时钟画作链接 */
-    background-image: url('https://shirasu224.github.io/menav/images/clock-art.jpg') !important;
-    background-size: cover !important;
-    background-position: center !important;
-    border: none !important;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5) !important;
-    border-radius: 12px !important;
-    overflow: hidden !important;
-}
-
-/* 隐藏时钟格子的数字和背景 */
-.dashboard-clock *,
-.clock-card *,
-.dashboard-stats > div:first-child * {
-    opacity: 0 !important;
-    pointer-events: none !important;
+/* 隐藏整个仪表盘区域（包含时钟和待办） */
+.dashboard-grid {
+    display: none !important;
 }
