@@ -1,1 +1,301 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>作品导读</title>
+    <style>
+                /* ==========================================
+           电脑端：数据统计缩小、变暗、稍微下移贴线
+           ========================================== */
+        .work-stats {
+            font-size: 0.8em !important; /* 字号缩小 */
+            color: #666 !important;      /* 颜色变灰暗 */
+            line-height: 1.2;
+            /* 往下微调 2px。用 transform 不会挤占空间，绝对不会错位！ */
+            transform: translateY(2px); 
+        }
+        
+        .work-stats b {
+            color: #999 !important;      /* 数字原本是纯白，现在也变灰一点 */
+            font-weight: normal;
+        }
 
+        /* ==========================================
+           手机端专属：英文标题缩小变暗
+           ========================================== */
+        @media (max-width: 600px) {
+            /* 英文原标题变小、透明 */
+            .en-title {
+                display: block;       /* 手机上干脆让它独占一行，显得不那么挤 */
+                font-size: 0.6em;     /* 字号只有原来的 60% */
+                color: #888;          /* 变暗 */
+                margin-top: 5px;
+                font-weight: normal;  /* 去掉粗体 */
+            }
+
+            /* 手机上恢复数据正常的换行状态，取消下移 */
+            .work-stats {
+                transform: none;
+                margin-top: 8px;
+                width: 100%;
+            }
+        }
+        :root {
+            --ao3-bg: #1a1a1a;
+            --ao3-text: #e0e0e0;
+            --ao3-link: #900;
+            --ao3-link-hover: #c00;
+            --ao3-border: #444;
+            --ao3-box-bg: #222;
+        }
+
+        body {
+            background-color: var(--ao3-bg);
+            color: var(--ao3-text);
+            font-family: "Lucida Grande", Arial, sans-serif;
+            font-size: 14px;
+            line-height: 1.5;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        a { color: var(--ao3-link); text-decoration: none; }
+        a:hover { color: var(--ao3-link-hover); text-decoration: underline; }
+
+        /* 头部排版 */
+        .work-header { border-bottom: 1px solid var(--ao3-border); padding-bottom: 15px; margin-bottom: 15px; }
+        .work-title { margin: 0 0 5px 0; font-size: 1.8em; font-weight: 700; color: #fff; }
+        .work-author { font-size: 1.1em; color: #999; }
+        
+        /* 标签网格系统 */
+        .work-meta dl { margin: 0; padding: 0; display: grid; grid-template-columns: 140px 1fr; gap: 8px 10px; margin-bottom: 15px; }
+        .work-meta dt { font-weight: bold; color: #fff; }
+        .work-meta dd { margin: 0; color: var(--ao3-text); }
+        
+        /* 原版分级图标样式 */
+        .rating-icon {
+            height: 24px; /* 控制图标大小 */
+            vertical-align: middle;
+            margin-right: 5px;
+            border-radius: 3px; /* 稍微加一点圆角看起来更贴合 */
+        }
+
+        /* 摘要框 */
+        .summary-box { background-color: var(--ao3-box-bg); border: 1px solid var(--ao3-border); padding: 15px; margin-bottom: 20px; border-radius: 4px; }
+        .summary-box h3 { margin-top: 0; font-size: 1em; color: #fff; }
+        .summary-box blockquote { margin: 0; padding-left: 10px; border-left: 3px solid #555; color: #aaa; font-style: italic; }
+
+        /* 底部统计栏 */
+        .stats-bar { text-align: right; font-size: 0.9em; color: #999; border-bottom: 1px solid var(--ao3-border); padding-bottom: 10px; margin-bottom: 20px; }
+        .stats-bar b { color: #fff; font-weight: normal; }
+
+        /* 阅读按钮 */
+        .navigation { margin-bottom: 30px; display: flex; gap: 10px; }
+        .ao3-btn { display: inline-block; padding: 6px 15px; background-color: var(--ao3-link); color: #fff; border-radius: 2px; font-weight: bold; cursor: pointer; }
+        .ao3-btn:hover { background-color: var(--ao3-link-hover); color: #fff; text-decoration: none; }
+        .ao3-btn-secondary { background-color: #444; }
+
+        /* 手机端适配 */
+                   @media (max-width: 600px) {
+            /* ...你之前的手机端代码... */
+
+            /* 手机端：把数据调暗、缩小 */
+            .work-stats {
+                font-size: 0.75em !important; /* 强制缩小字号 */
+                color: #666 !important; /* 文字变暗 */
+                opacity: 0.9; /* 整体稍微透明一点 */
+                width: 100%; /* 占满一行，和作者分开 */
+                margin-top: 8px; /* 和上面的作者留点空隙 */
+                display: flex;
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+            
+            /* 手机端：连数字也不要那么刺眼的白色 */
+            .work-stats b {
+                color: #aaa !important; 
+            }
+        }
+    </style>
+</head>
+<body>
+
+            <!-- 标题与作者（精细排版版） -->
+    <div class="work-header" style="padding-bottom: 10px;">
+        <!-- 用 span 把英文名包起来 -->
+        <h2 class="work-title" style="margin-bottom: 8px;">
+            手心朝上，手心朝下 <span class="en-title">| Overhand, Underhand</span>
+        </h2>
+        
+        <!-- 作者和数据放在同一行，底部对齐 -->
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 5px 15px;">
+            <!-- 左侧：作者 -->
+            <div class="work-author" style="margin-bottom: 0;">
+                by <a href="#">SugarMagic</a> | 翻译：<a href="#">Deepseek flash</a>
+            </div>
+            
+            <!-- 右侧：数据（去掉了内联的 font-size，方便 CSS 控制） -->
+            <div class="work-stats">
+                Words: <b>10,367</b> &nbsp;|&nbsp;
+                Chapters: <b>1/1</b> &nbsp;|&nbsp;
+                Kudos: <b>261</b> &nbsp;|&nbsp;
+                Hits: <b>2,565</b>
+            </div>
+        </div>
+    </div>
+
+    <!-- 标签信息区 -->
+    <div class="work-meta">
+        <dl>
+            <!-- 重点在这里：把之前转好的图片路径填进 src 里 -->
+            <dt>Rating:</dt>
+            <dd>
+                <img src="https://shirasu224.github.io/menav/icons/rating-E.png" class="rating-icon" alt="E"> 
+                <a href="#">Explicit</a> (限制级)
+            </dd>
+
+            <dt>Archive Warnings:</dt>
+            <dd><span style="color: #c00; font-weight: bold;"><a href="#" style="color: #c00;">暴力场景描写</a></span></dd>
+
+            <dt>Fandoms:</dt>
+            <dd><a href="#">Team Fortress 2 </a></dd>
+
+            <dt>Relationships:</dt>
+            <dd><a href="#">Spy/Spy，Scout/Spy</a></dd>
+
+            <dt>Additional Tags:</dt>
+            <dd>
+                <a href="#">第一次约会</a>, 
+                <a href="#">甜文</a>, 
+                <a href="#">扑克之夜</a>, 
+                <a href="#">慢热</a>
+            </dd>
+
+                        <dt>Language:</dt>
+                <dd>中英双语</dd>
+
+    
+        
+    </div>
+
+    <!-- 摘要区 -->
+    <div class="summary-box">
+        <h3>Summary:</h3>
+        <blockquote>
+            "Why did you show me you were cheating anyway?" Scout asked, voice quite. If it were anyone else, it could have sounded shy. Spy looked at him with lidded eyes.<br>
+             “你到底为什么让我看到你在作弊？” Scout 问道，声音很轻。要是换作别人，这声音听起来可能还会像是在害羞。Spy 半眯着眼看他。<br>
+             <br>
+             "Perhaps I find you interesting and used it as an excuse to get close to you." Spy took a casual drag on his cigarette. Scout balked.<br>
+             “也许我觉得你很有意思，就把它当成接近你的借口了。” Spy 漫不经心地吸了一口烟。Scout 一时语塞。<br>
+             <br>
+             No way. No fuckin' way. His face was probably like a fucking tomato right now, what the hell? Spy had to be making fun of him. "Man what the-"<br>
+             不可能。绝对他妈不可能。他现在脸大概红得像个他妈番茄，搞什么鬼？Spy 一定是在拿他寻开心。“老兄，搞什么——”<br>
+             <br>
+             "And perhaps not," the other man added, exhaling smoke. It hit Scout's senses hard as he unintentionally inhaled it, and yet he found himself breathing it deeply on purpose seconds later.<br>
+             “也许并非如此，”另一个男人吐出一口烟，补充道。Scout 无意间吸入时，那股烟猛烈地冲击着他的感官，然而几秒后，他却发现自己竟有意地深吸着它。<br>
+        </blockquote>
+        <p style="margin-bottom: 0;"><strong>Notes:</strong><br>
+            超甜甜的蓝狗谍吃完幸福一生！
+        </p>
+    </div>
+
+    
+
+        <div class="navigation" style="align-items: flex-start;">
+        <a href="Overhand_Underhand.htm" class="ao3-btn">📖 从头开始读</a>
+        
+        <!-- 折叠菜单替代下拉框 -->
+        <details class="custom-dropdown">
+            <summary class="ao3-btn-secondary">📑 章节列表</summary>
+            <div class="dropdown-content">
+                <a href="Overhand_Underhand.htm">Overhand, Underhand</a>
+            </div>
+        </details>
+    </div>
+
+    <!-- 配套的折叠菜单样式 -->
+        <style>
+        /* 给容器加上相对定位，作为下拉框的基准 */
+        .custom-dropdown { 
+            position: relative; 
+            display: inline-block; 
+        }
+        
+        /* 按钮的样式 */
+        .custom-dropdown summary {
+            list-style: none; /* 去掉默认的小三角 */
+            padding: 0 15px; 
+            background-color: #333; 
+            color: #fff; 
+            border: 1px solid #555;
+            border-radius: 2px; 
+            font-weight: bold; 
+            font-size: 14px;
+            cursor: pointer; 
+            height: 33px; 
+            box-sizing: border-box;
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            outline: none;
+        }
+        
+        .custom-dropdown summary:hover {
+            background-color: #444;
+        }
+
+        /* 去掉 Safari 默认的小三角 */
+        .custom-dropdown summary::-webkit-details-marker { display: none; }
+        
+        /* 自己画一个小倒三角 */
+                .custom-dropdown summary::after { 
+            content: "➤"; 
+            font-size: 12px; 
+            margin-left: 8px; 
+            display: inline-block;
+            transition: transform 0.2s ease;
+        }
+        .custom-dropdown[open] summary::after { 
+            transform: rotate(90deg); /* 点击时直接旋转90度变成向下 */
+        }
+        
+        /* 下拉框本体的核心修复 */
+        .dropdown-content {
+            position: absolute; 
+            top: 100%; 
+            left: 0; /* 强制左对齐 */
+            margin-top: 5px; /* 和按钮留一点点缝隙，更好看 */
+            min-width: 100%; /* 保证宽度至少和按钮一样宽 */
+            width: max-content; /* 如果章节名字太长，框会自动撑宽 */
+            background-color: #222; 
+            border: 1px solid #555; 
+            border-radius: 2px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5); /* 加一点高级阴影 */
+            z-index: 100; 
+            display: flex; 
+            flex-direction: column;
+        }
+        
+        .dropdown-content a {
+            padding: 10px 20px; 
+            color: #e0e0e0; 
+            text-align: left; /* 章节列表文字靠左看着更整齐 */
+            border-bottom: 1px solid #333; 
+            white-space: nowrap;
+            font-size: 14px;
+        }
+        
+        .dropdown-content a:last-child { 
+            border-bottom: none; 
+        }
+        
+        .dropdown-content a:hover { 
+            background-color: #900; /* 悬浮的时候变成AO3红，非常带感 */
+            color: #fff;
+            text-decoration: none; 
+        }
+    </style>
+</body>
+</html>
