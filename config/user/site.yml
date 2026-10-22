@@ -13,3 +13,7 @@ navigation:
   - name: 书签
     icon: fas fa-book
     id: articles
+    
+# 在 site.yml 中添加
+customCSS: 
+  - "assets/custom.css"  # 或者 "/menav/assets/custom.css"，取决于你的路径
