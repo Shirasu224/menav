@@ -5,6 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>作品导读</title>
     <style>
+                /* ==========================================
+           电脑端：数据统计缩小、变暗、稍微下移贴线
+           ========================================== */
+        .work-stats {
+            font-size: 0.8em !important; /* 字号缩小 */
+            color: #666 !important;      /* 颜色变灰暗 */
+            line-height: 1.2;
+            /* 往下微调 2px。用 transform 不会挤占空间，绝对不会错位！ */
+            transform: translateY(2px); 
+        }
+        
+        .work-stats b {
+            color: #999 !important;      /* 数字原本是纯白，现在也变灰一点 */
+            font-weight: normal;
+        }
+
+        /* ==========================================
+           手机端专属：英文标题缩小变暗
+           ========================================== */
+        @media (max-width: 600px) {
+            /* 英文原标题变小、透明 */
+            .en-title {
+                display: block;       /* 手机上干脆让它独占一行，显得不那么挤 */
+                font-size: 0.6em;     /* 字号只有原来的 60% */
+                color: #888;          /* 变暗 */
+                margin-top: 5px;
+                font-weight: normal;  /* 去掉粗体 */
+            }
+
+            /* 手机上恢复数据正常的换行状态，取消下移 */
+            .work-stats {
+                transform: none;
+                margin-top: 8px;
+                width: 100%;
+            }
+        }
         :root {
             --ao3-bg: #1a1a1a;
             --ao3-text: #e0e0e0;
@@ -62,20 +98,51 @@
         .ao3-btn-secondary { background-color: #444; }
 
         /* 手机端适配 */
-        @media (max-width: 600px) {
-            .work-meta dl { grid-template-columns: 1fr; gap: 2px; }
-            .work-meta dt { margin-top: 10px; }
-            .stats-bar { text-align: left; display: flex; flex-direction: column; gap: 5px; }
+                   @media (max-width: 600px) {
+            /* ...你之前的手机端代码... */
+
+            /* 手机端：把数据调暗、缩小 */
+            .work-stats {
+                font-size: 0.75em !important; /* 强制缩小字号 */
+                color: #666 !important; /* 文字变暗 */
+                opacity: 0.9; /* 整体稍微透明一点 */
+                width: 100%; /* 占满一行，和作者分开 */
+                margin-top: 8px; /* 和上面的作者留点空隙 */
+                display: flex;
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+            
+            /* 手机端：连数字也不要那么刺眼的白色 */
+            .work-stats b {
+                color: #aaa !important; 
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- 标题与作者 -->
-    <div class="work-header">
-        <h2 class="work-title">我们有什么不同吗？ | are We any Different?</h2>
-        <div class="work-author">
-            by <a href="#">匿名</a> | 翻译：<a href="#">Deepseek flash</a>
+            <!-- 标题与作者（精细排版版） -->
+    <div class="work-header" style="padding-bottom: 10px;">
+        <!-- 用 span 把英文名包起来 -->
+        <h2 class="work-title" style="margin-bottom: 8px;">
+            我们有什么不同吗？ <span class="en-title">| are We any Different?</span>
+        </h2>
+        
+        <!-- 作者和数据放在同一行，底部对齐 -->
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 5px 15px;">
+            <!-- 左侧：作者 -->
+            <div class="work-author" style="margin-bottom: 0;">
+                by <a href="#">匿名</a> | 翻译：<a href="#">Deepseek flash</a>
+            </div>
+            
+            <!-- 右侧：数据（去掉了内联的 font-size，方便 CSS 控制） -->
+            <div class="work-stats">
+                Words: <b>12,556</b> &nbsp;|&nbsp;
+                Chapters: <b>7/?</b> &nbsp;|&nbsp;
+                Kudos: <b>35</b> &nbsp;|&nbsp;
+                Hits: <b>764</b>
+            </div>
         </div>
     </div>
 
@@ -104,12 +171,14 @@
                 <a href="#">单相思</a>, 
                 <a href="#">权力动态</a>, 
                 <a href="#">奸尸</a>, 
-                <a href="#">儿童虐待</a>, 
+                <a href="#">儿童虐待</a>
             </dd>
 
-            <dt>Language:</dt>
-            <dd>中英双语</dd>
-        </dl>
+                        <dt>Language:</dt>
+                <dd>中英双语</dd>
+
+    
+        
     </div>
 
     <!-- 摘要区 -->
@@ -117,26 +186,20 @@
         <h3>Summary:</h3>
         <blockquote>
             n the ghettos of New Mexico lies a bar. Within the bar, two opposing enemies catches up with an old friend.<br>
-            新墨西哥州的贫民区里有一间酒吧。酒吧内，两个势不两立的敌人与一位老朋友重逢了。<br><br>
+            新墨西哥州的贫民区里有一间酒吧。酒吧内，两个势不两立的敌人与一位老朋友重逢了。<br>
+            <br>
             Things are more or less the same but a certain desire opens a door to an unexpected behavior.<br>
-            一切大体如旧，但某种欲望却为一种出人意料的举动打开了大门。
+            一切大体如旧，但某种欲望却为一种出人意料的举动打开了大门。<br>
         </blockquote>
         <p style="margin-bottom: 0;"><strong>Notes:</strong><br>
             怎么又是单相思不得的蓝谍，蓝狗谍也看得好胃痛；中毒了还想吃更多
         </p>
     </div>
 
-    <!-- 底部数据栏 -->
-    <div class="stats-bar">
-        <span>语言: <b>English</b></span> &nbsp;&nbsp;
-        <span>字数: <b>12,556</b></span> &nbsp;&nbsp;
-        <span>章节: <b>7/?</b></span> &nbsp;&nbsp;
-        <span>Kudos: <b>35</b></span> &nbsp;&nbsp;
-        <span>Hits: <b>764</b></span>
-    </div>
+    
 
         <div class="navigation" style="align-items: flex-start;">
-        <a href="are_We_any Different.htm" class="ao3-btn">📖 从头开始读</a>
+        <a href="Overhand_Underhand.htm" class="ao3-btn">📖 从头开始读</a>
         
         <!-- 折叠菜单替代下拉框 -->
         <details class="custom-dropdown">
