@@ -2,6 +2,7 @@ template: page
 categories:
   # 第一个分类：
   - name: "狗谍 - Cloak And Batter"
+    icon: fas fa-user-secret  
     slug: Cloak And Batter          # 可选，用于定位分类，通常自动生成
     sites:
       - name: "我们有什么不同吗？"
