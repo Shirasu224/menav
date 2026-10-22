@@ -6,16 +6,18 @@ categories:
     sites:
       - name: "我们有什么不同吗？"
         description: "红蓝狗谍＋谍水仙"
-        icon: /menav/icons/awad.png
+        icon: fas fa-heart-crack
         url: https://shirasu224.github.io//menav/are_We_any_Different/intro.html
       - name: "Overhand, Underhand"
         description: "扑克之夜"
+        icon: fas fa-heart-pulse
         url: /menav/sample.htm
       - name: "柑橘味香烟"
         description: "Citrus Smoke"
         url: /menav/sample.htm
       - name: "没有款待"
         description: "No treats"
+        icon: face-smile-wink
         url: /menav/sample.htm
 
   # 第二个分类：
@@ -27,6 +29,7 @@ categories:
         url: /menav/sample.htm        
       - name: "The Curious Case of Sex, Denial, and Love"
         description: "做"
+        icon: fas fa-house-fire
         url: /menav/sample.htm
 
   - name: "医谍 - Gentle Surgery"
@@ -34,7 +37,7 @@ categories:
     sites:
       - name: "副作用"
         description: "潜入失败CG"
-        icon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAIAAABLixI0AAAACXBIWXMAAA7EAAAOxAGVKw4bAAACaElEQVQ4jaWVz2sTQRTHP292dpumsY2WWFqKBZFiqxcP9iIeRKniVTyIIiIUFPyHFMG71+pFEQUPih48KaL0YK39FU1pa9Okm8zzsGmy2Wx/4ZdlWObN+873++btrDwWCUSU/4LAlqr1RbLW7pNLVKPRGZPg0lrNKjjVBJcfhjVITApsQhXCnqBQqcfpBBSsgmtP88Pw7e2rYzdvefW6eNbLZFDVel1R43SwMMBSce3ydUnhUnWqcWUhDFWZmrwBUCr+nH7mF/qzI8cNkhs7ifHeXLhUAs+5FpeIqlrAASLNgAOdXypTyZJZ+Ppl+s7dzLZwBwIBeO0ljt6tgrbrMlCplGu1GhY8zwe/vdKAi4lq6Iq46snSowgIIMa4SPjuUFWwqKoIMToF3XZc/f1HGyt3hQiqViO38XqpehubUX6lWFTQZjQijS2OK7AqkjBvwK2ul9ZKff25sFwOwTrXaG7wjLEuxbSKWOLbtryLOgecvvdg7vyZ5eKS8QzQO3B09eI1nVtMlWY7a6Hg0Gj1xuzM6KeZ8e6MgFj79+O713OLtmk24ZGOb0UBIdr3x4uXz6fuZ5olhqBjfUxXWhVbtQu6uiDYIZrkSvEdhzSHvZFs6CQOcrHtxWX2qWkXLte403pHT3Qqkx3SUiYFwsKR7q7u6DwrsApr2886LAufJyfCQz2JRNvJpeAFQb53ABicOHdl4fuv+dnWH0Ekm8udGj37VETbjyWFC/Bq7tuTR/nh4aAvP+TZY37+8PgYqojZWllZfv/h1eSIdJyvPEzjEqhCPaZUYyEDPngdWem6tL0/94m9euIg+Ac2pQiA0q3NCwAAAABJRU5ErkJggg=="
+        icon: fas fa-house-fire
         url: https://shirasu224.github.io/menav/Side_Effects.htm
         
   - name: "谍水仙 - Double Agent"
@@ -42,6 +45,7 @@ categories:
     sites:
       - name: "时间熵"
         description: "恨海擎天"
+        icon: fas fa-heart-crack
         url: /menav/sample.htm
         
   - name: "工程谍 - Napoleon Complex"
@@ -49,6 +53,7 @@ categories:
     sites:
       - name: "With Apologies To Pepper Coyote"
         description: "机械＋马"
+        icon: fas fa-house-fire
         url: /menav/sample.htm
         
   - name: "All谍 - Meet the Team"
@@ -56,4 +61,5 @@ categories:
     sites:
       - name: "little boy blue"
         description: "长篇连载"
+        icon: fas fa-house-fire
         url: /menav/sample.htm
