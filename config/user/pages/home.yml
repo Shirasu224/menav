@@ -14,7 +14,7 @@ categories:
         url: /menav/sample.htm
       - name: "柑橘味香烟"
         description: "Citrus Smoke"
-        icon: https://shirasu224.github.io/menav/public/icons/twemoji--tangerine.svg
+        icon: https://shirasu224.github.io/menav/icons/twemoji--tangerine.svg
         url: /menav/sample.htm
       - name: "没有款待"
         description: "No treats"
