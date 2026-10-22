@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>作品导读</title>
+    <style>
+        /* 全局暗黑模式设置 */
+        body {
+            background-color: #1a1a1a;
+            color: #e0e0e0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 900px; /* 限制最大宽度，电脑上更好看 */
+            margin: 0 auto;
+        }
+        
+        a { color: #900; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        /* 顶部标题区 */
+        .header {
+            border-bottom: 1px solid #444;
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+        }
+        .header h1 { margin: 0 0 10px 0; font-size: 1.8em; color: #eee; }
+        .header .author { font-size: 1.1em; color: #999; }
+        .header .author a { color: #ccc; }
+        
+        /* 标签列表区 (模仿 AO3 的 dl 结构) */
+        .meta-group { margin-bottom: 15px; display: flex; flex-wrap: wrap; }
+        .meta-label { 
+            font-weight: bold; 
+            color: #999; 
+            width: 100px; /* 手机端会自动换行 */
+            flex-shrink: 0;
+            margin-bottom: 5px;
+        }
+        .meta-content { flex: 1; min-width: 200px; margin-bottom: 5px; }
+        .tag { color: #e0e0e0; margin-right: 5px; cursor: pointer; }
+        .tag:hover { text-decoration: underline; }
+        .warning { color: #c00; font-weight: bold; }
+        
+        /* 摘要区 */
+        .summary-box { margin: 20px 0; }
+        .summary-box h3 { font-size: 1em; color: #999; margin-bottom: 5px; }
+        .summary-content { color: #ccc; }
+        
+        /* 开始阅读按钮 (我把它做成了 AO3 风格的红底白字) */
+        .read-btn-wrapper { text-align: center; margin: 30px 0; }
+        .read-btn {
+            display: inline-block; padding: 10px 40px; background-color: #900; color: #fff;
+            text-decoration: none; border-radius: 3px; font-size: 1.1em; font-weight: bold; 
+            transition: background 0.3s;
+        }
+        .read-btn:hover { background-color: #c00; text-decoration: none; }
+
+        /* 底部数据统计栏 */
+        .stats {
+            border-top: 1px solid #444;
+            border-bottom: 1px solid #444;
+            padding: 10px 0;
+            margin: 20px 0;
+            text-align: right;
+            font-size: 0.9em;
+            color: #999;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            gap: 15px;
+        }
+        .stats span b { color: #ccc; font-weight: normal; }
+        
+        /* 模拟截图底部那条黑框“阅读历史” */
+        .history-bar {
+            background-color: #000;
+            padding: 10px 15px;
+            border-radius: 4px;
+            font-size: 0.9em;
+            color: #999;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+        
+        /* 针对手机屏幕优化 */
+        @media (max-width: 600px) {
+            .meta-label { width: 100%; } /* 手机上标签和内容上下排列 */
+            .stats { justify-content: center; gap: 10px; text-align: center; }
+            .header h1 { font-size: 1.4em; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. 标题与作者 -->
+    <div class="header">
+        <h1>我们... (填文章名字)</h1>
+        <div class="author">
+            by <a href="#">原作者名字</a> | 翻译：<a href="#">你的名字</a>
+        </div>
+    </div>
+
+    <!-- 2. 标签信息区 -->
+    <div class="meta-group">
+        <div class="meta-label">Fandoms:</div>
+        <div class="meta-content">
+            <span class="tag">Harry Potter - J. K. Rowling</span>
+        </div>
+    </div>
+    
+    <div class="meta-group">
+        <div class="meta-label">Archive 预警:</div>
+        <div class="meta-content">
+            <span class="tag warning">作者选择不使用预警 (Creator Chose Not To Use Archive Warnings)</span>
+        </div>
+    </div>
+
+    <div class="meta-group">
+        <div class="meta-label">Relationships:</div>
+        <div class="meta-content">
+            <span class="tag">Draco Malfoy/Harry Potter</span>
+        </div>
+    </div>
+
+    <div class="meta-group">
+        <div class="meta-label">Additional Tags:</div>
+        <div class="meta-content">
+            <span class="tag">Alternate Universe</span>, 
+            <span class="tag">Fluff</span>, 
+            <span class="tag">暗黑风</span>
+        </div>
+    </div>
+
+    <div class="meta-group">
+        <div class="meta-label">语言:</div>
+        <div class="meta-content">中文-简体 (Chinese - Simplified)</div>
+    </div>
+
+    <!-- 3. 摘要区 -->
+    <div class="summary-box">
+        <h3>作品摘要:</h3>
+        <div class="summary-content">
+            把 AO3 上的 Summary 和你的碎碎念一起粘贴在这里。你可以自己排段落，看着非常整齐。
+        </div>
+    </div>
+
+    <!-- 4. 开始阅读按钮 -->
+    <div class="read-btn-wrapper">
+        <!-- 注意把 chap1.html 换成你真实的章节文件 -->
+        <a href="chap1.html" class="read-btn">📖 开始阅读</a>
+    </div>
+
+    <!-- 5. 数据统计栏 (把 AO3 的数据填进去) -->
+    <div class="stats">
+        <span>语言: <b>中文</b></span>
+        <span>字数: <b>2,881</b></span>
+        <span>章节: <b>1/1</b></span>
+        <span>评论: <b>11</b></span>
+        <span>点赞 (Kudos): <b>292</b></span>
+        <span>点击 (Hits): <b>13,727</b></span>
+    </div>
+
+    <!-- 6. 底部阅读历史黑条 (模拟你的截图) -->
+    <div class="history-bar">
+        <span>上次阅读：2026年10月21日（已是最新版）。阅读 1 次。</span>
+        <span style="color: #666; cursor: pointer;">删除历史记录</span>
+    </div>
+
+</body>
+</html>
