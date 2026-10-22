@@ -369,3 +369,20 @@ html.light-theme .dashboard-panel {
     margin-top: 0.5rem;
   }
 }
+/* ==========================================
+   自定义：仪表盘格子毛玻璃美化
+   ========================================== */
+/* 注意：这里的 .dashboard-card 是根据说明书推测的类名，如果没生效，请看下方提示 */
+.dashboard-card, .profile-card, .todo-card, .clock-card {
+    background: rgba(30, 30, 30, 0.6) !important; 
+    backdrop-filter: blur(12px); /* 背景模糊效果 */
+    border: 1px solid rgba(255, 255, 255, 0.08) !important; /* 极细发光边框 */
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4) !important; 
+    border-radius: 12px !important; /* 更圆润的边角 */
+    transition: transform 0.3s ease;
+}
+
+/* 鼠标放上去时稍微浮起 */
+.dashboard-card:hover, .profile-card:hover, .todo-card:hover, .clock-card:hover {
+    transform: translateY(-3px);
+}
