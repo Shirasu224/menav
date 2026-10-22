@@ -285,7 +285,27 @@
     left: 0 !important;
     width: 40px !important; /* 线的长度 */
     height: 3px !important;
-    /* 这里用了一道暗红到紫色的渐变，非常“德哈”/魔法风 */
+    /* 这里用了一道暗红到紫色的渐变，非常/魔法风 */
     background: linear-gradient(90deg, #900, #a040a0) !important; 
     border-radius: 3px !important;
+}
+
+/* 选中主页的所有分类卡片 */
+.card, .category-card, .dashboard-panel {
+    /* 统一的圆角，比原本更大一点，显得更柔和 */
+    border-radius: 16px !important;
+    /* 半透明的深色背景，配合背景图会更有质感 */
+    background-color: rgba(30, 30, 30, 0.7) !important;
+    /* 极细的发光边框 */
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    /* 平滑动画 */
+    transition: all 0.3s ease !important;
+}
+
+/* 鼠标悬停时的魔法效果 */
+.card:hover, .category-card:hover, .dashboard-panel:hover {
+    transform: translateY(-5px) !important; /* 上浮 */
+    /* 这里的 rgba 是暗红色光晕，对应 AO3 的经典红，你可以换成喜欢的颜色 */
+    box-shadow: 0 10px 30px rgba(153, 0, 0, 0.2) !important; 
+    border-color: rgba(153, 0, 0, 0.5) !important;
 }
