@@ -7,13 +7,14 @@ categories:
       - name: "我们有什么不同吗？"
         description: "红蓝狗谍＋谍水仙"
         icon: fas fa-heart-crack
-        url: https://shirasu224.github.io//menav/are_We_any_Different/intro.html
+        url: https://shirasu224.github.io/menav/are_We_any_Different/intro.html
       - name: "Overhand, Underhand"
         description: "扑克之夜"
         icon: fas fa-heart-pulse
         url: /menav/sample.htm
       - name: "柑橘味香烟"
         description: "Citrus Smoke"
+        icon: https://shirasu224.github.io/menav/public/icons/twemoji--tangerine.svg
         url: /menav/sample.htm
       - name: "没有款待"
         description: "No treats"
