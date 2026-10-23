@@ -1,4 +1,3 @@
-body { outline: 10px solid lime !important; }
 /* ================= 1. 绝对清除所有红色溢色和悬停阴影 ================= */
 .card:hover, 
 .category-card:hover, 
