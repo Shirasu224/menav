@@ -20,50 +20,41 @@
   line-height: 1.2 !important;
 }
 
-/* ================= 2. 彻底清除所有遮挡物 ================= */
-html, body, .layout, .content, .page, .page-template-home, .dashboard-grid, .sidebar {
+/* ================= 2. 把所有可能的底色全部打成透明 ================= */
+html, body, #app, .layout, .content, .page, .page-template-home, .dashboard-grid, .sidebar {
   background-color: transparent !important;
   background-image: none !important;
 }
 
-/* ================= 3. 强力底层背景图 (防覆盖) ================= */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -9999; /* 压在最底下，绝对不被遮挡 */
-  pointer-events: none;
+/* ================= 3. 暴力把背景图贴在 HTML 最底层 ================= */
+html.light-theme {
+  background: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), url('https://shirasu224.github.io/menav/pics/glitter_blu.jpg') !important;
+  background-size: cover !important;
+  background-attachment: fixed !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+}
+html[data-theme-mode="dark"]:not(.light-theme) {
+  background: linear-gradient(rgba(15, 15, 20, 0.6), rgba(15, 15, 20, 0.6)), url('https://shirasu224.github.io/menav/pics/mood_tree.jpg') !important;
   background-size: cover !important;
   background-attachment: fixed !important;
   background-position: center !important;
   background-repeat: no-repeat !important;
 }
 
-/* 白天模式底图 */
-html.light-theme body::before {
-  background-image: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), url('https://shirasu224.github.io/menav/pics/glitter_blu.jpg') !important;
-}
-
-/* 黑夜模式底图 */
-html[data-theme-mode="dark"]:not(.light-theme) body::before {
-  background-image: linear-gradient(rgba(15, 15, 20, 0.6), rgba(15, 15, 20, 0.6)), url('https://shirasu224.github.io/menav/pics/mood_tree.jpg') !important;
-}
-
-/* ================= 4. 侧边栏背景图 ================= */
+/* ================= 4. 侧边栏背景 ================= */
 html.light-theme .sidebar {
-  background-image: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), url('https://shirasu224.github.io/menav/pics/glitter_blu.jpg') !important;
+  background: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), url('https://shirasu224.github.io/menav/pics/glitter_blu.jpg') !important;
   background-size: cover !important;
-  background-position: center !important;
   background-attachment: fixed !important;
 }
 html[data-theme-mode="dark"]:not(.light-theme) .sidebar {
-  background-image: linear-gradient(rgba(15, 15, 20, 0.7), rgba(15, 15, 20, 0.7)), url('https://shirasu224.github.io/menav/pics/mood_tree.jpg') !important;
+  background: linear-gradient(rgba(15, 15, 20, 0.7), rgba(15, 15, 20, 0.7)), url('https://shirasu224.github.io/menav/pics/mood_tree.jpg') !important;
   background-size: cover !important;
-  background-position: center !important;
   background-attachment: fixed !important;
 }
 
-/* ================= 5. 时钟卡片渐变 (强权版) ================= */
+/* ================= 5. 时钟卡片渐变 (绝对强制) ================= */
 html.light-theme .dashboard-clock-card {
   background: linear-gradient(180deg, rgba(204, 237, 255, 0.6) 0%, rgba(255, 229, 229, 0.6) 100%) !important;
   backdrop-filter: blur(10px) !important; 
@@ -84,11 +75,7 @@ html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card {
 html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card * { color: #ffffff !important; }
 
 /* ================= 6. 干掉鼠标悬停阴影 ================= */
-.dashboard-grid:hover, 
-.dashboard-panel:hover, 
-.dashboard-clock-card:hover, 
-.card:hover, 
-.category-card:hover {
+.dashboard-grid:hover, .dashboard-panel:hover, .dashboard-clock-card:hover, .card:hover, .category-card:hover {
   box-shadow: none !important; 
   border-color: transparent !important; 
   background-color: transparent !important; 
