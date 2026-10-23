@@ -181,10 +181,18 @@ const fontAwesomePreload = `<link rel="preload" href="${fontAwesomeCssUrl}" as="
           opacity: 0.4; 
         }
 
-        /* 黑夜模式背景图 */
+               /* 黑夜模式背景图 */
+        /* 1. 先给黑夜模式的网页垫一个纯黑底色 */
+        html[data-theme-mode="dark"]:not(.light-theme) body {
+          background-color: #0a0a0c !important; /* 极深的黑灰色 */
+        }
+
+        /* 2. 再叠加背景图 */
         html[data-theme-mode="dark"]:not(.light-theme) body::before {
           background-image: url('https://shirasu224.github.io/menav/pics/mood_tree.jpg'); 
-          opacity: 0.3; 
+          opacity: 0.6; /* 因为底是黑的，透明度可以适当调高，让树枝更清晰 */
+          filter: brightness(0.7) contrast(1.1); /* 👈 这个魔法属性可以压暗图片并增加对比度 */
+
         }
 
         /* ================= 2. 白天模式时钟卡片 ================= */
