@@ -157,139 +157,116 @@ const fontAwesomePreload = `<link rel="preload" href="${fontAwesomeCssUrl}" as="
 
       <!-- 终极自定义样式 -->
       <style is:global>
-        /* ================= 1. 全局背景图替换 ================= */
-        /* 暴力清除所有可能遮挡背景的容器底色 */
+        /* ================= 1. 全局背景图 ================= */
         html, body, .layout, .content, .page, .page-template-home, .dashboard-grid {
           background-color: transparent !important;
         }
 
-        /* 底层垫片放背景图 */
         body::before {
           content: "";
           position: fixed;
           inset: 0;
-          z-index: -1; /* 👈 把 -999 改成了 -1，防止被某些层叠上下文吃掉 */
+          z-index: -999; 
           pointer-events: none;
           background-size: cover;
           background-position: center;
           background-repeat: no-repeat;
         }
 
-        /* 白天模式背景图 */
         html.light-theme body::before {
           background-image: url('https://shirasu224.github.io/menav/pics/glitter_blu.jpg'); 
           opacity: 0.4; 
         }
 
-               /* 黑夜模式背景图 */
-        /* 1. 先给黑夜模式的网页垫一个纯黑底色 */
         html[data-theme-mode="dark"]:not(.light-theme) body {
-          background-color: #0a0a0c !important; /* 极深的黑灰色 */
+          background-color: #0a0a0c !important;
         }
-
-        /* 2. 再叠加背景图 */
         html[data-theme-mode="dark"]:not(.light-theme) body::before {
           background-image: url('https://shirasu224.github.io/menav/pics/mood_tree.jpg'); 
-          opacity: 0.6; /* 因为底是黑的，透明度可以适当调高，让树枝更清晰 */
-          filter: brightness(0.7) contrast(1.1); /* 👈 这个魔法属性可以压暗图片并增加对比度 */
-
+          opacity: 0.6; 
+          filter: brightness(0.7) contrast(1.1); 
         }
 
-        /* ================= 2. 白天模式时钟卡片 ================= */
+        /* ================= 2. 时钟卡片渐变 ================= */
         html.light-theme .dashboard-clock-card {
           background: linear-gradient(180deg, rgba(204, 237, 255, 0.4) 0%, rgba(255, 229, 229, 0.4) 100%) !important;
-          background-image: linear-gradient(180deg, rgba(204, 237, 255, 0.4) 0%, rgba(255, 229, 229, 0.4) 100%) !important;
           backdrop-filter: blur(12px) !important;
-          -webkit-backdrop-filter: blur(12px) !important;
           border: 1px solid rgba(255, 255, 255, 0.6) !important;
           border-radius: 16px !important;
           box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05) !important;
           overflow: hidden !important;
         }
-        html.light-theme .dashboard-clock-card * {
-          color: #222222 !important;
-        }
+        html.light-theme .dashboard-clock-card * { color: #222222 !important; }
 
-        /* ================= 3. 黑夜模式时钟卡片 ================= */
         html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card {
           background: linear-gradient(180deg, rgba(70, 83, 124, 0.4) 0%, rgba(141, 124, 129, 0.4) 100%) !important;
-          background-image: linear-gradient(180deg, rgba(70, 83, 124, 0.4) 0%, rgba(141, 124, 129, 0.4) 100%) !important;
           backdrop-filter: blur(12px) !important; 
-          -webkit-backdrop-filter: blur(12px) !important;
           border: 1px solid rgba(255, 255, 255, 0.1) !important;
           border-radius: 16px !important;
           box-shadow: none !important; 
           outline: none !important; 
           overflow: hidden !important;
         }
-        html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card * {
-          color: #ffffff !important;
-        }
-
-        /* 强制隐藏黑夜多余发光层 */
+        html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card * { color: #ffffff !important; }
         html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card::before,
         html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card::after {
           display: none !important;
-          opacity: 0 !important;
-          background: transparent !important;
+        }
+
+        /* ================= 3. 侧边栏背景图 ================= */
+        html.light-theme .sidebar, html.light-theme .sidebar-footer {
+          background-image: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), url('https://shirasu224.github.io/menav/pics/glitter_blu.jpg') !important;
+          background-size: cover !important;
+          background-position: center !important;
+          backdrop-filter: blur(8px) !important;
+        }
+        html[data-theme-mode="dark"]:not(.light-theme) .sidebar, html[data-theme-mode="dark"]:not(.light-theme) .sidebar-footer {
+          background-image: linear-gradient(rgba(15, 15, 20, 0.6), rgba(15, 15, 20, 0.6)), url('https://shirasu224.github.io/menav/pics/mood_tree.jpg') !important;
+          background-size: cover !important;
+          background-position: center !important;
+          backdrop-filter: blur(8px) !important;
         }
 
         /* ================= 4. 终极封印悬停阴影 ================= */
-        .dashboard-grid:hover,
-        .dashboard-grid > div:hover,
-        .dashboard-panel:hover,
-        .dashboard-panel > div:hover,
-        .dashboard-clock-card:hover,
-        .card:hover, 
-        .category-card:hover, 
-        .page-home .category:hover {
+        .dashboard-grid:hover, .dashboard-panel:hover, .dashboard-clock-card:hover, .card:hover, .category-card:hover, .page-home .category:hover {
           box-shadow: none !important; 
           border-color: transparent !important; 
-          outline: none !important; 
           background-color: transparent !important; 
         }
 
-        /* ================= 6. 手机端专属紧急适配 ================= */
+        /* ================= 5. 手机端紧急适配 ================= */
         @media (max-width: 768px) {
-          /* 1. 强制变成上下单列布局 */
+          /* 强制单列上下布局 */
           .dashboard-grid {
             display: flex !important;
             flex-direction: column !important;
             gap: 15px !important;
           }
-
-          /* 2. 缩小巨大标题，不让它超出屏幕 */
+          /* 缩小标题并居中 */
           .dashboard-welcome h1 {
-            font-size: 1.8rem !important; /* 调整手机端标题大小 */
+            font-size: 1.8rem !important; 
             line-height: 1.3 !important;
             margin-bottom: 8px !important;
-            text-align: center !important; /* 手机上居中更好看 */
+            text-align: center !important; 
           }
           .dashboard-welcome p {
             font-size: 0.9rem !important;
             text-align: center !important;
             margin-bottom: 15px !important;
           }
-
-          /* 3. 让时钟卡片重新出现并占满宽度 */
+          /* 时钟卡片恢复并占满 */
           .dashboard-clock-card {
             width: 100% !important;
             min-height: 160px !important;
             padding: 15px !important;
             margin: 0 auto 15px auto !important;
           }
-
-          /* 4. 让右侧螃蟹图重新出现 */
+          /* 螃蟹图恢复并占满 */
           .dashboard-stats {
             display: block !important;
             width: 100% !important;
-            min-height: 250px !important; /* 给螃蟹留个合适的大小 */
+            min-height: 250px !important; 
             margin-top: 10px !important;
-          }
-
-          /* 5. 底部分类格子缩小一点边距 */
-          .card, .category-card {
-            padding: 15px !important;
           }
         }
       </style>
