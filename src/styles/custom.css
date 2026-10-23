@@ -92,8 +92,8 @@ html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card * { color: 
     position: absolute !important;
     top: -10px !important; /* 往上提一点，跟标题平齐 */
     right: 0 !important;   /* 靠右 */
-    width: 90px !important; /* 大小自己可调 */
-    height: 90px !important;
+    width: 100px !important; /* 大小自己可调 */
+    height: 100px !important;
     background-size: contain !important;
     background-position: top right !important; /* 靠右上角对齐 */
     background-repeat: no-repeat !important;
