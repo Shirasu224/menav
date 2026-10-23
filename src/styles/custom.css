@@ -1,72 +1,50 @@
-/* ================= 1. 全局背景色（精准对应白天/黑夜） ================= */
-html[data-theme-mode="dark"] body {
-  background: radial-gradient(circle at top, #1c1822 0%, #0d0d0f 100%) !important;
-  background-attachment: fixed !important;
+/* ================= 1. 绝对清除所有红色溢色和悬停阴影 ================= */
+.card:hover, 
+.category-card:hover, 
+.dashboard-panel:hover,
+.dashboard-clock-card:hover,
+.dashboard-grid:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1) !important;
+  border-color: inherit !important;
 }
 
-html:not([data-theme-mode="dark"]) body {
-  background: radial-gradient(circle at top, #f5f6f8 0%, #ffffff 100%) !important;
-  background-attachment: fixed !important;
-}
-
-/* ================= 1. 时钟卡片（白天渐变） ================= */
-html[data-theme-mode="light"] .dashboard-clock-card,
-html.light .dashboard-clock-card,
-html:not(.dark) .dashboard-clock-card {
-  /* 浅蓝到浅粉 */
+/* ================= 2. 白天模式（精准捕捉 .light-theme） ================= */
+html.light-theme .dashboard-clock-card {
   background: linear-gradient(180deg, #5cc9ff 0%, #ffdbdb 100%) !important;
-  background-image: linear-gradient(180deg, #5cc9ff 0%, #ffdbdb 100%) !important;
-  opacity: 0.9 !important; /* 保持一点点透明感 */
   border: 1px solid rgba(255, 255, 255, 0.8) !important;
   border-radius: 16px !important;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08) !important;
-  overflow: hidden !important; /* 防止渐变边缘溢出 */
+  overflow: hidden !important;
 }
 
-/* 强制白天文字深色 */
-html[data-theme-mode="light"] .dashboard-clock-card *,
-html.light .dashboard-clock-card *,
-html:not(.dark) .dashboard-clock-card * {
+/* 强制白天模式格子里的文字为深色 */
+html.light-theme .dashboard-clock-card * {
   color: #222222 !important;
 }
 
-/* ================= 2. 时钟卡片（黑夜渐变） ================= */
-html[data-theme-mode="dark"] .dashboard-clock-card,
-html.dark .dashboard-clock-card {
-  /* 深蓝到紫红 */
+/* ================= 3. 黑夜模式（精准捕捉 [data-theme-mode="dark"]） ================= */
+html[data-theme-mode="dark"] .dashboard-clock-card {
   background: linear-gradient(180deg, #24236c 0%, #92456a 100%) !important;
-  background-image: linear-gradient(180deg, #24236c 0%, #92456a 100%) !important;
-  opacity: 0.9 !important;
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
   border-radius: 16px !important;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4) !important;
-  overflow: hidden !important; /* 防止渐变边缘溢出 */
+  overflow: hidden !important;
 }
 
-/* 强制黑夜文字白色 */
-html[data-theme-mode="dark"] .dashboard-clock-card *,
-html.dark .dashboard-clock-card * {
+/* 强制黑夜模式格子里的文字为白色 */
+html[data-theme-mode="dark"] .dashboard-clock-card * {
   color: #ffffff !important;
 }
 
-/* ================= 3. 右侧螃蟹图大布局（从main.css转移过来的精华） ================= */
+/* ================= 4. 你的螃蟹图布局（保留原样，千万别动） ================= */
 .dashboard-grid {
   display: grid !important;
   grid-template-columns: 1fr 1fr !important;
   align-items: center !important;
   gap: 20px !important;
 }
-
-.dashboard-intro {
-  width: 100% !important;
-}
-
-/* 隐藏右侧时间、待办 */
-.dashboard-stats > * {
-  display: none !important; 
-}
-
-/* 螃蟹图设定 */
+.dashboard-intro { width: 100% !important; }
+.dashboard-stats > * { display: none !important; }
 .dashboard-stats {
   background-image: url('https://shirasu224.github.io/menav/pics/the-spycrab2.png') !important;
   background-size: contain !important;
@@ -79,57 +57,27 @@ html.dark .dashboard-clock-card * {
   min-height: 300px !important;
 }
 
-/* ================= 4. 分类卡片样式 ================= */
+/* ================= 5. 下方分类卡片样式 ================= */
 .card, .category-card, .dashboard-panel {
   border-radius: 16px !important;
   transition: all 0.3s ease !important;
 }
-
-/* 黑夜卡片 */
 html[data-theme-mode="dark"] .card,
 html[data-theme-mode="dark"] .category-card,
 html[data-theme-mode="dark"] .dashboard-panel {
   background-color: rgba(30, 30, 30, 0.7) !important;
   border: 1px solid rgba(255, 255, 255, 0.08) !important;
 }
-
-/* 白天卡片 */
-html:not([data-theme-mode="dark"]) .card,
-html:not([data-theme-mode="dark"]) .category-card,
-html:not([data-theme-mode="dark"]) .dashboard-panel {
+html.light-theme .card,
+html.light-theme .category-card,
+html.light-theme .dashboard-panel {
   background-color: #ffffff !important;
   border: 1px solid rgba(0, 0, 0, 0.05) !important;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05) !important;
 }
 
-/* 悬浮动画 */
-.card:hover, .category-card:hover, .dashboard-panel:hover {
-  transform: translateY(-5px) !important;
-}
-html[data-theme-mode="dark"] .card:hover, 
-html[data-theme-mode="dark"] .category-card:hover, 
-html[data-theme-mode="dark"] .dashboard-panel:hover {
-  box-shadow: 0 10px 30px rgba(153, 0, 0, 0.2) !important;
-  border-color: rgba(153, 0, 0, 0.5) !important;
-}
-
-/* ================= 5. 手机端适配 ================= */
+/* ================= 6. 手机端适配 ================= */
 @media (max-width: 768px) {
-  .dashboard-grid {
-    grid-template-columns: 1fr !important;
-    text-align: center !important;
-  }
-  .dashboard-stats {
-    min-height: 200px !important;
-    margin-top: 20px !important;
-  }
-}
-
-/* 彻底清除所有卡片（包括悬停）的红色溢色 */
-.card:hover, 
-.category-card:hover, 
-.dashboard-panel:hover,
-.dashboard-clock-card:hover {
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2) !important;
-  border-color: rgba(255, 255, 255, 0.2) !important;
+  .dashboard-grid { grid-template-columns: 1fr !important; text-align: center !important; }
+  .dashboard-stats { min-height: 200px !important; margin-top: 20px !important; }
 }
