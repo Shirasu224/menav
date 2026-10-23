@@ -298,44 +298,46 @@ body {
 }
 
 /* ==========================================
-   1. 强制全局背景渐变（扒掉所有容器的黑底）
+   黑夜模式专属：深空渐变 + 深色透明卡片
    ========================================== */
-body, html, .layout, main, .dashboard-grid {
-    background-color: transparent !important;
-}
-
-body {
-    /* 深空暗夜紫渐变 */
+[data-theme="dark"] body,
+[data-theme="dark"] .layout {
+    /* 你喜欢的深空渐变紫 */
     background: radial-gradient(circle at top, #1c1822 0%, #0d0d0f 100%) !important;
     background-attachment: fixed !important;
-    background-size: cover !important;
+}
+
+[data-theme="dark"] .card,
+[data-theme="dark"] .category-card,
+[data-theme="dark"] .dashboard-panel,
+[data-theme="dark"] .dashboard-stats {
+    /* 半透明深色卡片，透出背景渐变 */
+    background-color: rgba(30, 30, 30, 0.7) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
 }
 
 /* ==========================================
-   2. 强制手机端显示小螃蟹
+   白天模式专属：清透亮色渐变 + 纯白卡片
    ========================================== */
-@media (max-width: 768px) {
-    /* 强制让网格上下排列并居中 */
-    .dashboard-grid {
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-    }
-    
-    /* 强制右侧小螃蟹区域显示，并给个固定高度 */
-    .dashboard-stats {
-        display: block !important;
-        width: 90% !important; /* 占屏幕 90% 宽 */
-        height: 200px !important; /* 强制撑开高度 */
-        min-height: 200px !important;
-        margin: 20px auto !important;
-        
-        /* 再次确保背景图设置正确 */
-        background-image: url('https://shirasu224.github.io/menav/pics/the-spycrab2.png') !important;
-        background-size: contain !important;
-        background-repeat: no-repeat !important;
-        background-position: center !important;
-        background-color: transparent !important;
-        border: none !important;
-    }
+[data-theme="light"] body,
+[data-theme="light"] .layout {
+    /* 清爽的白天渐变（浅灰到纯白），你可以换成你喜欢的米色或浅蓝 */
+    background: radial-gradient(circle at top, #f5f6f8 0%, #ffffff 100%) !important;
+    background-attachment: fixed !important;
 }
+
+[data-theme="light"] .card,
+[data-theme="light"] .category-card,
+[data-theme="light"] .dashboard-panel,
+[data-theme="light"] .dashboard-stats {
+    /* 纯白卡片，带一点淡淡的阴影，非常干净 */
+    background-color: #ffffff !important;
+    border: 1px solid rgba(0, 0, 0, 0.05) !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* ==========================================
+   左侧小螃蟹的兼容处理
+   ========================================== */
+/* 因为你的图是透明底的深蓝色螃蟹 */
+/* 在白天模式下，为了避免它和白色背景对比太强烈，我们可以不加处理，原图直接放上去 */
