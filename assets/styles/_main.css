@@ -296,3 +296,46 @@ body {
     box-shadow: 0 10px 30px rgba(153, 0, 0, 0.2) !important; 
     border-color: rgba(153, 0, 0, 0.5) !important;
 }
+
+/* ==========================================
+   1. 强制全局背景渐变（扒掉所有容器的黑底）
+   ========================================== */
+body, html, .layout, main, .dashboard-grid {
+    background-color: transparent !important;
+}
+
+body {
+    /* 深空暗夜紫渐变 */
+    background: radial-gradient(circle at top, #1c1822 0%, #0d0d0f 100%) !important;
+    background-attachment: fixed !important;
+    background-size: cover !important;
+}
+
+/* ==========================================
+   2. 强制手机端显示小螃蟹
+   ========================================== */
+@media (max-width: 768px) {
+    /* 强制让网格上下排列并居中 */
+    .dashboard-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+    
+    /* 强制右侧小螃蟹区域显示，并给个固定高度 */
+    .dashboard-stats {
+        display: block !important;
+        width: 90% !important; /* 占屏幕 90% 宽 */
+        height: 200px !important; /* 强制撑开高度 */
+        min-height: 200px !important;
+        margin: 20px auto !important;
+        
+        /* 再次确保背景图设置正确 */
+        background-image: url('https://shirasu224.github.io/menav/pics/the-spycrab2.png') !important;
+        background-size: contain !important;
+        background-repeat: no-repeat !important;
+        background-position: center !important;
+        background-color: transparent !important;
+        border: none !important;
+    }
+}
