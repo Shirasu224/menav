@@ -1,4 +1,4 @@
-/* ================= 1. 全局标题对齐（紧贴版） ================= */
+/* ================= 1. 全局标题对齐与挤压间距 ================= */
 .dashboard-welcome {
   margin: 0 !important;
   padding: 0 !important;
@@ -20,23 +20,33 @@
   line-height: 1.2 !important;
 }
 
-/* ================= 2. 清除所有底色遮挡 ================= */
+/* ================= 2. 彻底清除所有遮挡物 ================= */
 html, body, .layout, .content, .page, .page-template-home, .dashboard-grid, .sidebar {
   background-color: transparent !important;
+  background-image: none !important;
 }
 
-/* ================= 3. 网页背景图 ================= */
-html.light-theme {
-  background-image: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), url('https://shirasu224.github.io/menav/pics/glitter_blu.jpg') !important;
+/* ================= 3. 强力底层背景图 (防覆盖) ================= */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -9999; /* 压在最底下，绝对不被遮挡 */
+  pointer-events: none;
   background-size: cover !important;
   background-attachment: fixed !important;
   background-position: center !important;
+  background-repeat: no-repeat !important;
 }
-html[data-theme-mode="dark"]:not(.light-theme) {
+
+/* 白天模式底图 */
+html.light-theme body::before {
+  background-image: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), url('https://shirasu224.github.io/menav/pics/glitter_blu.jpg') !important;
+}
+
+/* 黑夜模式底图 */
+html[data-theme-mode="dark"]:not(.light-theme) body::before {
   background-image: linear-gradient(rgba(15, 15, 20, 0.6), rgba(15, 15, 20, 0.6)), url('https://shirasu224.github.io/menav/pics/mood_tree.jpg') !important;
-  background-size: cover !important;
-  background-attachment: fixed !important;
-  background-position: center !important;
 }
 
 /* ================= 4. 侧边栏背景图 ================= */
@@ -53,29 +63,25 @@ html[data-theme-mode="dark"]:not(.light-theme) .sidebar {
   background-attachment: fixed !important;
 }
 
-/* ================= 5. 时钟卡片渐变色 ================= */
+/* ================= 5. 时钟卡片渐变 (强权版) ================= */
 html.light-theme .dashboard-clock-card {
-  background: linear-gradient(180deg, rgba(204, 237, 255, 0.55) 0%, rgba(255, 229, 229, 0.55) 100%) !important;
+  background: linear-gradient(180deg, rgba(204, 237, 255, 0.6) 0%, rgba(255, 229, 229, 0.6) 100%) !important;
   backdrop-filter: blur(10px) !important; 
   -webkit-backdrop-filter: blur(10px) !important;
   border: 1px solid rgba(255, 255, 255, 0.6) !important;
   border-radius: 16px !important;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05) !important;
 }
-html.light-theme .dashboard-clock-card * { 
-  color: #222222 !important; 
-}
+html.light-theme .dashboard-clock-card * { color: #222222 !important; }
 
 html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card {
-  background: linear-gradient(180deg, rgba(70, 83, 124, 0.55) 0%, rgba(141, 124, 129, 0.55) 100%) !important;
+  background: linear-gradient(180deg, rgba(70, 83, 124, 0.6) 0%, rgba(141, 124, 129, 0.6) 100%) !important;
   backdrop-filter: blur(10px) !important; 
   -webkit-backdrop-filter: blur(10px) !important;
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
   border-radius: 16px !important;
 }
-html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card * { 
-  color: #ffffff !important; 
-}
+html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card * { color: #ffffff !important; }
 
 /* ================= 6. 干掉鼠标悬停阴影 ================= */
 .dashboard-grid:hover, 
@@ -90,8 +96,6 @@ html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card * {
 
 /* ================= 7. 手机端专属排版 ================= */
 @media (max-width: 768px) {
-  
-  /* 整体布局 */
   .dashboard-grid {
     position: relative !important; 
     display: flex !important;
@@ -101,7 +105,6 @@ html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card * {
     padding-left: 10px !important; 
   }
 
-  /* 标题区域 */
   .dashboard-intro {
     width: 100% !important;
     display: flex !important;
@@ -120,7 +123,7 @@ html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card * {
   .dashboard-welcome h1 {
     font-size: 1.3rem !important;
     line-height: 1.2 !important; 
-    margin: 0 0 -5px 0 !important; /* 强行往上拉 */
+    margin: 0 0 -5px 0 !important; 
     padding: 0 !important;
   }
   
@@ -131,7 +134,6 @@ html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card * {
     line-height: 1 !important;
   }
 
-  /* 螃蟹图 */
   .dashboard-stats {
     display: block !important;
     position: absolute !important;
@@ -145,22 +147,20 @@ html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card * {
     z-index: 10 !important;
   }
 
-   /* 时钟卡片尺寸精准控制 */
   .dashboard-clock-card {
     display: flex !important;
     flex-direction: column !important;
     width: 75% !important;        
     max-width: 260px !important;  
-    height: auto !important; /* 👈 高度自适应，去掉多余的空白 */
-    min-height: unset !important; /* 👈 取消原先强制的高度 */
-    padding: 12px 15px 28px 15px !important; /* 👈 底部留出 28px 给跑马灯 */
+    height: auto !important; 
+    min-height: unset !important; 
+    padding: 12px 15px 28px 15px !important; 
     margin: 10px 0 0 0 !important; 
     box-sizing: border-box !important;
-    position: relative !important; /* 为底部的文字提供定位 */
-    overflow: hidden !important; /* 防止文字滚出去 */
+    position: relative !important; 
+    overflow: hidden !important; 
   }
 
-  /* 缩小手机端卡片里的所有字体 */
   .dashboard-clock-card .clock-main {
     font-size: 1.8rem !important; 
     text-align: right !important; 
@@ -177,9 +177,8 @@ html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card * {
     font-size: 0.75rem !important;
   }
 
-  /* 👇 新增：底部自动滚动的“好词好句” 👇 */
   .dashboard-clock-card::after {
-    content: "✨ 星光不问赶路人，时光不负有心人。"; /* 👈 在这里把字改成你想放的句子！ */
+    content: "✨ 星光不问赶路人，时光不负有心人。"; 
     position: absolute;
     bottom: 8px;
     left: 0;
@@ -188,16 +187,13 @@ html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card * {
     color: #666;
     white-space: nowrap;
     opacity: 0.8;
-    /* 滚动动画：从右往左 */
     animation: marquee 12s linear infinite;
   }
 
-  /* 黑夜模式下的好词好句颜色变浅 */
   html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card::after {
     color: #ccc;
   }
 
-  /* 定义滚动动画 */
   @keyframes marquee {
     0% { transform: translateX(100%); }
     100% { transform: translateX(-100%); }
