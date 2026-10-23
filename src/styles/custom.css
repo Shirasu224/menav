@@ -11,6 +11,16 @@
   text-align: left !important;
   text-indent: 0 !important;
 }
+
+/* 👇 新增：彻底挤压红框里的空白间距 👇 */
+.dashboard-welcome h1 {
+  margin-bottom: 2px !important; /* 大标题底下不留白 */
+  padding-bottom: 0 !important;
+}
+.dashboard-welcome p {
+  margin-top: 0 !important; /* 小标题上面不留白 */
+  padding-top: 0 !important;
+}
 /* ================= 1. 清除所有遮挡物 ================= */
 /* 必须把系统自带的所有底色变成透明，否则会盖住背景图 */
 html, body, .layout, .content, .page, .page-template-home, .dashboard-grid, .sidebar {
@@ -50,9 +60,10 @@ html[data-theme-mode="dark"]:not(.light-theme) .sidebar {
 
 /* ================= 4. 时钟卡片渐变 ================= */
 html.light-theme .dashboard-clock-card {
-  background: linear-gradient(180deg, rgba(204, 237, 255, 0.2) 0%, rgba(255, 229, 229, 0.2) 100%) !important;
-  backdrop-filter: blur(12px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.6) !important;
+  background: linear-gradient(180deg, rgba(204, 237, 255, 0.15) 0%, rgba(255, 229, 229, 0.15) 100%) !important;
+  backdrop-filter: blur(4px) !important; /* 模糊降低，透出质感 */
+  -webkit-backdrop-filter: blur(4px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.5) !important;
   border-radius: 16px !important;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05) !important;
 }
@@ -111,24 +122,17 @@ html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card * { color: 
     z-index: 10 !important;
   }
 
-  /* 4. 时钟卡片：缩小范围（橙色框变小），居中 */
+  /* 4. 时钟卡片：变小并靠左 */
   .dashboard-clock-card {
     display: flex !important;
     flex-direction: column !important;
-    width: 90% !important;        /* 👈 宽度改小，两边留白 */
-    max-width: 320px !important;  /* 👈 限制最大宽度，不让它太大 */
+    width: 85% !important;        /* 👈 宽度变小（原来90%） */
+    max-width: 280px !important;  /* 👈 最大宽度压扁 */
     min-height: 120px !important;
     padding: 15px !important;
-    margin: 10px auto 0 auto !important; /* 居中 */
+    margin: 10px 0 0 0 !important; /* 👈 关键：外边距设为0，强制靠左对齐！ */
     box-sizing: border-box !important;
-    /* 👈 强制提升透明度，强行让背景透出来 */
-    background: linear-gradient(180deg, rgba(204, 237, 255, 0.15) 0%, rgba(255, 229, 229, 0.15) 100%) !important;
-    backdrop-filter: blur(8px) !important; /* 模糊调小一点，看起来更透 */
-    -webkit-backdrop-filter: blur(8px) !important;
-    border: 1px solid rgba(255, 255, 255, 0.4) !important;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
   }
-
   /* 修复时间溢出 */
   .dashboard-clock-card .clock-main {
     font-size: 2.5rem !important; 
