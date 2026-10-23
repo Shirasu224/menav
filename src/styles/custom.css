@@ -1,15 +1,15 @@
-/* ================= 基础背景渐变 ================= */
-/* 清除原有纯色背景，让渐变透出来 */
-body {
+/* ================= 1. 强制背景渐变 ================= */
+/* 把外壳的纯色底全扒掉 */
+html, body, .layout, .content, .page-template-home, .dashboard-grid {
   background-color: transparent !important;
 }
 
-/* 浅色模式：温柔樱花粉 + 天空蓝 */
+/* 浅色模式：樱花粉 + 天空蓝 */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
-  z-index: -1;
+  z-index: -999;
   pointer-events: none;
   background: linear-gradient(135deg, #ffeef8 0%, #e8ebff 50%, #e8f7ff 100%);
 }
@@ -19,26 +19,19 @@ html[data-theme-mode="dark"] body::before {
   background: linear-gradient(135deg, #11111b 0%, #181825 50%, #241b2f 100%);
 }
 
-/* ================= 卡片毛玻璃 ================= */
-/* 使用 background-color 而不是 background，避免覆盖掉原卡片里的图片 */
-.dashboard-welcome,
+/* ================= 2. 卡片毛玻璃（仅保留时钟和下面分类） ================= */
 .dashboard-clock-card,
-.dashboard-stats,
 .category-card,
 .page-home .category {
   background-color: rgba(255, 255, 255, 0.6) !important;
   backdrop-filter: blur(16px) saturate(1.2);
   -webkit-backdrop-filter: blur(16px) saturate(1.2);
-  border: 1px solid rgba(255, 255, 255, 0.9) !important;
+  border: 1px solid rgba(255, 255, 255, 0.8) !important;
   border-radius: 16px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05) !important;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* 深色模式卡片 */
-html[data-theme-mode="dark"] .dashboard-welcome,
 html[data-theme-mode="dark"] .dashboard-clock-card,
-html[data-theme-mode="dark"] .dashboard-stats,
 html[data-theme-mode="dark"] .category-card,
 html[data-theme-mode="dark"] .page-home .category {
   background-color: rgba(30, 30, 46, 0.6) !important;
@@ -46,8 +39,25 @@ html[data-theme-mode="dark"] .page-home .category {
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
 }
 
-/* ================= 纯 CSS 花边装饰 ================= */
-/* 给整个主内容区加一个淡雅的虚线相框 */
+/* ================= 3. 去掉标题行和右侧图片的格子 ================= */
+.dashboard-welcome,
+.dashboard-stats {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* ================= 4. 强制修复浅色模式的文字颜色 ================= */
+/* 防止原来的白字在浅色渐变上看不清 */
+html:not([data-theme-mode="dark"]) .dashboard-welcome *,
+html:not([data-theme-mode="dark"]) .dashboard-clock-card *,
+html:not([data-theme-mode="dark"]) .dashboard-stats * {
+  color: #333333 !important;
+}
+
+/* ================= 5. 外围虚线花边 ================= */
 .page-template-home {
   position: relative;
   padding: 24px;
@@ -57,13 +67,12 @@ html[data-theme-mode="dark"] .page-home .category {
   content: "";
   position: absolute;
   inset: 8px;
-  border: 2px dashed rgba(255, 160, 190, 0.6); /* 浅粉虚线 */
+  border: 2px dashed rgba(255, 160, 190, 0.6);
   border-radius: 20px;
-  pointer-events: none; /* 保证不挡住鼠标点击 */
-  z-index: -1;
+  pointer-events: none;
+  z-index: -10;
 }
 
-/* 深色模式下的虚线花边 */
 html[data-theme-mode="dark"] .page-template-home::before {
-  border-color: rgba(150, 150, 220, 0.4); /* 淡紫虚线 */
+  border-color: rgba(150, 150, 220, 0.4);
 }
