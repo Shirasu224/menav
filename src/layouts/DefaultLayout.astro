@@ -157,31 +157,39 @@ const fontAwesomePreload = `<link rel="preload" href="${fontAwesomeCssUrl}" as="
 
       <!-- 终极自定义样式 -->
       <style is:global>
-        /* 1. 白天模式 */
+        /* 1. 白天模式：深#ccedff -> 浅#ffe5e5 */
         html.light-theme .dashboard-clock-card {
-          background: linear-gradient(180deg, #ccedff 0%, #ffe5e5 100%) !important;
-          background-image: linear-gradient(180deg, #ccedff 0%, #ffe5e5 100%) !important;
-          border: 1px solid rgba(255, 255, 255, 0.8) !important;
+          /* 60% 透明度，0.6 可以自己调，越小越透 */
+          background: linear-gradient(180deg, rgba(204, 237, 255, 0.6) 0%, rgba(255, 229, 229, 0.6) 100%) !important;
+          background-image: linear-gradient(180deg, rgba(204, 237, 255, 0.6) 0%, rgba(255, 229, 229, 0.6) 100%) !important;
+          backdrop-filter: blur(12px) !important; /* 磨砂玻璃效果 */
+          -webkit-backdrop-filter: blur(12px) !important;
+          border: 1px solid rgba(255, 255, 255, 0.6) !important;
           border-radius: 16px !important;
-          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08) !important;
+          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05) !important;
           overflow: hidden !important;
         }
         html.light-theme .dashboard-clock-card * {
           color: #222222 !important;
         }
 
-              /* 2. 黑夜模式（强制切除所有红色阴影和伪元素） */
+        /* 2. 黑夜模式：深#46537c -> 浅#8d7c81 */
         html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card {
-          background: linear-gradient(180deg, #24236c 0%, #92456a 100%) !important;
-          background-image: linear-gradient(180deg, #24236c 0%, #92456a 100%) !important;
-          border: none !important; /* 干掉所有边框 */
+          background: linear-gradient(180deg, rgba(70, 83, 124, 0.6) 0%, rgba(141, 124, 129, 0.6) 100%) !important;
+          background-image: linear-gradient(180deg, rgba(70, 83, 124, 0.6) 0%, rgba(141, 124, 129, 0.6) 100%) !important;
+          backdrop-filter: blur(12px) !important; 
+          -webkit-backdrop-filter: blur(12px) !important;
+          border: 1px solid rgba(255, 255, 255, 0.1) !important;
           border-radius: 16px !important;
-          box-shadow: none !important; /* 干掉所有阴影 */
-          outline: none !important; /* 干掉外轮廓 */
+          box-shadow: none !important; 
+          outline: none !important; 
           overflow: hidden !important;
         }
+        html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card * {
+          color: #ffffff !important;
+        }
 
-        /* 强制隐藏可能存在的多余发光层 */
+        /* 强制隐藏黑夜多余发光层 */
         html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card::before,
         html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card::after {
           display: none !important;
@@ -189,9 +197,19 @@ const fontAwesomePreload = `<link rel="preload" href="${fontAwesomeCssUrl}" as="
           background: transparent !important;
         }
 
-        /* 强制黑夜文字白色 */
-        html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card * {
-          color: #ffffff !important;
+        /* 3. 终极封印：彻底干掉所有悬停时的阴影、边框和背景色变化 */
+        .dashboard-grid:hover,
+        .dashboard-grid > div:hover,
+        .dashboard-panel:hover,
+        .dashboard-panel > div:hover,
+        .dashboard-clock-card:hover,
+        .card:hover, 
+        .category-card:hover, 
+        .page-home .category:hover {
+          box-shadow: none !important; 
+          border-color: transparent !important; 
+          outline: none !important; 
+          background-color: transparent !important; 
         }
       </style>
     </body>
