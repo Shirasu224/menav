@@ -272,22 +272,9 @@
     }
 }
 
-/* 给分类标题加渐变下划线 */
-.category-title, .category-header {
-    position: relative !important;
-    padding-bottom: 8px !important;
-}
-
-.category-title::after, .category-header::after {
-    content: "" !important;
-    position: absolute !important;
-    bottom: 0 !important;
-    left: 0 !important;
-    width: 40px !important; /* 线的长度 */
-    height: 3px !important;
-    /* 这里用了一道暗红到紫色的渐变，非常/魔法风 */
-    background: linear-gradient(90deg, #900, #a040a0) !important; 
-    border-radius: 3px !important;
+body {
+    /* 把原本纯黑的背景，换成微微带点紫色的暗夜渐变 */
+    background: radial-gradient(circle at top, #1c1822 0%, #0d0d0f 100%) !important;
 }
 
 /* 选中主页的所有分类卡片 */
