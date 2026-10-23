@@ -1,3 +1,16 @@
+/* 测试 1：把整个屏幕强制变红（看看 CSS 到底有没有加载） */
+html, body {
+  background: red !important;
+}
+
+/* 测试 2：加上极高权重的限制，把底图强行贴在所有的父容器上 */
+html body {
+  background-image: linear-gradient(rgba(15, 15, 20, 0.6), rgba(15, 15, 20, 0.6)), url('https://shirasu224.github.io/menav/pics/mood_tree.jpg') !important;
+  background-size: cover !important;
+  background-attachment: fixed !important;
+  background-position: center !important;
+  background-color: transparent !important;
+}
 /* ================= 1. 全局标题对齐 ================= */
 .dashboard-welcome {
   margin: 0 !important;
