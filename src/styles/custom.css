@@ -1,40 +1,39 @@
-/* ================= 1. 彻底清理背景遮挡 ================= */
+/* ================= 1. 清理背景但保留图片 ================= */
+/* 只把大框架背景变成透明，不碰内部图片所在的容器 */
 html, body, .layout, .content, .page-template-home, .dashboard-grid {
   background-color: transparent !important;
   background-image: none !important;
-  border: none !important;
 }
 
-/* ================= 2. 全局渐变背景 ================= */
+/* ================= 2. 明确区分白天/黑夜背景 ================= */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
   z-index: -999;
   pointer-events: none;
-  /* 白天模式：上 #5cc9ff (蓝) -> 下 #ffdbdb (粉) */
+  /* 白天模式：上 #5cc9ff -> 下 #ffdbdb */
   background: linear-gradient(180deg, #5cc9ff 0%, #ffdbdb 100%);
 }
 
-/* 夜晚模式：上 #24236c (深蓝) -> 下 #92456a (紫红) */
 html[data-theme-mode="dark"] body::before {
+  /* 黑夜模式：上 #24236c -> 下 #92456a */
   background: linear-gradient(180deg, #24236c 0%, #92456a 100%);
 }
 
 /* ================= 3. 标题下的格子（时钟卡片） ================= */
 .dashboard-clock-card {
-  /* 白天模式：透出一点底下的蓝粉渐变，并带磨砂效果 */
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.2) 100%) !important;
+  /* 半透明磨砂质感 */
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.1) 100%) !important;
   backdrop-filter: blur(16px) !important;
   -webkit-backdrop-filter: blur(16px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.6) !important;
+  border: 1px solid rgba(255, 255, 255, 0.5) !important;
   border-radius: 16px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05) !important;
 }
 
-/* 夜晚模式的时钟卡片 */
 html[data-theme-mode="dark"] .dashboard-clock-card {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%) !important;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.02) 100%) !important;
   border: 1px solid rgba(255, 255, 255, 0.15) !important;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2) !important;
 }
@@ -42,7 +41,7 @@ html[data-theme-mode="dark"] .dashboard-clock-card {
 /* ================= 4. 下方的分类卡片 ================= */
 .category-card,
 .page-home .category {
-  background-color: rgba(255, 255, 255, 0.3) !important;
+  background-color: rgba(255, 255, 255, 0.25) !important;
   backdrop-filter: blur(16px) !important;
   -webkit-backdrop-filter: blur(16px) !important;
   border: 1px solid rgba(255, 255, 255, 0.4) !important;
@@ -55,12 +54,33 @@ html[data-theme-mode="dark"] .page-home .category {
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
 
-/* ================= 5. 去网格化（去除标题和图片的格子） ================= */
+/* ================= 5. 去掉标题和右侧图片的边框，但保护图片 ================= */
 .dashboard-welcome,
 .dashboard-stats {
-  background: transparent !important;
+  background-color: transparent !important;
   border: none !important;
   box-shadow: none !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
+}
+
+/* 图片单独拎出来，保证它能正常显示 */
+.dashboard-stats img {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* ================= 6. 强制修复文字颜色，防止白天看不清 ================= */
+/* 白天模式强制深色字 */
+html:not([data-theme-mode="dark"]) .dashboard-welcome h1,
+html:not([data-theme-mode="dark"]) .dashboard-welcome p,
+html:not([data-theme-mode="dark"]) .dashboard-clock-card *,
+html:not([data-theme-mode="dark"]) .category-card * {
+  color: #222222 !important;
+}
+
+/* 黑夜模式强制浅色字 */
+html[data-theme-mode="dark"] .dashboard-welcome h1,
+html[data-theme-mode="dark"] .dashboard-welcome p,
+html[data-theme-mode="dark"] .dashboard-clock-card *,
+html[data-theme-mode="dark"] .category-card * {
+  color: #f0f0f0 !important;
 }
