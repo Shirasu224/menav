@@ -145,16 +145,19 @@ html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card * {
     z-index: 10 !important;
   }
 
-  /* 时钟卡片变小 */
+   /* 时钟卡片尺寸精准控制 */
   .dashboard-clock-card {
     display: flex !important;
     flex-direction: column !important;
     width: 75% !important;        
     max-width: 260px !important;  
-    min-height: 100px !important; 
-    padding: 10px 12px !important; 
+    height: auto !important; /* 👈 高度自适应，去掉多余的空白 */
+    min-height: unset !important; /* 👈 取消原先强制的高度 */
+    padding: 12px 15px 28px 15px !important; /* 👈 底部留出 28px 给跑马灯 */
     margin: 10px 0 0 0 !important; 
     box-sizing: border-box !important;
+    position: relative !important; /* 为底部的文字提供定位 */
+    overflow: hidden !important; /* 防止文字滚出去 */
   }
 
   /* 缩小手机端卡片里的所有字体 */
@@ -162,6 +165,7 @@ html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card * {
     font-size: 1.8rem !important; 
     text-align: right !important; 
     line-height: 1.2 !important;
+    margin-top: 4px !important;
   }
   
   .dashboard-clock-card .clock-header,
@@ -171,5 +175,31 @@ html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card * {
   
   .dashboard-clock-card div {
     font-size: 0.75rem !important;
+  }
+
+  /* 👇 新增：底部自动滚动的“好词好句” 👇 */
+  .dashboard-clock-card::after {
+    content: "✨ 星光不问赶路人，时光不负有心人。"; /* 👈 在这里把字改成你想放的句子！ */
+    position: absolute;
+    bottom: 8px;
+    left: 0;
+    width: 100%;
+    font-size: 0.7rem;
+    color: #666;
+    white-space: nowrap;
+    opacity: 0.8;
+    /* 滚动动画：从右往左 */
+    animation: marquee 12s linear infinite;
+  }
+
+  /* 黑夜模式下的好词好句颜色变浅 */
+  html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card::after {
+    color: #ccc;
+  }
+
+  /* 定义滚动动画 */
+  @keyframes marquee {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
   }
 }
