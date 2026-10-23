@@ -158,8 +158,8 @@ const fontAwesomePreload = `<link rel="preload" href="${fontAwesomeCssUrl}" as="
       <!-- 终极自定义样式 -->
       <style is:global>
         /* ================= 1. 全局背景图替换 ================= */
-        /* 清除系统原本底色 */
-        html, body, .layout {
+        /* 暴力清除所有可能遮挡背景的容器底色 */
+        html, body, .layout, .content, .page, .page-template-home, .dashboard-grid {
           background-color: transparent !important;
         }
 
@@ -168,7 +168,7 @@ const fontAwesomePreload = `<link rel="preload" href="${fontAwesomeCssUrl}" as="
           content: "";
           position: fixed;
           inset: 0;
-          z-index: -999;
+          z-index: -1; /* 👈 把 -999 改成了 -1，防止被某些层叠上下文吃掉 */
           pointer-events: none;
           background-size: cover;
           background-position: center;
