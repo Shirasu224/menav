@@ -1,55 +1,65 @@
-/* ================= 1. 只让时钟格子渐变 ================= */
-.dashboard-clock-card {
-  /* 白天模式：蓝到粉，透明度 85% */
-  background: linear-gradient(180deg, rgba(92, 201, 255, 0.85) 0%, rgba(255, 219, 219, 0.85) 100%) !important;
-  backdrop-filter: blur(12px) !important;
-  -webkit-backdrop-filter: blur(12px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.6) !important;
-  border-radius: 16px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08) !important;
-  color: #333333 !important; /* 强制白天文字深色 */
+/* ================= 1. 黑夜/白天 背景渐变 ================= */
+/* 修正了选择器，必须带 -mode */
+html[data-theme-mode="dark"] body {
+  background: radial-gradient(circle at top, #1c1822 0%, #0d0d0f 100%) !important;
+  background-attachment: fixed !important;
 }
 
-/* 强制白天模式格子里的文字变深色 */
+html:not([data-theme-mode="dark"]) body {
+  background: radial-gradient(circle at top, #f5f6f8 0%, #ffffff 100%) !important;
+  background-attachment: fixed !important;
+}
+
+/* ================= 2. 标题下的格子（时钟卡片）加渐变 ================= */
+/* 白天模式：浅蓝到浅粉，低透明度 */
+html:not([data-theme-mode="dark"]) .dashboard-clock-card {
+  background: linear-gradient(180deg, rgba(92, 201, 255, 0.6) 0%, rgba(255, 219, 219, 0.6) 100%) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.6) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05) !important;
+  border-radius: 16px !important;
+}
+
+/* 强制白天文字深色 */
 html:not([data-theme-mode="dark"]) .dashboard-clock-card * {
   color: #222222 !important;
 }
 
-/* 夜晚模式：深蓝到紫红，透明度 90% */
+/* 黑夜模式：深蓝到紫红，低透明度 */
 html[data-theme-mode="dark"] .dashboard-clock-card {
-  background: linear-gradient(180deg, rgba(36, 35, 108, 0.9) 0%, rgba(146, 69, 106, 0.9) 100%) !important;
-  border: 1px solid rgba(255, 255, 255, 0.15) !important;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3) !important;
+  background: linear-gradient(180deg, rgba(36, 35, 108, 0.7) 0%, rgba(146, 69, 106, 0.7) 100%) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4) !important;
+  border-radius: 16px !important;
 }
 
-/* 强制黑夜模式格子里的文字变浅色 */
+/* 强制黑夜文字白色 */
 html[data-theme-mode="dark"] .dashboard-clock-card * {
   color: #ffffff !important;
 }
 
-/* ================= 2. 修复图片消失 ================= */
-/* 强制让图片容器可见，并且如果有背景图也显示出来 */
+/* ================= 3. 修复右侧螃蟹图 ================= */
+/* 只清除背景色和边框，绝对不动背景图片 */
 .dashboard-stats {
   background-color: transparent !important;
-  background-image: none !important;
   border: none !important;
   box-shadow: none !important;
-  opacity: 1 !important;
-  visibility: visible !important;
+  /* 注意：这里故意不写 background-image，让它保留你在 _main.css 里设置的螃蟹图 */
 }
 
-/* 如果图片是 img 标签，强制显示 */
-.dashboard-stats img {
-  display: block !important;
-  opacity: 1 !important;
-  visibility: visible !important;
+/* 确保装载图片的大容器自身不带奇怪的底色 */
+.dashboard-grid > div {
+  background-color: transparent !important;
 }
 
-/* ================= 3. 修复夜间模式顶部红色溢色 ================= */
-/* 防止渐变在顶部溢出或产生条纹 */
-.dashboard-clock-card {
-  background-repeat: no-repeat !important;
-  background-size: cover !important;
-  background-attachment: local !important;
-  overflow: hidden !important; /* 把溢出部分裁掉 */
+/* ================= 4. 去掉多余的红/紫光晕（解决溢色） ================= */
+/* 如果你之前的鼠标悬停有红色光晕，这里把它全局关掉 */
+.dashboard-grid:hover,
+.dashboard-clock-card:hover,
+.dashboard-stats:hover {
+  box-shadow: none !important;
+  border-color: inherit !important;
 }
