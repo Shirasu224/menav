@@ -9,30 +9,43 @@ html:not([data-theme-mode="dark"]) body {
   background-attachment: fixed !important;
 }
 
-/* ================= 2. 标题下的格子（时钟卡片）渐变 ================= */
-/* 白天模式 */
-html:not([data-theme-mode="dark"]) .dashboard-clock-card {
-  background: linear-gradient(180deg, rgba(92, 201, 255, 0.6) 0%, rgba(255, 219, 219, 0.6) 100%) !important;
-  backdrop-filter: blur(16px) !important;
-  -webkit-backdrop-filter: blur(16px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.6) !important;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05) !important;
+/* ================= 1. 时钟卡片（白天渐变） ================= */
+html[data-theme-mode="light"] .dashboard-clock-card,
+html.light .dashboard-clock-card,
+html:not(.dark) .dashboard-clock-card {
+  /* 浅蓝到浅粉 */
+  background: linear-gradient(180deg, #5cc9ff 0%, #ffdbdb 100%) !important;
+  background-image: linear-gradient(180deg, #5cc9ff 0%, #ffdbdb 100%) !important;
+  opacity: 0.9 !important; /* 保持一点点透明感 */
+  border: 1px solid rgba(255, 255, 255, 0.8) !important;
   border-radius: 16px !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08) !important;
+  overflow: hidden !important; /* 防止渐变边缘溢出 */
 }
-html:not([data-theme-mode="dark"]) .dashboard-clock-card * {
+
+/* 强制白天文字深色 */
+html[data-theme-mode="light"] .dashboard-clock-card *,
+html.light .dashboard-clock-card *,
+html:not(.dark) .dashboard-clock-card * {
   color: #222222 !important;
 }
 
-/* 黑夜模式 */
-html[data-theme-mode="dark"] .dashboard-clock-card {
-  background: linear-gradient(180deg, rgba(36, 35, 108, 0.7) 0%, rgba(146, 69, 106, 0.7) 100%) !important;
-  backdrop-filter: blur(16px) !important;
-  -webkit-backdrop-filter: blur(16px) !important;
+/* ================= 2. 时钟卡片（黑夜渐变） ================= */
+html[data-theme-mode="dark"] .dashboard-clock-card,
+html.dark .dashboard-clock-card {
+  /* 深蓝到紫红 */
+  background: linear-gradient(180deg, #24236c 0%, #92456a 100%) !important;
+  background-image: linear-gradient(180deg, #24236c 0%, #92456a 100%) !important;
+  opacity: 0.9 !important;
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4) !important;
   border-radius: 16px !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4) !important;
+  overflow: hidden !important; /* 防止渐变边缘溢出 */
 }
-html[data-theme-mode="dark"] .dashboard-clock-card * {
+
+/* 强制黑夜文字白色 */
+html[data-theme-mode="dark"] .dashboard-clock-card *,
+html.dark .dashboard-clock-card * {
   color: #ffffff !important;
 }
 
@@ -110,4 +123,13 @@ html[data-theme-mode="dark"] .dashboard-panel:hover {
     min-height: 200px !important;
     margin-top: 20px !important;
   }
+}
+
+/* 彻底清除所有卡片（包括悬停）的红色溢色 */
+.card:hover, 
+.category-card:hover, 
+.dashboard-panel:hover,
+.dashboard-clock-card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2) !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
 }
