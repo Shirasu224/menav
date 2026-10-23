@@ -1,32 +1,21 @@
-/* ================= 1. 保持页面原本干净背景 ================= */
-/* 不再强行改变整个网页的背景，还给网页原本的干净底色 */
-
-/* ================= 2. 核心：只让“时钟格子”变成半透明渐变 ================= */
+/* ================= 1. 只让时钟格子渐变 ================= */
 .dashboard-clock-card {
-  /* 白天模式：上 #5cc9ff (蓝) -> 下 #ffdbdb (粉) */
-  /* 使用 rgba 调低透明度，让格子透出一点点底下的颜色，质感更好 */
+  /* 白天模式：蓝到粉，透明度 85% */
   background: linear-gradient(180deg, rgba(92, 201, 255, 0.85) 0%, rgba(255, 219, 219, 0.85) 100%) !important;
-  
-  /* 磨砂玻璃效果 */
   backdrop-filter: blur(12px) !important;
   -webkit-backdrop-filter: blur(12px) !important;
-  
-  /* 边框和圆角 */
   border: 1px solid rgba(255, 255, 255, 0.6) !important;
   border-radius: 16px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08) !important;
-  
-  /* 强制白天模式下的文字颜色，防止在浅色渐变上看不清 */
-  color: #333333 !important;
+  color: #333333 !important; /* 强制白天文字深色 */
 }
 
-/* 强制白天模式格子里的时间、文字变深色 */
+/* 强制白天模式格子里的文字变深色 */
 html:not([data-theme-mode="dark"]) .dashboard-clock-card * {
   color: #222222 !important;
 }
 
-/* ================= 3. 夜晚模式的“时钟格子” ================= */
-/* 夜晚模式：上 #24236c (深蓝) -> 下 #92456a (紫红) */
+/* 夜晚模式：深蓝到紫红，透明度 90% */
 html[data-theme-mode="dark"] .dashboard-clock-card {
   background: linear-gradient(180deg, rgba(36, 35, 108, 0.9) 0%, rgba(146, 69, 106, 0.9) 100%) !important;
   border: 1px solid rgba(255, 255, 255, 0.15) !important;
@@ -38,27 +27,29 @@ html[data-theme-mode="dark"] .dashboard-clock-card * {
   color: #ffffff !important;
 }
 
-/* ================= 4. 下方的分类卡片（保持轻微毛玻璃） ================= */
-/* 如果你也希望下面的分类格子统一风格，可以保留这个，不需要的话直接删掉 */
-.category-card,
-.page-home .category {
-  background-color: rgba(255, 255, 255, 0.4) !important;
-  backdrop-filter: blur(12px) !important;
-  -webkit-backdrop-filter: blur(12px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.3) !important;
-  border-radius: 16px;
-}
-
-html[data-theme-mode="dark"] .category-card,
-html[data-theme-mode="dark"] .page-home .category {
-  background-color: rgba(30, 30, 45, 0.4) !important;
-  border: 1px solid rgba(255, 255, 255, 0.08) !important;
-}
-
-/* ================= 5. 确保标题和螃蟹图没有背景 ================= */
-.dashboard-welcome,
+/* ================= 2. 修复图片消失 ================= */
+/* 强制让图片容器可见，并且如果有背景图也显示出来 */
 .dashboard-stats {
-  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
   border: none !important;
   box-shadow: none !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* 如果图片是 img 标签，强制显示 */
+.dashboard-stats img {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* ================= 3. 修复夜间模式顶部红色溢色 ================= */
+/* 防止渐变在顶部溢出或产生条纹 */
+.dashboard-clock-card {
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+  background-attachment: local !important;
+  overflow: hidden !important; /* 把溢出部分裁掉 */
 }
