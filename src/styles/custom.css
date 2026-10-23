@@ -1,83 +1,92 @@
-/* ================= 1. 绝对清除所有红色溢色和悬停阴影 ================= */
-.card:hover, 
-.category-card:hover, 
-.dashboard-panel:hover,
-.dashboard-clock-card:hover,
-.dashboard-grid:hover {
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1) !important;
-  border-color: inherit !important;
+/* ================= 1. 清除所有遮挡物 ================= */
+/* 必须把系统自带的所有底色变成透明，否则会盖住背景图 */
+html, body, .layout, .content, .page, .page-template-home, .dashboard-grid, .sidebar {
+  background-color: transparent !important;
 }
 
-/* ================= 2. 白天模式（精准捕捉 .light-theme） ================= */
+/* ================= 2. 背景图直接贴在网页最底层 ================= */
+/* 白天模式 */
+html.light-theme {
+  background-image: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), url('https://shirasu224.github.io/menav/pics/glitter_blu.jpg') !important;
+  background-size: cover !important;
+  background-attachment: fixed !important;
+  background-position: center !important;
+}
+
+/* 黑夜模式 */
+html[data-theme-mode="dark"]:not(.light-theme) {
+  background-image: linear-gradient(rgba(15, 15, 20, 0.6), rgba(15, 15, 20, 0.6)), url('https://shirasu224.github.io/menav/pics/mood_tree.jpg') !important;
+  background-size: cover !important;
+  background-attachment: fixed !important;
+  background-position: center !important;
+}
+
+/* ================= 3. 侧边栏背景图 ================= */
+html.light-theme .sidebar {
+  background-image: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), url('https://shirasu224.github.io/menav/pics/glitter_blu.jpg') !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-attachment: fixed !important;
+}
+html[data-theme-mode="dark"]:not(.light-theme) .sidebar {
+  background-image: linear-gradient(rgba(15, 15, 20, 0.7), rgba(15, 15, 20, 0.7)), url('https://shirasu224.github.io/menav/pics/mood_tree.jpg') !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-attachment: fixed !important;
+}
+
+/* ================= 4. 时钟卡片渐变 ================= */
 html.light-theme .dashboard-clock-card {
-  background: linear-gradient(180deg, #5cc9ff 0%, #ffdbdb 100%) !important;
-  border: 1px solid rgba(255, 255, 255, 0.8) !important;
+  background: linear-gradient(180deg, rgba(204, 237, 255, 0.6) 0%, rgba(255, 229, 229, 0.6) 100%) !important;
+  backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.6) !important;
   border-radius: 16px !important;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08) !important;
-  overflow: hidden !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05) !important;
 }
+html.light-theme .dashboard-clock-card * { color: #222222 !important; }
 
-/* 强制白天模式格子里的文字为深色 */
-html.light-theme .dashboard-clock-card * {
-  color: #222222 !important;
-}
-
-/* ================= 3. 黑夜模式（精准捕捉 [data-theme-mode="dark"]） ================= */
-html[data-theme-mode="dark"] .dashboard-clock-card {
-  background: linear-gradient(180deg, #24236c 0%, #92456a 100%) !important;
+html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card {
+  background: linear-gradient(180deg, rgba(70, 83, 124, 0.6) 0%, rgba(141, 124, 129, 0.6) 100%) !important;
+  backdrop-filter: blur(12px) !important; 
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
   border-radius: 16px !important;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4) !important;
-  overflow: hidden !important;
+}
+html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card * { color: #ffffff !important; }
+
+/* ================= 5. 终极封印悬停阴影 ================= */
+.dashboard-grid:hover, .dashboard-panel:hover, .dashboard-clock-card:hover, .card:hover, .category-card:hover {
+  box-shadow: none !important; 
+  border-color: transparent !important; 
+  background-color: transparent !important; 
 }
 
-/* 强制黑夜模式格子里的文字为白色 */
-html[data-theme-mode="dark"] .dashboard-clock-card * {
-  color: #ffffff !important;
-}
-
-/* ================= 4. 你的螃蟹图布局（保留原样，千万别动） ================= */
-.dashboard-grid {
-  display: grid !important;
-  grid-template-columns: 1fr 1fr !important;
-  align-items: center !important;
-  gap: 20px !important;
-}
-.dashboard-intro { width: 100% !important; }
-.dashboard-stats > * { display: none !important; }
-.dashboard-stats {
-  background-image: url('https://shirasu224.github.io/menav/pics/the-spycrab2.png') !important;
-  background-size: contain !important;
-  background-repeat: no-repeat !important;
-  background-position: center !important;
-  background-color: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
-  width: 100% !important;
-  min-height: 300px !important;
-}
-
-/* ================= 5. 下方分类卡片样式 ================= */
-.card, .category-card, .dashboard-panel {
-  border-radius: 16px !important;
-  transition: all 0.3s ease !important;
-}
-html[data-theme-mode="dark"] .card,
-html[data-theme-mode="dark"] .category-card,
-html[data-theme-mode="dark"] .dashboard-panel {
-  background-color: rgba(30, 30, 30, 0.7) !important;
-  border: 1px solid rgba(255, 255, 255, 0.08) !important;
-}
-html.light-theme .card,
-html.light-theme .category-card,
-html.light-theme .dashboard-panel {
-  background-color: #ffffff !important;
-  border: 1px solid rgba(0, 0, 0, 0.05) !important;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05) !important;
-}
-
-/* ================= 6. 手机端适配 ================= */
+/* ================= 6. 手机端超级暴力适配 ================= */
 @media (max-width: 768px) {
-  .dashboard-grid { grid-template-columns: 1fr !important; text-align: center !important; }
-  .dashboard-stats { min-height: 200px !important; margin-top: 20px !important; }
+  .dashboard-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    gap: 15px !important;
+  }
+  .dashboard-intro { width: 100% !important; }
+  .dashboard-welcome h1 {
+    font-size: 1.6rem !important; 
+    text-align: center !important; 
+    word-wrap: break-word !important;
+  }
+  .dashboard-welcome p { text-align: center !important; }
+  .dashboard-clock-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-height: 160px !important;
+    padding: 15px !important;
+    margin: 0 auto 15px auto !important;
+    box-sizing: border-box !important;
+  }
+  .dashboard-stats {
+    display: block !important;
+    width: 100% !important;
+    min-height: 250px !important; 
+    margin-top: 10px !important;
+  }
 }
