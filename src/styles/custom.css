@@ -1,49 +1,69 @@
-/* 1. 深色模式下的背景渐变 */
-html[data-theme-mode="dark"] body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -1; 
-  pointer-events: none;
-  background: linear-gradient(135deg, #1b1b26 0%, #232033 50%, #1a2530 100%);
+/* ================= 基础背景渐变 ================= */
+/* 清除原有纯色背景，让渐变透出来 */
+body {
+  background-color: transparent !important;
 }
 
-/* 2. 浅色模式下的背景渐变 */
-html[data-theme-mode="light"] body::before {
+/* 浅色模式：温柔樱花粉 + 天空蓝 */
+body::before {
   content: "";
   position: fixed;
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  background: linear-gradient(135deg, #f7d9e8 0%, #dde6ff 45%, #d8f3ea 100%);
+  background: linear-gradient(135deg, #ffeef8 0%, #e8ebff 50%, #e8f7ff 100%);
 }
 
-/* 3. 把原有背景变透明，让渐变透出来 */
-body {
-  background: transparent !important;
+/* 深色模式：静谧夜空紫 */
+html[data-theme-mode="dark"] body::before {
+  background: linear-gradient(135deg, #11111b 0%, #181825 50%, #241b2f 100%);
 }
 
-/* 4. 网页里的卡片变成半透明毛玻璃效果 */
-.dashboard-clock-card, 
-.dashboard-welcome, 
-.category-card, 
-.page-home .category,
-.dashboard-grid > div {
-  background: rgba(28, 28, 40, 0.55) !important;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
-  border-radius: 14px;
-  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.45);
-  backdrop-filter: blur(14px) saturate(1.15);
-  -webkit-backdrop-filter: blur(14px) saturate(1.15);
+/* ================= 卡片毛玻璃 ================= */
+/* 使用 background-color 而不是 background，避免覆盖掉原卡片里的图片 */
+.dashboard-welcome,
+.dashboard-clock-card,
+.dashboard-stats,
+.category-card,
+.page-home .category {
+  background-color: rgba(255, 255, 255, 0.6) !important;
+  backdrop-filter: blur(16px) saturate(1.2);
+  -webkit-backdrop-filter: blur(16px) saturate(1.2);
+  border: 1px solid rgba(255, 255, 255, 0.9) !important;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05) !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* 浅色模式下的卡片颜色调整 */
-html[data-theme-mode="light"] .dashboard-clock-card,
-html[data-theme-mode="light"] .dashboard-welcome,
-html[data-theme-mode="light"] .category-card,
-html[data-theme-mode="light"] .page-home .category,
-html[data-theme-mode="light"] .dashboard-grid > div {
-  background: rgba(255, 255, 255, 0.62) !important;
-  border: 1px solid rgba(255, 255, 255, 0.75) !important;
-  box-shadow: 0 8px 28px rgba(80, 70, 120, 0.12);
+/* 深色模式卡片 */
+html[data-theme-mode="dark"] .dashboard-welcome,
+html[data-theme-mode="dark"] .dashboard-clock-card,
+html[data-theme-mode="dark"] .dashboard-stats,
+html[data-theme-mode="dark"] .category-card,
+html[data-theme-mode="dark"] .page-home .category {
+  background-color: rgba(30, 30, 46, 0.6) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* ================= 纯 CSS 花边装饰 ================= */
+/* 给整个主内容区加一个淡雅的虚线相框 */
+.page-template-home {
+  position: relative;
+  padding: 24px;
+}
+
+.page-template-home::before {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border: 2px dashed rgba(255, 160, 190, 0.6); /* 浅粉虚线 */
+  border-radius: 20px;
+  pointer-events: none; /* 保证不挡住鼠标点击 */
+  z-index: -1;
+}
+
+/* 深色模式下的虚线花边 */
+html[data-theme-mode="dark"] .page-template-home::before {
+  border-color: rgba(150, 150, 220, 0.4); /* 淡紫虚线 */
 }
