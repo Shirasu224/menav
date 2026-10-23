@@ -1,37 +1,49 @@
-/* src/styles/custom.css */
-
-/* ===== 颜色变量：亮色 ===== */
-:root {
-  --page-grad: linear-gradient(135deg, #f7d9e8 0%, #dde6ff 45%, #d8f3ea 100%);
-  --surface: rgba(255, 255, 255, 0.62);
-  --surface-border: rgba(255, 255, 255, 0.75);
-  --surface-shadow: 0 8px 28px rgba(80, 70, 120, 0.12);
-  --ink: #2c2a35;
+/* 1. 深色模式下的背景渐变 */
+html[data-theme-mode="dark"] body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1; /* 放在最底层 */
+  pointer-events: none;
+  background: linear-gradient(135deg, #1b1b26 0%, #232033 50%, #1a2530 100%);
 }
 
-/* ===== 颜色变量：暗色 =====
-   选择器按你站点实际用的来，二选一留一个即可 */
-html.dark,
-html[data-theme="dark"] {
-  --page-grad: linear-gradient(135deg, #1b1b26 0%, #232033 50%, #1a2530 100%);
-  --surface: rgba(28, 28, 40, 0.55);
-  --surface-border: rgba(255, 255, 255, 0.12);
-  --surface-shadow: 0 8px 28px rgba(0, 0, 0, 0.45);
-  --ink: #e8e6f0;
-}
-
-/* ===== 铺底渐变 =====
-   用 fixed 伪元素而不是 background-attachment: fixed，
-   后者在 iOS Safari 上会失效 */
-body {
-  background: transparent !important;
-}
-
-body::before {
+/* 2. 浅色模式下的背景渐变 */
+html[data-theme-mode="light"] body::before {
   content: "";
   position: fixed;
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  background: var(--page-grad);
+  background: linear-gradient(135deg, #f7d9e8 0%, #dde6ff 45%, #d8f3ea 100%);
+}
+
+/* 3. 把原有背景变透明，让渐变透出来 */
+body {
+  background: transparent !important;
+}
+
+/* 4. 网页里的卡片变成半透明毛玻璃效果 */
+.dashboard-clock-card, 
+.dashboard-welcome, 
+.category-card, 
+.page-home .category,
+.dashboard-grid > div {
+  background: rgba(28, 28, 40, 0.55) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 14px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(14px) saturate(1.15);
+  -webkit-backdrop-filter: blur(14px) saturate(1.15);
+}
+
+/* 浅色模式下的卡片颜色调整 */
+html[data-theme-mode="light"] .dashboard-clock-card,
+html[data-theme-mode="light"] .dashboard-welcome,
+html[data-theme-mode="light"] .category-card,
+html[data-theme-mode="light"] .page-home .category,
+html[data-theme-mode="light"] .dashboard-grid > div {
+  background: rgba(255, 255, 255, 0.62) !important;
+  border: 1px solid rgba(255, 255, 255, 0.75) !important;
+  box-shadow: 0 8px 28px rgba(80, 70, 120, 0.12);
 }
