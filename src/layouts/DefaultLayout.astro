@@ -66,151 +66,19 @@ const fontAwesomePreload = `<link rel="preload" href="${fontAwesomeCssUrl}" as="
       <link rel="stylesheet" href={fontAwesomeCssUrl} />
     </noscript>
 
-    <!-- 终极自定义样式 -->
     <style is:global>
-      /* 1. 暴力清空所有底层黑底 */
-      html, body, .layout, .content, .page, .page-template-home, .dashboard-grid, .dashboard-stats, .dashboard-clock-card {
-        background-color: transparent !important;
-        box-shadow: none !important;
-        border: none !important;
+      /* 测试1：把整个网页变成亮绿色 */
+      html, body {
+        background: #00ff00 !important;
+        background-image: none !important;
       }
-
-      /* 2. 强行贴上背景图 */
-      html[data-theme-mode="dark"]:not(.light-theme),
-      html[data-theme-mode="dark"]:not(.light-theme) body {
-        background: linear-gradient(rgba(15, 15, 20, 0.6), rgba(15, 15, 20, 0.6)), url('https://shirasu224.github.io/menav/pics/mood_tree.jpg') !important;
-        background-size: cover !important;
-        background-attachment: fixed !important;
-        background-position: center !important;
-      }
-      html.light-theme,
-      html.light-theme body {
-        background: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), url('https://shirasu224.github.io/menav/pics/glitter_blu.jpg') !important;
-        background-size: cover !important;
-        background-attachment: fixed !important;
-        background-position: center !important;
-      }
-
-      /* 3. 时钟卡片渐变 */
-      html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card {
-        background: linear-gradient(180deg, rgba(70, 83, 124, 0.5) 0%, rgba(141, 124, 129, 0.5) 100%) !important;
-        backdrop-filter: blur(10px) !important;
-        border: 1px solid rgba(255, 255, 255, 0.1) !important;
-        border-radius: 16px !important;
-      }
-      html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card * { color: #ffffff !important; }
       
-      html.light-theme .dashboard-clock-card {
-        background: linear-gradient(180deg, rgba(204, 237, 255, 0.5) 0%, rgba(255, 229, 229, 0.5) 100%) !important;
-        backdrop-filter: blur(10px) !important;
-        border: 1px solid rgba(255, 255, 255, 0.6) !important;
-        border-radius: 16px !important;
-      }
-      html.light-theme .dashboard-clock-card * { color: #222222 !important; }
-
-      /* 4. 侧边栏背景图 */
-      html.light-theme .sidebar {
-        background: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), url('https://shirasu224.github.io/menav/pics/glitter_blu.jpg') !important;
-        background-size: cover !important;
-        background-attachment: fixed !important;
-      }
-      html[data-theme-mode="dark"]:not(.light-theme) .sidebar {
-        background: linear-gradient(rgba(15, 15, 20, 0.7), rgba(15, 15, 20, 0.7)), url('https://shirasu224.github.io/menav/pics/mood_tree.jpg') !important;
-        background-size: cover !important;
-        background-attachment: fixed !important;
-      }
-
-      /* 5. 电脑端布局：锁死螃蟹尺寸 */
-      .dashboard-grid {
-        display: grid !important;
-        grid-template-columns: 1fr 1fr !important; 
-        align-items: center !important; 
-        gap: 20px !important;
-      }
-      .dashboard-stats > * { display: none !important; }
+      /* 测试2：把右边那个巨大的螃蟹框强制变小并变红 */
       .dashboard-stats {
-        width: 320px !important; 
-        height: 260px !important; 
-        margin: 0 auto !important;
-        background-image: url('https://shirasu224.github.io/menav/pics/the-spycrab2.png') !important;
-        background-size: contain !important; 
-        background-repeat: no-repeat !important;
-        background-position: center !important;
-      }
-
-      /* 6. 手机端专属排版 */
-      @media (max-width: 768px) {
-        .dashboard-grid {
-          position: relative !important; 
-          display: flex !important;
-          flex-direction: column !important;
-          align-items: flex-start !important; 
-          width: 100% !important;
-          padding-left: 15px !important; 
-          padding-right: 15px !important;
-          box-sizing: border-box !important; 
-          gap: 10px !important;
-        }
-        .dashboard-intro {
-          width: 100% !important;
-          display: flex !important;
-          flex-direction: column !important;
-          align-items: flex-start !important;
-          text-align: left !important;
-        }
-        .dashboard-welcome {
-          width: 100% !important;
-          margin: 0 !important;
-          padding: 0 !important; 
-          text-align: left !important; 
-        }
-        .dashboard-welcome h1 {
-          font-size: 1.3rem !important;
-          margin: 0 0 -2px 0 !important; 
-          line-height: 1.2 !important;
-        }
-        .dashboard-welcome p {
-          font-size: 0.85rem !important;
-          margin: 0 !important;
-          line-height: 1.2 !important;
-        }
-        
-        /* 螃蟹悬浮右上角 */
-        .dashboard-stats {
-          display: block !important;
-          position: absolute !important;
-          top: 5px !important;      
-          right: 15px !important;   
-          width: 100px !important;   
-          height: 100px !important;  
-          background-position: top right !important; 
-          margin: 0 !important;
-          z-index: 10 !important;
-        }
-        
-        /* 卡片靠左 */
-        .dashboard-clock-card {
-          display: flex !important;
-          flex-direction: column !important;
-          width: 75% !important;        
-          max-width: 260px !important;  
-          height: auto !important; 
-          padding: 12px 15px !important; 
-          margin: 0 !important;         
-          margin-top: 5px !important; 
-          position: relative !important;
-        }
-        
-        .dashboard-clock-card .clock-main {
-          font-size: 1.8rem !important; 
-          text-align: right !important;
-          line-height: 1.1 !important;
-        }
-        .dashboard-clock-card .clock-header,
-        .dashboard-clock-card .clock-date {
-          font-size: 0.8rem !important;
-          white-space: nowrap !important; 
-        }
+        width: 200px !important;
+        height: 200px !important;
+        background-color: #ff0000 !important;
+        background-image: none !important;
       }
     </style>
   </head>
