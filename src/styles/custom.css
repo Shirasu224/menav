@@ -51,3 +51,113 @@ html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card {
   border-radius: 16px !important;
 }
 html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card * { color: #ffffff !important; }
+
+/* ================= 5. 手机端专属排版 ================= */
+@media (max-width: 768px) {
+  .dashboard-grid {
+    position: relative !important; 
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    gap: 15px !important;
+    padding-left: 10px !important; 
+  }
+
+  .dashboard-intro {
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important; 
+  }
+  
+  .dashboard-welcome {
+    width: 100% !important;
+    padding-right: 100px !important; 
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+    text-align: left !important;
+  }
+  
+  .dashboard-welcome h1 {
+    font-size: 1.3rem !important;
+    line-height: 1.2 !important; 
+    margin: 0 0 -5px 0 !important; /* 强行拉近副标题 */
+    padding: 0 !important;
+  }
+  
+  .dashboard-welcome p {
+    font-size: 0.85rem !important;
+    margin-top: 0 !important; 
+    padding: 0 !important;
+    line-height: 1 !important;
+  }
+
+  /* 螃蟹图：缩小并悬浮到右上角 */
+  .dashboard-stats {
+    display: block !important;
+    position: absolute !important;
+    top: -30px !important; 
+    right: 0 !important;   
+    width: 100px !important; 
+    height: 100px !important;
+    background-size: contain !important;
+    background-position: top right !important; 
+    background-repeat: no-repeat !important;
+    z-index: 10 !important;
+  }
+
+  /* 时钟卡片：缩小靠左 */
+  .dashboard-clock-card {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 75% !important;        
+    max-width: 260px !important;  
+    height: auto !important; 
+    min-height: unset !important; 
+    padding: 12px 15px 28px 15px !important; 
+    margin: 10px 0 0 0 !important; 
+    box-sizing: border-box !important;
+    position: relative !important; 
+    overflow: hidden !important; 
+  }
+
+  /* 缩小字体 */
+  .dashboard-clock-card .clock-main {
+    font-size: 1.8rem !important; 
+    text-align: right !important; 
+    line-height: 1.2 !important;
+    margin-top: 4px !important;
+  }
+  
+  .dashboard-clock-card .clock-header,
+  .dashboard-clock-card .clock-date {
+    font-size: 0.75rem !important; 
+  }
+  
+  .dashboard-clock-card div {
+    font-size: 0.75rem !important;
+  }
+
+  /* 底部跑马灯 */
+  .dashboard-clock-card::after {
+    content: "✨ 星光不问赶路人，时光不负有心人。"; 
+    position: absolute;
+    bottom: 8px;
+    left: 0;
+    width: 100%;
+    font-size: 0.7rem;
+    color: #666;
+    white-space: nowrap;
+    opacity: 0.8;
+    animation: marquee 12s linear infinite;
+  }
+
+  html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card::after {
+    color: #ccc;
+  }
+
+  @keyframes marquee {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+  }
+}
