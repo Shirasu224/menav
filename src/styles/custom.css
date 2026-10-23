@@ -20,29 +20,31 @@
   line-height: 1.2 !important;
 }
 
-/* ================= 2. 暴力全屏背景图 ================= */
-/* 把所有可能的底色全设透明 */
-html, body, .layout, .content, .page, .page-template-home {
+/* ================= 2. 清除系统自带的死黑底 ================= */
+html, body, .layout, .content, .page, .page-template-home, .dashboard-grid, .sidebar {
   background-color: transparent !important;
 }
 
-/* 白天模式背景 */
-html.light-theme .layout {
+/* ================= 3. 直接强插背景图到 HTML 和 BODY 上 ================= */
+/* 白天模式 */
+html.light-theme, 
+html.light-theme body {
   background: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), url('https://shirasu224.github.io/menav/pics/glitter_blu.jpg') !important;
   background-size: cover !important;
   background-attachment: fixed !important;
   background-position: center !important;
 }
 
-/* 黑夜模式背景 */
-html[data-theme-mode="dark"]:not(.light-theme) .layout {
+/* 黑夜模式 */
+html[data-theme-mode="dark"]:not(.light-theme), 
+html[data-theme-mode="dark"]:not(.light-theme) body {
   background: linear-gradient(rgba(15, 15, 20, 0.6), rgba(15, 15, 20, 0.6)), url('https://shirasu224.github.io/menav/pics/mood_tree.jpg') !important;
   background-size: cover !important;
   background-attachment: fixed !important;
   background-position: center !important;
 }
 
-/* ================= 3. 侧边栏背景图 ================= */
+/* ================= 4. 侧边栏背景图 ================= */
 html.light-theme .sidebar {
   background: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), url('https://shirasu224.github.io/menav/pics/glitter_blu.jpg') !important;
   background-size: cover !important;
@@ -54,7 +56,7 @@ html[data-theme-mode="dark"]:not(.light-theme) .sidebar {
   background-attachment: fixed !important;
 }
 
-/* ================= 4. 时钟卡片渐变 (透明度 0.4) ================= */
+/* ================= 5. 时钟卡片渐变 (透明度 0.4) ================= */
 html.light-theme .dashboard-clock-card {
   background: linear-gradient(180deg, rgba(204, 237, 255, 0.4) 0%, rgba(255, 229, 229, 0.4) 100%) !important;
   backdrop-filter: blur(10px) !important; 
@@ -74,14 +76,14 @@ html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card {
 }
 html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card * { color: #ffffff !important; }
 
-/* ================= 5. 干掉鼠标悬停阴影 ================= */
+/* ================= 6. 干掉鼠标悬停阴影 ================= */
 .dashboard-grid:hover, .dashboard-panel:hover, .dashboard-clock-card:hover, .card:hover, .category-card:hover {
   box-shadow: none !important; 
   border-color: transparent !important; 
   background-color: transparent !important; 
 }
 
-/* ================= 6. 电脑端右侧螃蟹布局 ================= */
+/* ================= 7. 电脑端右侧螃蟹布局 (锁死尺寸) ================= */
 .dashboard-grid {
   display: grid !important;
   grid-template-columns: 1fr 1fr !important; 
@@ -94,6 +96,12 @@ html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card * { color: 
 .dashboard-stats > * {
   display: none !important; 
 }
+/* 干掉可能包裹着螃蟹的灰色底盒子 */
+.dashboard-grid > div {
+  background-color: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+}
 .dashboard-stats {
   background-image: url('https://shirasu224.github.io/menav/pics/the-spycrab2.png') !important;
   background-size: contain !important; 
@@ -102,11 +110,14 @@ html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card * { color: 
   background-color: transparent !important; 
   border: none !important; 
   box-shadow: none !important; 
+  /* 👇 限制螃蟹的尺寸，绝对不让它撑爆 */
   width: 100% !important;
-  min-height: 300px !important; 
+  max-width: 350px !important; 
+  height: 250px !important; 
+  margin: 0 auto !important;
 }
 
-/* ================= 7. 手机端专属排版 ================= */
+/* ================= 8. 手机端专属排版 ================= */
 @media (max-width: 768px) {
   .dashboard-grid {
     position: relative !important; 
@@ -153,6 +164,8 @@ html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card * { color: 
     background-position: top right !important; 
     background-repeat: no-repeat !important;
     z-index: 10 !important;
+    margin: 0 !important;
+    max-width: none !important; /* 取消电脑端的宽度限制 */
   }
   /* 卡片尺寸 */
   .dashboard-clock-card {
