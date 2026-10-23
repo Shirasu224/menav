@@ -1,5 +1,4 @@
-/* ================= 1. 黑夜/白天 背景渐变 ================= */
-/* 修正了选择器，必须带 -mode */
+/* ================= 1. 全局背景色（精准对应白天/黑夜） ================= */
 html[data-theme-mode="dark"] body {
   background: radial-gradient(circle at top, #1c1822 0%, #0d0d0f 100%) !important;
   background-attachment: fixed !important;
@@ -10,8 +9,8 @@ html:not([data-theme-mode="dark"]) body {
   background-attachment: fixed !important;
 }
 
-/* ================= 2. 标题下的格子（时钟卡片）加渐变 ================= */
-/* 白天模式：浅蓝到浅粉，低透明度 */
+/* ================= 2. 标题下的格子（时钟卡片）渐变 ================= */
+/* 白天模式 */
 html:not([data-theme-mode="dark"]) .dashboard-clock-card {
   background: linear-gradient(180deg, rgba(92, 201, 255, 0.6) 0%, rgba(255, 219, 219, 0.6) 100%) !important;
   backdrop-filter: blur(16px) !important;
@@ -20,13 +19,11 @@ html:not([data-theme-mode="dark"]) .dashboard-clock-card {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05) !important;
   border-radius: 16px !important;
 }
-
-/* 强制白天文字深色 */
 html:not([data-theme-mode="dark"]) .dashboard-clock-card * {
   color: #222222 !important;
 }
 
-/* 黑夜模式：深蓝到紫红，低透明度 */
+/* 黑夜模式 */
 html[data-theme-mode="dark"] .dashboard-clock-card {
   background: linear-gradient(180deg, rgba(36, 35, 108, 0.7) 0%, rgba(146, 69, 106, 0.7) 100%) !important;
   backdrop-filter: blur(16px) !important;
@@ -35,31 +32,82 @@ html[data-theme-mode="dark"] .dashboard-clock-card {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4) !important;
   border-radius: 16px !important;
 }
-
-/* 强制黑夜文字白色 */
 html[data-theme-mode="dark"] .dashboard-clock-card * {
   color: #ffffff !important;
 }
 
-/* ================= 3. 修复右侧螃蟹图 ================= */
-/* 只清除背景色和边框，绝对不动背景图片 */
+/* ================= 3. 右侧螃蟹图大布局（从main.css转移过来的精华） ================= */
+.dashboard-grid {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  align-items: center !important;
+  gap: 20px !important;
+}
+
+.dashboard-intro {
+  width: 100% !important;
+}
+
+/* 隐藏右侧时间、待办 */
+.dashboard-stats > * {
+  display: none !important; 
+}
+
+/* 螃蟹图设定 */
 .dashboard-stats {
+  background-image: url('https://shirasu224.github.io/menav/pics/the-spycrab2.png') !important;
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
   background-color: transparent !important;
   border: none !important;
   box-shadow: none !important;
-  /* 注意：这里故意不写 background-image，让它保留你在 _main.css 里设置的螃蟹图 */
+  width: 100% !important;
+  min-height: 300px !important;
 }
 
-/* 确保装载图片的大容器自身不带奇怪的底色 */
-.dashboard-grid > div {
-  background-color: transparent !important;
+/* ================= 4. 分类卡片样式 ================= */
+.card, .category-card, .dashboard-panel {
+  border-radius: 16px !important;
+  transition: all 0.3s ease !important;
 }
 
-/* ================= 4. 去掉多余的红/紫光晕（解决溢色） ================= */
-/* 如果你之前的鼠标悬停有红色光晕，这里把它全局关掉 */
-.dashboard-grid:hover,
-.dashboard-clock-card:hover,
-.dashboard-stats:hover {
-  box-shadow: none !important;
-  border-color: inherit !important;
+/* 黑夜卡片 */
+html[data-theme-mode="dark"] .card,
+html[data-theme-mode="dark"] .category-card,
+html[data-theme-mode="dark"] .dashboard-panel {
+  background-color: rgba(30, 30, 30, 0.7) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+/* 白天卡片 */
+html:not([data-theme-mode="dark"]) .card,
+html:not([data-theme-mode="dark"]) .category-card,
+html:not([data-theme-mode="dark"]) .dashboard-panel {
+  background-color: #ffffff !important;
+  border: 1px solid rgba(0, 0, 0, 0.05) !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* 悬浮动画 */
+.card:hover, .category-card:hover, .dashboard-panel:hover {
+  transform: translateY(-5px) !important;
+}
+html[data-theme-mode="dark"] .card:hover, 
+html[data-theme-mode="dark"] .category-card:hover, 
+html[data-theme-mode="dark"] .dashboard-panel:hover {
+  box-shadow: 0 10px 30px rgba(153, 0, 0, 0.2) !important;
+  border-color: rgba(153, 0, 0, 0.5) !important;
+}
+
+/* ================= 5. 手机端适配 ================= */
+@media (max-width: 768px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr !important;
+    text-align: center !important;
+  }
+  .dashboard-stats {
+    min-height: 200px !important;
+    margin-top: 20px !important;
+  }
 }
