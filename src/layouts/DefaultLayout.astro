@@ -156,6 +156,37 @@ const fontAwesomePreload = `<link rel="preload" href="${fontAwesomeCssUrl}" as="
       <RuntimeScripts runtimeConfigJson={runtimeConfigJson} />
 
       <!-- 终极自定义样式 -->
+        /* ================= 全局背景图替换 ================= */
+        /* 1. 先把系统原本的纯黑/纯白底色变成透明 */
+        html, body, .layout {
+          background-color: transparent !important;
+        }
+
+        /* 2. 创建一个底层垫片放背景图 */
+        body::before {
+          content: "";
+          position: fixed;
+          inset: 0;
+          z-index: -999; /* 放在所有东西的最底层 */
+          pointer-events: none; /* 不影响鼠标点击 */
+          background-size: cover; /* 自动铺满全屏，保持比例裁剪 */
+          background-position: center; /* 居中显示 */
+          background-repeat: no-repeat; /* 不重复平铺 */
+        }
+
+        /* 3. 白天模式背景图 */
+        html.light-theme body::before {
+          /* 把这里的网址换成你的白天图片链接 */
+          background-image: url('https://shirasu224.github.io/menav/pics/glitter_blu.jpg'); 
+          opacity: 0.4; /* 👈 透明度：0 是全透，1 是不透。0.4 代表 40% 不透明度，你可以调成 0.2 或 0.8 */
+        }
+
+        /* 4. 黑夜模式背景图 */
+        html[data-theme-mode="dark"]:not(.light-theme) body::before {
+          /* 把这里的网址换成你的黑夜图片链接 */
+          background-image: url('https://shirasu224.github.io/menav/pics/mood_tree.jpg'); 
+          opacity: 0.3; /* 黑夜模式通常需要更暗一点，不然刺眼，你可以自己调 */
+        }
       <style is:global>
         /* 1. 白天模式：深#ccedff -> 浅#ffe5e5 */
         html.light-theme .dashboard-clock-card {
