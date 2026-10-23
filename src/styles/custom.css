@@ -10,12 +10,14 @@
   text-indent: 0 !important;
 }
 .dashboard-welcome h1 {
-  margin-bottom: 2px !important; 
+  margin-bottom: 0 !important; /* 底部完全不留白 */
   padding-bottom: 0 !important;
+  line-height: 1.2 !important; /* 压缩大标题的行高 */
 }
 .dashboard-welcome p {
-  margin-top: 0 !important; 
+  margin-top: -2px !important; /* 魔法：稍微给一点负数间距，强行拉近 */
   padding-top: 0 !important;
+  line-height: 1.2 !important; /* 压缩副标题的行高 */
 }
 
 /* ================= 2. 清除所有遮挡物 ================= */
@@ -134,20 +136,19 @@ html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card * { color: 
   .dashboard-clock-card {
     display: flex !important;
     flex-direction: column !important;
-    width: 90% !important; 
-    max-width: 320px !important; 
-    min-height: 120px !important;
-    padding: 15px !important;
-    margin: 10px 0 0 0 !important; /* 靠左对齐 */
+    width: 75% !important;        /* 👈 宽度从 90% 缩小到 75% */
+    max-width: 260px !important;  /* 👈 最大宽度限制在 260px，完美契合橙色框 */
+    min-height: 100px !important; /* 👈 高度也稍微压缩 */
+    padding: 12px 15px !important;/* 👈 内边距变小，减少臃肿感 */
+    margin: 10px 0 0 0 !important; 
     box-sizing: border-box !important;
   }
 
   /* 修复手机端时间字体溢出 */
   .dashboard-clock-card .clock-main {
-    font-size: 2.5rem !important; 
+    font-size: 2.2rem !important; /* 👈 时间字体从 2.5rem 缩小到 2.2rem */
     text-align: right !important; 
   }
   .dashboard-clock-card .clock-header {
-    font-size: 0.85rem !important;
+    font-size: 0.8rem !important; /* 👈 顶部的 GOOD EVENING 也相应缩小一点 */
   }
-}
