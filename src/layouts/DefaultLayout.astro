@@ -157,36 +157,35 @@ const fontAwesomePreload = `<link rel="preload" href="${fontAwesomeCssUrl}" as="
 
       <!-- 终极自定义样式 -->
       <style is:global>
-        /* 白天模式 */
+        /* 1. 白天模式（只要 HTML 上有 light-theme，就绝对是白天） */
         html.light-theme .dashboard-clock-card {
           background: linear-gradient(180deg, #5cc9ff 0%, #ffdbdb 100%) !important;
           background-image: linear-gradient(180deg, #5cc9ff 0%, #ffdbdb 100%) !important;
           border: 1px solid rgba(255, 255, 255, 0.8) !important;
           border-radius: 16px !important;
           box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08) !important;
+          overflow: hidden !important;
         }
         html.light-theme .dashboard-clock-card * {
           color: #222222 !important;
         }
 
-        /* 黑夜模式 */
-        html[data-theme-mode="dark"] .dashboard-clock-card {
+        /* 2. 黑夜模式（必须加上 :not(.light-theme)，防止白天被黑夜覆盖） */
+        html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card {
           background: linear-gradient(180deg, #24236c 0%, #92456a 100%) !important;
           background-image: linear-gradient(180deg, #24236c 0%, #92456a 100%) !important;
           border: 1px solid rgba(255, 255, 255, 0.1) !important;
           border-radius: 16px !important;
           box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4) !important;
+          overflow: hidden !important;
         }
-        html[data-theme-mode="dark"] .dashboard-clock-card * {
+        html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card * {
           color: #ffffff !important;
         }
 
-        /* 干掉所有悬停红晕 */
+        /* 3. 干掉所有悬停红晕 */
         .card:hover, .category-card:hover, .dashboard-panel:hover, .dashboard-clock-card:hover, .dashboard-grid:hover {
           box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1) !important;
           border-color: inherit !important;
         }
       </style>
-
-    </body>
-</html>
