@@ -60,47 +60,58 @@ html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card * { color: 
   background-color: transparent !important; 
 }
 
-/* ================= 6. 手机端完美适配 ================= */
+/* ================= 6. 手机端完美适配（保留时钟和螃蟹） ================= */
 @media (max-width: 768px) {
-  /* 1. 强制单列上下布局，留出适当间距 */
+  /* 1. 整体变成上下单列，居中对齐 */
   .dashboard-grid {
     display: flex !important;
     flex-direction: column !important;
+    align-items: center !important; /* 居中所有内容 */
     width: 100% !important;
-    gap: 20px !important;
+    gap: 15px !important;
   }
-  
+
+  /* 2. 标题和文字区域 */
   .dashboard-intro {
     width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
   }
-
-  /* 2. 标题大小微调，居中显示 */
+  .dashboard-welcome {
+    text-align: center !important;
+    width: 100% !important;
+  }
   .dashboard-welcome h1 {
-    font-size: 1.5rem !important; 
-    line-height: 1.4 !important;
-    text-align: center !important; 
-    word-wrap: break-word !important;
-    margin-bottom: 10px !important;
+    font-size: 1.6rem !important; 
+    line-height: 1.3 !important;
+    margin-bottom: 8px !important;
   }
-  
   .dashboard-welcome p {
     font-size: 0.9rem !important;
-    text-align: center !important;
-    margin-bottom: 20px !important;
+    margin-bottom: 15px !important;
   }
 
-  /* 3. 🚨 手机端直接隐藏巨大的螃蟹图，把空间留给真正的时钟和卡片 */
-  .dashboard-stats {
-    display: none !important; 
-  }
-
-  /* 4. 时钟卡片占满屏幕宽度 */
+  /* 3. 时钟卡片：确保显示出来，并限制宽度适配手机 */
   .dashboard-clock-card {
-    width: 100% !important;
-    max-width: 100% !important;
-    min-height: 140px !important; 
+    display: block !important; 
+    width: 90% !important;
+    max-width: 400px !important;
+    min-height: 140px !important;
     padding: 15px !important;
     margin: 0 auto !important;
     box-sizing: border-box !important;
+  }
+
+  /* 4. 螃蟹图容器：确保显示，给它一个合适的高度 */
+  .dashboard-stats {
+    display: block !important;
+    width: 100% !important;
+    min-height: 220px !important; /* 给螃蟹留出 220px 的高度 */
+    background-size: contain !important; /* 保证螃蟹完整显示不放大变形 */
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    margin-top: 10px !important;
+    margin-bottom: 10px !important;
   }
 }
