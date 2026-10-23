@@ -1,9 +1,20 @@
-/* ================= 强制标题和副标题左对齐 ================= */
+/* ================= 全局强制标题对齐（电脑+手机） ================= */
+.dashboard-welcome {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important; /* 强制所有子元素从最左边开始排 */
+}
+
 .dashboard-welcome h1,
 .dashboard-welcome p {
-  margin-left: 0 !important;
-  padding-left: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  text-indent: 0 !important;
   text-align: left !important;
+}
+
+.dashboard-welcome h1 {
+  margin-bottom: 8px !important; /* 标题和副标题之间留一点点距离 */
 }
 /* ================= 1. 清除所有遮挡物 ================= */
 /* 必须把系统自带的所有底色变成透明，否则会盖住背景图 */
