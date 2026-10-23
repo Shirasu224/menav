@@ -60,58 +60,68 @@ html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card * { color: 
   background-color: transparent !important; 
 }
 
-/* ================= 6. 手机端完美适配（保留时钟和螃蟹） ================= */
+/* ================= 6. 手机端杂志风排版 ================= */
 @media (max-width: 768px) {
-  /* 1. 整体变成上下单列，居中对齐 */
+  /* 1. 让大框架支持绝对定位，方便放螃蟹 */
   .dashboard-grid {
+    position: relative !important;
     display: flex !important;
     flex-direction: column !important;
-    align-items: center !important; /* 居中所有内容 */
     width: 100% !important;
     gap: 15px !important;
   }
 
-  /* 2. 标题和文字区域 */
+  /* 2. 标题区：右侧留出 100px 的空间，防止字被螃蟹挡住 */
   .dashboard-intro {
     width: 100% !important;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
   }
   .dashboard-welcome {
-    text-align: center !important;
-    width: 100% !important;
+    padding-right: 100px !important; /* 魔法：给右上角的螃蟹腾地方 */
+    text-align: left !important;
   }
   .dashboard-welcome h1 {
-    font-size: 1.6rem !important; 
+    font-size: 1.5rem !important; 
     line-height: 1.3 !important;
     margin-bottom: 8px !important;
+    word-wrap: break-word !important;
   }
   .dashboard-welcome p {
-    font-size: 0.9rem !important;
-    margin-bottom: 15px !important;
+    font-size: 0.85rem !important;
   }
 
-  /* 3. 时钟卡片：确保显示出来，并限制宽度适配手机 */
+  /* 3. 螃蟹图：缩小并悬浮到右上角 */
+  .dashboard-stats {
+    position: absolute !important;
+    top: -10px !important; /* 根据实际情况微调上下位置 */
+    right: 0px !important; /* 靠右 */
+    width: 90px !important; /* 缩小宽度 */
+    height: 90px !important; /* 缩小高度 */
+    min-height: 90px !important;
+    background-size: contain !important;
+    z-index: 10 !important;
+  }
+
+  /* 4. 时钟卡片：占满宽度，并修复时间溢出 */
   .dashboard-clock-card {
-    display: block !important; 
-    width: 90% !important;
-    max-width: 400px !important;
-    min-height: 140px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-height: 130px !important;
     padding: 15px !important;
     margin: 0 auto !important;
     box-sizing: border-box !important;
   }
 
-  /* 4. 螃蟹图容器：确保显示，给它一个合适的高度 */
-  .dashboard-stats {
-    display: block !important;
-    width: 100% !important;
-    min-height: 220px !important; /* 给螃蟹留出 220px 的高度 */
-    background-size: contain !important; /* 保证螃蟹完整显示不放大变形 */
-    background-position: center !important;
-    background-repeat: no-repeat !important;
-    margin-top: 10px !important;
-    margin-bottom: 10px !important;
+  /* 修复黄框问题：强制缩小手机端的巨大时间字体 */
+  .dashboard-clock-card .clock-main {
+    font-size: 2.5rem !important; /* 时间字体缩小 */
+    text-align: right !important; /* 时间靠右对齐 */
+    word-wrap: break-word !important;
+  }
+  
+  /* 修复星期/日期文字的排版 */
+  .dashboard-clock-card .clock-header {
+    font-size: 0.85rem !important;
   }
 }
