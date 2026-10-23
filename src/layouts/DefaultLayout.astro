@@ -157,7 +157,7 @@ const fontAwesomePreload = `<link rel="preload" href="${fontAwesomeCssUrl}" as="
 
       <!-- 终极自定义样式 -->
       <style is:global>
-        /* 1. 白天模式（只要 HTML 上有 light-theme，就绝对是白天） */
+        /* 1. 白天模式 */
         html.light-theme .dashboard-clock-card {
           background: linear-gradient(180deg, #5cc9ff 0%, #ffdbdb 100%) !important;
           background-image: linear-gradient(180deg, #5cc9ff 0%, #ffdbdb 100%) !important;
@@ -170,7 +170,7 @@ const fontAwesomePreload = `<link rel="preload" href="${fontAwesomeCssUrl}" as="
           color: #222222 !important;
         }
 
-        /* 2. 黑夜模式（必须加上 :not(.light-theme)，防止白天被黑夜覆盖） */
+        /* 2. 黑夜模式（加了排除标签） */
         html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card {
           background: linear-gradient(180deg, #24236c 0%, #92456a 100%) !important;
           background-image: linear-gradient(180deg, #24236c 0%, #92456a 100%) !important;
@@ -189,3 +189,5 @@ const fontAwesomePreload = `<link rel="preload" href="${fontAwesomeCssUrl}" as="
           border-color: inherit !important;
         }
       </style>
+    </body>
+</html>
