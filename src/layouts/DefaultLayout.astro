@@ -65,6 +65,121 @@ const fontAwesomePreload = `<link rel="preload" href="${fontAwesomeCssUrl}" as="
     <noscript>
       <link rel="stylesheet" href={fontAwesomeCssUrl} />
     </noscript>
+    <!-- 终极自定义样式：直接写在 head 里，绝对防覆盖 -->
+    <style is:global>
+      /* 1. 暴力清空所有底层黑底 */
+      html, body, .layout, .content, .page, .page-template-home, .dashboard-grid, .dashboard-stats {
+        background-color: transparent !important;
+        background-image: none !important;
+        box-shadow: none !important;
+        border: none !important;
+      }
+
+      /* 2. 强行贴上背景图 */
+      html[data-theme-mode="dark"]:not(.light-theme) body {
+        background-image: linear-gradient(rgba(15, 15, 20, 0.6), rgba(15, 15, 20, 0.6)), url('https://shirasu224.github.io/menav/pics/mood_tree.jpg') !important;
+        background-size: cover !important;
+        background-attachment: fixed !important;
+        background-position: center !important;
+      }
+      html.light-theme body {
+        background-image: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), url('https://shirasu224.github.io/menav/pics/glitter_blu.jpg') !important;
+        background-size: cover !important;
+        background-attachment: fixed !important;
+        background-position: center !important;
+      }
+
+      /* 3. 时钟卡片渐变 */
+      html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card {
+        background: linear-gradient(180deg, rgba(70, 83, 124, 0.4) 0%, rgba(141, 124, 129, 0.4) 100%) !important;
+        backdrop-filter: blur(10px) !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        border-radius: 16px !important;
+      }
+      html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card * { color: #ffffff !important; }
+      
+      html.light-theme .dashboard-clock-card {
+        background: linear-gradient(180deg, rgba(204, 237, 255, 0.4) 0%, rgba(255, 229, 229, 0.4) 100%) !important;
+        backdrop-filter: blur(10px) !important;
+        border: 1px solid rgba(255, 255, 255, 0.6) !important;
+        border-radius: 16px !important;
+      }
+      html.light-theme .dashboard-clock-card * { color: #222222 !important; }
+
+      /* 4. 侧边栏背景图 */
+      html.light-theme .sidebar {
+        background: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), url('https://shirasu224.github.io/menav/pics/glitter_blu.jpg') !important;
+        background-size: cover !important;
+        background-attachment: fixed !important;
+      }
+      html[data-theme-mode="dark"]:not(.light-theme) .sidebar {
+        background: linear-gradient(rgba(15, 15, 20, 0.7), rgba(15, 15, 20, 0.7)), url('https://shirasu224.github.io/menav/pics/mood_tree.jpg') !important;
+        background-size: cover !important;
+        background-attachment: fixed !important;
+      }
+
+      /* 5. 电脑端：锁死螃蟹尺寸 */
+      .dashboard-grid {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important; 
+        align-items: center !important; 
+        gap: 20px !important;
+      }
+      .dashboard-stats > * { display: none !important; }
+      .dashboard-stats {
+        width: 320px !important; 
+        height: 260px !important; 
+        margin: 0 auto !important;
+        background-image: url('https://shirasu224.github.io/menav/pics/the-spycrab2.png') !important;
+        background-size: contain !important; 
+        background-repeat: no-repeat !important;
+        background-position: center !important;
+      }
+
+      /* 6. 手机端适配 */
+      @media (max-width: 768px) {
+        .dashboard-grid {
+          position: relative !important; 
+          display: flex !important;
+          flex-direction: column !important;
+          width: 100% !important;
+          gap: 15px !important;
+          padding-left: 10px !important; 
+        }
+        .dashboard-welcome {
+          width: 100% !important;
+          padding-right: 100px !important; 
+          margin: 0 !important;
+          text-align: left !important;
+        }
+        .dashboard-welcome h1 {
+          font-size: 1.3rem !important;
+          margin: 0 0 -5px 0 !important; 
+          line-height: 1.2 !important;
+        }
+        .dashboard-welcome p {
+          font-size: 0.85rem !important;
+          margin: 0 !important;
+          line-height: 1 !important;
+        }
+        .dashboard-stats {
+          position: absolute !important;
+          top: -30px !important; 
+          right: 0 !important;   
+          width: 100px !important; 
+          height: 100px !important;
+          background-position: top right !important; 
+          margin: 0 !important;
+        }
+        .dashboard-clock-card {
+          width: 75% !important;        
+          max-width: 260px !important;  
+          height: auto !important; 
+          padding: 12px 15px 28px 15px !important; 
+          margin: 10px 0 0 0 !important; 
+        }
+      }
+    </style>
   </head>
   <body class="loading">
     <div class="layout">
