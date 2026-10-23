@@ -248,6 +248,34 @@ const fontAwesomePreload = `<link rel="preload" href="${fontAwesomeCssUrl}" as="
           outline: none !important; 
           background-color: transparent !important; 
         }
+
+        /* ================= 5. 侧边栏（左侧导航栏）自定义背景图 ================= */
+        
+        /* 白天模式：图片 + 60% 透明白色遮罩 */
+        html.light-theme .sidebar,
+        html.light-theme .sidebar-footer {
+          /* 👇 把 url 里的链接换成你白天的图片链接 👇 */
+          background-image: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), url('https://shirasu224.github.io/menav/pics/glitter_blu.jpg') !important;
+          background-size: cover !important;
+          background-position: center !important;
+          background-repeat: no-repeat !important;
+          backdrop-filter: blur(8px) !important;
+          -webkit-backdrop-filter: blur(8px) !important;
+          border-right: 1px solid rgba(0, 0, 0, 0.05) !important;
+        }
+
+        /* 黑夜模式：图片 + 60% 透明黑色遮罩 */
+        html[data-theme-mode="dark"]:not(.light-theme) .sidebar,
+        html[data-theme-mode="dark"]:not(.light-theme) .sidebar-footer {
+          /* 👇 把 url 里的链接换成你黑夜的图片链接 👇 */
+          background-image: linear-gradient(rgba(15, 15, 20, 0.6), rgba(15, 15, 20, 0.6)), url('https://shirasu224.github.io/menav/pics/mood_tree.jpg') !important;
+          background-size: cover !important;
+          background-position: center !important;
+          background-repeat: no-repeat !important;
+          backdrop-filter: blur(8px) !important;
+          -webkit-backdrop-filter: blur(8px) !important;
+          border-right: 1px solid rgba(255, 255, 255, 0.05) !important;
+        }
       </style>
     </body>
 </html>
