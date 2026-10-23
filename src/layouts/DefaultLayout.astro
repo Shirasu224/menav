@@ -156,44 +156,42 @@ const fontAwesomePreload = `<link rel="preload" href="${fontAwesomeCssUrl}" as="
       <RuntimeScripts runtimeConfigJson={runtimeConfigJson} />
 
       <!-- 终极自定义样式 -->
-        /* ================= 全局背景图替换 ================= */
-        /* 1. 先把系统原本的纯黑/纯白底色变成透明 */
+      <style is:global>
+        /* ================= 1. 全局背景图替换 ================= */
+        /* 清除系统原本底色 */
         html, body, .layout {
           background-color: transparent !important;
         }
 
-        /* 2. 创建一个底层垫片放背景图 */
+        /* 底层垫片放背景图 */
         body::before {
           content: "";
           position: fixed;
           inset: 0;
-          z-index: -999; /* 放在所有东西的最底层 */
-          pointer-events: none; /* 不影响鼠标点击 */
-          background-size: cover; /* 自动铺满全屏，保持比例裁剪 */
-          background-position: center; /* 居中显示 */
-          background-repeat: no-repeat; /* 不重复平铺 */
+          z-index: -999;
+          pointer-events: none;
+          background-size: cover;
+          background-position: center;
+          background-repeat: no-repeat;
         }
 
-        /* 3. 白天模式背景图 */
+        /* 白天模式背景图 */
         html.light-theme body::before {
-          /* 把这里的网址换成你的白天图片链接 */
           background-image: url('https://shirasu224.github.io/menav/pics/glitter_blu.jpg'); 
-          opacity: 0.4; /* 👈 透明度：0 是全透，1 是不透。0.4 代表 40% 不透明度，你可以调成 0.2 或 0.8 */
+          opacity: 0.4; 
         }
 
-        /* 4. 黑夜模式背景图 */
+        /* 黑夜模式背景图 */
         html[data-theme-mode="dark"]:not(.light-theme) body::before {
-          /* 把这里的网址换成你的黑夜图片链接 */
           background-image: url('https://shirasu224.github.io/menav/pics/mood_tree.jpg'); 
-          opacity: 0.3; /* 黑夜模式通常需要更暗一点，不然刺眼，你可以自己调 */
+          opacity: 0.3; 
         }
-      <style is:global>
-        /* 1. 白天模式：深#ccedff -> 浅#ffe5e5 */
+
+        /* ================= 2. 白天模式时钟卡片 ================= */
         html.light-theme .dashboard-clock-card {
-          /* 60% 透明度，0.6 可以自己调，越小越透 */
           background: linear-gradient(180deg, rgba(204, 237, 255, 0.4) 0%, rgba(255, 229, 229, 0.4) 100%) !important;
           background-image: linear-gradient(180deg, rgba(204, 237, 255, 0.4) 0%, rgba(255, 229, 229, 0.4) 100%) !important;
-          backdrop-filter: blur(12px) !important; /* 磨砂玻璃效果 */
+          backdrop-filter: blur(12px) !important;
           -webkit-backdrop-filter: blur(12px) !important;
           border: 1px solid rgba(255, 255, 255, 0.6) !important;
           border-radius: 16px !important;
@@ -204,7 +202,7 @@ const fontAwesomePreload = `<link rel="preload" href="${fontAwesomeCssUrl}" as="
           color: #222222 !important;
         }
 
-        /* 2. 黑夜模式：深#46537c -> 浅#8d7c81 */
+        /* ================= 3. 黑夜模式时钟卡片 ================= */
         html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card {
           background: linear-gradient(180deg, rgba(70, 83, 124, 0.4) 0%, rgba(141, 124, 129, 0.4) 100%) !important;
           background-image: linear-gradient(180deg, rgba(70, 83, 124, 0.4) 0%, rgba(141, 124, 129, 0.4) 100%) !important;
@@ -228,7 +226,7 @@ const fontAwesomePreload = `<link rel="preload" href="${fontAwesomeCssUrl}" as="
           background: transparent !important;
         }
 
-        /* 3. 终极封印：彻底干掉所有悬停时的阴影、边框和背景色变化 */
+        /* ================= 4. 终极封印悬停阴影 ================= */
         .dashboard-grid:hover,
         .dashboard-grid > div:hover,
         .dashboard-panel:hover,
