@@ -183,10 +183,17 @@ const fontAwesomePreload = `<link rel="preload" href="${fontAwesomeCssUrl}" as="
           color: #ffffff !important;
         }
 
-        /* 3. 干掉所有悬停红晕 */
-        .card:hover, .category-card:hover, .dashboard-panel:hover, .dashboard-clock-card:hover, .dashboard-grid:hover {
-          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1) !important;
-          border-color: inherit !important;
+        /* 3. 暴力清除所有悬停阴影、红晕和边框 */
+        .card:hover, 
+        .category-card:hover, 
+        .dashboard-panel:hover, 
+        .dashboard-clock-card:hover, 
+        .dashboard-grid:hover,
+        .dashboard-welcome:hover,
+        .dashboard-stats:hover {
+          box-shadow: none !important; /* 彻底干掉所有阴影框 */
+          border-color: transparent !important; /* 干掉可能出现的红边框 */
+          transform: none !important; /* 如果原本有上浮动画也一并干掉 */
         }
       </style>
     </body>
