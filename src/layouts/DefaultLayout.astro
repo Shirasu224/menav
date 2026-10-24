@@ -221,6 +221,32 @@ const fontAwesomePreload = `<link rel="preload" href="${fontAwesomeCssUrl}" as="
           white-space: nowrap !important; 
         }
       }
+      /* ================= 全局卡片透明化 ================= */
+      /* 白天模式：40% 透明白色磨砂 */
+      html.light-theme .card,
+      html.light-theme .site-card,
+      html.light-theme .category-card,
+      html.light-theme .dashboard-panel,
+      html.light-theme .group,
+      html.light-theme .category,
+      html.light-theme .dashboard-clock-card {
+        background-color: rgba(255, 255, 255, 0.4) !important;
+        backdrop-filter: blur(10px) !important;
+        -webkit-backdrop-filter: blur(10px) !important;
+      }
+
+      /* 黑夜模式：40% 透明深灰磨砂 */
+      html[data-theme-mode="dark"]:not(.light-theme) .card,
+      html[data-theme-mode="dark"]:not(.light-theme) .site-card,
+      html[data-theme-mode="dark"]:not(.light-theme) .category-card,
+      html[data-theme-mode="dark"]:not(.light-theme) .dashboard-panel,
+      html[data-theme-mode="dark"]:not(.light-theme) .group,
+      html[data-theme-mode="dark"]:not(.light-theme) .category,
+      html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card {
+        background-color: rgba(30, 30, 46, 0.4) !important;
+        backdrop-filter: blur(10px) !important;
+        -webkit-backdrop-filter: blur(10px) !important;
+      }
     </style>
   </head>
   <body class="loading">
