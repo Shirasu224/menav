@@ -52,7 +52,11 @@ categories:
         faviconUrl: data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxZW0iIGhlaWdodD0iMWVtIiB2aWV3Qm94PSIwIDAgMTUgMTUiPgoJPHBhdGggZD0iTTAgMGgxNXYxNUgweiIgZmlsbD0ibm9uZSIgLz4KCTxwYXRoIGZpbGw9IiM4Nzg3ODciIGQ9Ik0zLjc1IDBoLTIuNUwyIDRoMXpNMi41IDQuNWMtLjU1IDAtMSAuNDUtMSAxcy40NSAxIDEgMXMxLS40NSAxLTFzLS40NS0xLTEtMW03LjAzLTIuNkwxMSAzaDFsMS40Ny0xLjFjLjIyLS4xNy41My0uMDEuNTMuMjZWNS41YzAgLjcyLS41MiAxLjE4LTEgMS41N1YxMWwuOCAyLjRsLjcxLjM1Yy4zLjE1LjQ5LjQ2LjQ5LjhjMCAuMjUtLjIuNDUtLjQ1LjQ1aC04LjNDNS4wMiAxNSA0IDE0IDQgMTIuNzFjMC0yLjE3LjQ1LTMuNzguNzUtNC44NmMuMTQtLjU1LjI5LS45Ni4zOS0xLjI0Yy4wNi0uMTUuMTEtLjMuMTktLjQ0Yy40NS0uODYgMS43NC0uMjEgMS4zNC42NmMtLjA1LjExLS4wOS4yMi0uMTMuMzJjLS4wOS4yMy0uMjEuNTktLjM1IDEuMDhjLS4yNC45Mi0uNTIgMi4yOS0uNjMgNC4xNGMuMzctMi4wNiAyLjQyLTQuMTMgNC4wOC01LjYxQzkuMjkgNi40MyA5IDYuMDQgOSA1LjVWMi4xNmMwLS4yNy4zMS0uNDMuNTMtLjI2IiAvPgo8L3N2Zz4K
         url: https://shirasu224.github.io/menav/Risky_Business.htm
         
-      - name: "你的暗蓝黑影" 
+      - name: "你对他人的憎恨" 
+        description: 占位符
+        url: /menav/sample.htm        
+        
+      - name: "What's Done In The Dark Will Be Brought To The Light" 
         description: 占位符
         url: /menav/sample.htm        
         
