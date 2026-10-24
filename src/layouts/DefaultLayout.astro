@@ -65,88 +65,71 @@ const fontAwesomePreload = `<link rel="preload" href="${fontAwesomeCssUrl}" as="
     <noscript>
       <link rel="stylesheet" href={fontAwesomeCssUrl} />
     </noscript>
-
-    <!-- 终极自定义样式 -->
+    <!-- 终极自定义样式：最高强权版 -->
     <style is:global>
-      /* 1. 彻底清空底层底色 */
+      /* 1. 彻底清空所有底色 */
       html, body, .layout, .content, .page, .page-template-home, .dashboard-grid {
         background-color: transparent !important;
       }
 
-      /* 2. 魔法垫片：在系统黑底之上，文字之下显示背景图 */
+      /* 2. 魔法垫片：这个伪元素会盖在系统的黑底之上，但在你的文字之下 */
       body::before {
         content: "";
         position: fixed;
         top: 0; left: 0; right: 0; bottom: 0;
-        z-index: 0; 
-        pointer-events: none; 
+        z-index: 0; /* 放在 0 层，刚好压住底部的黑色，又不会挡住内容 */
+        pointer-events: none; /* 让你能正常点击网页 */
         background-size: cover !important;
         background-attachment: fixed !important;
         background-position: center !important;
       }
 
-      /* 白天模式背景 */
+      /* 白天模式垫片 */
       html.light-theme body::before {
-        background-image: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), url('https://shirasu224.github.io/menav/pics/glitter_blu.jpg') !important;
+        background-image: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), url('https://shirasu224.github.io/menav/pics/pyrohous.jpg') !important;
       }
 
-      /* 黑夜模式背景 */
+      /* 黑夜模式垫片 */
       html[data-theme-mode="dark"]:not(.light-theme) body::before {
-        background-image: linear-gradient(rgba(15, 15, 20, 0.6), rgba(15, 15, 20, 0.6)), url('https://shirasu224.github.io/menav/pics/mood_tree.jpg') !important;
+        background-image: linear-gradient(rgba(15, 15, 20, 0.6), rgba(15, 15, 20, 0.6)), url('https://shirasu224.github.io/menav/pics/nightsnipe.jpg') !important;
       }
 
-      /* 确保内容在垫片之上 */
+      /* 3. 把你的所有内容提上来，压在垫片上面 */
       .layout {
         position: relative !important;
         z-index: 1 !important; 
       }
 
-      /* 3. 侧边栏背景 */
+      /* 4. 时钟卡片渐变 (透明度 0.4) */
+      html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card {
+        background: linear-gradient(180deg, rgba(70, 83, 124, 0.2) 0%, rgba(141, 124, 129, 0.2) 100%) !important;
+        backdrop-filter: blur(10px) !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        border-radius: 16px !important;
+      }
+      html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card * { color: #ffffff !important; }
+      
+      html.light-theme .dashboard-clock-card {
+        background: linear-gradient(180deg, rgba(204, 237, 255, 0.2) 0%, rgba(255, 229, 229, 0.2) 100%) !important;
+        backdrop-filter: blur(10px) !important;
+        border: 1px solid rgba(255, 255, 255, 0.6) !important;
+        border-radius: 16px !important;
+      }
+      html.light-theme .dashboard-clock-card * { color: #222222 !important; }
+
+      /* 5. 侧边栏背景 */
       html.light-theme .sidebar {
-        background: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), url('https://shirasu224.github.io/menav/pics/glitter_blu.jpg') !important;
+        background: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), url('https://shirasu224.github.io/menav/pics/pyrohous.jpg') !important;
         background-size: cover !important;
         background-attachment: fixed !important;
       }
       html[data-theme-mode="dark"]:not(.light-theme) .sidebar {
-        background: linear-gradient(rgba(15, 15, 20, 0.7), rgba(15, 15, 20, 0.7)), url('https://shirasu224.github.io/menav/pics/mood_tree.jpg') !important;
+        background: linear-gradient(rgba(15, 15, 20, 0.7), rgba(15, 15, 20, 0.7)), url('https://shirasu224.github.io/menav/pics/nightsnipe.jpg') !important;
         background-size: cover !important;
         background-attachment: fixed !important;
       }
 
-      /* ================= 4. 全站卡片透明化 ================= */
-      /* 黑夜模式：半透明深色 */
-      html[data-theme-mode="dark"]:not(.light-theme) .card,
-      html[data-theme-mode="dark"]:not(.light-theme) .site-card,
-      html[data-theme-mode="dark"]:not(.light-theme) .category-card,
-      html[data-theme-mode="dark"]:not(.light-theme) .dashboard-panel,
-      html[data-theme-mode="dark"]:not(.light-theme) .group,
-      html[data-theme-mode="dark"]:not(.light-theme) .category,
-      html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card {
-        background: rgba(30, 30, 46, 0.4) !important; /* 40% 透明度 */
-        backdrop-filter: blur(12px) !important; 
-        -webkit-backdrop-filter: blur(12px) !important;
-        border: 1px solid rgba(255, 255, 255, 0.1) !important;
-        box-shadow: none !important;
-      }
-      html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card * { color: #ffffff !important; }
-
-      /* 白天模式：半透明白色 */
-      html.light-theme .card,
-      html.light-theme .site-card,
-      html.light-theme .category-card,
-      html.light-theme .dashboard-panel,
-      html.light-theme .group,
-      html.light-theme .category,
-      html.light-theme .dashboard-clock-card {
-        background: rgba(255, 255, 255, 0.4) !important; /* 40% 透明度 */
-        backdrop-filter: blur(12px) !important; 
-        -webkit-backdrop-filter: blur(12px) !important;
-        border: 1px solid rgba(255, 255, 255, 0.6) !important;
-        box-shadow: none !important;
-      }
-      html.light-theme .dashboard-clock-card * { color: #222222 !important; }
-
-      /* 5. 电脑端布局：锁死螃蟹尺寸 */
+      /* 6. 电脑端：锁死螃蟹尺寸 */
       .dashboard-grid {
         display: grid !important;
         grid-template-columns: 1fr 1fr !important; 
@@ -166,7 +149,7 @@ const fontAwesomePreload = `<link rel="preload" href="${fontAwesomeCssUrl}" as="
         border: none !important;
       }
 
-      /* 6. 手机端专属排版 */
+      /* 7. 手机端专属排版 */
       @media (max-width: 768px) {
         .dashboard-grid {
           position: relative !important; 
