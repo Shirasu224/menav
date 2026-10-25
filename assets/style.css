@@ -307,14 +307,15 @@ html[data-theme-mode="dark"]:not(.light-theme) .nav-item.active {
   }
 }
 
-/* ================== 5. 作品集画廊大图模式 (终极版) ================== */
-section.category[data-id="作品集"] .sites-grid {
+/* ================== 5. 作品集画廊大图模式 (精准命中版) ================== */
+/* 💥 改用 data-name 属性匹配中文，无论 id 变成什么都能选中 */
+section[data-name="作品集"] .sites-grid {
   display: grid !important;
   grid-template-columns: repeat(2, 1fr) !important; 
   gap: 20px !important;
 }
 
-section.category[data-id="作品集"] .site-card {
+section[data-name="作品集"] .site-card {
   display: flex !important;
   flex-direction: column !important;
   justify-content: flex-end !important; 
@@ -329,25 +330,28 @@ section.category[data-id="作品集"] .site-card {
   transition: transform 0.3s ease !important;
 }
 
-section.category[data-id="作品集"] .site-card:hover {
+section[data-name="作品集"] .site-card:hover {
   transform: translateY(-5px) scale(1.02) !important;
   box-shadow: 0 15px 30px rgba(0,0,0,0.4) !important;
 }
 
-/* 💥 核心：暴力定位并撑满图标容器 */
-section.category[data-id="作品集"] .site-card-icon {
+/* 💥 核心：暴力拆解图标容器 */
+section[data-name="作品集"] .site-card-icon {
   position: absolute !important;
   top: 0 !important; left: 0 !important; 
   width: 100% !important; height: 100% !important;
+  min-width: 100% !important; max-width: 100% !important; /* 打破框架的宽高限制 */
+  min-height: 100% !important; max-height: 100% !important;
   margin: 0 !important;
   padding: 0 !important;
   z-index: 1 !important;
   background: transparent !important;
   border-radius: 0 !important;
+  display: block !important; /* 强制块级显示 */
 }
 
-/* 💥 核心：暴力放大里面的 img 标签 */
-section.category[data-id="作品集"] .site-card-icon img {
+/* 💥 核心：暴力放大 img */
+section[data-name="作品集"] .site-card-icon img {
   width: 100% !important;
   height: 100% !important;
   object-fit: cover !important; /* 等比填满，多余裁剪 */
@@ -355,13 +359,13 @@ section.category[data-id="作品集"] .site-card-icon img {
   display: block !important;
 }
 
-/* 如果里面是字体图标，就把它隐藏掉 */
-section.category[data-id="作品集"] .site-card-icon i {
+/* 隐藏可能存在的默认图标 */
+section[data-name="作品集"] .site-card-icon i {
   display: none !important;
 }
 
 /* 文字区域加渐变黑色遮罩 */
-section.category[data-id="作品集"] .site-card-content {
+section[data-name="作品集"] .site-card-content {
   position: relative !important;
   z-index: 2 !important;
   width: 100% !important;
@@ -371,14 +375,14 @@ section.category[data-id="作品集"] .site-card-content {
   border: none !important;
 }
 
-section.category[data-id="作品集"] .site-card-content h3 {
+section[data-name="作品集"] .site-card-content h3 {
   color: #ffffff !important;
   font-size: 1.1rem !important;
   margin: 0 0 5px 0 !important;
   text-shadow: 0 2px 4px rgba(0,0,0,0.8) !important;
 }
 
-section.category[data-id="作品集"] .site-card-content p {
+section[data-name="作品集"] .site-card-content p {
   color: #cccccc !important;
   font-size: 0.85rem !important;
   margin: 0 !important;
@@ -387,10 +391,10 @@ section.category[data-id="作品集"] .site-card-content p {
 
 /* 手机端画廊单列 */
 @media (max-width: 768px) {
-  section.category[data-id="作品集"] .sites-grid {
+  section[data-name="作品集"] .sites-grid {
     grid-template-columns: 1fr !important;
   }
-  section.category[data-id="作品集"] .site-card {
+  section[data-name="作品集"] .site-card {
     height: 220px !important;
   }
 }
