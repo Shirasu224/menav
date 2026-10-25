@@ -64,7 +64,7 @@ html, body {
 /* --- 浅色模式（白天）：蓝-白-粉 三色渐变 --- */
 html.light-theme .welcome-title,
 html.light-theme .dashboard-welcome h1 {
-  background: linear-gradient(90deg, #b8dcff, #ffffff, #ffc2c2) !important;
+  background: linear-gradient(90deg, #f48a8a, #f5fff0, #5faddd) !important;
   -webkit-background-clip: text !important;
   background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
@@ -81,7 +81,7 @@ html.light-theme .dashboard-welcome p {
 /* --- 深色模式（黑夜）：深蓝-白-红 三色渐变 --- */
 html[data-theme-mode="dark"]:not(.light-theme) .welcome-title,
 html[data-theme-mode="dark"]:not(.light-theme) .dashboard-welcome h1 {
-  background: linear-gradient(90deg, #3587b1, #ffffff, #e87d7d) !important;
+  background: linear-gradient(90deg, #64a0b4, #d9f0cc, #614ea6) !important;
   -webkit-background-clip: text !important;
   background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
