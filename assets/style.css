@@ -111,9 +111,10 @@ input#search { background-color: transparent !important; }
 @media (min-width: 1025px) {
   .dashboard-grid { position: relative !important; }
   
+  /* 💥 采用横向拉伸，而不是向上撑开 */
   .dashboard-stats {
-    width: 320px !important; 
-    height: 260px !important; 
+    width: 400px !important;   /* 加宽 */
+    height: 240px !important;  /* 高度稍微收敛，不顶到上面 */
     margin: 0 auto !important;
     background-image: url('https://shirasu224.github.io/menav/pics/the-spycrab2.png') !important;
     background-size: contain !important; 
@@ -121,12 +122,10 @@ input#search { background-color: transparent !important; }
     background-position: center !important;
     background-color: transparent !important; 
     border: none !important;
-    /* 💥 放大 1.4 倍，满足电脑端大图需求，且不会撑破网格 */
-    transform: scale(1.4) !important; 
   }
 }
 
-/* ================== 4. 手机端专属排版 (螃蟹下移) ================== */
+/* ================== 4. 手机端专属排版 (精准定位不挡字) ================== */
 @media (max-width: 1024px) {
   section.category::before, section.category::after { display: none !important; }
 
@@ -156,16 +155,16 @@ input#search { background-color: transparent !important; }
   .dashboard-welcome h1 { font-size: 1.6rem !important; margin: 0 !important; line-height: 1.2 !important; }
   .dashboard-welcome p { font-size: 0.9rem !important; margin: 0 !important; line-height: 1.2 !important; }
 
-  /* 🦀 螃蟹移到绿色框（右下角） */
+  /* 🦀 螃蟹卡在时钟卡片的右下角 */
   .dashboard-stats {
     display: block !important;
     position: absolute !important;
-    top: 160px !important; /* 💥 挪到时钟的右下方 */
-    right: 10px !important; /* 💥 靠右侧边缘 */
-    width: 100px !important; 
-    height: 100px !important;
-    min-width: 100px !important; 
-    max-width: 100px !important;
+    top: 130px !important; /* 刚好在时钟卡片的下半部分，不碰到底下的分类 */
+    right: 0px !important; /* 贴着右边，显得像装饰 */
+    width: 110px !important; 
+    height: 110px !important;
+    min-width: 110px !important; 
+    max-width: 110px !important;
     background-image: url('https://shirasu224.github.io/menav/pics/the-spycrab2.png') !important;
     background-size: contain !important; 
     background-repeat: no-repeat !important;
@@ -180,7 +179,7 @@ input#search { background-color: transparent !important; }
     width: 100% !important;
     margin: 0 !important;
     padding: 0 !important;
-    padding-top: 100px !important; /* 撑开空间 */
+    padding-top: 100px !important; 
   }
   
   .dashboard-clock-card {
