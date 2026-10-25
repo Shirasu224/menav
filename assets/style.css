@@ -41,74 +41,88 @@ html, body {
 html.light-theme .dashboard-welcome h1 { filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.4)) !important; }
 html.light-theme .dashboard-welcome p { text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6) !important; }
 
-/* ================== 2. 极限透明化 (暴力扒光大框和小框) ================== */
-/* 先把所有可能的层级底色全部干掉 */
-section.category,
-.category-header,
-.category-content,
-.sites-grid {
+
+/* ================== 2. 完美层级透明化 + 悬浮反馈 ================== */
+section.category, .category-header, .category-content, .sites-grid {
   background: transparent !important;
   box-shadow: none !important;
   border: none !important;
 }
 
 /* --- 浅色模式 --- */
+/* 大框：较透 (25% 白) */
 html.light-theme section.category {
   background-color: rgba(255, 255, 255, 0.25) !important; 
-  border: 1px solid rgba(255, 255, 255, 0.5) !important;
-  box-shadow: none !important;
+  border: 1px solid rgba(255, 255, 255, 0.4) !important;
 }
-/* 内部小框：极透加磨砂 */
+
+/* 内部小框：稍微实一点 (45% 白) */
 html.light-theme .site-card,
 html.light-theme .sites-grid a {
-  background-color: rgba(255, 255, 255, 0.15) !important; 
-  border: 1px solid rgba(255, 255, 255, 0.3) !important;
-  backdrop-filter: blur(6px) !important;
+  background-color: rgba(255, 255, 255, 0.45) !important; 
+  border: 1px solid rgba(255, 255, 255, 0.5) !important;
   box-shadow: none !important;
+  transition: background-color 0.2s ease !important;
 }
+
+/* 浅色模式悬浮：变得更白、更亮 */
+html.light-theme .site-card:hover,
+html.light-theme .sites-grid a:hover {
+  background-color: rgba(255, 255, 255, 0.75) !important; 
+}
+
 html.light-theme .site-card-icon,
 html.light-theme .site-card-content {
   background: transparent !important;
   border: none !important;
-  box-shadow: none !important;
 }
+
 html.light-theme .search-box,
 html.light-theme .nav-item {
-  background-color: rgba(255, 255, 255, 0.4) !important;
+  background-color: rgba(255, 255, 255, 0.45) !important;
   border: 1px solid rgba(255, 255, 255, 0.5) !important;
 }
 html.light-theme .dashboard-clock-card {
-  background: rgba(255, 255, 255, 0.2) !important;
+  background: rgba(255, 255, 255, 0.25) !important;
   border: 1px solid rgba(255, 255, 255, 0.4) !important;
 }
 
+
 /* --- 深色模式 --- */
+/* 大框：较透 (25% 深色) */
 html[data-theme-mode="dark"]:not(.light-theme) section.category {
   background-color: rgba(30, 35, 50, 0.25) !important; 
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
-  box-shadow: none !important;
 }
-/* 内部小框：极透加磨砂 */
+
+/* 内部小框：稍微实一点 (45% 深色) */
 html[data-theme-mode="dark"]:not(.light-theme) .site-card,
 html[data-theme-mode="dark"]:not(.light-theme) .sites-grid a {
-  background-color: rgba(45, 50, 65, 0.15) !important; 
+  background-color: rgba(45, 50, 65, 0.45) !important; 
   border: 1px solid rgba(255, 255, 255, 0.08) !important;
-  backdrop-filter: blur(6px) !important;
   box-shadow: none !important;
+  transition: background-color 0.2s ease !important;
 }
+
+/* 深色模式悬浮：变得更亮、发灰一点（代替原本变透明的错误效果） */
+html[data-theme-mode="dark"]:not(.light-theme) .site-card:hover,
+html[data-theme-mode="dark"]:not(.light-theme) .sites-grid a:hover {
+  background-color: rgba(70, 75, 95, 0.65) !important; 
+}
+
 html[data-theme-mode="dark"]:not(.light-theme) .site-card-icon,
 html[data-theme-mode="dark"]:not(.light-theme) .site-card-content {
   background: transparent !important;
   border: none !important;
-  box-shadow: none !important;
 }
+
 html[data-theme-mode="dark"]:not(.light-theme) .search-box,
 html[data-theme-mode="dark"]:not(.light-theme) .nav-item {
-  background-color: rgba(30, 35, 50, 0.4) !important;
+  background-color: rgba(30, 35, 50, 0.45) !important;
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
 html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card {
-  background: rgba(70, 83, 124, 0.15) !important; 
+  background: rgba(70, 83, 124, 0.25) !important; 
   border: 1px solid rgba(255, 255, 255, 0.15) !important;
 }
 
@@ -118,7 +132,7 @@ input#search { background-color: transparent !important; }
 /* ================== 3. PC 端排版 (> 1024px) ================== */
 @media (min-width: 1025px) {
   .dashboard-grid {
-    position: relative !important; /* 作为螃蟹的绝对定位基准 */
+    position: relative !important;
   }
   .dashboard-stats {
     width: 320px !important; 
@@ -137,7 +151,6 @@ input#search { background-color: transparent !important; }
 @media (max-width: 1024px) {
   section.category::before, section.category::after { display: none !important; }
 
-  /* 主网格容器：设为相对定位，高度自动 */
   .dashboard-grid {
     display: flex !important;
     flex-direction: column !important;
@@ -148,7 +161,6 @@ input#search { background-color: transparent !important; }
     position: relative !important;
   }
 
-  /* 标题区域：完全不设 margin-bottom，靠下面的元素自己推 */
   .dashboard-intro {
     width: 100% !important;
     display: flex !important;
@@ -165,7 +177,6 @@ input#search { background-color: transparent !important; }
   .dashboard-welcome h1 { font-size: 1.6rem !important; margin: 0 !important; line-height: 1.2 !important; }
   .dashboard-welcome p { font-size: 0.9rem !important; margin: 0 !important; line-height: 1.2 !important; }
 
-  /* 🦀 螃蟹：锁定在整个大网格的右上角 */
   .dashboard-stats {
     display: block !important;
     position: absolute !important;
@@ -184,12 +195,11 @@ input#search { background-color: transparent !important; }
   }
   .dashboard-stats * { display: none !important; visibility: hidden !important; }
 
-  /* ⏰ 时钟面板：直接强制物理位移，推开 90px */
   .dashboard-panel {
     width: 100% !important;
     margin: 0 !important;
     padding: 0 !important;
-    margin-top: 90px !important; /* ★ 终极绝杀：90px 物理占位，框架绝对吃不掉 */
+    margin-top: 90px !important; 
   }
   
   .dashboard-clock-card {
