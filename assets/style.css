@@ -17,6 +17,12 @@
 @import './styles/components.css';
 @import './styles/utilities.css';
 
+/* ================== 0. 禁用微信字体强制放大 ================== */
+html, body {
+  -webkit-text-size-adjust: 100% !important;
+  text-size-adjust: 100% !important;
+}
+
 /* ================== 1. 渐变字与颜色区分 ================== */
 .dashboard-welcome h1 {
   background: linear-gradient(90deg, #b8dcff, #ffc2c2) !important;
@@ -27,13 +33,11 @@
   font-weight: 800 !important;
   filter: drop-shadow(0 0 6px rgba(184, 220, 255, 0.25)) !important;
 }
-
 .dashboard-welcome p {
   color: #ffc2c2 !important;
   font-weight: 700 !important;
   text-shadow: 0 0 6px rgba(255, 194, 194, 0.25) !important;
 }
-
 html.light-theme .dashboard-welcome h1 {
   filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.4)) !important; 
 }
@@ -41,58 +45,53 @@ html.light-theme .dashboard-welcome p {
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6) !important; 
 }
 
-/* ================== 2. 核弹级透明化 (PC和手机通用，无视微信内核) ================== */
-/* 暴力扒光所有容器的背景层 */
-section.category,
-.category-header,
-.category-content,
-.sites-grid {
-  background-color: transparent !important;
-  background-image: none !important;
+/* ================== 2. 透明度调优 (大框透，小框微实) ================== */
+/* 浅色模式 */
+html.light-theme section.category {
+  background-color: rgba(255, 255, 255, 0.3) !important; /* 大框：30% 白 */
+  border: 1px solid rgba(255, 255, 255, 0.4) !important;
   box-shadow: none !important;
 }
-
-/* 重新定义大分类框（极透边框） */
-html.light-theme section.category { border: 1px solid rgba(255, 255, 255, 0.3) !important; }
-html[data-theme-mode="dark"]:not(.light-theme) section.category { border: 1px solid rgba(255, 255, 255, 0.08) !important; }
-
-/* 小卡片：透明度降到极低 (5%) */
-html.light-theme .sites-grid > a,
-html.light-theme .sites-grid > div {
-  background-color: rgba(255, 255, 255, 0.05) !important; 
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
-  backdrop-filter: blur(4px) !important; /* 加一点毛玻璃防糊 */
+html.light-theme .sites-grid a,
+html.light-theme .sites-grid div {
+  background-color: rgba(255, 255, 255, 0.6) !important; /* 小框：60% 白（更实一点） */
+  border: 1px solid rgba(255, 255, 255, 0.8) !important;
+  box-shadow: none !important;
 }
-html[data-theme-mode="dark"]:not(.light-theme) .sites-grid > a,
-html[data-theme-mode="dark"]:not(.light-theme) .sites-grid > div {
-  background-color: rgba(0, 0, 0, 0.1) !important; 
-  border: 1px solid rgba(255, 255, 255, 0.05) !important;
-}
-
-/* 搜索框和侧边栏导航 */
 html.light-theme .search-box,
 html.light-theme .nav-item {
-  background-color: rgba(255, 255, 255, 0.2) !important;
+  background-color: rgba(255, 255, 255, 0.5) !important;
+  border: 1px solid rgba(255, 255, 255, 0.6) !important;
+}
+html.light-theme .dashboard-clock-card {
+  background: rgba(255, 255, 255, 0.2) !important;
   border: 1px solid rgba(255, 255, 255, 0.4) !important;
+  border-radius: 16px !important;
+}
+
+/* 深色模式 */
+html[data-theme-mode="dark"]:not(.light-theme) section.category {
+  background-color: rgba(30, 35, 50, 0.4) !important; /* 大框：40% 深色 */
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: none !important;
+}
+html[data-theme-mode="dark"]:not(.light-theme) .sites-grid a,
+html[data-theme-mode="dark"]:not(.light-theme) .sites-grid div {
+  background-color: rgba(45, 50, 65, 0.7) !important; /* 小框：70% 深色（更实） */
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: none !important;
 }
 html[data-theme-mode="dark"]:not(.light-theme) .search-box,
 html[data-theme-mode="dark"]:not(.light-theme) .nav-item {
-  background-color: rgba(0, 0, 0, 0.2) !important;
-  border: 1px solid rgba(255, 255, 255, 0.08) !important;
-}
-
-/* 时钟卡片 */
-html.light-theme .dashboard-clock-card {
-  background: rgba(255, 255, 255, 0.1) !important;
-  border: 1px solid rgba(255, 255, 255, 0.3) !important;
-}
-html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card {
-  background: rgba(0, 0, 0, 0.15) !important; 
+  background-color: rgba(30, 35, 50, 0.5) !important;
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
-
+html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card {
+  background: rgba(70, 83, 124, 0.2) !important; 
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  border-radius: 16px !important;
+}
 input#search { background-color: transparent !important; }
-
 
 /* ================== 3. PC 端排版 (> 1024px) ================== */
 @media (min-width: 1025px) {
@@ -109,7 +108,7 @@ input#search { background-color: transparent !important; }
   }
 }
 
-/* ================== 4. 手机端专属 (无视微信内核缩放) ================== */
+/* ================== 4. 手机端专属排版 (<= 1024px) ================== */
 @media (max-width: 1024px) {
   section.category::before,
   section.category::after {
@@ -135,15 +134,15 @@ input#search { background-color: transparent !important; }
     text-align: left !important;
     padding-right: 90px !important;
     box-sizing: border-box !important;
-    margin-bottom: 40px !important; /* 适当缩小了一点防止太散 */
-    position: relative !important; /* ★ 关键：强制作为螃蟹的绝对定位基准 */
+    margin-bottom: 30px !important; /* 适当拉开距离 */
+    position: relative !important; 
   }
 
   .dashboard-welcome { display: flex !important; flex-direction: column !important; gap: 5px !important; }
   .dashboard-welcome h1 { font-size: 1.6rem !important; margin: 0 !important; line-height: 1.2 !important; }
   .dashboard-welcome p { font-size: 0.9rem !important; margin: 0 !important; line-height: 1.2 !important; }
 
-  /* ★ 螃蟹：取消 120% 放大，防止微信拉伸变形；并微调位置 */
+  /* 螃蟹固定 */
   .dashboard-stats {
     display: block !important;
     position: absolute !important;
@@ -153,43 +152,54 @@ input#search { background-color: transparent !important; }
     height: 100px !important;
     min-width: 100px !important; 
     max-width: 100px !important;
-    max-height: 100px !important;
     background-image: url('https://shirasu224.github.io/menav/pics/the-spycrab2.png') !important;
-    background-size: contain !important; /* 恢复完整比例，绝不拉伸 */
+    background-size: contain !important; 
     background-repeat: no-repeat !important;
     background-position: center right !important;
     margin: 0 !important;
     z-index: 10 !important;
   }
-  
   .dashboard-stats * { display: none !important; visibility: hidden !important; }
 
+  /* 时钟卡片重置 */
   .dashboard-panel {
     width: 100% !important;
-    margin-top: 10px !important; 
+    margin-top: 15px !important; 
   }
   
-  /* 💥 时钟卡片核弹级字体重置 */
   .dashboard-clock-card {
     display: flex !important;
     flex-direction: column !important;
     width: 100% !important; 
     height: auto !important;
-    padding: 15px 20px !important; 
+    padding: 20px !important; 
     margin: 0 !important;
     box-sizing: border-box !important;
+    border-radius: 16px !important;
   }
 
-  /* 暴力干掉所有内部字体的放大，微信就算自动放大也能被压回来 */
-  .dashboard-clock-card * {
-    font-size: 14px !important; 
+  /* 修复手机端时钟内排版错乱 */
+  .dashboard-clock-card > div {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    width: 100% !important;
+  }
+
+  /* 强制压制微信字体放大，并精准设置字号 */
+  .dashboard-clock-card .clock-header,
+  .dashboard-clock-card .clock-date {
+    font-size: 13px !important;
     line-height: 1.2 !important;
+    white-space: nowrap !important; 
   }
-
-  /* 单独再给时间设个字号，确保它比上面的 14px 大一点点 */
-  .dashboard-clock-card .clock-main,
-  .dashboard-clock-card [class*="clock-time"] {
+  
+  .dashboard-clock-card .clock-main {
     font-size: 28px !important; 
-    margin-top: 5px !important;
+    line-height: 1.2 !important;
+    text-align: right !important;
+    margin-top: 10px !important;
+    width: 100% !important;
   }
 }
