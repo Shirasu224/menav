@@ -223,63 +223,65 @@ const fontAwesomePreload = `<link rel="preload" href="${fontAwesomeCssUrl}" as="
       }
 /* ================= 统一框框透明度 ================= */
 :root {
-  /* 深色模式的底色和透明度 */
-  --menav-panel-rgb: 24, 27, 38;
-  --menav-panel-alpha: 0.3; 
-}
-
-html.light-theme {
-  /* 浅色模式的底色和透明度 */
+  /* 浅色模式：白色半透明（alpha越小越透，0.3 很透，0.6 较实） */
   --menav-panel-rgb: 255, 255, 255;
-  --menav-panel-alpha: 0.45; /* 浅色稍微实一点，不然看不清字 */
+  --menav-panel-alpha: 0.35; 
 }
 
-/* 1. 覆盖大模块、导航栏、卡片等 */
-.nav-item,
-.nav-item-wrapper,
-.category,
-.category-header,
-.category-content,
-.link-card,
-.site-card,
-.card,
-.search-container,
-.search-bar,
-.search-box,
-.search-form,
-.social-links {
-  background-color: rgba(var(--menav-panel-rgb), var(--menav-panel-alpha)) !important;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+html[data-theme-mode="dark"]:not(.light-theme) {
+  /* 深色模式：深蓝灰半透明 */
+  --menav-panel-rgb: 24, 27, 38;
+  --menav-panel-alpha: 0.4;
+}
+
+/* 1. 暴力清除所有可能会遮挡背景的元素底色（只清理背景色，保留文字和图片） */
+html, body, #app, .layout, .content, main, .page, .category, .category-content, .category-header, .sites-grid {
+  background-color: transparent !important;
   box-shadow: none !important;
 }
 
-/* 2. 单独调整搜索框输入区域，避免太透 */
-.search-container input {
+/* 2. 精准给“大框框”和“小卡片”加半透明背景 */
+section.category, 
+.nav-item, 
+.search-bar, 
+.search-container,
+.link-card, 
+.site-card,
+.dashboard-clock-card,
+.sidebar-submenu-panel {
+  background-color: rgba(var(--menav-panel-rgb), var(--menav-panel-alpha)) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important; /* 极细的边框增加质感 */
+  box-shadow: none !important;
+}
+
+/* 3. 搜索框内部的输入区域保持全透明 */
+.search-container input, 
+.search-bar input {
   background-color: transparent !important;
 }
 
-/* 3. 悬停反馈：鼠标放上去稍微变实一点 */
-.nav-item:hover,
-.link-card:hover,
-.card:hover {
+/* 4. 鼠标悬停时稍微变实一点（不然全透没反馈） */
+.nav-item:hover, 
+.link-card:hover, 
+.site-card:hover {
   background-color: rgba(var(--menav-panel-rgb), calc(var(--menav-panel-alpha) + 0.15)) !important;
 }
 
-/* 4. 修正你原代码里的侧边栏遮罩（让遮罩不那么厚，透出更多图） */
+/* 5. 侧边栏遮罩修正：不要让默认的黑色/白色遮罩太厚 */
 html.light-theme .sidebar {
-  background: linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)),
+  background: linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)),
               url('https://shirasu224.github.io/menav/pics/pyrohous.jpg') !important;
   background-size: cover !important;
   background-attachment: fixed !important;
 }
 html[data-theme-mode="dark"]:not(.light-theme) .sidebar {
-  background: linear-gradient(rgba(15, 15, 20, 0.4), rgba(15, 15, 20, 0.4)),
+  background: linear-gradient(rgba(15, 15, 20, 0.3), rgba(15, 15, 20, 0.3)),
               url('https://shirasu224.github.io/menav/pics/nightsnipe.jpg') !important;
   background-size: cover !important;
   background-attachment: fixed !important;
 }
 
-/* 5. 修正时钟卡片：去掉毛玻璃，改用安全的半透明背景 */
+/* 6. 时钟卡片单独处理 */
 html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card {
   background: linear-gradient(180deg, rgba(70, 83, 124, var(--menav-panel-alpha)) 0%, rgba(141, 124, 129, var(--menav-panel-alpha)) 100%) !important;
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
