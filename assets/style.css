@@ -21,7 +21,7 @@
 .dashboard-welcome h1,
 .dashboard-welcome p {
   /* 渐变颜色：#b8dcff 浅蓝 -> #ffc2c2 浅粉 */
-  background: linear-gradient(90deg, #b8dcff, #ffc2c2) !important;
+  background: linear-gradient(90deg, #8ac4ff, #ffe5e5) !important;
   -webkit-background-clip: text !important;
   background-clip: text !important;
   -webkit-text-fill-color: transparent !important; /* 让字体内部透明，透出渐变 */
