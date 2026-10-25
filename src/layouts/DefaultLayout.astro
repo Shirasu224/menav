@@ -65,39 +65,39 @@ const fontAwesomePreload = `<link rel="preload" href="${fontAwesomeCssUrl}" as="
     <noscript>
       <link rel="stylesheet" href={fontAwesomeCssUrl} />
     </noscript>
+    
     <!-- 终极自定义样式：最高强权版 -->
     <style is:global>
-      /* 1. 彻底清空所有底色 */
+      /* 1. 强制清空所有干扰底色 */
       html, body, .layout, .content, .page, .page-template-home, .dashboard-grid {
         background-color: transparent !important;
+        background-image: none !important;
       }
 
-      /* 2. 魔法垫片：这个伪元素会盖在系统的黑底之上，但在你的文字之下 */
-      body::before {
-        content: "";
-        position: fixed;
-        top: 0; left: 0; right: 0; bottom: 0;
-        z-index: 0;
-        pointer-events: none;
+      /* 2. 把背景图直接焊死在 html 标签上（这是网页最底层，绝对不可能被遮挡） */
+      html {
+        background: linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), url('https://shirasu224.github.io/menav/pics/pyrohous.jpg') no-repeat center center fixed !important;
         background-size: cover !important;
-        background-attachment: fixed !important;
-        background-position: center !important;
+      }
+      html[data-theme-mode="dark"]:not(.light-theme) {
+        background: linear-gradient(rgba(15, 15, 20, 0.6), rgba(15, 15, 20, 0.6)), url('https://shirasu224.github.io/menav/pics/nightsnipe.jpg') no-repeat center center fixed !important;
+        background-size: cover !important;
       }
 
-      /* 白天模式垫片 */
-      html.light-theme body::before {
-        background-image: linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), url('https://shirasu224.github.io/menav/pics/pyrohous.jpg') !important;
+      /* 3. 解决文字看不清的问题：加发光阴影 */
+      /* 浅色模式：深色字 + 白色发光 */
+      html.light-theme .dashboard-welcome h1,
+      html.light-theme .dashboard-welcome p {
+        color: #111111 !important;
+        text-shadow: 0 2px 4px rgba(255, 255, 255, 1), 0 0 15px rgba(255, 255, 255, 1) !important;
+        font-weight: 800 !important;
       }
-
-      /* 黑夜模式垫片 */
-      html[data-theme-mode="dark"]:not(.light-theme) body::before {
-        background-image: linear-gradient(rgba(15, 15, 20, 0.6), rgba(15, 15, 20, 0.6)), url('https://shirasu224.github.io/menav/pics/nightsnipe.jpg') !important;
-      }
-
-      /* 3. 把你的所有内容提上来，压在垫片上面 */
-      .layout {
-        position: relative !important;
-        z-index: 1 !important; 
+      /* 深色模式：白色字 + 黑色发光 */
+      html[data-theme-mode="dark"]:not(.light-theme) .dashboard-welcome h1,
+      html[data-theme-mode="dark"]:not(.light-theme) .dashboard-welcome p {
+        color: #ffffff !important;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 1), 0 0 15px rgba(0, 0, 0, 1) !important;
+        font-weight: 800 !important;
       }
 
       /* 4. 时钟卡片（极限透明微调版） */
@@ -114,13 +114,6 @@ const fontAwesomePreload = `<link rel="preload" href="${fontAwesomeCssUrl}" as="
         border-radius: 16px !important;
       }
       html.light-theme .dashboard-clock-card * { color: #222222 !important; }
-      
-      @media (max-width: 768px) {
-        section.category::before,
-        section.category::after {
-          display: none;
-        }
-      }
 
       /* 5. 侧边栏背景 */
       html.light-theme .sidebar {
@@ -225,33 +218,6 @@ const fontAwesomePreload = `<link rel="preload" href="${fontAwesomeCssUrl}" as="
           font-size: 0.8rem !important;
           white-space: nowrap !important; 
         }
-      }
-
-      /* ================== 8. 彻底解决文字看不清的问题 ================== */
-      /* 浅色模式下给欢迎文字加上白色半透明底板 */
-      html.light-theme .dashboard-welcome {
-        background-color: rgba(255, 255, 255, 0.7) !important;
-        padding: 10px 20px !important;
-        border-radius: 12px !important;
-        display: inline-block !important;
-        backdrop-filter: blur(5px) !important;
-      }
-      html.light-theme .dashboard-welcome h1,
-      html.light-theme .dashboard-welcome p {
-        color: #111111 !important; /* 强制深黑色 */
-      }
-
-      /* 深色模式下给欢迎文字加上黑色半透明底板 */
-      html[data-theme-mode="dark"]:not(.light-theme) .dashboard-welcome {
-        background-color: rgba(0, 0, 0, 0.5) !important;
-        padding: 10px 20px !important;
-        border-radius: 12px !important;
-        display: inline-block !important;
-        backdrop-filter: blur(5px) !important;
-      }
-      html[data-theme-mode="dark"]:not(.light-theme) .dashboard-welcome h1,
-      html[data-theme-mode="dark"]:not(.light-theme) .dashboard-welcome p {
-        color: #ffffff !important; /* 强制纯白色 */
       }
     </style>
   </head>
