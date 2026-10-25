@@ -12,5 +12,5 @@ categories:
     sites:
       - name: 某人的画作1
         url: https://shirasu224.github.io/menav/pics/respawn.jpg
-        icon: https://shirasu224.github.io/menav/pics/respawn.jpg
+        faviconUrl: https://shirasu224.github.io/menav/pics/respawn.jpg
         description: 这是一个插画作品
