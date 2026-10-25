@@ -66,82 +66,93 @@ const fontAwesomePreload = `<link rel="preload" href="${fontAwesomeCssUrl}" as="
       <link rel="stylesheet" href={fontAwesomeCssUrl} />
     </noscript>
     
-    <!-- 终极自定义样式：最高强权版 -->
-    <style is:global>
-      /* ================== 终极美化版 ================== */
+       /* ================== 暴力全透覆盖版 ================== */
 
-      /* 1. 清空所有可能遮挡背景的默认底色 */
-      html, body, #app, .layout, .content, main, .page, .page-template-home, .dashboard-grid, .dashboard-panel {
+      /* 1. 将所有可能遮挡背景的大容器直接“扒光”变透明，去掉所有阴影 */
+      html, body, #app, .layout, .content, main, .page, .page-template-home, .dashboard-grid, .sidebar, .search-container {
         background-color: transparent !important;
+        background-image: none !important;
         box-shadow: none !important;
       }
 
-      /* 2. 直接把背景图挂载在 body 上，绝不被遮挡 */
-      html.light-theme body {
+      /* 2. 魔法背景垫片：强制沉在页面最底层（z-index: -1），任何东西都挡不住它 */
+      body::before {
+        content: "";
+        position: fixed;
+        top: 0; left: 0; width: 100vw; height: 100vh;
+        z-index: -1;
+        pointer-events: none;
+        background-size: cover !important;
+        background-position: center !important;
+        background-attachment: fixed !important;
+      }
+
+      /* 白天模式垫片 */
+      html.light-theme body::before {
         background-image: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), url('https://shirasu224.github.io/menav/pics/pyrohous.jpg') !important;
-        background-size: cover !important;
-        background-attachment: fixed !important;
-        background-position: center !important;
       }
 
-      html[data-theme-mode="dark"]:not(.light-theme) body {
-        background-image: linear-gradient(rgba(15, 15, 20, 0.6), rgba(15, 15, 20, 0.6)), url('https://shirasu224.github.io/menav/pics/nightsnipe.jpg') !important;
-        background-size: cover !important;
-        background-attachment: fixed !important;
-        background-position: center !important;
+      /* 黑夜模式垫片 */
+      html[data-theme-mode="dark"]:not(.light-theme) body::before {
+        background-image: linear-gradient(rgba(15, 15, 20, 0.5), rgba(15, 15, 20, 0.5)), url('https://shirasu224.github.io/menav/pics/nightsnipe.jpg') !important;
       }
 
-      /* 3. 侧边栏背景（保留你的设定） */
+      /* 3. 定义框框的颜色变量 */
+      :root {
+        --menav-panel-bg: rgba(255, 255, 255, 0.4); /* 浅色模式半透明白 */
+        --menav-panel-border: 1px solid rgba(255, 255, 255, 0.5);
+      }
+      html[data-theme-mode="dark"]:not(.light-theme) {
+        --menav-panel-bg: rgba(30, 35, 50, 0.5); /* 深色模式半透明深蓝 */
+        --menav-panel-border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      /* 4. 暴风骤雨式重写所有卡片和框框 */
+      .nav-item,
+      .search-box,
+      .category-content,
+      .dashboard-clock-card,
+      .dashboard-panel,
+      .sites-grid > a,
+      .sites-grid > div {
+        background: var(--menav-panel-bg) !important;
+        backdrop-filter: blur(12px) !important;
+        -webkit-backdrop-filter: blur(12px) !important;
+        border: var(--menav-panel-border) !important;
+        box-shadow: none !important; /* 强制去掉所有丑陋的阴影 */
+        border-radius: 16px !important;
+      }
+
+      /* 5. 清理内部元素的默认白底 */
+      section.category { background: transparent !important; }
+      section.category * { box-shadow: none !important; background-color: transparent !important; }
+      input#search { background: transparent !important; }
+      
+      /* 6. 鼠标悬停轻微反馈 */
+      .nav-item:hover,
+      .sites-grid > a:hover,
+      .sites-grid > div:hover {
+        background: rgba(255, 255, 255, 0.6) !important;
+      }
+      html[data-theme-mode="dark"]:not(.light-theme) .nav-item:hover,
+      html[data-theme-mode="dark"]:not(.light-theme) .sites-grid > a:hover,
+      html[data-theme-mode="dark"]:not(.light-theme) .sites-grid > div:hover {
+        background: rgba(50, 55, 70, 0.7) !important;
+      }
+
+      /* 7. 侧边栏背景特殊处理 */
       html.light-theme .sidebar {
-        background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url('https://shirasu224.github.io/menav/pics/pyrohous.jpg') !important;
+        background: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), url('https://shirasu224.github.io/menav/pics/pyrohous.jpg') !important;
         background-size: cover !important;
         background-attachment: fixed !important;
       }
       html[data-theme-mode="dark"]:not(.light-theme) .sidebar {
-        background: linear-gradient(rgba(15, 15, 20, 0.6), rgba(15, 15, 20, 0.6)), url('https://shirasu224.github.io/menav/pics/nightsnipe.jpg') !important;
+        background: linear-gradient(rgba(15, 15, 20, 0.5), rgba(15, 15, 20, 0.5)), url('https://shirasu224.github.io/menav/pics/nightsnipe.jpg') !important;
         background-size: cover !important;
         background-attachment: fixed !important;
       }
 
-      /* 4. 定义框框的透明度和模糊程度 */
-      :root {
-        --menav-panel-rgb: 255, 255, 255;
-        --menav-panel-alpha: 0.35; /* ★ 浅色模式：数字越小越透（0.1极透，0.8很实） */
-        --menav-panel-blur: 10px;
-      }
-      html[data-theme-mode="dark"]:not(.light-theme) {
-        --menav-panel-rgb: 24, 27, 38;
-        --menav-panel-alpha: 0.4; /* ★ 深色模式透明度 */
-      }
-
-      /* 5. 精准命中：给导航、搜索框、分类大框、小卡片加上半透明和磨砂玻璃 */
-      .nav-item,
-      .search-box,
-      section.category,
-      .category-header,
-      .sites-grid > a,
-      .sites-grid > div,
-      .dashboard-clock-card {
-        background-color: rgba(var(--menav-panel-rgb), var(--menav-panel-alpha)) !important;
-        border: 1px solid rgba(255, 255, 255, 0.15) !important;
-        backdrop-filter: blur(var(--menav-panel-blur)) !important;
-        -webkit-backdrop-filter: blur(var(--menav-panel-blur)) !important;
-        box-shadow: none !important;
-      }
-
-      /* 6. 鼠标悬停反馈：稍微变实一点 */
-      .nav-item:hover,
-      .sites-grid > a:hover,
-      .sites-grid > div:hover {
-        background-color: rgba(var(--menav-panel-rgb), calc(var(--menav-panel-alpha) + 0.15)) !important;
-      }
-
-      /* 7. 搜索框内部透明 */
-      #search {
-        background-color: transparent !important;
-      }
-
-      /* ================== 螃蟹和手机端排版保留你的原样 ================== */
+      /* ================== 保留你原本的螃蟹排版 ================== */
       .dashboard-grid {
         display: grid !important;
         grid-template-columns: 1fr 1fr !important; 
@@ -159,78 +170,27 @@ const fontAwesomePreload = `<link rel="preload" href="${fontAwesomeCssUrl}" as="
         background-position: center !important;
         background-color: transparent !important;
         border: none !important;
+        box-shadow: none !important;
       }
-
+      
       @media (max-width: 768px) {
         .dashboard-grid {
-          position: relative !important; 
-          display: flex !important;
-          flex-direction: column !important;
-          align-items: flex-start !important; 
-          width: 100% !important;
-          padding-left: 15px !important; 
-          padding-right: 15px !important;
-          box-sizing: border-box !important; 
-          gap: 10px !important;
+          position: relative !important; display: flex !important; flex-direction: column !important; align-items: flex-start !important; 
+          width: 100% !important; padding-left: 15px !important; padding-right: 15px !important; box-sizing: border-box !important; gap: 10px !important;
         }
-        .dashboard-intro {
-          width: 100% !important;
-          display: flex !important;
-          flex-direction: column !important;
-          align-items: flex-start !important;
-          text-align: left !important;
-        }
-        .dashboard-welcome {
-          width: 100% !important;
-          margin: 0 !important;
-          padding: 0 !important; 
-          text-align: left !important; 
-        }
-        .dashboard-welcome h1 {
-          font-size: 1.3rem !important;
-          margin: 0 0 -2px 0 !important; 
-          line-height: 1.2 !important;
-        }
-        .dashboard-welcome p {
-          font-size: 0.85rem !important;
-          margin: 0 !important;
-          line-height: 1.2 !important;
-        }
-        
+        .dashboard-intro, .dashboard-welcome { width: 100% !important; text-align: left !important; margin: 0 !important; padding: 0 !important;}
+        .dashboard-welcome h1 { font-size: 1.3rem !important; margin: 0 0 -2px 0 !important; line-height: 1.2 !important; }
+        .dashboard-welcome p { font-size: 0.85rem !important; margin: 0 !important; line-height: 1.2 !important; }
         .dashboard-stats {
-          display: block !important;
-          position: absolute !important;
-          top: 5px !important;      
-          right: 15px !important;   
-          width: 100px !important;   
-          height: 100px !important;  
-          background-position: top right !important; 
-          margin: 0 !important;
-          z-index: 10 !important;
+          display: block !important; position: absolute !important; top: 5px !important; right: 15px !important; 
+          width: 100px !important; height: 100px !important; background-position: top right !important; margin: 0 !important; z-index: 10 !important;
         }
-        
         .dashboard-clock-card {
-          display: flex !important;
-          flex-direction: column !important;
-          width: 75% !important;        
-          max-width: 260px !important;  
-          height: auto !important; 
-          padding: 12px 15px !important; 
-          margin: 0 !important;         
-          margin-top: 5px !important; 
-          position: relative !important;
+          display: flex !important; flex-direction: column !important; width: 75% !important; max-width: 260px !important; 
+          height: auto !important; padding: 12px 15px !important; margin: 5px 0 0 0 !important; position: relative !important;
         }
-        
-        .dashboard-clock-card .clock-main {
-          font-size: 1.8rem !important; 
-          text-align: right !important;
-          line-height: 1.1 !important;
-        }
-        .dashboard-clock-card .clock-header,
-        .dashboard-clock-card .clock-date {
-          font-size: 0.8rem !important;
-          white-space: nowrap !important; 
-        }
+        .dashboard-clock-card .clock-main { font-size: 1.8rem !important; text-align: right !important; line-height: 1.1 !important; }
+        .dashboard-clock-card .clock-header, .dashboard-clock-card .clock-date { font-size: 0.8rem !important; white-space: nowrap !important; }
       }
     </style>
   </head>
