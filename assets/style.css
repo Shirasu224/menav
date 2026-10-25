@@ -26,26 +26,27 @@
   -webkit-text-fill-color: transparent !important;
   color: transparent !important;
   font-weight: 800 !important;
-  filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.6)) !important;
+  /* 夜间模式：微微发光，不伤眼 */
+  filter: drop-shadow(0 0 8px rgba(184, 220, 255, 0.3)) !important;
 }
 
-/* 副标题：纯粉色，加发光保证清晰 */
+/* 副标题：纯粉色 */
 .dashboard-welcome p {
   color: #ffc2c2 !important;
   font-weight: 700 !important;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8), 0 0 10px rgba(0, 0, 0, 0.5) !important;
+  /* 夜间模式：微微发光 */
+  text-shadow: 0 0 8px rgba(255, 194, 194, 0.3) !important;
 }
 
-/* 浅色模式下的标题与副标题阴影调整 */
+/* 浅色模式下的阴影调整（白天需要深色阴影或白光） */
 html.light-theme .dashboard-welcome h1 {
-  filter: drop-shadow(0px 2px 4px rgba(255, 255, 255, 1)) !important;
+  filter: drop-shadow(0px 2px 4px rgba(255, 255, 255, 0.8)) !important;
 }
 html.light-theme .dashboard-welcome p {
-  text-shadow: 0 2px 4px rgba(255, 255, 255, 1), 0 0 10px rgba(255, 255, 255, 0.8) !important;
+  text-shadow: 0 2px 4px rgba(255, 255, 255, 0.8) !important;
 }
 
 /* ================== 2. 全部卡片/框框透明化 ================== */
-/* （这里保持不变，你原来的代码就行） */
 html[data-theme-mode="dark"]:not(.light-theme) section.category {
   background-color: rgba(30, 35, 50, 0.4) !important;
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
@@ -95,29 +96,30 @@ html.light-theme .dashboard-clock-card {
 html.light-theme .dashboard-clock-card * { color: #222222 !important; }
 input#search { background-color: transparent !important; }
 
-/* ================== 3. 手机端专属排版 (彻底重置) ================== */
-@media (max-width: 768px) {
+/* ================== 3. 手机端专属排版 (强制覆盖版) ================== */
+/* 把 768px 改为 1024px，确保大部分手机和平板都能命中 */
+@media (max-width: 1024px) {
   .dashboard-grid {
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
     width: 100% !important;
-    padding: 0 10px 30px 10px !important;
+    padding: 0 15px 40px 15px !important;
     box-sizing: border-box !important;
-    gap: 20px !important; /* 拉开间距 */
+    gap: 30px !important; /* 强行拉开大间距 */
     position: relative !important;
   }
 
-  /* 标题区域：变大，并且留出右侧给螃蟹 */
+  /* 标题区域：留出螃蟹的空间，并增加下方间距 */
   .dashboard-intro {
     width: 100% !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: flex-start !important;
     text-align: left !important;
-    padding-right: 80px !important; /* 给螃蟹留位置 */
+    padding-right: 80px !important;
     box-sizing: border-box !important;
-    margin-bottom: 5px !important;
+    margin-bottom: 15px !important; /* 让标题和时钟分开 */
   }
 
   .dashboard-welcome {
@@ -127,39 +129,40 @@ input#search { background-color: transparent !important; }
   }
   
   .dashboard-welcome h1 {
-    font-size: 1.8rem !important; /* 变大 */
+    font-size: 1.8rem !important; 
     margin: 0 !important;
     padding: 0 !important;
     line-height: 1.2 !important;
   }
   
   .dashboard-welcome p {
-    font-size: 1rem !important; /* 变大 */
+    font-size: 1rem !important; 
     margin: 0 !important;
     padding: 0 !important;
     line-height: 1.2 !important;
   }
 
-  /* ★ 螃蟹锁死在右上角 (橙色框) */
+  /* ★ 螃蟹图：用绝对定位死死钉在右上角，并强制缩放 */
   .dashboard-stats {
     display: block !important;
     position: absolute !important;
-    top: -10px !important;
-    right: 10px !important;
-    width: 80px !important;
-    height: 80px !important;
-    max-width: 80px !important;
-    max-height: 80px !important;
+    top: 0px !important;
+    right: 15px !important;
+    width: 70px !important;
+    height: 70px !important;
+    max-width: 70px !important;
+    max-height: 70px !important;
     background-size: contain !important;
     background-position: top right !important;
     margin: 0 !important;
     z-index: 10 !important;
+    transform: scale(1) !important; /* 防止被内部样式放大 */
   }
 
-  /* ★ 时钟卡片撑满 (绿色框) */
+  /* ★ 时钟卡片撑满，并且保证它是在标题下方 */
   .dashboard-panel {
-    width: 100% !important; /* 确保父容器全宽 */
-    margin: 0 !important;
+    width: 100% !important;
+    margin-top: 10px !important; /* 再次确保往下走 */
   }
   
   .dashboard-clock-card {
@@ -168,22 +171,22 @@ input#search { background-color: transparent !important; }
     width: 100% !important; 
     max-width: 100% !important;
     height: auto !important;
-    padding: 15px 20px !important; /* 增加内边距，让字不挤 */
+    padding: 15px 20px !important; 
     margin: 0 !important;
     box-sizing: border-box !important;
     position: relative !important;
   }
 
-  /* 时钟字体大小 */
+  /* ★ 强行把手机端时钟字体改小 (使用像素单位最稳) */
   .dashboard-clock-card .clock-main {
-    font-size: 1.8rem !important; 
+    font-size: 26px !important; /* 强制 26px，绝对比之前小 */
     text-align: right !important;
     line-height: 1.1 !important;
-    margin-top: 5px !important;
+    margin-top: 10px !important;
   }
   .dashboard-clock-card .clock-header,
   .dashboard-clock-card .clock-date {
-    font-size: 0.85rem !important;
+    font-size: 12px !important; 
     white-space: nowrap !important;
   }
 }
