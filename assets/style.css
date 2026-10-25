@@ -5,10 +5,23 @@
 @import './styles/components.css';
 @import './styles/utilities.css';
 
+/* 引入京华老宋体 CDN */
+@import url('https://fontsapi.zeoseven.com/309/main/result.css');
+
+/* 2. 应用到全站文字（同时保护 FontAwesome 图标不受影响） */
+body, h1, h2, h3, h4, h5, h6, p, span, a, div, input, textarea {
+  font-family: "KingHwaOldSong", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+}
+
+/* 3. 确保 FontAwesome 图标不变形 */
+.fas, .far, .fab, .fa, [class^="fa-"], [class*=" fa-"] {
+  font-family: "Font Awesome 6 Free", "Font Awesome 6 Brands" !important;
+}
 /* ================== 0. 字体防缩放 & 全局字体统一 ================== */
 html, body {
   -webkit-text-size-adjust: 100% !important;
   text-size-adjust: 100% !important;
+  
   /* 💥 统一全局字体，消除中文自带的错位 */
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "PingFang SC", "Microsoft YaHei", sans-serif !important;
 }
