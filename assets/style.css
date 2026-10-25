@@ -37,12 +37,12 @@
   text-shadow: 0 0 6px rgba(255, 194, 194, 0.25) !important;
 }
 
-/* 浅色模式下的阴影调整 */
+/* 浅色模式下调整阴影，防止字发糊 */
 html.light-theme .dashboard-welcome h1 {
-  filter: drop-shadow(0px 2px 4px rgba(255, 255, 255, 0.9)) !important;
+  filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.4)) !important; /* 改成深色阴影 */
 }
 html.light-theme .dashboard-welcome p {
-  text-shadow: 0 2px 4px rgba(255, 255, 255, 0.9) !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6) !important; /* 深灰黑色阴影，绝对清晰 */
 }
 
 /* ================== 2. 全部卡片/框框透明化 ================== */
@@ -123,7 +123,6 @@ input#search { background-color: transparent !important; }
     position: relative !important;
   }
 
-  /* 标题区域布局 */
   .dashboard-intro {
     width: 100% !important;
     display: flex !important;
@@ -155,7 +154,7 @@ input#search { background-color: transparent !important; }
     line-height: 1.2 !important;
   }
 
-  /* ★ 螃蟹图强制变小，并固定在右上角 */
+  /* ★ 解决螃蟹分身术：干掉所有子元素，并且隐藏溢出 */
   .dashboard-stats {
     display: block !important;
     position: absolute !important;
@@ -167,12 +166,19 @@ input#search { background-color: transparent !important; }
     max-height: 60px !important;
     background-image: url('https://shirasu224.github.io/menav/pics/the-spycrab2.png') !important;
     background-size: contain !important;
+    background-repeat: no-repeat !important;
     background-position: top right !important;
     margin: 0 !important;
     z-index: 10 !important;
+    overflow: hidden !important; /* 隐藏超出的背景 */
+  }
+  
+  /* 💥 这一句是关键：彻底让内部所有元素消失，防止它们撑大容器露出背景 */
+  .dashboard-stats * {
+    display: none !important;
+    visibility: hidden !important;
   }
 
-  /* ★ 时钟卡片撑满，解决文字重叠 */
   .dashboard-panel {
     width: 100% !important;
     margin-top: 5px !important; 
@@ -188,10 +194,9 @@ input#search { background-color: transparent !important; }
     margin: 0 !important;
     box-sizing: border-box !important;
     position: relative !important;
-    gap: 10px !important; /* 强制撑开内部的间距，解决重叠 */
+    gap: 10px !important; 
   }
 
-  /* ★ 用属性选择器把所有跟时间相关的元素字体改小，绝杀覆盖 */
   .dashboard-clock-card .clock-main,
   .dashboard-clock-card [class*="clock-time"],
   .dashboard-clock-card [class*="clock-main"] {
