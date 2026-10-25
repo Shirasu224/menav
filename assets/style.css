@@ -206,7 +206,7 @@ html[data-theme-mode="dark"]:not(.light-theme) .nav-item:hover, html[data-theme-
   .dashboard-stats {
     display: block !important;
     position: absolute !important;
-    top: 55px !important;   
+    top: 40px !important;   
     right: 5px !important;  
     width: 120px !important; 
     height: 120px !important;
