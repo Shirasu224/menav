@@ -100,19 +100,21 @@ const fontAwesomePreload = `<link rel="preload" href="${fontAwesomeCssUrl}" as="
         z-index: 1 !important; 
       }
 
-      /* 4. 时钟卡片渐变 (透明度 0.4) */
+      /* 4. 时钟卡片（极限透明微调版） */
       html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card {
-        background: linear-gradient(180deg, rgba(70, 83, 124, 0.2) 0%, rgba(141, 124, 129, 0.2) 100%) !important;
-        backdrop-filter: blur(10px) !important;
-        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        /* 改用单一纯色，把透明度降到 0.08（极其通透） */
+        background: rgba(70, 83, 124, 0.08) !important; 
+        /* ★ 注释掉了 backdrop-filter，去掉毛玻璃，让背景图完全透出来 */
+        /* backdrop-filter: blur(10px) !important; */
+        border: 1px solid rgba(255, 255, 255, 0.15) !important;
         border-radius: 16px !important;
       }
       html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card * { color: #ffffff !important; }
       
       html.light-theme .dashboard-clock-card {
-        background: linear-gradient(180deg, rgba(204, 237, 255, 0.2) 0%, rgba(255, 229, 229, 0.2) 100%) !important;
-        backdrop-filter: blur(10px) !important;
-        border: 1px solid rgba(255, 255, 255, 0.6) !important;
+        /* 浅色模式同理，透明度降到 0.15 */
+        background: rgba(255, 255, 255, 0.15) !important;
+        border: 1px solid rgba(255, 255, 255, 0.4) !important;
         border-radius: 16px !important;
       }
       html.light-theme .dashboard-clock-card * { color: #222222 !important; }
