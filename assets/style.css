@@ -110,15 +110,23 @@ input#search { background-color: transparent !important; }
 /* ================== 3. PC 端排版 (> 1024px) ================== */
 @media (min-width: 1025px) {
   .dashboard-grid { position: relative !important; }
+  
   .dashboard-stats {
-    width: 320px !important; height: 260px !important; margin: 0 auto !important;
+    width: 320px !important; 
+    height: 260px !important; 
+    margin: 0 auto !important;
     background-image: url('https://shirasu224.github.io/menav/pics/the-spycrab2.png') !important;
-    background-size: contain !important; background-repeat: no-repeat !important;
-    background-position: center !important; background-color: transparent !important; border: none !important;
+    background-size: contain !important; 
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    background-color: transparent !important; 
+    border: none !important;
+    /* 💥 放大 1.4 倍，满足电脑端大图需求，且不会撑破网格 */
+    transform: scale(1.4) !important; 
   }
 }
 
-/* ================== 4. 手机端专属排版 (暴力塞入占位空间) ================== */
+/* ================== 4. 手机端专属排版 (螃蟹下移) ================== */
 @media (max-width: 1024px) {
   section.category::before, section.category::after { display: none !important; }
 
@@ -148,28 +156,31 @@ input#search { background-color: transparent !important; }
   .dashboard-welcome h1 { font-size: 1.6rem !important; margin: 0 !important; line-height: 1.2 !important; }
   .dashboard-welcome p { font-size: 0.9rem !important; margin: 0 !important; line-height: 1.2 !important; }
 
-  /* 🦀 螃蟹往上挪，紧贴右上角 */
+  /* 🦀 螃蟹移到绿色框（右下角） */
   .dashboard-stats {
     display: block !important;
     position: absolute !important;
-    top: -10px !important; /* 负值让它往上贴 */
-    right: 5px !important;
-    width: 100px !important; height: 100px !important;
-    min-width: 100px !important; max-width: 100px !important;
+    top: 160px !important; /* 💥 挪到时钟的右下方 */
+    right: 10px !important; /* 💥 靠右侧边缘 */
+    width: 100px !important; 
+    height: 100px !important;
+    min-width: 100px !important; 
+    max-width: 100px !important;
     background-image: url('https://shirasu224.github.io/menav/pics/the-spycrab2.png') !important;
     background-size: contain !important; 
     background-repeat: no-repeat !important;
     background-position: center right !important;
-    margin: 0 !important; z-index: 10 !important;
+    margin: 0 !important; 
+    z-index: 10 !important;
   }
   .dashboard-stats * { display: none !important; visibility: hidden !important; }
 
-  /* ⏰ 时钟面板：用 padding-top 强行撑开 120px 的绝对空间 */
+  /* ⏰ 时钟面板 */
   .dashboard-panel {
     width: 100% !important;
     margin: 0 !important;
     padding: 0 !important;
-    padding-top: 110px !important; /* ★ 终极必杀：padding 绝对不会被 flex 吃掉 */
+    padding-top: 100px !important; /* 撑开空间 */
   }
   
   .dashboard-clock-card {
