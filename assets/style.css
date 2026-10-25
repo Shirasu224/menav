@@ -41,48 +41,36 @@ html, body {
 html.light-theme .dashboard-welcome h1 { filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.4)) !important; }
 html.light-theme .dashboard-welcome p { text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6) !important; }
 
-
-/* ================== 2. 渐变半透明卡片 + 丝滑悬浮 ================== */
-/* 彻底清空大框和内部容器的干扰底色 */
+/* ================== 2. 渐变半透明卡片 ================== */
 section.category, .category-header, .category-content, .sites-grid {
   background: transparent !important;
   box-shadow: none !important;
   border: none !important;
 }
-
-/* 干掉所有嵌套子元素的背景，防止它偷偷加白底 */
 .site-card *, .sites-grid a * {
   background: transparent !important;
   background-image: none !important;
   border: none !important;
 }
 
-/* --- 浅色模式 --- */
+/* 浅色模式 */
 html.light-theme section.category {
   background-color: rgba(255, 255, 255, 0.25) !important; 
   border: 1px solid rgba(255, 255, 255, 0.4) !important;
 }
-
-/* 浅色小框：带一点点透明白色的 135度 渐变 */
-html.light-theme .site-card,
-html.light-theme .sites-grid a {
+html.light-theme .site-card, html.light-theme .sites-grid a {
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.3) 100%) !important; 
   border: 1px solid rgba(255, 255, 255, 0.6) !important;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03) !important; 
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important; 
 }
-
-/* 浅色悬浮：渐变变亮、上浮、阴影加深 */
-html.light-theme .site-card:hover,
-html.light-theme .sites-grid a:hover {
+html.light-theme .site-card:hover, html.light-theme .sites-grid a:hover {
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.7) 100%) !important; 
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1) !important;
   transform: translateY(-3px) !important; 
   border-color: rgba(255, 255, 255, 1) !important;
 }
-
-html.light-theme .search-box,
-html.light-theme .nav-item {
+html.light-theme .search-box, html.light-theme .nav-item {
   background-color: rgba(255, 255, 255, 0.4) !important;
   border: 1px solid rgba(255, 255, 255, 0.5) !important;
 }
@@ -91,33 +79,24 @@ html.light-theme .dashboard-clock-card {
   border: 1px solid rgba(255, 255, 255, 0.4) !important;
 }
 
-
-/* --- 深色模式 --- */
+/* 深色模式 */
 html[data-theme-mode="dark"]:not(.light-theme) section.category {
   background-color: rgba(30, 35, 50, 0.25) !important; 
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
-
-/* 深色小框：带一点点深蓝灰色的 135度 渐变 */
-html[data-theme-mode="dark"]:not(.light-theme) .site-card,
-html[data-theme-mode="dark"]:not(.light-theme) .sites-grid a {
+html[data-theme-mode="dark"]:not(.light-theme) .site-card, html[data-theme-mode="dark"]:not(.light-theme) .sites-grid a {
   background: linear-gradient(135deg, rgba(65, 75, 100, 0.6) 0%, rgba(30, 35, 50, 0.3) 100%) !important; 
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
 }
-
-/* 深色悬浮：渐变变亮、上浮、阴影加深 */
-html[data-theme-mode="dark"]:not(.light-theme) .site-card:hover,
-html[data-theme-mode="dark"]:not(.light-theme) .sites-grid a:hover {
+html[data-theme-mode="dark"]:not(.light-theme) .site-card:hover, html[data-theme-mode="dark"]:not(.light-theme) .sites-grid a:hover {
   background: linear-gradient(135deg, rgba(90, 100, 130, 0.8) 0%, rgba(50, 55, 75, 0.5) 100%) !important; 
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4) !important;
   transform: translateY(-3px) !important;
   border-color: rgba(255, 255, 255, 0.25) !important;
 }
-
-html[data-theme-mode="dark"]:not(.light-theme) .search-box,
-html[data-theme-mode="dark"]:not(.light-theme) .nav-item {
+html[data-theme-mode="dark"]:not(.light-theme) .search-box, html[data-theme-mode="dark"]:not(.light-theme) .nav-item {
   background-color: rgba(30, 35, 50, 0.4) !important;
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
@@ -125,29 +104,21 @@ html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card {
   background: rgba(70, 83, 124, 0.25) !important; 
   border: 1px solid rgba(255, 255, 255, 0.15) !important;
 }
-
 input#search { background-color: transparent !important; }
 
 
 /* ================== 3. PC 端排版 (> 1024px) ================== */
 @media (min-width: 1025px) {
-  .dashboard-grid {
-    position: relative !important;
-  }
+  .dashboard-grid { position: relative !important; }
   .dashboard-stats {
-    width: 320px !important; 
-    height: 260px !important; 
-    margin: 0 auto !important;
+    width: 320px !important; height: 260px !important; margin: 0 auto !important;
     background-image: url('https://shirasu224.github.io/menav/pics/the-spycrab2.png') !important;
-    background-size: contain !important; 
-    background-repeat: no-repeat !important;
-    background-position: center !important;
-    background-color: transparent !important;
-    border: none !important;
+    background-size: contain !important; background-repeat: no-repeat !important;
+    background-position: center !important; background-color: transparent !important; border: none !important;
   }
 }
 
-/* ================== 4. 手机端专属排版 (绝对锁死位置) ================== */
+/* ================== 4. 手机端专属排版 (暴力塞入占位空间) ================== */
 @media (max-width: 1024px) {
   section.category::before, section.category::after { display: none !important; }
 
@@ -177,65 +148,50 @@ input#search { background-color: transparent !important; }
   .dashboard-welcome h1 { font-size: 1.6rem !important; margin: 0 !important; line-height: 1.2 !important; }
   .dashboard-welcome p { font-size: 0.9rem !important; margin: 0 !important; line-height: 1.2 !important; }
 
+  /* 🦀 螃蟹往上挪，紧贴右上角 */
   .dashboard-stats {
     display: block !important;
     position: absolute !important;
-    top: 15px !important; 
+    top: -10px !important; /* 负值让它往上贴 */
     right: 5px !important;
-    width: 100px !important;
-    height: 100px !important;
-    min-width: 100px !important; 
-    max-width: 100px !important;
+    width: 100px !important; height: 100px !important;
+    min-width: 100px !important; max-width: 100px !important;
     background-image: url('https://shirasu224.github.io/menav/pics/the-spycrab2.png') !important;
     background-size: contain !important; 
     background-repeat: no-repeat !important;
     background-position: center right !important;
-    margin: 0 !important;
-    z-index: 10 !important;
+    margin: 0 !important; z-index: 10 !important;
   }
   .dashboard-stats * { display: none !important; visibility: hidden !important; }
 
+  /* ⏰ 时钟面板：用 padding-top 强行撑开 120px 的绝对空间 */
   .dashboard-panel {
     width: 100% !important;
     margin: 0 !important;
     padding: 0 !important;
-    margin-top: 90px !important; 
+    padding-top: 110px !important; /* ★ 终极必杀：padding 绝对不会被 flex 吃掉 */
   }
   
   .dashboard-clock-card {
     display: flex !important;
     flex-direction: column !important;
-    width: 100% !important; 
-    height: auto !important;
-    padding: 20px !important; 
-    margin: 0 !important;
-    box-sizing: border-box !important;
-    border-radius: 16px !important;
+    width: 100% !important; height: auto !important;
+    padding: 20px !important; margin: 0 !important;
+    box-sizing: border-box !important; border-radius: 16px !important;
   }
 
-  .dashboard-clock-card > div:first-child,
-  .dashboard-clock-card [class*="header"] {
-    display: flex !important;
-    flex-direction: row !important;
-    justify-content: space-between !important;
-    align-items: center !important;
-    width: 100% !important;
+  .dashboard-clock-card > div:first-child, .dashboard-clock-card [class*="header"] {
+    display: flex !important; flex-direction: row !important;
+    justify-content: space-between !important; align-items: center !important; width: 100% !important;
   }
 
-  .dashboard-clock-card .clock-header,
-  .dashboard-clock-card .clock-date {
-    font-size: 14px !important;
-    line-height: 1.5 !important;
-    white-space: nowrap !important;
+  .dashboard-clock-card .clock-header, .dashboard-clock-card .clock-date {
+    font-size: 14px !important; line-height: 1.5 !important; white-space: nowrap !important;
   }
   
-  .dashboard-clock-card .clock-main,
-  .dashboard-clock-card [class*="clock-time"] {
-    font-size: 32px !important; 
-    line-height: 1.2 !important;
-    text-align: right !important;
-    display: block !important;
-    width: 100% !important;
-    margin-top: 10px !important;
+  .dashboard-clock-card .clock-main, .dashboard-clock-card [class*="clock-time"] {
+    font-size: 32px !important; line-height: 1.2 !important;
+    text-align: right !important; display: block !important;
+    width: 100% !important; margin-top: 10px !important;
   }
 }
