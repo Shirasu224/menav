@@ -8,22 +8,18 @@
 /* 引入京华老宋体 CDN */
 @import url('https://fontsapi.zeoseven.com/309/main/result.css');
 
-/* 2. 应用到全站文字（同时保护 FontAwesome 图标不受影响） */
-body, h1, h2, h3, h4, h5, h6, p, span, a, div, input, textarea {
-  font-family: "KingHwaOldSong", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
-}
-
-/* 3. 确保 FontAwesome 图标不变形 */
-.fas, .far, .fab, .fa, [class^="fa-"], [class*=" fa-"] {
-  font-family: "Font Awesome 6 Free", "Font Awesome 6 Brands" !important;
-}
 /* ================== 0. 字体防缩放 & 全局字体统一 ================== */
 html, body {
   -webkit-text-size-adjust: 100% !important;
   text-size-adjust: 100% !important;
   
-  /* 💥 统一全局字体，消除中文自带的错位 */
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "PingFang SC", "Microsoft YaHei", sans-serif !important;
+  /* 💥 修复冲突：全局直接使用京华老宋体 */
+  font-family: "KingHwaOldSong", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "PingFang SC", "Microsoft YaHei", sans-serif !important;
+}
+
+/* 确保 FontAwesome 图标不变形 */
+.fas, .far, .fab, .fa, [class^="fa-"], [class*=" fa-"] {
+  font-family: "Font Awesome 6 Free", "Font Awesome 6 Brands" !important;
 }
 
 /* ================== 1. 标题排版与三色渐变 ================== */
@@ -37,7 +33,7 @@ html, body {
   width: 100% !important;
 }
 
-/* --- 公共基础设置 --- */
+/* --- 主标题基础设置 --- */
 .welcome-title,
 .dashboard-welcome h1 {
   font-weight: 800 !important;
@@ -46,9 +42,10 @@ html, body {
   line-height: 1.2 !important;
   text-align: left !important;
   letter-spacing: 2px !important; 
-  white-space: nowrap !important; /* 💥 强制不换行，字再多也在一行 */
+  white-space: nowrap !important; 
 }
 
+/* --- 副标题基础设置（统一暗淡白 + 阴影发光） --- */
 .welcome-subtitle,
 .dashboard-welcome p {
   font-weight: 700 !important;
@@ -57,11 +54,20 @@ html, body {
   line-height: 1.2 !important;
   text-align: right !important; 
   letter-spacing: 1px !important;
-  align-self: flex-end !important; /* 💥 强制靠右对齐（绿框位置） */
+  align-self: flex-end !important; 
   margin-right: 30px !important;   
+
+  /* 💥 修改：统一暗淡的白色 (0.6 控制透明度，越小越透) */
+  color: rgba(255, 255, 255, 0.6) !important; 
+  
+  /* 💥 修改：多层阴影+发光，让它在复杂背景上清晰可见 */
+  text-shadow: 
+    0px 2px 4px rgba(0, 0, 0, 0.9),      /* 底部阴影，托住文字 */
+    0px 0px 8px rgba(255, 255, 255, 0.5), /* 内层白光 */
+    0px 0px 15px rgba(255, 255, 255, 0.2) !important; /* 外层光晕 */
 }
 
-/* --- 浅色模式（白天）：蓝-白-粉 三色渐变 --- */
+/* --- 浅色模式（白天）：主标题渐变 --- */
 html.light-theme .welcome-title,
 html.light-theme .dashboard-welcome h1 {
   background: linear-gradient(90deg, #fdafaf, #c2ccff, #e3ffe0) !important;
@@ -69,16 +75,10 @@ html.light-theme .dashboard-welcome h1 {
   background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
   color: transparent !important;
-  /* 柔和的白色微光 */
   filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.6)) !important; 
 }
-html.light-theme .welcome-subtitle,
-html.light-theme .dashboard-welcome p {
-  color: #ffc2c2 !important;
-  text-shadow: 0 0 6px rgba(255, 194, 194, 0.4) !important;
-}
 
-/* --- 深色模式（黑夜）：深蓝-白-红 三色渐变 --- */
+/* --- 深色模式（黑夜）：主标题渐变 --- */
 html[data-theme-mode="dark"]:not(.light-theme) .welcome-title,
 html[data-theme-mode="dark"]:not(.light-theme) .dashboard-welcome h1 {
   background: linear-gradient(90deg, #704474, #5f6ba5, #353e69) !important;
@@ -86,14 +86,10 @@ html[data-theme-mode="dark"]:not(.light-theme) .dashboard-welcome h1 {
   background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
   color: transparent !important;
-  /* 柔和的不伤眼微光 */
   filter: drop-shadow(0 0 8px rgba(53, 135, 177, 0.4)) drop-shadow(0 0 15px rgba(232, 125, 125, 0.2)) !important; 
 }
-html[data-theme-mode="dark"]:not(.light-theme) .welcome-subtitle,
-html[data-theme-mode="dark"]:not(.light-theme) .dashboard-welcome p {
-  color: #e87d7d !important;
-  text-shadow: 0 0 8px rgba(232, 125, 125, 0.3) !important;
-}
+
+
 /* ================== 2. 渐变半透明卡片 ================== */
 section.category, .category-header, .category-content, .sites-grid {
   background: transparent !important;
@@ -160,23 +156,20 @@ html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card {
 input#search { background-color: transparent !important; }
 
 
-/* ================== 2.5 侧边栏专属美化 (自己在这里调透明度) ================== */
-
-/* 👇 侧边栏整体背景：修改最后一个数字 (0.8 代表 80% 的不透明度) */
+/* ================== 2.5 侧边栏专属美化 ================== */
 html.light-theme .sidebar {
   background-color: rgba(245, 245, 245, 0.8) !important; 
   border-right: 1px solid rgba(255, 255, 255, 0.5) !important;
   backdrop-filter: blur(10px) !important;
 }
 html[data-theme-mode="dark"]:not(.light-theme) .sidebar {
-  background-color: rgba(20, 25, 35, 0.85) !important; /* 👈 改这里 */
+  background-color: rgba(20, 25, 35, 0.85) !important; 
   border-right: 1px solid rgba(255, 255, 255, 0.05) !important;
   backdrop-filter: blur(10px) !important;
 }
 
-/* 👇 侧边栏按钮：调按钮的透明度 */
 html.light-theme .nav-item {
-  background: rgba(255, 255, 255, 0.2) !important; /* 👈 改这里 */
+  background: rgba(255, 255, 255, 0.2) !important; 
   border: none !important;
   box-shadow: none !important; 
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important; 
@@ -189,7 +182,7 @@ html.light-theme .nav-item:hover, html.light-theme .nav-item.active {
   transform: translateY(-2px) !important; 
 }
 html[data-theme-mode="dark"]:not(.light-theme) .nav-item {
-  background: rgba(255, 255, 255, 0.05) !important; /* 👈 改这里 */
+  background: rgba(255, 255, 255, 0.05) !important; 
   border: none !important;
   box-shadow: none !important;
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
@@ -203,7 +196,6 @@ html[data-theme-mode="dark"]:not(.light-theme) .nav-item.active {
   transform: translateY(-2px) !important;
 }
 
-/* 子菜单透明化 */
 .sidebar-submenu-panel, .submenu, .submenu-header, .submenu-item {
   background: transparent !important; 
   border: none !important;
@@ -245,7 +237,8 @@ html[data-theme-mode="dark"]:not(.light-theme) .nav-item.active {
     display: flex !important; flex-direction: column !important; align-items: center !important;
     width: 100% !important; padding: 0 15px 40px 15px !important; box-sizing: border-box !important; position: relative !important;
   }
-    .dashboard-intro {
+  
+  .dashboard-intro {
     width: 100% !important; 
     display: flex !important; 
     flex-direction: column !important; 
@@ -254,11 +247,10 @@ html[data-theme-mode="dark"]:not(.light-theme) .nav-item.active {
     padding-right: 90px !important; 
     box-sizing: border-box !important; 
     margin-bottom: 0 !important; 
-    padding-bottom: 20px !important; /* 💥 新增：强行把下方的时钟栏推远一点 */
+    padding-bottom: 20px !important; 
     z-index: 2 !important;
   }
 
-  /* 手机端副标题的右边距稍微小一点，避免离屏幕边缘太近 */
   .dashboard-welcome p {
     margin-right: 10px !important; 
   }
