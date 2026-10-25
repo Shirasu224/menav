@@ -202,7 +202,7 @@ html[data-theme-mode="dark"]:not(.light-theme) .nav-item.active {
   }
 
   .dashboard-welcome { display: flex !important; flex-direction: column !important; gap: 5px !important; }
-  .dashboard-welcome h1 { font-size: 1.8rem !important; margin: 0 !important; line-height: 1.5 !important; }
+  .dashboard-welcome h1 { font-size: 1.6rem !important; margin: 0 !important; line-height: 1.2 !important; }
   .dashboard-welcome p { font-size: 0.9rem !important; margin: 0 !important; line-height: 1.2 !important; }
 
   /* 🦀 螃蟹卡在绿框内 (使用你的坐标，并更靠右) */
