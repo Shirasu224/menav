@@ -41,7 +41,7 @@ html, body {
 html.light-theme .dashboard-welcome h1 { filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.4)) !important; }
 html.light-theme .dashboard-welcome p { text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6) !important; }
 
-/* ================== 2. 透明化 (小框再透一点) ================== */
+/* ================== 2. 透明化 (极限透亮版) ================== */
 section.category,
 section.category > div,
 .category-content,
@@ -53,14 +53,15 @@ section.category > div,
 
 /* 浅色模式 */
 html.light-theme section.category {
-  background-color: rgba(255, 255, 255, 0.4) !important; 
-  border: 1px solid rgba(255, 255, 255, 0.5) !important;
+  background-color: rgba(255, 255, 255, 0.3) !important; 
+  border: 1px solid rgba(255, 255, 255, 0.4) !important;
 }
-/* 小框透明度降到 0.35 */
+/* 💥 小框直接降到 0.15，并加上磨砂质感 */
 html.light-theme .site-card,
 html.light-theme .sites-grid a {
-  background-color: rgba(255, 255, 255, 0.35) !important; 
-  border: 1px solid rgba(255, 255, 255, 0.6) !important;
+  background-color: rgba(255, 255, 255, 0.15) !important; 
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  backdrop-filter: blur(4px) !important;
   box-shadow: none !important;
 }
 html.light-theme .site-card-icon,
@@ -71,24 +72,25 @@ html.light-theme .site-card-content {
 }
 html.light-theme .search-box,
 html.light-theme .nav-item {
-  background-color: rgba(255, 255, 255, 0.5) !important;
-  border: 1px solid rgba(255, 255, 255, 0.6) !important;
+  background-color: rgba(255, 255, 255, 0.4) !important;
+  border: 1px solid rgba(255, 255, 255, 0.5) !important;
 }
 html.light-theme .dashboard-clock-card {
-  background: rgba(255, 255, 255, 0.3) !important;
-  border: 1px solid rgba(255, 255, 255, 0.5) !important;
+  background: rgba(255, 255, 255, 0.15) !important;
+  border: 1px solid rgba(255, 255, 255, 0.4) !important;
 }
 
 /* 深色模式 */
 html[data-theme-mode="dark"]:not(.light-theme) section.category {
-  background-color: rgba(30, 35, 50, 0.4) !important; 
+  background-color: rgba(30, 35, 50, 0.3) !important; 
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
-/* 小框透明度降到 0.3 */
+/* 💥 小框直接降到 0.15 */
 html[data-theme-mode="dark"]:not(.light-theme) .site-card,
 html[data-theme-mode="dark"]:not(.light-theme) .sites-grid a {
-  background-color: rgba(45, 50, 65, 0.3) !important; 
+  background-color: rgba(45, 50, 65, 0.15) !important; 
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(4px) !important;
   box-shadow: none !important;
 }
 html[data-theme-mode="dark"]:not(.light-theme) .site-card-icon,
@@ -99,11 +101,11 @@ html[data-theme-mode="dark"]:not(.light-theme) .site-card-content {
 }
 html[data-theme-mode="dark"]:not(.light-theme) .search-box,
 html[data-theme-mode="dark"]:not(.light-theme) .nav-item {
-  background-color: rgba(30, 35, 50, 0.5) !important;
+  background-color: rgba(30, 35, 50, 0.4) !important;
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
 html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card {
-  background: rgba(70, 83, 124, 0.3) !important; 
+  background: rgba(70, 83, 124, 0.15) !important; 
   border: 1px solid rgba(255, 255, 255, 0.15) !important;
 }
 
@@ -125,7 +127,7 @@ input#search { background-color: transparent !important; }
   }
 }
 
-/* ================== 4. 手机端专属排版 (物理下推) ================== */
+/* ================== 4. 手机端专属排版 (强迫症物理下推) ================== */
 @media (max-width: 1024px) {
   section.category::before, section.category::after { display: none !important; }
 
@@ -137,7 +139,6 @@ input#search { background-color: transparent !important; }
     padding: 0 15px 40px 15px !important;
     box-sizing: border-box !important;
     position: relative !important;
-    gap: 0 !important; /* 清除原生 gap，用 margin 手动控 */
   }
 
   .dashboard-intro {
@@ -157,11 +158,10 @@ input#search { background-color: transparent !important; }
   .dashboard-welcome h1 { font-size: 1.6rem !important; margin: 0 !important; line-height: 1.2 !important; }
   .dashboard-welcome p { font-size: 0.9rem !important; margin: 0 !important; line-height: 1.2 !important; }
 
-  /* 🦀 螃蟹位置调整：往下移动一点，不要贴着最上面 */
   .dashboard-stats {
     display: block !important;
     position: absolute !important;
-    top: 10px !important; /* 从 -15px 改到 10px，往下挪 */
+    top: 10px !important; 
     right: 5px !important;
     width: 100px !important;
     height: 100px !important;
@@ -176,11 +176,11 @@ input#search { background-color: transparent !important; }
   }
   .dashboard-stats * { display: none !important; visibility: hidden !important; }
 
-  /* ⏰ 时钟卡片：用 transform 强行暴力下推 40px */
+  /* 💥 终极魔法：不再指望父容器，直接给时钟卡片本身加巨大的外边距 */
   .dashboard-panel {
     width: 100% !important;
-    margin-top: 20px !important; 
-    transform: translateY(40px) !important; /* ★ 物理下推魔法 */
+    margin: 0 !important;
+    padding: 0 !important;
   }
   
   .dashboard-clock-card {
@@ -189,7 +189,7 @@ input#search { background-color: transparent !important; }
     width: 100% !important; 
     height: auto !important;
     padding: 20px !important; 
-    margin: 0 !important;
+    margin-top: 60px !important; /* ★ 硬核下推 60px */
     box-sizing: border-box !important;
     border-radius: 16px !important;
   }
