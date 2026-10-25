@@ -214,6 +214,51 @@ const fontAwesomePreload = `<link rel="preload" href="${fontAwesomeCssUrl}" as="
         .dashboard-clock-card .clock-main { font-size: 1.8rem !important; text-align: right !important; line-height: 1.1 !important; }
         .dashboard-clock-card .clock-header, .dashboard-clock-card .clock-date { font-size: 0.8rem !important; white-space: nowrap !important; }
       }
+
+      /* ================== 急救补丁：斩草除根 ================== */
+      
+      /* 强行把所有可能是底色的变量直接改掉（MeNav 常用套路） */
+      :root, html, body {
+        --bg-color: transparent !important;
+        --background-color: transparent !important;
+        --card-bg: rgba(255, 255, 255, 0.4) !important;
+        --card-background: rgba(255, 255, 255, 0.4) !important;
+        --panel-bg: rgba(255, 255, 255, 0.4) !important;
+        background-color: transparent !important;
+      }
+
+      /* 把所有带颜色的框框全部强制归零 */
+      div, section, main, nav, aside, header, footer {
+        background-color: transparent !important;
+        box-shadow: none !important;
+      }
+
+      /* 然后再把特定的卡片和框框画上毛玻璃半透明底色 */
+      .search-box,
+      .dashboard-clock-card,
+      .dashboard-panel,
+      .sites-grid > a,
+      .sites-grid > div,
+      .nav-item,
+      section.category {
+        background-color: rgba(255, 255, 255, 0.35) !important; /* 白天模式 */
+        backdrop-filter: blur(12px) !important;
+        -webkit-backdrop-filter: blur(12px) !important;
+        border: 1px solid rgba(255, 255, 255, 0.4) !important;
+        box-shadow: none !important;
+      }
+
+      /* 黑夜模式适配 */
+      html[data-theme-mode="dark"]:not(.light-theme) .search-box,
+      html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card,
+      html[data-theme-mode="dark"]:not(.light-theme) .dashboard-panel,
+      html[data-theme-mode="dark"]:not(.light-theme) .sites-grid > a,
+      html[data-theme-mode="dark"]:not(.light-theme) .sites-grid > div,
+      html[data-theme-mode="dark"]:not(.light-theme) .nav-item,
+      html[data-theme-mode="dark"]:not(.light-theme) section.category {
+        background-color: rgba(30, 35, 50, 0.5) !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+      }
     </style>
   </head>
   <body class="loading">
