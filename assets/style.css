@@ -26,7 +26,6 @@
   -webkit-text-fill-color: transparent !important;
   color: transparent !important;
   font-weight: 800 !important;
-  /* 夜间模式：柔和发光 */
   filter: drop-shadow(0 0 6px rgba(184, 220, 255, 0.25)) !important;
 }
 
@@ -39,10 +38,10 @@
 
 /* 浅色模式下调整阴影，防止字发糊 */
 html.light-theme .dashboard-welcome h1 {
-  filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.4)) !important; /* 改成深色阴影 */
+  filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.4)) !important; 
 }
 html.light-theme .dashboard-welcome p {
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6) !important; /* 深灰黑色阴影，绝对清晰 */
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6) !important; 
 }
 
 /* ================== 2. 全部卡片/框框透明化 ================== */
@@ -112,6 +111,17 @@ input#search { background-color: transparent !important; }
 
 /* ================== 4. 手机端专属排版 (<= 1024px) ================== */
 @media (max-width: 1024px) {
+  /* 💥 暴力清除所有分类卡片上的伪元素和多余背景，消灭分身 */
+  section.category::before,
+  section.category::after {
+    display: none !important;
+    content: none !important;
+    background: none !important;
+  }
+  section.category {
+    background-image: none !important;
+  }
+
   .dashboard-grid {
     display: flex !important;
     flex-direction: column !important;
@@ -154,7 +164,7 @@ input#search { background-color: transparent !important; }
     line-height: 1.2 !important;
   }
 
-  /* ★ 解决螃蟹分身术：干掉所有子元素，并且隐藏溢出 */
+  /* ★ 锁定右上角唯一的螃蟹 */
   .dashboard-stats {
     display: block !important;
     position: absolute !important;
@@ -162,6 +172,8 @@ input#search { background-color: transparent !important; }
     right: 10px !important;
     width: 60px !important;
     height: 60px !important;
+    min-width: 60px !important;  /* 三重锁定尺寸 */
+    min-height: 60px !important;
     max-width: 60px !important;
     max-height: 60px !important;
     background-image: url('https://shirasu224.github.io/menav/pics/the-spycrab2.png') !important;
@@ -170,10 +182,10 @@ input#search { background-color: transparent !important; }
     background-position: top right !important;
     margin: 0 !important;
     z-index: 10 !important;
-    overflow: hidden !important; /* 隐藏超出的背景 */
+    overflow: hidden !important; 
   }
   
-  /* 💥 这一句是关键：彻底让内部所有元素消失，防止它们撑大容器露出背景 */
+  /* 确保内部没有元素能撑大它 */
   .dashboard-stats * {
     display: none !important;
     visibility: hidden !important;
