@@ -13,10 +13,3 @@ navigation:
   - name: 书签
     icon: fas fa-book
     id: articles
-  - name: 参考
-    icon: fas fa-bookmark
-    id: bookmarks
-  - name: 作品集
-    icon: fas fa-bookmark
-    id: bookmarks
-    
