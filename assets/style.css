@@ -17,28 +17,35 @@
 @import './styles/components.css';
 @import './styles/utilities.css';
 
-/* ================== 1. 渐变发光字体 ================== */
-.dashboard-welcome h1,
-.dashboard-welcome p {
-  /* 渐变颜色：#b8dcff 浅蓝 -> #ffc2c2 浅粉 */
-  background: linear-gradient(90deg, #8ac4ff, #ffe5e5) !important;
+/* ================== 1. 渐变字与颜色区分 ================== */
+/* 标题：蓝粉渐变 */
+.dashboard-welcome h1 {
+  background: linear-gradient(90deg, #b8dcff, #ffc2c2) !important;
   -webkit-background-clip: text !important;
   background-clip: text !important;
-  -webkit-text-fill-color: transparent !important; /* 让字体内部透明，透出渐变 */
+  -webkit-text-fill-color: transparent !important;
   color: transparent !important;
   font-weight: 800 !important;
-  /* 发光阴影 */
   filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.6)) !important;
 }
 
-/* 浅色模式下的文字发光改成白色，保证在亮色背景也能看清 */
-html.light-theme .dashboard-welcome h1,
-html.light-theme .dashboard-welcome p {
+/* 副标题：纯粉色，加发光保证清晰 */
+.dashboard-welcome p {
+  color: #ffc2c2 !important;
+  font-weight: 700 !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8), 0 0 10px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* 浅色模式下的标题与副标题阴影调整 */
+html.light-theme .dashboard-welcome h1 {
   filter: drop-shadow(0px 2px 4px rgba(255, 255, 255, 1)) !important;
+}
+html.light-theme .dashboard-welcome p {
+  text-shadow: 0 2px 4px rgba(255, 255, 255, 1), 0 0 10px rgba(255, 255, 255, 0.8) !important;
 }
 
 /* ================== 2. 全部卡片/框框透明化 ================== */
-/* 深色模式 */
+/* （这里保持不变，你原来的代码就行） */
 html[data-theme-mode="dark"]:not(.light-theme) section.category {
   background-color: rgba(30, 35, 50, 0.4) !important;
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
@@ -63,7 +70,6 @@ html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card {
 }
 html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card * { color: #ffffff !important; }
 
-/* 浅色模式 */
 html.light-theme section.category {
   background-color: rgba(255, 255, 255, 0.3) !important;
   border: 1px solid rgba(255, 255, 255, 0.5) !important;
@@ -89,7 +95,7 @@ html.light-theme .dashboard-clock-card {
 html.light-theme .dashboard-clock-card * { color: #222222 !important; }
 input#search { background-color: transparent !important; }
 
-/* ================== 3. 手机端专属排版 (强制覆盖) ================== */
+/* ================== 3. 手机端专属排版 (彻底重置) ================== */
 @media (max-width: 768px) {
   .dashboard-grid {
     display: flex !important;
@@ -98,75 +104,86 @@ input#search { background-color: transparent !important; }
     width: 100% !important;
     padding: 0 10px 30px 10px !important;
     box-sizing: border-box !important;
-    gap: 15px !important;
+    gap: 20px !important; /* 拉开间距 */
+    position: relative !important;
   }
 
+  /* 标题区域：变大，并且留出右侧给螃蟹 */
   .dashboard-intro {
     width: 100% !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: flex-start !important;
     text-align: left !important;
-    padding-right: 70px !important; /* 给螃蟹留位置 */
+    padding-right: 80px !important; /* 给螃蟹留位置 */
     box-sizing: border-box !important;
-    margin-bottom: -5px !important;
+    margin-bottom: 5px !important;
   }
 
   .dashboard-welcome {
     display: flex !important;
     flex-direction: column !important;
-    gap: 0px !important;
+    gap: 5px !important;
   }
+  
   .dashboard-welcome h1 {
-    font-size: 1.4rem !important;
+    font-size: 1.8rem !important; /* 变大 */
     margin: 0 !important;
     padding: 0 !important;
     line-height: 1.2 !important;
   }
+  
   .dashboard-welcome p {
-    font-size: 0.85rem !important;
+    font-size: 1rem !important; /* 变大 */
     margin: 0 !important;
     padding: 0 !important;
     line-height: 1.2 !important;
   }
 
-  /* ★ 彻底锁死手机端螃蟹的尺寸，防止它变成庞然大物 */
+  /* ★ 螃蟹锁死在右上角 (橙色框) */
   .dashboard-stats {
     display: block !important;
     position: absolute !important;
-    top: 0px !important;
+    top: -10px !important;
     right: 10px !important;
-    width: 70px !important;
-    height: 70px !important;
-    max-width: 70px !important;  /* 双重保险 */
-    max-height: 70px !important; /* 双重保险 */
+    width: 80px !important;
+    height: 80px !important;
+    max-width: 80px !important;
+    max-height: 80px !important;
     background-size: contain !important;
     background-position: top right !important;
     margin: 0 !important;
     z-index: 10 !important;
   }
 
+  /* ★ 时钟卡片撑满 (绿色框) */
+  .dashboard-panel {
+    width: 100% !important; /* 确保父容器全宽 */
+    margin: 0 !important;
+  }
+  
   .dashboard-clock-card {
     display: flex !important;
     flex-direction: column !important;
     width: 100% !important; 
     max-width: 100% !important;
     height: auto !important;
-    padding: 12px 15px !important;
+    padding: 15px 20px !important; /* 增加内边距，让字不挤 */
     margin: 0 !important;
     box-sizing: border-box !important;
     position: relative !important;
   }
 
-  /* ★ 强制覆盖手机端时钟字体大小 */
+  /* 时钟字体大小 */
   .dashboard-clock-card .clock-main {
-    font-size: 1.6rem !important; 
+    font-size: 1.8rem !important; 
     text-align: right !important;
     line-height: 1.1 !important;
+    margin-top: 5px !important;
   }
   .dashboard-clock-card .clock-header,
   .dashboard-clock-card .clock-date {
-    font-size: 0.75rem !important;
+    font-size: 0.85rem !important;
     white-space: nowrap !important;
   }
 }
