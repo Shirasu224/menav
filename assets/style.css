@@ -23,12 +23,14 @@ html, body {
   text-size-adjust: 100% !important;
 }
 
-/* ================== 1. 渐变字与完美对齐 ================== */
+/* ================== 1. 标题强制左对齐与渐变字 ================== */
 .dashboard-welcome {
   display: flex !important;
   flex-direction: column !important;
   align-items: flex-start !important; /* 强制左对齐 */
   text-align: left !important;
+  padding-left: 0 !important;
+  margin-left: 0 !important;
 }
 .dashboard-welcome h1 {
   background: linear-gradient(90deg, #b8dcff, #ffc2c2) !important;
@@ -38,14 +40,18 @@ html, body {
   color: transparent !important;
   font-weight: 800 !important;
   margin: 0 !important; 
+  padding: 0 !important;
   line-height: 1.2 !important;
+  text-align: left !important; /* 强制文字左对齐 */
   filter: drop-shadow(0 0 6px rgba(184, 220, 255, 0.25)) !important;
 }
 .dashboard-welcome p {
   color: #ffc2c2 !important;
   font-weight: 700 !important;
-  margin: 4px 0 0 0 !important; /* 与标题保持微小间距 */
+  margin: 4px 0 0 0 !important; 
+  padding: 0 !important;
   line-height: 1.2 !important;
+  text-align: left !important; /* 强制文字左对齐 */
   text-shadow: 0 0 6px rgba(255, 194, 194, 0.25) !important;
 }
 html.light-theme .dashboard-welcome h1 { filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.4)) !important; }
@@ -117,7 +123,7 @@ html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card {
 input#search { background-color: transparent !important; }
 
 
-/* ================== 2.5 侧边栏专属美化 (圆角 + 极透按钮) ================== */
+/* ================== 2.5 侧边栏专属美化 (彻底清理补丁) ================== */
 /* 侧边栏整体背景 */
 html.light-theme .sidebar {
   background-color: rgba(245, 245, 245, 0.8) !important; 
@@ -130,7 +136,7 @@ html[data-theme-mode="dark"]:not(.light-theme) .sidebar {
   backdrop-filter: blur(10px) !important;
 }
 
-/* 侧边栏导航按钮：透明度调低，去掉边框，更融入背景 */
+/* 侧边栏主按钮 */
 html.light-theme .nav-item {
   background: rgba(255, 255, 255, 0.2) !important; 
   border: none !important;
@@ -144,7 +150,6 @@ html.light-theme .nav-item:hover, html.light-theme .nav-item.active {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;
   transform: translateY(-2px) !important; 
 }
-
 html[data-theme-mode="dark"]:not(.light-theme) .nav-item {
   background: rgba(255, 255, 255, 0.05) !important; 
   border: none !important;
@@ -160,15 +165,38 @@ html[data-theme-mode="dark"]:not(.light-theme) .nav-item.active {
   transform: translateY(-2px) !important;
 }
 
-/* 💥 解决你圈出来的黑方块：子菜单容器和底部的圆角 */
+/* 💥 解决深色补丁：将子菜单大框、标题和子项全部去底色并加圆角 */
 .sidebar-submenu-panel, .submenu {
   border-radius: 12px !important;
-  margin: 5px 10px !important; /* 给它留出左右空间 */
-  background: rgba(255, 255, 255, 0.1) !important; /* 稍微提亮一点点 */
+  margin: 5px 10px !important; 
+  background: rgba(255, 255, 255, 0.1) !important; 
+  overflow: hidden !important; /* 强制切掉直角 */
 }
 html[data-theme-mode="dark"]:not(.light-theme) .sidebar-submenu-panel, 
 html[data-theme-mode="dark"]:not(.light-theme) .submenu {
   background: rgba(0, 0, 0, 0.2) !important; 
+}
+
+/* 干掉那个突兀的深色块（子菜单的标题） */
+.submenu-header {
+  background: transparent !important;
+  border: none !important;
+  padding: 10px 15px !important;
+  font-weight: bold !important;
+  color: rgba(255, 255, 255, 0.6) !important;
+}
+html.light-theme .submenu-header {
+  color: rgba(0, 0, 0, 0.6) !important;
+}
+
+/* 子菜单里的每个小链接 */
+.submenu-item {
+  border-radius: 8px !important;
+  margin: 2px 8px !important;
+  padding: 8px 12px !important;
+}
+.submenu-item:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
 }
 
 /* 底部版权区圆角 */
@@ -176,9 +204,10 @@ html[data-theme-mode="dark"]:not(.light-theme) .submenu {
   border-radius: 12px !important;
   margin: 0 10px 10px 10px !important;
   border-top: none !important;
+  background: transparent !important;
 }
 
-/* 移除侧边栏内部可能残留的默认背景色 */
+/* 移除内部残留背景 */
 .sidebar-content, .nav-section, .nav-item-wrapper {
   background: transparent !important;
 }
@@ -187,7 +216,6 @@ html[data-theme-mode="dark"]:not(.light-theme) .submenu {
 /* ================== 3. PC 端排版 (> 1024px) ================== */
 @media (min-width: 1025px) {
   .dashboard-grid { position: relative !important; }
-  
   .dashboard-stats {
     width: 400px !important;   
     height: 240px !important;  
@@ -201,7 +229,7 @@ html[data-theme-mode="dark"]:not(.light-theme) .submenu {
   }
 }
 
-/* ================== 4. 手机端专属排版 (螃蟹绿框内) ================== */
+/* ================== 4. 手机端专属排版 ================== */
 @media (max-width: 1024px) {
   section.category::before, section.category::after { display: none !important; }
 
@@ -230,7 +258,6 @@ html[data-theme-mode="dark"]:not(.light-theme) .submenu {
   .dashboard-welcome h1 { font-size: 1.6rem !important; }
   .dashboard-welcome p { font-size: 0.9rem !important; }
 
-  /* 🦀 螃蟹卡在绿框内 (应用你的精准坐标) */
   .dashboard-stats {
     display: block !important;
     position: absolute !important;
@@ -249,7 +276,6 @@ html[data-theme-mode="dark"]:not(.light-theme) .submenu {
   }
   .dashboard-stats * { display: none !important; visibility: hidden !important; }
 
-  /* ⏰ 时钟面板 */
   .dashboard-panel {
     width: 100% !important;
     margin: 0 !important;
