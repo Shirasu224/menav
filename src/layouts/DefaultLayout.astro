@@ -65,14 +65,13 @@ const fontAwesomePreload = `<link rel="preload" href="${fontAwesomeCssUrl}" as="
     <noscript>
       <link rel="stylesheet" href={fontAwesomeCssUrl} />
     </noscript>
-    <!-- 终极自定义样式：最高强权版 -->
+    
+    <!-- 只保留最底层背景，其他全交给 style.css -->
     <style is:global>
-      /* 1. 彻底清空所有底色 */
       html, body, .layout, .content, .page, .page-template-home, .dashboard-grid {
         background-color: transparent !important;
       }
 
-      /* 2. 魔法垫片：这个伪元素会盖在系统的黑底之上，但在你的文字之下 */
       body::before {
         content: "";
         position: fixed;
@@ -84,63 +83,19 @@ const fontAwesomePreload = `<link rel="preload" href="${fontAwesomeCssUrl}" as="
         background-position: center !important;
       }
 
-      /* 白天模式垫片 */
       html.light-theme body::before {
-        background-image: linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), url('https://shirasu224.github.io/menav/pics/pyrohous.jpg') !important;
+        background-image: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), url('https://shirasu224.github.io/menav/pics/pyrohous.jpg') !important;
       }
-
-      /* 黑夜模式垫片 */
       html[data-theme-mode="dark"]:not(.light-theme) body::before {
         background-image: linear-gradient(rgba(15, 15, 20, 0.6), rgba(15, 15, 20, 0.6)), url('https://shirasu224.github.io/menav/pics/nightsnipe.jpg') !important;
       }
 
-      /* 3. 把你的所有内容提上来，压在垫片上面 */
       .layout {
         position: relative !important;
         z-index: 1 !important; 
       }
 
-      /* 4. 时钟卡片（极限透明微调版） */
-      html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card {
-        background: rgba(70, 83, 124, 0.12) !important; 
-        border: 1px solid rgba(255, 255, 255, 0.15) !important;
-        border-radius: 16px !important;
-      }
-      html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card * { color: #ffffff !important; }
-      
-      html.light-theme .dashboard-clock-card {
-        background: rgba(255, 255, 255, 0.15) !important;
-        border: 1px solid rgba(255, 255, 255, 0.4) !important;
-        border-radius: 16px !important;
-      }
-      html.light-theme .dashboard-clock-card * { color: #222222 !important; }
-      
-      @media (max-width: 768px) {
-        section.category::before,
-        section.category::after {
-          display: none;
-        }
-      }
-
-      /* 5. 侧边栏背景 */
-      html.light-theme .sidebar {
-        background: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), url('https://shirasu224.github.io/menav/pics/pyrohous.jpg') !important;
-        background-size: cover !important;
-        background-attachment: fixed !important;
-      }
-      html[data-theme-mode="dark"]:not(.light-theme) .sidebar {
-        background: linear-gradient(rgba(15, 15, 20, 0.7), rgba(15, 15, 20, 0.7)), url('https://shirasu224.github.io/menav/pics/nightsnipe.jpg') !important;
-        background-size: cover !important;
-        background-attachment: fixed !important;
-      }
-
-      /* 6. 电脑端：锁死螃蟹尺寸 */
-      .dashboard-grid {
-        display: grid !important;
-        grid-template-columns: 1fr 1fr !important; 
-        align-items: center !important; 
-        gap: 20px !important;
-      }
+      /* 电脑端螃蟹尺寸 */
       .dashboard-stats > * { display: none !important; }
       .dashboard-stats {
         width: 320px !important; 
@@ -153,7 +108,6 @@ const fontAwesomePreload = `<link rel="preload" href="${fontAwesomeCssUrl}" as="
         background-color: transparent !important;
         border: none !important;
       }
-
     </style>
   </head>
   <body class="loading">
