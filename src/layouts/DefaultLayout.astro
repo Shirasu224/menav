@@ -119,6 +119,53 @@ const fontAwesomePreload = `<link rel="preload" href="${fontAwesomeCssUrl}" as="
       }
       html.light-theme .dashboard-clock-card * { color: #222222 !important; }
 
+      /* ================== 分类格子的装饰图案 ================== */
+      
+      /* 1. 先让大格子作为参考基准 */
+      section.category {
+        position: relative !important;
+      }
+
+      /* 2. 右上角的图案（对应你的绿框） */
+      section.category::before {
+        content: "";
+        position: absolute;
+        top: -20px;    /* 负数表示往上偏出框外，正数表示在框内 */
+        right: -20px;  /* 往右偏出 */
+        width: 80px;   /* 图案宽度，按需修改 */
+        height: 80px;  /* 图案高度，按需修改 */
+        background-image: url('https://shirasu224.github.io/menav/pics/the-spycrab2.png'); /* ★ 换成你的画 */
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        pointer-events: none; /* 防止挡住鼠标点击 */
+        z-index: 10;
+      }
+
+      /* 3. 底部的图案（对应你的红框） */
+      section.category::after {
+        content: "";
+        position: absolute;
+        bottom: -30px; /* 贴在底部往下偏一点 */
+        left: 10%;     /* 从左侧 10% 的位置开始 */
+        width: 80%;    /* 宽度占格子的 80% */
+        height: 60px;  /* 如果是长条形图，高度改这里 */
+        background-image: url('https://shirasu224.github.io/menav/pics/nightsnipe.jpg'); /* ★ 换成你的画 */
+        background-size: contain; /* 如果想让长图拉伸填满可以改成 100% 100% */
+        background-repeat: no-repeat;
+        background-position: center bottom;
+        pointer-events: none;
+        z-index: 10;
+      }
+
+      /* 4. 手机端屏幕窄，先隐藏，防止图案把页面撑歪 */
+      @media (max-width: 768px) {
+        section.category::before,
+        section.category::after {
+          display: none;
+        }
+      }
+
       /* 5. 侧边栏背景 */
       html.light-theme .sidebar {
         background: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), url('https://shirasu224.github.io/menav/pics/pyrohous.jpg') !important;
