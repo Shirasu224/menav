@@ -107,6 +107,54 @@ html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card {
 input#search { background-color: transparent !important; }
 
 
+/* ================== 2.5 侧边栏专属美化 (渐变+半透明) ================== */
+/* 侧边栏整体背景 */
+html.light-theme .sidebar {
+  background-color: rgba(255, 255, 255, 0.3) !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.4) !important;
+}
+html[data-theme-mode="dark"]:not(.light-theme) .sidebar {
+  background-color: rgba(15, 15, 20, 0.4) !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+
+/* 侧边栏导航按钮（和右侧小卡片一模一样） */
+html.light-theme .nav-item {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.3) 100%) !important; 
+  border: 1px solid rgba(255, 255, 255, 0.6) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03) !important; 
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important; 
+  border-radius: 12px !important;
+  margin-bottom: 8px !important;
+}
+html.light-theme .nav-item:hover, html.light-theme .nav-item.active {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.7) 100%) !important; 
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08) !important;
+  transform: translateY(-2px) !important; 
+  border-color: rgba(255, 255, 255, 1) !important;
+}
+
+html[data-theme-mode="dark"]:not(.light-theme) .nav-item {
+  background: linear-gradient(135deg, rgba(65, 75, 100, 0.6) 0%, rgba(30, 35, 50, 0.3) 100%) !important; 
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+  border-radius: 12px !important;
+  margin-bottom: 8px !important;
+}
+html[data-theme-mode="dark"]:not(.light-theme) .nav-item:hover, html[data-theme-mode="dark"]:not(.light-theme) .nav-item.active {
+  background: linear-gradient(135deg, rgba(90, 100, 130, 0.8) 0%, rgba(50, 55, 75, 0.5) 100%) !important; 
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3) !important;
+  transform: translateY(-2px) !important;
+  border-color: rgba(255, 255, 255, 0.25) !important;
+}
+
+/* 移除侧边栏默认的丑陋背景色 */
+.sidebar-content, .nav-section, .nav-item-wrapper {
+  background: transparent !important;
+}
+
+
 /* ================== 3. PC 端排版 (> 1024px) ================== */
 @media (min-width: 1025px) {
   .dashboard-grid { position: relative !important; }
@@ -158,12 +206,12 @@ input#search { background-color: transparent !important; }
   .dashboard-stats {
     display: block !important;
     position: absolute !important;
-    top: 55px !important;   /* 💥 调整高度，正好在时钟右下角 */
-    right: 5px !important;  /* 靠右侧边缘 */
-    width: 100px !important; /* 稍微缩小，看起来更精致 */
-    height: 100px !important;
-    min-width: 90px !important; 
-    max-width: 90px !important;
+    top: 55px !important;   
+    right: 5px !important;  
+    width: 120px !important; 
+    height: 120px !important;
+    min-width: 120px !important; 
+    max-width: 120px !important;
     background-image: url('https://shirasu224.github.io/menav/pics/the-spycrab2.png') !important;
     background-size: contain !important; 
     background-repeat: no-repeat !important;
