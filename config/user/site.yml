@@ -11,5 +11,5 @@ navigation:
     id: home
     active: true
   - name: 书签
-    icon: fas fa-book
-    id: articles
+    icon: fas fa-bookmark  # 顺便把这个图标换个更贴切的，之前是书本，现在是书签
+    id: bookmarks          # 💥 改这里！必须是 bookmarks
