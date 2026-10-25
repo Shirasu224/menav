@@ -13,11 +13,11 @@ html, body {
   -webkit-text-size-adjust: 100% !important;
   text-size-adjust: 100% !important;
   
-  /* 💥 修复英文丢失问题：后备字体全部改成衬线体(serif) */
+  /* 全局强制京华老宋体 */
   font-family: "KingHwaOldSong", "KingHwa_OldSong", "Noto Serif SC", "Songti SC", "SimSun", serif !important;
 }
 
-/* 强制卡片内部的所有元素继承老宋体（包括英文字母） */
+/* 强制卡片内部的所有元素继承老宋体 */
 .dashboard-clock-card *, .site-card *, .nav-item * {
   font-family: inherit !important;
 }
@@ -41,7 +41,7 @@ html, body {
 /* --- 主标题基础设置 --- */
 .welcome-title,
 .dashboard-welcome h1 {
-  font-weight: 800 !important;
+  font-weight: 900 !important; /* 强制最高字重 */
   margin: 0 !important; 
   padding: 0 !important;
   line-height: 1.2 !important;
@@ -50,7 +50,7 @@ html, body {
   white-space: nowrap !important; 
 }
 
-/* --- 副标题基础设置（纯白 + 极透 + 发光） --- */
+/* --- 副标题基础设置 --- */
 .welcome-subtitle,
 .dashboard-welcome p {
   font-weight: 700 !important;
@@ -62,18 +62,16 @@ html, body {
   align-self: flex-end !important; 
   margin-right: 30px !important;   
 
-  /* 💥 修改：纯白颜色，透明度用 opacity 控制 */
   color: #ffffff !important;
-  opacity: 0.4 !important; /* 👈 调透明度：0.1极透，0.8很实 */
+  opacity: 0.4 !important; 
   
-  /* 多层阴影+发光 */
   text-shadow: 
     0px 2px 4px rgba(0, 0, 0, 0.8),      
     0px 0px 8px rgba(255, 255, 255, 0.6),
     0px 0px 15px rgba(255, 255, 255, 0.3) !important; 
 }
 
-/* --- 浅色模式（白天）：主标题渐变 --- */
+/* --- 浅色模式（白天）：主标题渐变 + 物理加粗 --- */
 html.light-theme .welcome-title,
 html.light-theme .dashboard-welcome h1 {
   background: linear-gradient(90deg, #fdafaf, #c2ccff, #e3ffe0) !important;
@@ -81,10 +79,16 @@ html.light-theme .dashboard-welcome h1 {
   background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
   color: transparent !important;
-  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.6)) !important; 
+  
+  /* 💥 物理加粗魔法：用极细的同色阴影堆叠出边缘厚度，再叠加外层发光 */
+  filter: 
+    drop-shadow(0.5px 0 0 #fdafaf) 
+    drop-shadow(-0.5px 0 0 #c2ccff) 
+    drop-shadow(0 0.5px 0 #e3ffe0)
+    drop-shadow(0 0 8px rgba(255, 255, 255, 0.8)) !important; 
 }
 
-/* --- 深色模式（黑夜）：主标题渐变 --- */
+/* --- 深色模式（黑夜）：主标题渐变 + 物理加粗 --- */
 html[data-theme-mode="dark"]:not(.light-theme) .welcome-title,
 html[data-theme-mode="dark"]:not(.light-theme) .dashboard-welcome h1 {
   background: linear-gradient(90deg, #704474, #5f6ba5, #353e69) !important;
@@ -92,7 +96,14 @@ html[data-theme-mode="dark"]:not(.light-theme) .dashboard-welcome h1 {
   background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
   color: transparent !important;
-  filter: drop-shadow(0 0 8px rgba(53, 135, 177, 0.4)) drop-shadow(0 0 15px rgba(232, 125, 125, 0.2)) !important; 
+  
+  /* 💥 物理加粗：深色模式下用周围的两个主色做描边，外加原来的发光 */
+  filter: 
+    drop-shadow(0.5px 0 0 #704474) 
+    drop-shadow(-0.5px 0 0 #5f6ba5) 
+    drop-shadow(0 0.5px 0 #353e69)
+    drop-shadow(0 0 8px rgba(53, 135, 177, 0.5)) 
+    drop-shadow(0 0 15px rgba(232, 125, 125, 0.3)) !important; 
 }
 
 
@@ -260,7 +271,12 @@ html[data-theme-mode="dark"]:not(.light-theme) .nav-item.active {
   .dashboard-welcome p {
     margin-right: 10px !important; 
   }
-  .dashboard-welcome h1 { font-size: 1.6rem !important; }
+  
+  /* 手机端稍微放大标题，并确保加粗效果存在 */
+  .dashboard-welcome h1 { 
+    font-size: 1.7rem !important; 
+    font-weight: 900 !important; 
+  }
   .dashboard-welcome p { font-size: 0.9rem !important; }
 
   .dashboard-stats {
