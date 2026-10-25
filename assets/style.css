@@ -49,28 +49,21 @@ html, body {
   line-height: 1.2 !important;
   text-align: left !important;
   filter: drop-shadow(0 0 6px rgba(184, 220, 255, 0.25)) !important;
-  letter-spacing: 1px !important; /* 稍微拉开一点字间距，更大气 */
+  letter-spacing: 2px !important; /* 💥 老宋体稍微拉开一点更大气 */
 }
 
 .welcome-subtitle,
 .dashboard-welcome p {
   color: #ffc2c2 !important;
   font-weight: 700 !important;
-  margin: 4px 0 0 0 !important; 
+  margin: 6px 0 0 0 !important; /* 稍微加大一点和主标题的距离 */
   padding: 0 !important;
+  padding-left: 1px !important; /* 💥 副标题向右挪 1px 寻找视觉平衡 */
   line-height: 1.2 !important;
   text-align: left !important; 
   text-shadow: 0 0 6px rgba(255, 194, 194, 0.25) !important;
-  width: 100% !important;
-  letter-spacing: 0.5px !important;
-  /* 用一点点左边的 micro-adjust 修正视觉差，而不是暴力平移 */
-  padding-left: 1px !important; 
+  letter-spacing: 1px !important; /* 💥 副标题字间距 */
 }
-
-html.light-theme .welcome-title,
-html.light-theme .dashboard-welcome h1 { filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.4)) !important; }
-html.light-theme .welcome-subtitle,
-html.light-theme .dashboard-welcome p { text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6) !important; }
 
 /* ================== 2. 渐变半透明卡片 ================== */
 section.category, .category-header, .category-content, .sites-grid {
