@@ -41,72 +41,63 @@ html, body {
 html.light-theme .dashboard-welcome h1 { filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.4)) !important; }
 html.light-theme .dashboard-welcome p { text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6) !important; }
 
-/* ================== 2. 透明化 (极限透亮版) ================== */
-section.category,
-section.category > div,
-.category-content,
-.sites-grid {
-  background-color: transparent !important;
+/* ================== 2. 极限透明化 (暴力清除底裤) ================== */
+/* 针对卡片内部的子元素，直接扒光 */
+.site-card, 
+.sites-grid > a, 
+.sites-grid > div {
   background-image: none !important;
   box-shadow: none !important;
 }
 
-/* 浅色模式 */
-html.light-theme section.category {
-  background-color: rgba(255, 255, 255, 0.3) !important; 
-  border: 1px solid rgba(255, 255, 255, 0.4) !important;
-}
-/* 💥 小框直接降到 0.15，并加上磨砂质感 */
-html.light-theme .site-card,
-html.light-theme .sites-grid a {
-  background-color: rgba(255, 255, 255, 0.15) !important; 
-  border: 1px solid rgba(255, 255, 255, 0.3) !important;
-  backdrop-filter: blur(4px) !important;
-  box-shadow: none !important;
-}
-html.light-theme .site-card-icon,
-html.light-theme .site-card-content {
-  background-color: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
-}
-html.light-theme .search-box,
-html.light-theme .nav-item {
-  background-color: rgba(255, 255, 255, 0.4) !important;
-  border: 1px solid rgba(255, 255, 255, 0.5) !important;
-}
-html.light-theme .dashboard-clock-card {
-  background: rgba(255, 255, 255, 0.15) !important;
-  border: 1px solid rgba(255, 255, 255, 0.4) !important;
-}
-
 /* 深色模式 */
 html[data-theme-mode="dark"]:not(.light-theme) section.category {
-  background-color: rgba(30, 35, 50, 0.3) !important; 
+  background-color: rgba(30, 35, 50, 0.2) !important; 
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
-/* 💥 小框直接降到 0.15 */
+/* 💥 小框直接设成 0.05 极限透明，配合磨砂 */
 html[data-theme-mode="dark"]:not(.light-theme) .site-card,
 html[data-theme-mode="dark"]:not(.light-theme) .sites-grid a {
-  background-color: rgba(45, 50, 65, 0.15) !important; 
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
-  backdrop-filter: blur(4px) !important;
-  box-shadow: none !important;
+  background: rgba(45, 50, 65, 0.05) !important; 
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: blur(8px) !important;
 }
 html[data-theme-mode="dark"]:not(.light-theme) .site-card-icon,
 html[data-theme-mode="dark"]:not(.light-theme) .site-card-content {
   background-color: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
 }
 html[data-theme-mode="dark"]:not(.light-theme) .search-box,
 html[data-theme-mode="dark"]:not(.light-theme) .nav-item {
   background-color: rgba(30, 35, 50, 0.4) !important;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
 html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card {
   background: rgba(70, 83, 124, 0.15) !important; 
   border: 1px solid rgba(255, 255, 255, 0.15) !important;
+}
+
+/* 浅色模式 */
+html.light-theme section.category {
+  background-color: rgba(255, 255, 255, 0.2) !important; 
+  border: 1px solid rgba(255, 255, 255, 0.4) !important;
+}
+/* 💥 小框直接设成 0.05 */
+html.light-theme .site-card,
+html.light-theme .sites-grid a {
+  background: rgba(255, 255, 255, 0.05) !important; 
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  backdrop-filter: blur(8px) !important;
+}
+html.light-theme .site-card-icon,
+html.light-theme .site-card-content {
+  background-color: transparent !important;
+}
+html.light-theme .search-box,
+html.light-theme .nav-item {
+  background-color: rgba(255, 255, 255, 0.3) !important;
+}
+html.light-theme .dashboard-clock-card {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
 }
 
 input#search { background-color: transparent !important; }
@@ -127,7 +118,7 @@ input#search { background-color: transparent !important; }
   }
 }
 
-/* ================== 4. 手机端专属排版 (强迫症物理下推) ================== */
+/* ================== 4. 手机端专属排版 (撕裂级下推) ================== */
 @media (max-width: 1024px) {
   section.category::before, section.category::after { display: none !important; }
 
@@ -139,6 +130,7 @@ input#search { background-color: transparent !important; }
     padding: 0 15px 40px 15px !important;
     box-sizing: border-box !important;
     position: relative !important;
+    gap: 40px !important; /* ★ 直接用 gap 强行撕开上下两个兄弟元素 */
   }
 
   .dashboard-intro {
@@ -149,9 +141,9 @@ input#search { background-color: transparent !important; }
     text-align: left !important;
     padding-right: 90px !important;
     box-sizing: border-box !important;
-    margin-bottom: 10px !important; 
     position: relative !important; 
     z-index: 2 !important;
+    margin: 0 !important;
   }
 
   .dashboard-welcome { display: flex !important; flex-direction: column !important; gap: 5px !important; }
@@ -176,11 +168,10 @@ input#search { background-color: transparent !important; }
   }
   .dashboard-stats * { display: none !important; visibility: hidden !important; }
 
-  /* 💥 终极魔法：不再指望父容器，直接给时钟卡片本身加巨大的外边距 */
+  /* 因为 gap 已经撑开了，这里给个双保险 */
   .dashboard-panel {
     width: 100% !important;
-    margin: 0 !important;
-    padding: 0 !important;
+    margin-top: 20px !important; 
   }
   
   .dashboard-clock-card {
@@ -189,7 +180,7 @@ input#search { background-color: transparent !important; }
     width: 100% !important; 
     height: auto !important;
     padding: 20px !important; 
-    margin-top: 60px !important; /* ★ 硬核下推 60px */
+    margin: 0 !important;
     box-sizing: border-box !important;
     border-radius: 16px !important;
   }
