@@ -65,113 +65,71 @@ const fontAwesomePreload = `<link rel="preload" href="${fontAwesomeCssUrl}" as="
     <noscript>
       <link rel="stylesheet" href={fontAwesomeCssUrl} />
     </noscript>
-    
     <!-- 终极自定义样式：最高强权版 -->
     <style is:global>
-      /* ================== 1. 清空所有干扰底色 ================== */
-      html, body, #app, .layout, .content, main, .page, .page-template-home, .dashboard-grid, .dashboard-intro, .dashboard-welcome, .category-content, .dashboard-panel {
+      /* 1. 彻底清空所有底色 */
+      html, body, .layout, .content, .page, .page-template-home, .dashboard-grid {
         background-color: transparent !important;
-        background-image: none !important;
-        box-shadow: none !important;
       }
 
-      /* ================== 2. 强制底层背景图 ================== */
+      /* 2. 魔法垫片：这个伪元素会盖在系统的黑底之上，但在你的文字之下 */
       body::before {
         content: "";
         position: fixed;
         top: 0; left: 0; right: 0; bottom: 0;
-        z-index: -999 !important; /* 强制沉入最底层，任何东西都挡不住它 */
-        pointer-events: none;
+        z-index: 0; /* 放在 0 层，刚好压住底部的黑色，又不会挡住内容 */
+        pointer-events: none; /* 让你能正常点击网页 */
         background-size: cover !important;
         background-attachment: fixed !important;
         background-position: center !important;
       }
 
+      /* 白天模式垫片 */
       html.light-theme body::before {
         background-image: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), url('https://shirasu224.github.io/menav/pics/pyrohous.jpg') !important;
       }
 
+      /* 黑夜模式垫片 */
       html[data-theme-mode="dark"]:not(.light-theme) body::before {
         background-image: linear-gradient(rgba(15, 15, 20, 0.6), rgba(15, 15, 20, 0.6)), url('https://shirasu224.github.io/menav/pics/nightsnipe.jpg') !important;
       }
 
+      /* 3. 把你的所有内容提上来，压在垫片上面 */
       .layout {
         position: relative !important;
         z-index: 1 !important; 
       }
 
-      /* ================== 3. 给所有框框加半透明底 ================== */
-      /* 全局清除默认的丑陋阴影 */
-      .nav-item, .search-box, .sites-grid > a, .sites-grid > div, .dashboard-clock-card, section.category {
-        box-shadow: none !important; 
-      }
-
-      /* 导航栏 & 搜索框 */
-      .nav-item, .search-box {
-        background-color: rgba(255, 255, 255, 0.5) !important;
-        border: 1px solid rgba(255, 255, 255, 0.6) !important;
-        border-radius: 12px !important;
-      }
-      html[data-theme-mode="dark"]:not(.light-theme) .nav-item, 
-      html[data-theme-mode="dark"]:not(.light-theme) .search-box {
-        background-color: rgba(30, 35, 50, 0.6) !important;
-        border: 1px solid rgba(255, 255, 255, 0.1) !important;
-      }
-
-      /* 网站小卡片 */
-      .sites-grid > a, .sites-grid > div {
-        background-color: rgba(255, 255, 255, 0.5) !important;
-        border: 1px solid rgba(255, 255, 255, 0.6) !important;
-        border-radius: 12px !important;
-      }
-      html[data-theme-mode="dark"]:not(.light-theme) .sites-grid > a,
-      html[data-theme-mode="dark"]:not(.light-theme) .sites-grid > div {
-        background-color: rgba(40, 45, 60, 0.6) !important;
-        border: 1px solid rgba(255, 255, 255, 0.1) !important;
-      }
-
-      /* 分类大框框 */
-      section.category {
-        background-color: rgba(255, 255, 255, 0.25) !important;
-        border: 1px solid rgba(255, 255, 255, 0.4) !important;
-        border-radius: 16px !important;
-      }
-      html[data-theme-mode="dark"]:not(.light-theme) section.category {
-        background-color: rgba(20, 25, 35, 0.4) !important;
-        border: 1px solid rgba(255, 255, 255, 0.05) !important;
-      }
-
-      /* 搜索框内部输入区透明 */
-      input#search {
-        background-color: transparent !important;
-      }
-
-      /* 悬停反馈：稍微变实一点 */
-      .nav-item:hover, .sites-grid > a:hover, .sites-grid > div:hover {
-        background-color: rgba(255, 255, 255, 0.8) !important;
-      }
-      html[data-theme-mode="dark"]:not(.light-theme) .nav-item:hover,
-      html[data-theme-mode="dark"]:not(.light-theme) .sites-grid > a:hover,
-      html[data-theme-mode="dark"]:not(.light-theme) .sites-grid > div:hover {
-        background-color: rgba(50, 55, 70, 0.8) !important;
-      }
-
-      /* 时钟卡片单独处理 */
+      /* 4. 时钟卡片渐变 (透明度 0.4) */
       html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card {
-        background: linear-gradient(180deg, rgba(70, 83, 124, 0.5) 0%, rgba(141, 124, 129, 0.5) 100%) !important;
+        background: linear-gradient(180deg, rgba(70, 83, 124, 0.2) 0%, rgba(141, 124, 129, 0.2) 100%) !important;
+        backdrop-filter: blur(10px) !important;
         border: 1px solid rgba(255, 255, 255, 0.1) !important;
         border-radius: 16px !important;
       }
       html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card * { color: #ffffff !important; }
       
       html.light-theme .dashboard-clock-card {
-        background: linear-gradient(180deg, rgba(204, 237, 255, 0.5) 0%, rgba(255, 229, 229, 0.5) 100%) !important;
+        background: linear-gradient(180deg, rgba(204, 237, 255, 0.2) 0%, rgba(255, 229, 229, 0.2) 100%) !important;
+        backdrop-filter: blur(10px) !important;
         border: 1px solid rgba(255, 255, 255, 0.6) !important;
         border-radius: 16px !important;
       }
       html.light-theme .dashboard-clock-card * { color: #222222 !important; }
 
-      /* ================== 4. 螃蟹尺寸锁死 ================== */
+      /* 5. 侧边栏背景 */
+      html.light-theme .sidebar {
+        background: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), url('https://shirasu224.github.io/menav/pics/pyrohous.jpg') !important;
+        background-size: cover !important;
+        background-attachment: fixed !important;
+      }
+      html[data-theme-mode="dark"]:not(.light-theme) .sidebar {
+        background: linear-gradient(rgba(15, 15, 20, 0.7), rgba(15, 15, 20, 0.7)), url('https://shirasu224.github.io/menav/pics/nightsnipe.jpg') !important;
+        background-size: cover !important;
+        background-attachment: fixed !important;
+      }
+
+      /* 6. 电脑端：锁死螃蟹尺寸 */
       .dashboard-grid {
         display: grid !important;
         grid-template-columns: 1fr 1fr !important; 
@@ -180,54 +138,88 @@ const fontAwesomePreload = `<link rel="preload" href="${fontAwesomeCssUrl}" as="
       }
       .dashboard-stats > * { display: none !important; }
       .dashboard-stats {
-        width: 320px !important; height: 260px !important; margin: 0 auto !important;
+        width: 320px !important; 
+        height: 260px !important; 
+        margin: 0 auto !important;
         background-image: url('https://shirasu224.github.io/menav/pics/the-spycrab2.png') !important;
-        background-size: contain !important; background-repeat: no-repeat !important; background-position: center !important;
-        background-color: transparent !important; border: none !important;
+        background-size: contain !important; 
+        background-repeat: no-repeat !important;
+        background-position: center !important;
+        background-color: transparent !important;
+        border: none !important;
       }
 
-      /* ================== 5. 手机端排版 ================== */
+      /* 7. 手机端专属排版 */
       @media (max-width: 768px) {
         .dashboard-grid {
-          position: relative !important; display: flex !important; flex-direction: column !important; align-items: flex-start !important; 
-          width: 100% !important; padding-left: 15px !important; padding-right: 15px !important; box-sizing: border-box !important; gap: 10px !important;
+          position: relative !important; 
+          display: flex !important;
+          flex-direction: column !important;
+          align-items: flex-start !important; 
+          width: 100% !important;
+          padding-left: 15px !important; 
+          padding-right: 15px !important;
+          box-sizing: border-box !important; 
+          gap: 10px !important;
         }
-        .dashboard-intro, .dashboard-welcome { width: 100% !important; text-align: left !important; margin: 0 !important; padding: 0 !important;}
-        .dashboard-welcome h1 { font-size: 1.3rem !important; margin: 0 0 -2px 0 !important; line-height: 1.2 !important; }
-        .dashboard-welcome p { font-size: 0.85rem !important; margin: 0 !important; line-height: 1.2 !important; }
+        .dashboard-intro {
+          width: 100% !important;
+          display: flex !important;
+          flex-direction: column !important;
+          align-items: flex-start !important;
+          text-align: left !important;
+        }
+        .dashboard-welcome {
+          width: 100% !important;
+          margin: 0 !important;
+          padding: 0 !important; 
+          text-align: left !important; 
+        }
+        .dashboard-welcome h1 {
+          font-size: 1.3rem !important;
+          margin: 0 0 -2px 0 !important; 
+          line-height: 1.2 !important;
+        }
+        .dashboard-welcome p {
+          font-size: 0.85rem !important;
+          margin: 0 !important;
+          line-height: 1.2 !important;
+        }
+        
         .dashboard-stats {
-          display: block !important; position: absolute !important; top: 5px !important; right: 15px !important; 
-          width: 100px !important; height: 100px !important; background-position: top right !important; margin: 0 !important; z-index: 10 !important;
+          display: block !important;
+          position: absolute !important;
+          top: 5px !important;      
+          right: 15px !important;   
+          width: 100px !important;   
+          height: 100px !important;  
+          background-position: top right !important; 
+          margin: 0 !important;
+          z-index: 10 !important;
         }
+        
         .dashboard-clock-card {
-          display: flex !important; flex-direction: column !important; width: 75% !important; max-width: 260px !important; 
-          height: auto !important; padding: 12px 15px !important; margin: 5px 0 0 0 !important; position: relative !important;
+          display: flex !important;
+          flex-direction: column !important;
+          width: 75% !important;        
+          max-width: 260px !important;  
+          height: auto !important; 
+          padding: 12px 15px !important; 
+          margin: 0 !important;         
+          margin-top: 5px !important; 
+          position: relative !important;
         }
-        .dashboard-clock-card .clock-main { font-size: 1.8rem !important; text-align: right !important; line-height: 1.1 !important; }
-        .dashboard-clock-card .clock-header, .dashboard-clock-card .clock-date { font-size: 0.8rem !important; white-space: nowrap !important; }
-      }
-
-      /* ================== 6. 你的专属图案占位符（可随时替换） ================== */
-      /* 在“翻译合集”或“大类框”的左上角加个小图案 */
-      section.category {
-        position: relative !important;
-      }
-      section.category::before {
-        content: "";
-        position: absolute;
-        left: -20px; 
-        top: -30px;
-        width: 80px;
-        height: 80px;
-        /* 换成你自己的画的图链接，比如 ./pics/drawing.png */
-        background-image: url('https://shirasu224.github.io/menav/pics/the-spycrab2.png'); 
-        background-size: contain;
-        background-repeat: no-repeat;
-        pointer-events: none;
-        z-index: 10;
-      }
-      @media (max-width: 768px) {
-        section.category::before { display: none; } /* 手机端先隐藏图案防出界 */
+        
+        .dashboard-clock-card .clock-main {
+          font-size: 1.8rem !important; 
+          text-align: right !important;
+          line-height: 1.1 !important;
+        }
+        .dashboard-clock-card .clock-header,
+        .dashboard-clock-card .clock-date {
+          font-size: 0.8rem !important;
+          white-space: nowrap !important; 
+        }
       }
     </style>
   </head>
