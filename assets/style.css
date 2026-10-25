@@ -41,8 +41,8 @@ html, body {
 html.light-theme .dashboard-welcome h1 { filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.4)) !important; }
 html.light-theme .dashboard-welcome p { text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6) !important; }
 
-/* ================== 2. 终极透明化 (彻底扒光电脑端白底) ================== */
-/* 暴力打击所有可能的容器，去掉白底和阴影 */
+/* ================== 2. 透明化 (精准打击内部小卡片) ================== */
+/* 暴力清理所有嵌套层级的底色 */
 section.category,
 section.category > div,
 .category-content,
@@ -52,16 +52,25 @@ section.category > div,
   box-shadow: none !important;
 }
 
-/* 浅色模式：稍微调实一点（大框 45% 白，小框 75% 白） */
+/* 浅色模式 */
 html.light-theme section.category {
   background-color: rgba(255, 255, 255, 0.45) !important; 
   border: 1px solid rgba(255, 255, 255, 0.5) !important;
 }
-html.light-theme .sites-grid a,
-html.light-theme .sites-grid div {
-  background-color: rgba(255, 255, 255, 0.75) !important; 
-  border: 1px solid rgba(255, 255, 255, 0.9) !important;
+/* 针对具体的卡片类名 .site-card，以及清理内部方块 */
+html.light-theme .site-card,
+html.light-theme .sites-grid a {
+  background-color: rgba(255, 255, 255, 0.6) !important; 
+  border: 1px solid rgba(255, 255, 255, 0.8) !important;
+  box-shadow: none !important;
 }
+html.light-theme .site-card-icon,
+html.light-theme .site-card-content {
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
 html.light-theme .search-box,
 html.light-theme .nav-item {
   background-color: rgba(255, 255, 255, 0.65) !important;
@@ -72,16 +81,24 @@ html.light-theme .dashboard-clock-card {
   border: 1px solid rgba(255, 255, 255, 0.6) !important;
 }
 
-/* 深色模式：稍微调实一点（大框 50% 黑，小框 75% 黑） */
+/* 深色模式 */
 html[data-theme-mode="dark"]:not(.light-theme) section.category {
   background-color: rgba(30, 35, 50, 0.5) !important; 
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
-html[data-theme-mode="dark"]:not(.light-theme) .sites-grid a,
-html[data-theme-mode="dark"]:not(.light-theme) .sites-grid div {
-  background-color: rgba(45, 50, 65, 0.75) !important; 
+html[data-theme-mode="dark"]:not(.light-theme) .site-card,
+html[data-theme-mode="dark"]:not(.light-theme) .sites-grid a {
+  background-color: rgba(45, 50, 65, 0.5) !important; 
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: none !important;
 }
+html[data-theme-mode="dark"]:not(.light-theme) .site-card-icon,
+html[data-theme-mode="dark"]:not(.light-theme) .site-card-content {
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
 html[data-theme-mode="dark"]:not(.light-theme) .search-box,
 html[data-theme-mode="dark"]:not(.light-theme) .nav-item {
   background-color: rgba(30, 35, 50, 0.6) !important;
@@ -110,7 +127,7 @@ input#search { background-color: transparent !important; }
   }
 }
 
-/* ================== 4. 手机端专属排版 (重构时钟排版防乱飘) ================== */
+/* ================== 4. 手机端专属排版 (修正换行与下移) ================== */
 @media (max-width: 1024px) {
   section.category::before, section.category::after { display: none !important; }
 
@@ -124,6 +141,7 @@ input#search { background-color: transparent !important; }
     position: relative !important;
   }
 
+  /* 💥 标题下方硬核拉开 60px 距离，把时钟彻底推下去 */
   .dashboard-intro {
     width: 100% !important;
     display: flex !important;
@@ -132,7 +150,7 @@ input#search { background-color: transparent !important; }
     text-align: left !important;
     padding-right: 90px !important;
     box-sizing: border-box !important;
-    margin-bottom: 40px !important; 
+    margin-bottom: 60px !important; /* ★ 再次加大间距 */
     position: relative !important; 
   }
 
@@ -159,51 +177,46 @@ input#search { background-color: transparent !important; }
   }
   .dashboard-stats * { display: none !important; visibility: hidden !important; }
 
+  /* 再次给时钟加一层上边距兜底 */
   .dashboard-panel {
     width: 100% !important;
-    margin-top: 10px !important; 
+    margin-top: 20px !important; 
   }
   
-  /* 💥 放弃 flex，用最稳定的块级排版镇压 Edge 乱飘 */
+  /* 恢复正常的弹性布局，找回 Week 43 */
   .dashboard-clock-card {
-    display: block !important;
+    display: flex !important;
+    flex-direction: column !important;
     width: 100% !important; 
     height: auto !important;
     padding: 20px !important; 
     margin: 0 !important;
     box-sizing: border-box !important;
     border-radius: 16px !important;
-    position: relative !important;
   }
 
-  /* 强制所有的内部 div 老老实实按块显示 */
-  .dashboard-clock-card > div {
-    display: block !important;
-    width: 100% !important;
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-
-  /* 问候语和周数 */
-  .dashboard-clock-card .clock-header,
+  /* 强制第一行（问候语和Week）左右对齐 */
+  .dashboard-clock-card > div:first-child,
   .dashboard-clock-card [class*="header"] {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    width: 100% !important;
+  }
+
+  .dashboard-clock-card .clock-header,
+  .dashboard-clock-card .clock-date {
     font-size: 14px !important;
     line-height: 1.5 !important;
-    margin-bottom: 5px !important;
-  }
-
-  /* 日期 */
-  .dashboard-clock-card .clock-date,
-  .dashboard-clock-card [class*="date"] {
-    font-size: 13px !important;
-    line-height: 1.5 !important;
+    white-space: nowrap !important;
   }
   
-  /* 时间：强行右对齐，并独占一行 */
+  /* 时间：强行右对齐 */
   .dashboard-clock-card .clock-main,
   .dashboard-clock-card [class*="clock-time"] {
     font-size: 32px !important; 
-    line-height: 1 !important;
+    line-height: 1.2 !important;
     text-align: right !important;
     display: block !important;
     width: 100% !important;
