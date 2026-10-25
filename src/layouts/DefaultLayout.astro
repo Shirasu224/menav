@@ -65,71 +65,80 @@ const fontAwesomePreload = `<link rel="preload" href="${fontAwesomeCssUrl}" as="
     <noscript>
       <link rel="stylesheet" href={fontAwesomeCssUrl} />
     </noscript>
-    <!-- 终极自定义样式：最高强权版 -->
-    <style is:global>
-      /* 1. 彻底清空所有底色 */
-      html, body, .layout, .content, .page, .page-template-home, .dashboard-grid {
+      /* ================== 终极美化版 (直接替换全段) ================== */
+
+      /* 1. 清空所有可能遮挡背景的默认底色 */
+      html, body, #app, .layout, .content, main, .page, .page-template-home, .dashboard-grid, .dashboard-panel {
         background-color: transparent !important;
+        box-shadow: none !important;
       }
 
-      /* 2. 魔法垫片：这个伪元素会盖在系统的黑底之上，但在你的文字之下 */
-      body::before {
-        content: "";
-        position: fixed;
-        top: 0; left: 0; right: 0; bottom: 0;
-        z-index: 0; /* 放在 0 层，刚好压住底部的黑色，又不会挡住内容 */
-        pointer-events: none; /* 让你能正常点击网页 */
+      /* 2. 直接把背景图挂载在 body 上，绝不被遮挡 */
+      html.light-theme body {
+        background-image: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), url('https://shirasu224.github.io/menav/pics/pyrohous.jpg') !important;
         background-size: cover !important;
         background-attachment: fixed !important;
         background-position: center !important;
       }
 
-      /* 白天模式垫片 */
-      html.light-theme body::before {
-        background-image: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), url('https://shirasu224.github.io/menav/pics/pyrohous.jpg') !important;
-      }
-
-      /* 黑夜模式垫片 */
-      html[data-theme-mode="dark"]:not(.light-theme) body::before {
+      html[data-theme-mode="dark"]:not(.light-theme) body {
         background-image: linear-gradient(rgba(15, 15, 20, 0.6), rgba(15, 15, 20, 0.6)), url('https://shirasu224.github.io/menav/pics/nightsnipe.jpg') !important;
+        background-size: cover !important;
+        background-attachment: fixed !important;
+        background-position: center !important;
       }
 
-      /* 3. 把你的所有内容提上来，压在垫片上面 */
-      .layout {
-        position: relative !important;
-        z-index: 1 !important; 
-      }
-
-      /* 4. 时钟卡片渐变 (透明度 0.4) */
-      html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card {
-        background: linear-gradient(180deg, rgba(70, 83, 124, 0.2) 0%, rgba(141, 124, 129, 0.2) 100%) !important;
-        backdrop-filter: blur(10px) !important;
-        border: 1px solid rgba(255, 255, 255, 0.1) !important;
-        border-radius: 16px !important;
-      }
-      html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card * { color: #ffffff !important; }
-      
-      html.light-theme .dashboard-clock-card {
-        background: linear-gradient(180deg, rgba(204, 237, 255, 0.2) 0%, rgba(255, 229, 229, 0.2) 100%) !important;
-        backdrop-filter: blur(10px) !important;
-        border: 1px solid rgba(255, 255, 255, 0.6) !important;
-        border-radius: 16px !important;
-      }
-      html.light-theme .dashboard-clock-card * { color: #222222 !important; }
-
-      /* 5. 侧边栏背景 */
+      /* 3. 侧边栏背景（保留你的设定） */
       html.light-theme .sidebar {
-        background: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), url('https://shirasu224.github.io/menav/pics/pyrohous.jpg') !important;
+        background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url('https://shirasu224.github.io/menav/pics/pyrohous.jpg') !important;
         background-size: cover !important;
         background-attachment: fixed !important;
       }
       html[data-theme-mode="dark"]:not(.light-theme) .sidebar {
-        background: linear-gradient(rgba(15, 15, 20, 0.7), rgba(15, 15, 20, 0.7)), url('https://shirasu224.github.io/menav/pics/nightsnipe.jpg') !important;
+        background: linear-gradient(rgba(15, 15, 20, 0.6), rgba(15, 15, 20, 0.6)), url('https://shirasu224.github.io/menav/pics/nightsnipe.jpg') !important;
         background-size: cover !important;
         background-attachment: fixed !important;
       }
 
-      /* 6. 电脑端：锁死螃蟹尺寸 */
+      /* 4. 定义框框的透明度和模糊程度 */
+      :root {
+        --menav-panel-rgb: 255, 255, 255;
+        --menav-panel-alpha: 0.35; /* ★ 浅色模式：数字越小越透（0.1极透，0.8很实） */
+        --menav-panel-blur: 10px;
+      }
+      html[data-theme-mode="dark"]:not(.light-theme) {
+        --menav-panel-rgb: 24, 27, 38;
+        --menav-panel-alpha: 0.4; /* ★ 深色模式透明度 */
+      }
+
+      /* 5. 精准命中：给导航、搜索框、分类大框、小卡片加上半透明和磨砂玻璃 */
+      .nav-item,
+      .search-box,
+      section.category,
+      .category-header,
+      .sites-grid > a,
+      .sites-grid > div,
+      .dashboard-clock-card {
+        background-color: rgba(var(--menav-panel-rgb), var(--menav-panel-alpha)) !important;
+        border: 1px solid rgba(255, 255, 255, 0.15) !important;
+        backdrop-filter: blur(var(--menav-panel-blur)) !important;
+        -webkit-backdrop-filter: blur(var(--menav-panel-blur)) !important;
+        box-shadow: none !important;
+      }
+
+      /* 6. 鼠标悬停反馈：稍微变实一点 */
+      .nav-item:hover,
+      .sites-grid > a:hover,
+      .sites-grid > div:hover {
+        background-color: rgba(var(--menav-panel-rgb), calc(var(--menav-panel-alpha) + 0.15)) !important;
+      }
+
+      /* 7. 搜索框内部透明 */
+      #search {
+        background-color: transparent !important;
+      }
+
+      /* ================== 螃蟹和手机端排版保留你的原样 ================== */
       .dashboard-grid {
         display: grid !important;
         grid-template-columns: 1fr 1fr !important; 
@@ -149,7 +158,6 @@ const fontAwesomePreload = `<link rel="preload" href="${fontAwesomeCssUrl}" as="
         border: none !important;
       }
 
-      /* 7. 手机端专属排版 */
       @media (max-width: 768px) {
         .dashboard-grid {
           position: relative !important; 
@@ -221,77 +229,6 @@ const fontAwesomePreload = `<link rel="preload" href="${fontAwesomeCssUrl}" as="
           white-space: nowrap !important; 
         }
       }
-/* ================= 统一框框透明度 ================= */
-:root {
-  /* 浅色模式：白色半透明（alpha越小越透，0.3 很透，0.6 较实） */
-  --menav-panel-rgb: 255, 255, 255;
-  --menav-panel-alpha: 0.35; 
-}
-
-html[data-theme-mode="dark"]:not(.light-theme) {
-  /* 深色模式：深蓝灰半透明 */
-  --menav-panel-rgb: 24, 27, 38;
-  --menav-panel-alpha: 0.4;
-}
-
-/* 1. 暴力清除所有可能会遮挡背景的元素底色（只清理背景色，保留文字和图片） */
-html, body, #app, .layout, .content, main, .page, .category, .category-content, .category-header, .sites-grid {
-  background-color: transparent !important;
-  box-shadow: none !important;
-}
-
-/* 2. 精准给“大框框”和“小卡片”加半透明背景 */
-section.category, 
-.nav-item, 
-.search-bar, 
-.search-container,
-.link-card, 
-.site-card,
-.dashboard-clock-card,
-.sidebar-submenu-panel {
-  background-color: rgba(var(--menav-panel-rgb), var(--menav-panel-alpha)) !important;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important; /* 极细的边框增加质感 */
-  box-shadow: none !important;
-}
-
-/* 3. 搜索框内部的输入区域保持全透明 */
-.search-container input, 
-.search-bar input {
-  background-color: transparent !important;
-}
-
-/* 4. 鼠标悬停时稍微变实一点（不然全透没反馈） */
-.nav-item:hover, 
-.link-card:hover, 
-.site-card:hover {
-  background-color: rgba(var(--menav-panel-rgb), calc(var(--menav-panel-alpha) + 0.15)) !important;
-}
-
-/* 5. 侧边栏遮罩修正：不要让默认的黑色/白色遮罩太厚 */
-html.light-theme .sidebar {
-  background: linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)),
-              url('https://shirasu224.github.io/menav/pics/pyrohous.jpg') !important;
-  background-size: cover !important;
-  background-attachment: fixed !important;
-}
-html[data-theme-mode="dark"]:not(.light-theme) .sidebar {
-  background: linear-gradient(rgba(15, 15, 20, 0.3), rgba(15, 15, 20, 0.3)),
-              url('https://shirasu224.github.io/menav/pics/nightsnipe.jpg') !important;
-  background-size: cover !important;
-  background-attachment: fixed !important;
-}
-
-/* 6. 时钟卡片单独处理 */
-html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card {
-  background: linear-gradient(180deg, rgba(70, 83, 124, var(--menav-panel-alpha)) 0%, rgba(141, 124, 129, var(--menav-panel-alpha)) 100%) !important;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
-  border-radius: 16px !important;
-}
-html.light-theme .dashboard-clock-card {
-  background: linear-gradient(180deg, rgba(204, 237, 255, var(--menav-panel-alpha)) 0%, rgba(255, 229, 229, var(--menav-panel-alpha)) 100%) !important;
-  border: 1px solid rgba(255, 255, 255, 0.6) !important;
-  border-radius: 16px !important;
-}
     </style>
   </head>
   <body class="loading">
