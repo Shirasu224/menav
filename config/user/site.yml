@@ -16,6 +16,3 @@ navigation:
   - name: 文章
     icon: fas fa-book
     id: articles  
-
-    icons:
-  mode: manual
