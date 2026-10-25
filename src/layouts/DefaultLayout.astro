@@ -221,95 +221,73 @@ const fontAwesomePreload = `<link rel="preload" href="${fontAwesomeCssUrl}" as="
           white-space: nowrap !important; 
         }
       }
-/* ================= 统一面板透明度 ================= */
+/* ================= 统一框框透明度 ================= */
 :root {
-  /* 深色主题下面板的底色（RGB，不带透明度） */
+  /* 深色模式的底色和透明度 */
   --menav-panel-rgb: 24, 27, 38;
-  /* ★ 面板不透明度：越小越透，0.15 很透 / 0.45 较实 */
-  --menav-panel-alpha: 0.28;
-  /* 面板模糊程度 */
-  --menav-panel-blur: 10px;
-  /* 面板边框透明度 */
-  --menav-panel-border-alpha: 0.10;
+  --menav-panel-alpha: 0.3; 
 }
 
 html.light-theme {
+  /* 浅色模式的底色和透明度 */
   --menav-panel-rgb: 255, 255, 255;
-  --menav-panel-alpha: 0.36;      /* 浅色模式可以稍实一点，否则看不清 */
-  --menav-panel-border-alpha: 0.55;
+  --menav-panel-alpha: 0.45; /* 浅色稍微实一点，不然看不清字 */
 }
 
-/* 把所有“框”统一改成半透明 + 模糊 */
-.nav-section,
-.sidebar-submenu-panel,
-.search-bar,
-.search-container,
-.search-box,
-.search-form,
-.search-input,
-.link-card,
-.site-card,
-.category-card,
+/* 1. 覆盖大模块、导航栏、卡片等 */
+.nav-item,
+.nav-item-wrapper,
 .category,
 .category-header,
+.category-content,
+.link-card,
+.site-card,
 .card,
-.link-item,
-.site-link,
-.social-links,
-.social-link,
-.copyright,
-.menu-toggle,
-.search-toggle,
-.sidebar-toggle,
-.theme-toggle,
-.category-toggle {
-  background: rgba(var(--menav-panel-rgb), var(--menav-panel-alpha)) !important;
-  -webkit-backdrop-filter: blur(var(--menav-panel-blur)) !important;
-  backdrop-filter: blur(var(--menav-panel-blur)) !important;
-  border-color: rgba(255, 255, 255, var(--menav-panel-border-alpha)) !important;
+.search-container,
+.search-bar,
+.search-box,
+.search-form,
+.social-links {
+  background-color: rgba(var(--menav-panel-rgb), var(--menav-panel-alpha)) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
   box-shadow: none !important;
 }
 
-/* 悬停时稍微变实一点，避免“没反馈” */
-.nav-item:hover,
-.nav-link:hover,
-.link-card:hover,
-.link-item:hover,
-.site-link:hover {
-  background: rgba(var(--menav-panel-rgb), calc(var(--menav-panel-alpha) + 0.12)) !important;
+/* 2. 单独调整搜索框输入区域，避免太透 */
+.search-container input {
+  background-color: transparent !important;
 }
 
-/* 侧边栏：保留你的背景图，只把遮罩调透 */
+/* 3. 悬停反馈：鼠标放上去稍微变实一点 */
+.nav-item:hover,
+.link-card:hover,
+.card:hover {
+  background-color: rgba(var(--menav-panel-rgb), calc(var(--menav-panel-alpha) + 0.15)) !important;
+}
+
+/* 4. 修正你原代码里的侧边栏遮罩（让遮罩不那么厚，透出更多图） */
 html.light-theme .sidebar {
-  background: linear-gradient(rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.35)),
+  background: linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)),
               url('https://shirasu224.github.io/menav/pics/pyrohous.jpg') !important;
   background-size: cover !important;
   background-attachment: fixed !important;
 }
 html[data-theme-mode="dark"]:not(.light-theme) .sidebar {
-  background: linear-gradient(rgba(15, 15, 20, 0.40), rgba(15, 15, 20, 0.40)),
+  background: linear-gradient(rgba(15, 15, 20, 0.4), rgba(15, 15, 20, 0.4)),
               url('https://shirasu224.github.io/menav/pics/nightsnipe.jpg') !important;
   background-size: cover !important;
   background-attachment: fixed !important;
 }
 
-/* 时钟卡片：沿用你的渐变，但透明度用同一个变量控制 */
+/* 5. 修正时钟卡片：去掉毛玻璃，改用安全的半透明背景 */
 html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card {
-  background: linear-gradient(180deg,
-              rgba(70, 83, 124, var(--menav-panel-alpha)) 0%,
-              rgba(141, 124, 129, var(--menav-panel-alpha)) 100%) !important;
-  backdrop-filter: blur(var(--menav-panel-blur)) !important;
-  -webkit-backdrop-filter: blur(var(--menav-panel-blur)) !important;
-  border: 1px solid rgba(255, 255, 255, var(--menav-panel-border-alpha)) !important;
+  background: linear-gradient(180deg, rgba(70, 83, 124, var(--menav-panel-alpha)) 0%, rgba(141, 124, 129, var(--menav-panel-alpha)) 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
   border-radius: 16px !important;
 }
 html.light-theme .dashboard-clock-card {
-  background: linear-gradient(180deg,
-              rgba(204, 237, 255, var(--menav-panel-alpha)) 0%,
-              rgba(255, 229, 229, var(--menav-panel-alpha)) 100%) !important;
-  backdrop-filter: blur(var(--menav-panel-blur)) !important;
-  -webkit-backdrop-filter: blur(var(--menav-panel-blur)) !important;
-  border: 1px solid rgba(255, 255, 255, var(--menav-panel-border-alpha)) !important;
+  background: linear-gradient(180deg, rgba(204, 237, 255, var(--menav-panel-alpha)) 0%, rgba(255, 229, 229, var(--menav-panel-alpha)) 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.6) !important;
   border-radius: 16px !important;
 }
     </style>
