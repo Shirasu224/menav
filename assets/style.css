@@ -1,15 +1,3 @@
-/* ============================================
-   Menav Style System - Layered Entry Point
-   ============================================
-
-   分层 CSS 架构：
-   - tokens.css：尺寸、间距、圆角、动效和派生 token
-   - themes.css：默认深色主题与 Notion 风格浅色主题
-   - base.css：全局基础样式与动画
-   - layout.css：页面与模板布局
-   - components.css：侧边栏、搜索、卡片、表单、内容、仪表盘组件
-   - utilities.css：响应式、热力图和待后续拆分的兜底样式
-   ============================================ */
 @import './styles/tokens.css';
 @import './styles/themes.css';
 @import './styles/base.css';
@@ -23,11 +11,11 @@ html, body {
   text-size-adjust: 100% !important;
 }
 
-/* ================== 1. 标题强制左对齐与渐变字 ================== */
+/* ================== 1. 标题强制对齐与渐变字 ================== */
 .dashboard-welcome {
   display: flex !important;
   flex-direction: column !important;
-  align-items: flex-start !important; /* 强制左对齐 */
+  align-items: flex-start !important; 
   text-align: left !important;
   padding-left: 0 !important;
   margin-left: 0 !important;
@@ -41,8 +29,9 @@ html, body {
   font-weight: 800 !important;
   margin: 0 !important; 
   padding: 0 !important;
+  text-indent: 0 !important; /* 💥 清除隐形的缩进 */
   line-height: 1.2 !important;
-  text-align: left !important; /* 强制文字左对齐 */
+  text-align: left !important;
   filter: drop-shadow(0 0 6px rgba(184, 220, 255, 0.25)) !important;
 }
 .dashboard-welcome p {
@@ -50,9 +39,11 @@ html, body {
   font-weight: 700 !important;
   margin: 4px 0 0 0 !important; 
   padding: 0 !important;
+  text-indent: 0 !important; /* 💥 强制清除缩进 */
   line-height: 1.2 !important;
-  text-align: left !important; /* 强制文字左对齐 */
+  text-align: left !important; 
   text-shadow: 0 0 6px rgba(255, 194, 194, 0.25) !important;
+  width: 100% !important;
 }
 html.light-theme .dashboard-welcome h1 { filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.4)) !important; }
 html.light-theme .dashboard-welcome p { text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6) !important; }
@@ -123,7 +114,7 @@ html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card {
 input#search { background-color: transparent !important; }
 
 
-/* ================== 2.5 侧边栏专属美化 (彻底清理补丁) ================== */
+/* ================== 2.5 侧边栏专属美化 (彻底扒光深色块) ================== */
 /* 侧边栏整体背景 */
 html.light-theme .sidebar {
   background-color: rgba(245, 245, 245, 0.8) !important; 
@@ -165,46 +156,31 @@ html[data-theme-mode="dark"]:not(.light-theme) .nav-item.active {
   transform: translateY(-2px) !important;
 }
 
-/* 💥 解决深色补丁：将子菜单大框、标题和子项全部去底色并加圆角 */
-.sidebar-submenu-panel, .submenu {
-  border-radius: 12px !important;
-  margin: 5px 10px !important; 
-  background: rgba(255, 255, 255, 0.1) !important; 
-  overflow: hidden !important; /* 强制切掉直角 */
-}
-html[data-theme-mode="dark"]:not(.light-theme) .sidebar-submenu-panel, 
-html[data-theme-mode="dark"]:not(.light-theme) .submenu {
-  background: rgba(0, 0, 0, 0.2) !important; 
-}
-
-/* 干掉那个突兀的深色块（子菜单的标题） */
-.submenu-header {
-  background: transparent !important;
+/* 💥 彻底干掉子菜单的深色方块（背景全透明，只留文字） */
+.sidebar-submenu-panel, 
+.submenu, 
+.submenu-header,
+.submenu-item {
+  background: transparent !important; /* 强制透明 */
   border: none !important;
-  padding: 10px 15px !important;
-  font-weight: bold !important;
-  color: rgba(255, 255, 255, 0.6) !important;
-}
-html.light-theme .submenu-header {
-  color: rgba(0, 0, 0, 0.6) !important;
+  box-shadow: none !important;
 }
 
-/* 子菜单里的每个小链接 */
+/* 把子菜单项稍微做点圆角悬浮反馈 */
 .submenu-item {
   border-radius: 8px !important;
   margin: 2px 8px !important;
   padding: 8px 12px !important;
+  transition: all 0.2s ease !important;
 }
 .submenu-item:hover {
   background: rgba(255, 255, 255, 0.1) !important;
 }
 
-/* 底部版权区圆角 */
+/* 底部版权区背景全透明 */
 .sidebar-footer {
-  border-radius: 12px !important;
-  margin: 0 10px 10px 10px !important;
-  border-top: none !important;
   background: transparent !important;
+  border-top: none !important;
 }
 
 /* 移除内部残留背景 */
