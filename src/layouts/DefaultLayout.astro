@@ -158,6 +158,21 @@ const fontAwesomePreload = `<link rel="preload" href="${fontAwesomeCssUrl}" as="
         border: none !important;
       }
 
+      /* ================== 修复副标题看不清的问题 ================== */
+      /* 浅色模式下：改成深灰色，并加上白色发光阴影 */
+      html.light-theme .dashboard-welcome p {
+        color: #333333 !important;
+        text-shadow: 0 1px 3px rgba(255, 255, 255, 0.8), 0 0 10px rgba(255, 255, 255, 0.5) !important;
+        font-weight: 600 !important;
+      }
+      
+      /* 深色模式下：改成亮白色，并加上黑色阴影 */
+      html[data-theme-mode="dark"]:not(.light-theme) .dashboard-welcome p {
+        color: #ffffff !important;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8), 0 0 10px rgba(0, 0, 0, 0.5) !important;
+        font-weight: 600 !important;
+      }
+
       /* 7. 手机端专属排版 */
       @media (max-width: 768px) {
         .dashboard-grid {
