@@ -26,24 +26,23 @@
   -webkit-text-fill-color: transparent !important;
   color: transparent !important;
   font-weight: 800 !important;
-  /* 夜间模式：微微发光，不伤眼 */
-  filter: drop-shadow(0 0 8px rgba(184, 220, 255, 0.3)) !important;
+  /* 夜间模式：柔和发光 */
+  filter: drop-shadow(0 0 6px rgba(184, 220, 255, 0.25)) !important;
 }
 
 /* 副标题：纯粉色 */
 .dashboard-welcome p {
   color: #ffc2c2 !important;
   font-weight: 700 !important;
-  /* 夜间模式：微微发光 */
-  text-shadow: 0 0 8px rgba(255, 194, 194, 0.3) !important;
+  text-shadow: 0 0 6px rgba(255, 194, 194, 0.25) !important;
 }
 
-/* 浅色模式下的阴影调整（白天需要深色阴影或白光） */
+/* 浅色模式下的阴影调整 */
 html.light-theme .dashboard-welcome h1 {
-  filter: drop-shadow(0px 2px 4px rgba(255, 255, 255, 0.8)) !important;
+  filter: drop-shadow(0px 2px 4px rgba(255, 255, 255, 0.9)) !important;
 }
 html.light-theme .dashboard-welcome p {
-  text-shadow: 0 2px 4px rgba(255, 255, 255, 0.8) !important;
+  text-shadow: 0 2px 4px rgba(255, 255, 255, 0.9) !important;
 }
 
 /* ================== 2. 全部卡片/框框透明化 ================== */
@@ -96,8 +95,22 @@ html.light-theme .dashboard-clock-card {
 html.light-theme .dashboard-clock-card * { color: #222222 !important; }
 input#search { background-color: transparent !important; }
 
-/* ================== 3. 手机端专属排版 (强制覆盖版) ================== */
-/* 把 768px 改为 1024px，确保大部分手机和平板都能命中 */
+/* ================== 3. PC 端排版 (> 1024px) ================== */
+@media (min-width: 1025px) {
+  .dashboard-stats {
+    width: 320px !important; 
+    height: 260px !important; 
+    margin: 0 auto !important;
+    background-image: url('https://shirasu224.github.io/menav/pics/the-spycrab2.png') !important;
+    background-size: contain !important; 
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    background-color: transparent !important;
+    border: none !important;
+  }
+}
+
+/* ================== 4. 手机端专属排版 (<= 1024px) ================== */
 @media (max-width: 1024px) {
   .dashboard-grid {
     display: flex !important;
@@ -106,11 +119,11 @@ input#search { background-color: transparent !important; }
     width: 100% !important;
     padding: 0 15px 40px 15px !important;
     box-sizing: border-box !important;
-    gap: 30px !important; /* 强行拉开大间距 */
+    gap: 20px !important;
     position: relative !important;
   }
 
-  /* 标题区域：留出螃蟹的空间，并增加下方间距 */
+  /* 标题区域布局 */
   .dashboard-intro {
     width: 100% !important;
     display: flex !important;
@@ -119,7 +132,7 @@ input#search { background-color: transparent !important; }
     text-align: left !important;
     padding-right: 80px !important;
     box-sizing: border-box !important;
-    margin-bottom: 15px !important; /* 让标题和时钟分开 */
+    margin-bottom: 10px !important;
   }
 
   .dashboard-welcome {
@@ -129,40 +142,40 @@ input#search { background-color: transparent !important; }
   }
   
   .dashboard-welcome h1 {
-    font-size: 1.8rem !important; 
+    font-size: 1.6rem !important; 
     margin: 0 !important;
     padding: 0 !important;
     line-height: 1.2 !important;
   }
   
   .dashboard-welcome p {
-    font-size: 1rem !important; 
+    font-size: 0.9rem !important; 
     margin: 0 !important;
     padding: 0 !important;
     line-height: 1.2 !important;
   }
 
-  /* ★ 螃蟹图：用绝对定位死死钉在右上角，并强制缩放 */
+  /* ★ 螃蟹图强制变小，并固定在右上角 */
   .dashboard-stats {
     display: block !important;
     position: absolute !important;
     top: 0px !important;
-    right: 15px !important;
-    width: 70px !important;
-    height: 70px !important;
-    max-width: 70px !important;
-    max-height: 70px !important;
+    right: 10px !important;
+    width: 60px !important;
+    height: 60px !important;
+    max-width: 60px !important;
+    max-height: 60px !important;
+    background-image: url('https://shirasu224.github.io/menav/pics/the-spycrab2.png') !important;
     background-size: contain !important;
     background-position: top right !important;
     margin: 0 !important;
     z-index: 10 !important;
-    transform: scale(1) !important; /* 防止被内部样式放大 */
   }
 
-  /* ★ 时钟卡片撑满，并且保证它是在标题下方 */
+  /* ★ 时钟卡片撑满，解决文字重叠 */
   .dashboard-panel {
     width: 100% !important;
-    margin-top: 10px !important; /* 再次确保往下走 */
+    margin-top: 5px !important; 
   }
   
   .dashboard-clock-card {
@@ -175,17 +188,22 @@ input#search { background-color: transparent !important; }
     margin: 0 !important;
     box-sizing: border-box !important;
     position: relative !important;
+    gap: 10px !important; /* 强制撑开内部的间距，解决重叠 */
   }
 
-  /* ★ 强行把手机端时钟字体改小 (使用像素单位最稳) */
-  .dashboard-clock-card .clock-main {
-    font-size: 26px !important; /* 强制 26px，绝对比之前小 */
+  /* ★ 用属性选择器把所有跟时间相关的元素字体改小，绝杀覆盖 */
+  .dashboard-clock-card .clock-main,
+  .dashboard-clock-card [class*="clock-time"],
+  .dashboard-clock-card [class*="clock-main"] {
+    font-size: 26px !important; 
     text-align: right !important;
     line-height: 1.1 !important;
-    margin-top: 10px !important;
   }
+  
   .dashboard-clock-card .clock-header,
-  .dashboard-clock-card .clock-date {
+  .dashboard-clock-card .clock-date,
+  .dashboard-clock-card [class*="clock-header"],
+  .dashboard-clock-card [class*="clock-date"] {
     font-size: 12px !important; 
     white-space: nowrap !important;
   }
