@@ -77,8 +77,8 @@ const fontAwesomePreload = `<link rel="preload" href="${fontAwesomeCssUrl}" as="
         content: "";
         position: fixed;
         top: 0; left: 0; right: 0; bottom: 0;
-        z-index: 0; /* 放在 0 层，刚好压住底部的黑色，又不会挡住内容 */
-        pointer-events: none; /* 让你能正常点击网页 */
+        z-index: 0;
+        pointer-events: none;
         background-size: cover !important;
         background-attachment: fixed !important;
         background-position: center !important;
@@ -86,7 +86,7 @@ const fontAwesomePreload = `<link rel="preload" href="${fontAwesomeCssUrl}" as="
 
       /* 白天模式垫片 */
       html.light-theme body::before {
-        background-image: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), url('https://shirasu224.github.io/menav/pics/pyrohous.jpg') !important;
+        background-image: linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), url('https://shirasu224.github.io/menav/pics/pyrohous.jpg') !important;
       }
 
       /* 黑夜模式垫片 */
@@ -102,22 +102,25 @@ const fontAwesomePreload = `<link rel="preload" href="${fontAwesomeCssUrl}" as="
 
       /* 4. 时钟卡片（极限透明微调版） */
       html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card {
-        /* 改用单一纯色，把透明度降到 0.08（极其通透） */
-        background: rgba(70, 83, 124, 0.08) !important; 
-        /* ★ 注释掉了 backdrop-filter，去掉毛玻璃，让背景图完全透出来 */
-        /* backdrop-filter: blur(10px) !important; */
+        background: rgba(70, 83, 124, 0.12) !important; 
         border: 1px solid rgba(255, 255, 255, 0.15) !important;
         border-radius: 16px !important;
       }
       html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card * { color: #ffffff !important; }
       
       html.light-theme .dashboard-clock-card {
-        /* 浅色模式同理，透明度降到 0.15 */
         background: rgba(255, 255, 255, 0.15) !important;
         border: 1px solid rgba(255, 255, 255, 0.4) !important;
         border-radius: 16px !important;
       }
       html.light-theme .dashboard-clock-card * { color: #222222 !important; }
+      
+      @media (max-width: 768px) {
+        section.category::before,
+        section.category::after {
+          display: none;
+        }
+      }
 
       /* 5. 侧边栏背景 */
       html.light-theme .sidebar {
@@ -222,6 +225,33 @@ const fontAwesomePreload = `<link rel="preload" href="${fontAwesomeCssUrl}" as="
           font-size: 0.8rem !important;
           white-space: nowrap !important; 
         }
+      }
+
+      /* ================== 8. 彻底解决文字看不清的问题 ================== */
+      /* 浅色模式下给欢迎文字加上白色半透明底板 */
+      html.light-theme .dashboard-welcome {
+        background-color: rgba(255, 255, 255, 0.7) !important;
+        padding: 10px 20px !important;
+        border-radius: 12px !important;
+        display: inline-block !important;
+        backdrop-filter: blur(5px) !important;
+      }
+      html.light-theme .dashboard-welcome h1,
+      html.light-theme .dashboard-welcome p {
+        color: #111111 !important; /* 强制深黑色 */
+      }
+
+      /* 深色模式下给欢迎文字加上黑色半透明底板 */
+      html[data-theme-mode="dark"]:not(.light-theme) .dashboard-welcome {
+        background-color: rgba(0, 0, 0, 0.5) !important;
+        padding: 10px 20px !important;
+        border-radius: 12px !important;
+        display: inline-block !important;
+        backdrop-filter: blur(5px) !important;
+      }
+      html[data-theme-mode="dark"]:not(.light-theme) .dashboard-welcome h1,
+      html[data-theme-mode="dark"]:not(.light-theme) .dashboard-welcome p {
+        color: #ffffff !important; /* 强制纯白色 */
       }
     </style>
   </head>
