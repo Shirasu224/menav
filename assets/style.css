@@ -42,42 +42,43 @@ html.light-theme .dashboard-welcome h1 { filter: drop-shadow(0px 2px 4px rgba(0,
 html.light-theme .dashboard-welcome p { text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6) !important; }
 
 
-/* ================== 2. 完美层级透明化 + 丝滑悬浮动画 ================== */
+/* ================== 2. 渐变半透明卡片 + 丝滑悬浮 ================== */
+/* 彻底清空大框和内部容器的干扰底色 */
 section.category, .category-header, .category-content, .sites-grid {
   background: transparent !important;
   box-shadow: none !important;
   border: none !important;
 }
 
+/* 干掉所有嵌套子元素的背景，防止它偷偷加白底 */
+.site-card *, .sites-grid a * {
+  background: transparent !important;
+  background-image: none !important;
+  border: none !important;
+}
+
 /* --- 浅色模式 --- */
-/* 大框：较透 (25% 白) */
 html.light-theme section.category {
   background-color: rgba(255, 255, 255, 0.25) !important; 
   border: 1px solid rgba(255, 255, 255, 0.4) !important;
 }
 
-/* 内部小框：稍微实一点 (40% 白) + 柔和过渡 */
+/* 浅色小框：带一点点透明白色的 135度 渐变 */
 html.light-theme .site-card,
 html.light-theme .sites-grid a {
-  background-color: rgba(255, 255, 255, 0.4) !important; 
-  border: 1px solid rgba(255, 255, 255, 0.5) !important;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02) !important; /* 极微弱的基础阴影 */
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important; /* 丝滑曲线 */
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.3) 100%) !important; 
+  border: 1px solid rgba(255, 255, 255, 0.6) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03) !important; 
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important; 
 }
 
-/* 浅色模式悬浮：变白、上浮、阴影加深 */
+/* 浅色悬浮：渐变变亮、上浮、阴影加深 */
 html.light-theme .site-card:hover,
 html.light-theme .sites-grid a:hover {
-  background-color: rgba(255, 255, 255, 0.85) !important; 
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08) !important;
-  transform: translateY(-2px) !important; 
-  border-color: rgba(255, 255, 255, 0.9) !important;
-}
-
-html.light-theme .site-card-icon,
-html.light-theme .site-card-content {
-  background: transparent !important;
-  border: none !important;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.7) 100%) !important; 
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1) !important;
+  transform: translateY(-3px) !important; 
+  border-color: rgba(255, 255, 255, 1) !important;
 }
 
 html.light-theme .search-box,
@@ -92,34 +93,27 @@ html.light-theme .dashboard-clock-card {
 
 
 /* --- 深色模式 --- */
-/* 大框：较透 (25% 深色) */
 html[data-theme-mode="dark"]:not(.light-theme) section.category {
   background-color: rgba(30, 35, 50, 0.25) !important; 
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
 
-/* 内部小框：稍微实一点 (40% 深色) + 柔和过渡 */
+/* 深色小框：带一点点深蓝灰色的 135度 渐变 */
 html[data-theme-mode="dark"]:not(.light-theme) .site-card,
 html[data-theme-mode="dark"]:not(.light-theme) .sites-grid a {
-  background-color: rgba(45, 50, 65, 0.4) !important; 
-  border: 1px solid rgba(255, 255, 255, 0.08) !important;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1) !important;
+  background: linear-gradient(135deg, rgba(65, 75, 100, 0.6) 0%, rgba(30, 35, 50, 0.3) 100%) !important; 
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
 }
 
-/* 深色模式悬浮：变亮、上浮、阴影加深 */
+/* 深色悬浮：渐变变亮、上浮、阴影加深 */
 html[data-theme-mode="dark"]:not(.light-theme) .site-card:hover,
 html[data-theme-mode="dark"]:not(.light-theme) .sites-grid a:hover {
-  background-color: rgba(65, 72, 95, 0.6) !important; 
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3) !important;
-  transform: translateY(-2px) !important;
-  border-color: rgba(255, 255, 255, 0.2) !important;
-}
-
-html[data-theme-mode="dark"]:not(.light-theme) .site-card-icon,
-html[data-theme-mode="dark"]:not(.light-theme) .site-card-content {
-  background: transparent !important;
-  border: none !important;
+  background: linear-gradient(135deg, rgba(90, 100, 130, 0.8) 0%, rgba(50, 55, 75, 0.5) 100%) !important; 
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4) !important;
+  transform: translateY(-3px) !important;
+  border-color: rgba(255, 255, 255, 0.25) !important;
 }
 
 html[data-theme-mode="dark"]:not(.light-theme) .search-box,
