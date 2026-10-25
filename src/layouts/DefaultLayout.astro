@@ -65,115 +65,71 @@ const fontAwesomePreload = `<link rel="preload" href="${fontAwesomeCssUrl}" as="
     <noscript>
       <link rel="stylesheet" href={fontAwesomeCssUrl} />
     </noscript>
-    
-    <!-- 终极自定义样式：绝对生效版 -->
+    <!-- 终极自定义样式：最高强权版 -->
     <style is:global>
-      /* ================== 1. 底层背景图（直接挂载在 html 上，永远无法被遮盖） ================== */
-      html {
-        background: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), url('https://shirasu224.github.io/menav/pics/pyrohous.jpg') no-repeat center center fixed !important;
-        background-size: cover !important;
-      }
-      html[data-theme-mode="dark"]:not(.light-theme) {
-        background: linear-gradient(rgba(15, 15, 20, 0.6), rgba(15, 15, 20, 0.6)), url('https://shirasu224.github.io/menav/pics/nightsnipe.jpg') no-repeat center center fixed !important;
-        background-size: cover !important;
-      }
-
-      /* ================== 2. 把所有大容器彻底变透明，去掉白底 ================== */
-      body, #app, .layout, .content, main, .page, .page-template-home, .dashboard-grid, .dashboard-intro, .dashboard-welcome, .category-content, .dashboard-panel, section.category {
+      /* 1. 彻底清空所有底色 */
+      html, body, .layout, .content, .page, .page-template-home, .dashboard-grid {
         background-color: transparent !important;
-        background-image: none !important;
-        box-shadow: none !important;
       }
 
-      /* ================== 3. 精准给框框加半透明磨砂 ================== */
-      :root {
-        --card-bg-light: rgba(255, 255, 255, 0.4);
-        --card-bg-dark: rgba(30, 35, 50, 0.5);
-        --card-border-light: 1px solid rgba(255, 255, 255, 0.5);
-        --card-border-dark: 1px solid rgba(255, 255, 255, 0.1);
+      /* 2. 魔法垫片：这个伪元素会盖在系统的黑底之上，但在你的文字之下 */
+      body::before {
+        content: "";
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        z-index: 0; /* 放在 0 层，刚好压住底部的黑色，又不会挡住内容 */
+        pointer-events: none; /* 让你能正常点击网页 */
+        background-size: cover !important;
+        background-attachment: fixed !important;
+        background-position: center !important;
       }
 
-      /* 侧边栏导航 */
-      .nav-item {
-        background-color: var(--card-bg-light) !important;
-        backdrop-filter: blur(12px) !important;
-        -webkit-backdrop-filter: blur(12px) !important;
-        border: var(--card-border-light) !important;
-        box-shadow: none !important;
-      }
-      html[data-theme-mode="dark"]:not(.light-theme) .nav-item {
-        background-color: var(--card-bg-dark) !important;
-        border: var(--card-border-dark) !important;
+      /* 白天模式垫片 */
+      html.light-theme body::before {
+        background-image: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), url('https://shirasu224.github.io/menav/pics/pyrohous.jpg') !important;
       }
 
-      /* 搜索框 */
-      .search-box {
-        background-color: var(--card-bg-light) !important;
-        backdrop-filter: blur(12px) !important;
-        -webkit-backdrop-filter: blur(12px) !important;
-        border: var(--card-border-light) !important;
-        box-shadow: none !important;
+      /* 黑夜模式垫片 */
+      html[data-theme-mode="dark"]:not(.light-theme) body::before {
+        background-image: linear-gradient(rgba(15, 15, 20, 0.6), rgba(15, 15, 20, 0.6)), url('https://shirasu224.github.io/menav/pics/nightsnipe.jpg') !important;
       }
-      html[data-theme-mode="dark"]:not(.light-theme) .search-box {
-        background-color: var(--card-bg-dark) !important;
-        border: var(--card-border-dark) !important;
-      }
-      input#search { background: transparent !important; }
 
-      /* 大分类框（带一点淡淡的底色） */
-      section.category {
-        background-color: rgba(255, 255, 255, 0.25) !important;
+      /* 3. 把你的所有内容提上来，压在垫片上面 */
+      .layout {
+        position: relative !important;
+        z-index: 1 !important; 
+      }
+
+      /* 4. 时钟卡片渐变 (透明度 0.4) */
+      html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card {
+        background: linear-gradient(180deg, rgba(70, 83, 124, 0.2) 0%, rgba(141, 124, 129, 0.2) 100%) !important;
         backdrop-filter: blur(10px) !important;
-        -webkit-backdrop-filter: blur(10px) !important;
-        border: 1px solid rgba(255, 255, 255, 0.4) !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
         border-radius: 16px !important;
       }
-      html[data-theme-mode="dark"]:not(.light-theme) section.category {
-        background-color: rgba(20, 25, 35, 0.4) !important;
-        border: 1px solid rgba(255, 255, 255, 0.1) !important;
-      }
-
-      /* 里面具体的网站小卡片 */
-      .sites-grid > a,
-      .sites-grid > div {
-        background-color: var(--card-bg-light) !important;
-        backdrop-filter: blur(12px) !important;
-        -webkit-backdrop-filter: blur(12px) !important;
-        border: var(--card-border-light) !important;
-        box-shadow: none !important;
-        border-radius: 12px !important;
-      }
-      html[data-theme-mode="dark"]:not(.light-theme) .sites-grid > a,
-      html[data-theme-mode="dark"]:not(.light-theme) .sites-grid > div {
-        background-color: var(--card-bg-dark) !important;
-        border: var(--card-border-dark) !important;
-      }
-
-      /* 悬停反馈 */
-      .nav-item:hover, .sites-grid > a:hover, .sites-grid > div:hover {
-        background-color: rgba(255, 255, 255, 0.6) !important;
-      }
-      html[data-theme-mode="dark"]:not(.light-theme) .nav-item:hover,
-      html[data-theme-mode="dark"]:not(.light-theme) .sites-grid > a:hover,
-      html[data-theme-mode="dark"]:not(.light-theme) .sites-grid > div:hover {
-        background-color: rgba(50, 55, 70, 0.7) !important;
-      }
-
-      /* 时钟卡片 */
-      .dashboard-clock-card {
-        background-color: var(--card-bg-light) !important;
-        backdrop-filter: blur(12px) !important;
-        -webkit-backdrop-filter: blur(12px) !important;
-        border: var(--card-border-light) !important;
-        box-shadow: none !important;
-      }
-      html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card {
-        background: linear-gradient(180deg, rgba(70, 83, 124, 0.5) 0%, rgba(141, 124, 129, 0.5) 100%) !important;
-        border: var(--card-border-dark) !important;
-      }
       html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card * { color: #ffffff !important; }
+      
+      html.light-theme .dashboard-clock-card {
+        background: linear-gradient(180deg, rgba(204, 237, 255, 0.2) 0%, rgba(255, 229, 229, 0.2) 100%) !important;
+        backdrop-filter: blur(10px) !important;
+        border: 1px solid rgba(255, 255, 255, 0.6) !important;
+        border-radius: 16px !important;
+      }
+      html.light-theme .dashboard-clock-card * { color: #222222 !important; }
 
-      /* ================== 4. 螃蟹布局修复，绝不撑爆 ================== */
+      /* 5. 侧边栏背景 */
+      html.light-theme .sidebar {
+        background: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), url('https://shirasu224.github.io/menav/pics/pyrohous.jpg') !important;
+        background-size: cover !important;
+        background-attachment: fixed !important;
+      }
+      html[data-theme-mode="dark"]:not(.light-theme) .sidebar {
+        background: linear-gradient(rgba(15, 15, 20, 0.7), rgba(15, 15, 20, 0.7)), url('https://shirasu224.github.io/menav/pics/nightsnipe.jpg') !important;
+        background-size: cover !important;
+        background-attachment: fixed !important;
+      }
+
+      /* 6. 电脑端：锁死螃蟹尺寸 */
       .dashboard-grid {
         display: grid !important;
         grid-template-columns: 1fr 1fr !important; 
@@ -191,73 +147,79 @@ const fontAwesomePreload = `<link rel="preload" href="${fontAwesomeCssUrl}" as="
         background-position: center !important;
         background-color: transparent !important;
         border: none !important;
-        box-shadow: none !important;
       }
 
-      /* ================== 5. 手机端排版 ================== */
+      /* 7. 手机端专属排版 */
       @media (max-width: 768px) {
         .dashboard-grid {
-          position: relative !important; display: flex !important; flex-direction: column !important; align-items: flex-start !important; 
-          width: 100% !important; padding-left: 15px !important; padding-right: 15px !important; box-sizing: border-box !important; gap: 10px !important;
+          position: relative !important; 
+          display: flex !important;
+          flex-direction: column !important;
+          align-items: flex-start !important; 
+          width: 100% !important;
+          padding-left: 15px !important; 
+          padding-right: 15px !important;
+          box-sizing: border-box !important; 
+          gap: 10px !important;
         }
-        .dashboard-intro, .dashboard-welcome { width: 100% !important; text-align: left !important; margin: 0 !important; padding: 0 !important;}
-        .dashboard-welcome h1 { font-size: 1.3rem !important; margin: 0 0 -2px 0 !important; line-height: 1.2 !important; }
-        .dashboard-welcome p { font-size: 0.85rem !important; margin: 0 !important; line-height: 1.2 !important; }
+        .dashboard-intro {
+          width: 100% !important;
+          display: flex !important;
+          flex-direction: column !important;
+          align-items: flex-start !important;
+          text-align: left !important;
+        }
+        .dashboard-welcome {
+          width: 100% !important;
+          margin: 0 !important;
+          padding: 0 !important; 
+          text-align: left !important; 
+        }
+        .dashboard-welcome h1 {
+          font-size: 1.3rem !important;
+          margin: 0 0 -2px 0 !important; 
+          line-height: 1.2 !important;
+        }
+        .dashboard-welcome p {
+          font-size: 0.85rem !important;
+          margin: 0 !important;
+          line-height: 1.2 !important;
+        }
+        
         .dashboard-stats {
-          display: block !important; position: absolute !important; top: 5px !important; right: 15px !important; 
-          width: 100px !important; height: 100px !important; background-position: top right !important; margin: 0 !important; z-index: 10 !important;
+          display: block !important;
+          position: absolute !important;
+          top: 5px !important;      
+          right: 15px !important;   
+          width: 100px !important;   
+          height: 100px !important;  
+          background-position: top right !important; 
+          margin: 0 !important;
+          z-index: 10 !important;
         }
+        
         .dashboard-clock-card {
-          display: flex !important; flex-direction: column !important; width: 75% !important; max-width: 260px !important; 
-          height: auto !important; padding: 12px 15px !important; margin: 5px 0 0 0 !important; position: relative !important;
+          display: flex !important;
+          flex-direction: column !important;
+          width: 75% !important;        
+          max-width: 260px !important;  
+          height: auto !important; 
+          padding: 12px 15px !important; 
+          margin: 0 !important;         
+          margin-top: 5px !important; 
+          position: relative !important;
         }
-        .dashboard-clock-card .clock-main { font-size: 1.8rem !important; text-align: right !important; line-height: 1.1 !important; }
-        .dashboard-clock-card .clock-header, .dashboard-clock-card .clock-date { font-size: 0.8rem !important; white-space: nowrap !important; }
-      }
-
-      /* ================== 急救补丁：斩草除根 ================== */
-      
-      /* 强行把所有可能是底色的变量直接改掉（MeNav 常用套路） */
-      :root, html, body {
-        --bg-color: transparent !important;
-        --background-color: transparent !important;
-        --card-bg: rgba(255, 255, 255, 0.4) !important;
-        --card-background: rgba(255, 255, 255, 0.4) !important;
-        --panel-bg: rgba(255, 255, 255, 0.4) !important;
-        background-color: transparent !important;
-      }
-
-      /* 把所有带颜色的框框全部强制归零 */
-      div, section, main, nav, aside, header, footer {
-        background-color: transparent !important;
-        box-shadow: none !important;
-      }
-
-      /* 然后再把特定的卡片和框框画上毛玻璃半透明底色 */
-      .search-box,
-      .dashboard-clock-card,
-      .dashboard-panel,
-      .sites-grid > a,
-      .sites-grid > div,
-      .nav-item,
-      section.category {
-        background-color: rgba(255, 255, 255, 0.35) !important; /* 白天模式 */
-        backdrop-filter: blur(12px) !important;
-        -webkit-backdrop-filter: blur(12px) !important;
-        border: 1px solid rgba(255, 255, 255, 0.4) !important;
-        box-shadow: none !important;
-      }
-
-      /* 黑夜模式适配 */
-      html[data-theme-mode="dark"]:not(.light-theme) .search-box,
-      html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card,
-      html[data-theme-mode="dark"]:not(.light-theme) .dashboard-panel,
-      html[data-theme-mode="dark"]:not(.light-theme) .sites-grid > a,
-      html[data-theme-mode="dark"]:not(.light-theme) .sites-grid > div,
-      html[data-theme-mode="dark"]:not(.light-theme) .nav-item,
-      html[data-theme-mode="dark"]:not(.light-theme) section.category {
-        background-color: rgba(30, 35, 50, 0.5) !important;
-        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        
+        .dashboard-clock-card .clock-main {
+          font-size: 1.8rem !important; 
+          text-align: right !important;
+          line-height: 1.1 !important;
+        }
+        .dashboard-clock-card .clock-header,
+        .dashboard-clock-card .clock-date {
+          font-size: 0.8rem !important;
+          white-space: nowrap !important; 
+        }
       }
     </style>
   </head>
