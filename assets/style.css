@@ -307,19 +307,18 @@ html[data-theme-mode="dark"]:not(.light-theme) .nav-item.active {
   }
 }
 
-/* ================== 5. 作品集画廊模式 ================== */
-/* 假设你的分类名字叫“作品集”，那么它的 data-id 可能是“作品集” */
+/* ================== 5. 作品集画廊大图模式 (终极版) ================== */
 section.category[data-id="作品集"] .sites-grid {
   display: grid !important;
-  grid-template-columns: repeat(2, 1fr) !important; /* 两列大图，手机端会自动变一列 */
+  grid-template-columns: repeat(2, 1fr) !important; 
   gap: 20px !important;
 }
 
 section.category[data-id="作品集"] .site-card {
   display: flex !important;
   flex-direction: column !important;
-  justify-content: flex-end !important; /* 文字推到底部 */
-  height: 260px !important; /* 卡片高度，可按需修改 */
+  justify-content: flex-end !important; 
+  height: 260px !important; /* 卡片高度 */
   padding: 0 !important;
   border-radius: 16px !important;
   overflow: hidden !important;
@@ -335,25 +334,33 @@ section.category[data-id="作品集"] .site-card:hover {
   box-shadow: 0 15px 30px rgba(0,0,0,0.4) !important;
 }
 
-/* 把图标变成全屏大背景图 */
+/* 💥 核心：暴力定位并撑满图标容器 */
 section.category[data-id="作品集"] .site-card-icon {
   position: absolute !important;
   top: 0 !important; left: 0 !important; 
   width: 100% !important; height: 100% !important;
   margin: 0 !important;
+  padding: 0 !important;
   z-index: 1 !important;
   background: transparent !important;
-}
-
-section.category[data-id="作品集"] .site-card-icon img,
-section.category[data-id="作品集"] .site-card-icon svg {
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: cover !important; /* 等比填满，多余部分裁剪 */
   border-radius: 0 !important;
 }
 
-/* 文字区域加一层半透明黑色遮罩，保证字能看清 */
+/* 💥 核心：暴力放大里面的 img 标签 */
+section.category[data-id="作品集"] .site-card-icon img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important; /* 等比填满，多余裁剪 */
+  border-radius: 0 !important;
+  display: block !important;
+}
+
+/* 如果里面是字体图标，就把它隐藏掉 */
+section.category[data-id="作品集"] .site-card-icon i {
+  display: none !important;
+}
+
+/* 文字区域加渐变黑色遮罩 */
 section.category[data-id="作品集"] .site-card-content {
   position: relative !important;
   z-index: 2 !important;
@@ -378,12 +385,12 @@ section.category[data-id="作品集"] .site-card-content p {
   text-shadow: 0 1px 3px rgba(0,0,0,0.8) !important;
 }
 
-/* 手机端时，画廊变成单列 */
+/* 手机端画廊单列 */
 @media (max-width: 768px) {
   section.category[data-id="作品集"] .sites-grid {
     grid-template-columns: 1fr !important;
   }
   section.category[data-id="作品集"] .site-card {
-    height: 200px !important; /* 手机端矮一点 */
+    height: 220px !important;
   }
 }
