@@ -95,19 +95,8 @@ const fontAwesomePreload = `<link rel="preload" href="${fontAwesomeCssUrl}" as="
         z-index: 1 !important; 
       }
 
-      /* 电脑端螃蟹尺寸 */
+      /* 只隐藏不需要的文字，尺寸全交给 style.css */
       .dashboard-stats > * { display: none !important; }
-      .dashboard-stats {
-        width: 320px !important; 
-        height: 260px !important; 
-        margin: 0 auto !important;
-        background-image: url('https://shirasu224.github.io/menav/pics/the-spycrab2.png') !important;
-        background-size: contain !important; 
-        background-repeat: no-repeat !important;
-        background-position: center !important;
-        background-color: transparent !important;
-        border: none !important;
-      }
     </style>
   </head>
   <body class="loading">
@@ -155,7 +144,7 @@ const fontAwesomePreload = `<link rel="preload" href="${fontAwesomeCssUrl}" as="
         <div class="sidebar-social" data-container="social-links">
           <SocialLinks
             social={config.social || []}
-            allowedSchemes={renderContext?.allowedSchemes}
+            renderContext={renderContext}
           />
         </div>
 
