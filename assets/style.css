@@ -102,3 +102,63 @@
     white-space: nowrap !important;
   }
 }
+/* ================== 分类框和卡片的透明美化 ================== */
+
+/* 1. 针对深色模式（你截图里正在用的） */
+html[data-theme-mode="dark"]:not(.light-theme) section.category {
+  background-color: rgba(30, 35, 50, 0.4) !important; /* 大分类框：深色半透明 */
+  border: 1px solid rgba(255, 255, 255, 0.1) !important; /* 极细边框增加质感 */
+  box-shadow: none !important; /* 去掉厚重的阴影 */
+}
+
+html[data-theme-mode="dark"]:not(.light-theme) .sites-grid > a,
+html[data-theme-mode="dark"]:not(.light-theme) .sites-grid > div {
+  background-color: rgba(45, 50, 65, 0.6) !important; /* 里面的小卡片：稍微实一点点 */
+  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+  box-shadow: none !important;
+}
+
+/* 搜索框和侧边栏导航 */
+html[data-theme-mode="dark"]:not(.light-theme) .search-box,
+html[data-theme-mode="dark"]:not(.light-theme) .nav-item {
+  background-color: rgba(30, 35, 50, 0.5) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: none !important;
+}
+
+
+/* 2. 针对浅色模式（白天用的时候也不突兀） */
+html.light-theme section.category {
+  background-color: rgba(255, 255, 255, 0.3) !important;
+  border: 1px solid rgba(255, 255, 255, 0.5) !important;
+  box-shadow: none !important;
+}
+
+html.light-theme .sites-grid > a,
+html.light-theme .sites-grid > div {
+  background-color: rgba(255, 255, 255, 0.6) !important;
+  border: 1px solid rgba(255, 255, 255, 0.8) !important;
+  box-shadow: none !important;
+}
+
+html.light-theme .search-box,
+html.light-theme .nav-item {
+  background-color: rgba(255, 255, 255, 0.6) !important;
+  border: 1px solid rgba(255, 255, 255, 0.8) !important;
+  box-shadow: none !important;
+}
+
+/* 3. 搜索框内部的输入框必须透明 */
+input#search {
+  background-color: transparent !important;
+}
+
+/* 4. 鼠标放上去的反馈效果（悬停变亮一点） */
+html[data-theme-mode="dark"]:not(.light-theme) .sites-grid > a:hover,
+html[data-theme-mode="dark"]:not(.light-theme) .sites-grid > div:hover {
+  background-color: rgba(60, 65, 80, 0.8) !important;
+}
+html.light-theme .sites-grid > a:hover,
+html.light-theme .sites-grid > div:hover {
+  background-color: rgba(255, 255, 255, 0.9) !important;
+}
