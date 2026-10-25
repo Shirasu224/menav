@@ -26,14 +26,15 @@ html, body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "PingFang SC", "Microsoft YaHei", sans-serif !important;
 }
 
-/* ================== 1. 标题完美对齐与渐变字 ================== */
+/* ================== 1. 标题排版与渐变字 ================== */
 .dashboard-welcome {
   display: flex !important;
   flex-direction: column !important;
-  align-items: flex-start !important; 
+  align-items: flex-start !important; /* 整体默认靠左 */
   text-align: left !important;
   padding: 0 !important;
   margin: 0 !important;
+  width: 100% !important;
 }
 
 .welcome-title,
@@ -49,20 +50,23 @@ html, body {
   line-height: 1.2 !important;
   text-align: left !important;
   filter: drop-shadow(0 0 6px rgba(184, 220, 255, 0.25)) !important;
-  letter-spacing: 2px !important; /* 💥 老宋体稍微拉开一点更大气 */
+  letter-spacing: 2px !important; 
 }
 
 .welcome-subtitle,
 .dashboard-welcome p {
   color: #ffc2c2 !important;
   font-weight: 700 !important;
-  margin: 6px 0 0 0 !important; /* 稍微加大一点和主标题的距离 */
+  margin: 5px 0 0 0 !important; /* 稍微拉开一点上下间距 */
   padding: 0 !important;
-  padding-left: 1px !important; /* 💥 副标题向右挪 1px 寻找视觉平衡 */
   line-height: 1.2 !important;
-  text-align: left !important; 
+  text-align: right !important; /* 文字本身靠右 */
   text-shadow: 0 0 6px rgba(255, 194, 194, 0.25) !important;
-  letter-spacing: 1px !important; /* 💥 副标题字间距 */
+  letter-spacing: 1px !important;
+  
+  /* 💥 核心魔法：让它向右移动，去绿框的位置 */
+  align-self: flex-end !important; /* 让副标题在 Flex 容器中靠右对齐 */
+  margin-right: 30px !important;   /* 距离右边边缘留一点空隙，具体数值你可以自己调（比如 10px, 50px） */
 }
 
 /* ================== 2. 渐变半透明卡片 ================== */
