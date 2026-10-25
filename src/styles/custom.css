@@ -1,1 +1,62 @@
+/* ================== 框框半透明美化 ================== */
 
+/* 1. 清理所有可能阻挡背景的大容器 */
+html, body, #app, .layout, .content, main, .page, .page-template-home, .dashboard-grid, .dashboard-intro, .dashboard-welcome, .category-content, .dashboard-panel, section.category {
+    background-color: transparent !important;
+    background-image: none !important;
+    box-shadow: none !important;
+}
+
+/* 2. 给所有卡片和输入框加毛玻璃效果 */
+.nav-item,
+.search-box,
+.sites-grid > a,
+.sites-grid > div,
+.dashboard-clock-card {
+    background-color: rgba(255, 255, 255, 0.4) !important; /* 浅色模式半透明白 */
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.5) !important;
+    box-shadow: none !important;
+    border-radius: 12px !important;
+}
+
+/* 3. 深色模式下的卡片颜色 */
+html:not(.light-theme) .nav-item,
+html:not(.light-theme) .search-box,
+html:not(.light-theme) .sites-grid > a,
+html:not(.light-theme) .sites-grid > div,
+html:not(.light-theme) .dashboard-clock-card {
+    background-color: rgba(30, 35, 50, 0.6) !important; /* 深色半透明 */
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+/* 4. 大分类框（稍微更透一点，区分层级） */
+section.category {
+    background-color: rgba(255, 255, 255, 0.2) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+}
+html:not(.light-theme) section.category {
+    background-color: rgba(20, 25, 35, 0.4) !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+
+/* 5. 搜索框内部透明 */
+input#search {
+    background-color: transparent !important;
+}
+
+/* 6. 悬停反馈 */
+.nav-item:hover, .sites-grid > a:hover, .sites-grid > div:hover {
+    background-color: rgba(255, 255, 255, 0.6) !important;
+}
+html:not(.light-theme) .nav-item:hover, 
+html:not(.light-theme) .sites-grid > a:hover, 
+html:not(.light-theme) .sites-grid > div:hover {
+    background-color: rgba(50, 55, 70, 0.8) !important;
+}
+
+/* 7. 时钟卡片颜色文字适配 */
+html:not(.light-theme) .dashboard-clock-card * { color: #ffffff !important; }
