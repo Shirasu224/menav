@@ -17,7 +17,7 @@
 @import './styles/components.css';
 @import './styles/utilities.css';
 
-/* ================== 0. 禁用微信字体强制放大 ================== */
+/* ================== 0. 字体防缩放 ================== */
 html, body {
   -webkit-text-size-adjust: 100% !important;
   text-size-adjust: 100% !important;
@@ -38,60 +38,62 @@ html, body {
   font-weight: 700 !important;
   text-shadow: 0 0 6px rgba(255, 194, 194, 0.25) !important;
 }
-html.light-theme .dashboard-welcome h1 {
-  filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.4)) !important; 
-}
-html.light-theme .dashboard-welcome p {
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6) !important; 
+html.light-theme .dashboard-welcome h1 { filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.4)) !important; }
+html.light-theme .dashboard-welcome p { text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6) !important; }
+
+/* ================== 2. 终极透明化 (彻底扒光电脑端白底) ================== */
+/* 暴力打击所有可能的容器，去掉白底和阴影 */
+section.category,
+section.category > div,
+.category-content,
+.sites-grid {
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
 }
 
-/* ================== 2. 透明度调优 (大框透，小框微实) ================== */
-/* 浅色模式 */
+/* 浅色模式：稍微调实一点（大框 45% 白，小框 75% 白） */
 html.light-theme section.category {
-  background-color: rgba(255, 255, 255, 0.3) !important; /* 大框：30% 白 */
-  border: 1px solid rgba(255, 255, 255, 0.4) !important;
-  box-shadow: none !important;
+  background-color: rgba(255, 255, 255, 0.45) !important; 
+  border: 1px solid rgba(255, 255, 255, 0.5) !important;
 }
 html.light-theme .sites-grid a,
 html.light-theme .sites-grid div {
-  background-color: rgba(255, 255, 255, 0.6) !important; /* 小框：60% 白（更实一点） */
-  border: 1px solid rgba(255, 255, 255, 0.8) !important;
-  box-shadow: none !important;
+  background-color: rgba(255, 255, 255, 0.75) !important; 
+  border: 1px solid rgba(255, 255, 255, 0.9) !important;
 }
 html.light-theme .search-box,
 html.light-theme .nav-item {
-  background-color: rgba(255, 255, 255, 0.5) !important;
-  border: 1px solid rgba(255, 255, 255, 0.6) !important;
+  background-color: rgba(255, 255, 255, 0.65) !important;
+  border: 1px solid rgba(255, 255, 255, 0.7) !important;
 }
 html.light-theme .dashboard-clock-card {
-  background: rgba(255, 255, 255, 0.2) !important;
-  border: 1px solid rgba(255, 255, 255, 0.4) !important;
-  border-radius: 16px !important;
+  background: rgba(255, 255, 255, 0.4) !important;
+  border: 1px solid rgba(255, 255, 255, 0.6) !important;
 }
 
-/* 深色模式 */
+/* 深色模式：稍微调实一点（大框 50% 黑，小框 75% 黑） */
 html[data-theme-mode="dark"]:not(.light-theme) section.category {
-  background-color: rgba(30, 35, 50, 0.4) !important; /* 大框：40% 深色 */
+  background-color: rgba(30, 35, 50, 0.5) !important; 
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
-  box-shadow: none !important;
 }
 html[data-theme-mode="dark"]:not(.light-theme) .sites-grid a,
 html[data-theme-mode="dark"]:not(.light-theme) .sites-grid div {
-  background-color: rgba(45, 50, 65, 0.7) !important; /* 小框：70% 深色（更实） */
+  background-color: rgba(45, 50, 65, 0.75) !important; 
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
-  box-shadow: none !important;
 }
 html[data-theme-mode="dark"]:not(.light-theme) .search-box,
 html[data-theme-mode="dark"]:not(.light-theme) .nav-item {
-  background-color: rgba(30, 35, 50, 0.5) !important;
+  background-color: rgba(30, 35, 50, 0.6) !important;
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
 html[data-theme-mode="dark"]:not(.light-theme) .dashboard-clock-card {
-  background: rgba(70, 83, 124, 0.2) !important; 
+  background: rgba(70, 83, 124, 0.4) !important; 
   border: 1px solid rgba(255, 255, 255, 0.15) !important;
-  border-radius: 16px !important;
 }
+
 input#search { background-color: transparent !important; }
+
 
 /* ================== 3. PC 端排版 (> 1024px) ================== */
 @media (min-width: 1025px) {
@@ -108,12 +110,9 @@ input#search { background-color: transparent !important; }
   }
 }
 
-/* ================== 4. 手机端专属排版 (<= 1024px) ================== */
+/* ================== 4. 手机端专属排版 (重构时钟排版防乱飘) ================== */
 @media (max-width: 1024px) {
-  section.category::before,
-  section.category::after {
-    display: none !important;
-  }
+  section.category::before, section.category::after { display: none !important; }
 
   .dashboard-grid {
     display: flex !important;
@@ -125,7 +124,6 @@ input#search { background-color: transparent !important; }
     position: relative !important;
   }
 
-  /* 标题区往下推 */
   .dashboard-intro {
     width: 100% !important;
     display: flex !important;
@@ -134,7 +132,7 @@ input#search { background-color: transparent !important; }
     text-align: left !important;
     padding-right: 90px !important;
     box-sizing: border-box !important;
-    margin-bottom: 30px !important; /* 适当拉开距离 */
+    margin-bottom: 40px !important; 
     position: relative !important; 
   }
 
@@ -146,7 +144,7 @@ input#search { background-color: transparent !important; }
   .dashboard-stats {
     display: block !important;
     position: absolute !important;
-    top: -10px !important;
+    top: -15px !important;
     right: 0px !important;
     width: 100px !important;
     height: 100px !important;
@@ -161,45 +159,54 @@ input#search { background-color: transparent !important; }
   }
   .dashboard-stats * { display: none !important; visibility: hidden !important; }
 
-  /* 时钟卡片重置 */
   .dashboard-panel {
     width: 100% !important;
-    margin-top: 15px !important; 
+    margin-top: 10px !important; 
   }
   
+  /* 💥 放弃 flex，用最稳定的块级排版镇压 Edge 乱飘 */
   .dashboard-clock-card {
-    display: flex !important;
-    flex-direction: column !important;
+    display: block !important;
     width: 100% !important; 
     height: auto !important;
     padding: 20px !important; 
     margin: 0 !important;
     box-sizing: border-box !important;
     border-radius: 16px !important;
+    position: relative !important;
   }
 
-  /* 修复手机端时钟内排版错乱 */
+  /* 强制所有的内部 div 老老实实按块显示 */
   .dashboard-clock-card > div {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    justify-content: space-between !important;
-    align-items: center !important;
+    display: block !important;
     width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
   }
 
-  /* 强制压制微信字体放大，并精准设置字号 */
+  /* 问候语和周数 */
   .dashboard-clock-card .clock-header,
-  .dashboard-clock-card .clock-date {
+  .dashboard-clock-card [class*="header"] {
+    font-size: 14px !important;
+    line-height: 1.5 !important;
+    margin-bottom: 5px !important;
+  }
+
+  /* 日期 */
+  .dashboard-clock-card .clock-date,
+  .dashboard-clock-card [class*="date"] {
     font-size: 13px !important;
-    line-height: 1.2 !important;
-    white-space: nowrap !important; 
+    line-height: 1.5 !important;
   }
   
-  .dashboard-clock-card .clock-main {
-    font-size: 28px !important; 
-    line-height: 1.2 !important;
+  /* 时间：强行右对齐，并独占一行 */
+  .dashboard-clock-card .clock-main,
+  .dashboard-clock-card [class*="clock-time"] {
+    font-size: 32px !important; 
+    line-height: 1 !important;
     text-align: right !important;
-    margin-top: 10px !important;
+    display: block !important;
     width: 100% !important;
+    margin-top: 10px !important;
   }
 }
