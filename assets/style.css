@@ -26,7 +26,7 @@ html, body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "PingFang SC", "Microsoft YaHei", sans-serif !important;
 }
 
-/* ================== 1. 标题排版与渐变字 ================== */
+/* ================== 1. 标题排版与三色渐变 ================== */
 .dashboard-welcome {
   display: flex !important;
   flex-direction: column !important;
@@ -37,56 +37,63 @@ html, body {
   width: 100% !important;
 }
 
-/* --- 浅色模式（白天）：蓝粉渐变 --- */
+/* --- 公共基础设置 --- */
 .welcome-title,
-html.light-theme .welcome-title,
-html.light-theme .dashboard-welcome h1 {
-  background: linear-gradient(90deg, #b8dcff, #ffc2c2) !important;
-  -webkit-background-clip: text !important;
-  background-clip: text !important;
-  -webkit-text-fill-color: transparent !important;
-  color: transparent !important;
+.dashboard-welcome h1 {
   font-weight: 800 !important;
   margin: 0 !important; 
   padding: 0 !important;
   line-height: 1.2 !important;
   text-align: left !important;
-  filter: drop-shadow(0 0 6px rgba(184, 220, 255, 0.25)) !important;
   letter-spacing: 2px !important; 
+  white-space: nowrap !important; /* 💥 强制不换行，字再多也在一行 */
 }
 
 .welcome-subtitle,
-html.light-theme .welcome-subtitle,
-html.light-theme .dashboard-welcome p {
-  color: #ffc2c2 !important;
+.dashboard-welcome p {
   font-weight: 700 !important;
   margin: 5px 0 0 0 !important; 
   padding: 0 !important;
   line-height: 1.2 !important;
   text-align: right !important; 
-  text-shadow: 0 0 6px rgba(255, 194, 194, 0.25) !important;
   letter-spacing: 1px !important;
-  align-self: flex-end !important; 
+  align-self: flex-end !important; /* 💥 强制靠右对齐（绿框位置） */
   margin-right: 30px !important;   
 }
 
-/* --- 深色模式（黑夜）：深蓝红渐变 --- */
-html[data-theme-mode="dark"]:not(.light-theme) .welcome-title,
-html[data-theme-mode="dark"]:not(.light-theme) .dashboard-welcome h1 {
-  background: linear-gradient(90deg, #3587b1, #e87d7d) !important;
+/* --- 浅色模式（白天）：蓝-白-粉 三色渐变 --- */
+html.light-theme .welcome-title,
+html.light-theme .dashboard-welcome h1 {
+  background: linear-gradient(90deg, #b8dcff, #ffffff, #ffc2c2) !important;
   -webkit-background-clip: text !important;
   background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
   color: transparent !important;
-  filter: drop-shadow(0 0 8px rgba(53, 135, 177, 0.3)) !important; /* 深蓝微光 */
+  /* 柔和的白色微光 */
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.6)) !important; 
+}
+html.light-theme .welcome-subtitle,
+html.light-theme .dashboard-welcome p {
+  color: #ffc2c2 !important;
+  text-shadow: 0 0 6px rgba(255, 194, 194, 0.4) !important;
 }
 
+/* --- 深色模式（黑夜）：深蓝-白-红 三色渐变 --- */
+html[data-theme-mode="dark"]:not(.light-theme) .welcome-title,
+html[data-theme-mode="dark"]:not(.light-theme) .dashboard-welcome h1 {
+  background: linear-gradient(90deg, #3587b1, #ffffff, #e87d7d) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent !important;
+  /* 柔和的不伤眼微光 */
+  filter: drop-shadow(0 0 8px rgba(53, 135, 177, 0.4)) drop-shadow(0 0 15px rgba(232, 125, 125, 0.2)) !important; 
+}
 html[data-theme-mode="dark"]:not(.light-theme) .welcome-subtitle,
 html[data-theme-mode="dark"]:not(.light-theme) .dashboard-welcome p {
-  color: #e87d7d !important; /* 夜间纯红 */
-  text-shadow: 0 0 8px rgba(232, 125, 125, 0.3) !important; /* 红色微光 */
+  color: #e87d7d !important;
+  text-shadow: 0 0 8px rgba(232, 125, 125, 0.3) !important;
 }
-
 /* ================== 2. 渐变半透明卡片 ================== */
 section.category, .category-header, .category-content, .sites-grid {
   background: transparent !important;
