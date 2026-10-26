@@ -398,11 +398,11 @@ section[data-name="作品集"] .site-card-content p {
 .music-btn {
   position: fixed;
   /* 💥 1. 调整位置：把它推到原有按钮的上方 */
-  bottom: 140px;  /* 如果觉得太高或太低，改这个数值（比如 130px） */
+  bottom: 130px;  /* 如果觉得太高或太低，改这个数值（比如 130px） */
   right: 30px;    /* 保持和下面按钮右侧对齐 */
   
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   /* 💥 2. 统一风格：圆角矩形 + 半透明底色 + 毛玻璃 */
   border-radius: 12px; 
   background: rgba(255, 255, 255, 0.15);
