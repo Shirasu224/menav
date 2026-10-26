@@ -542,20 +542,19 @@ html.light-theme .music-btn.playing {
     height: 30px !important;
     font-size: 11px !important;
   }
-/* ================== 1. 左侧导航栏：用伪元素强行插入 ================== */
-.sidebar { width: 260px !important; min-width: 260px !important; }
-
-.submenu-item {
-  position: relative !important;
-  padding-left: 26px !important; /* 给左侧留出 26px 空间 */
-  display: flex !important;
-  align-items: center !important;
+/* ================== 左侧导航栏图标 ================== */
+.sidebar {
+  width: 260px !important;
+  min-width: 260px !important;
 }
 
-/* 隐藏原生的所有图标 */
-.submenu-item > i { display: none !important; }
+/* 给左侧菜单项加定位和左侧留白 */
+.submenu-item {
+  position: relative !important;
+  padding-left: 28px !important; 
+}
 
-/* 用 ::before 强行画图标 */
+/* 强制画出左侧图标 */
 .submenu-item::before {
   content: "" !important;
   position: absolute !important;
@@ -567,27 +566,20 @@ html.light-theme .music-btn.playing {
   background-size: contain !important;
   background-repeat: no-repeat !important;
   background-position: center !important;
-  pointer-events: none !important; 
+  pointer-events: none !important; /* 鼠标穿透，不影响悬浮 */
 }
 
-/* 替换成你的链接 */
 .submenu-item[data-category*="狗谍"]::before {
   background-image: url('https://shirasu224.github.io/menav/icons/scoutspy.png') !important;
 }
-.submenu-item[data-category*="支援组"]::before {
-  background-image: url('https://shirasu224.github.io/menav/icons/food.png') !important;
-}
 
 
-/* ================== 2. 右侧主区域：绝对定位 + 死磕空间 ================== */
+/* ================== 右侧分类标题图标 ================== */
 section.category[data-name] .category-header h2 {
   position: relative !important;
-  padding-left: 32px !important; /* 强行推开 32px */
-  margin-left: 0 !important;
-  display: block !important; /* 保证块级排版，箭头被挤到右边 */
+  padding-left: 32px !important;
 }
 
-/* 强行画图标 */
 section.category[data-name] .category-header h2::before {
   content: "" !important;
   position: absolute !important;
@@ -596,27 +588,20 @@ section.category[data-name] .category-header h2::before {
   transform: translateY(-50%) !important;
   width: 26px !important;
   height: 26px !important;
-  
-  /* 测试背景，如果生效你会看到一块淡红色 */
-  background-color: rgba(255, 0, 0, 0.2) !important; 
   background-size: contain !important;
   background-repeat: no-repeat !important;
   background-position: center !important;
-  z-index: 10 !important;
 }
 
-/* 替换成你的链接 */
 section.category[data-name*="狗谍"] .category-header h2::before {
   background-image: url('https://shirasu224.github.io/menav/icons/scoutspy.png') !important;
 }
-section.category[data-name*="支援组"] .category-header h2::before {
-  background-image: url('https://shirasu224.github.io/menav/icons/food.png') !important;
-}
 
-/* ================== 3. 手机端 ================== */
+
+/* ================== 手机端适配 ================== */
 @media (max-width: 768px) {
   .sidebar { width: 220px !important; min-width: 220px !important; }
-  .submenu-item { padding-left: 22px !important; }
+  .submenu-item { padding-left: 24px !important; }
   .submenu-item::before { width: 14px !important; height: 14px !important; left: 6px !important; }
   section.category[data-name] .category-header h2 { padding-left: 26px !important; }
   section.category[data-name] .category-header h2::before { width: 22px !important; height: 22px !important; }
