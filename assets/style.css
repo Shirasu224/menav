@@ -543,33 +543,39 @@ html.light-theme .music-btn.playing {
     font-size: 11px !important;
   }
 }
-/* ================== 1. 左侧导航栏：用 gap 控间距，完美保留悬浮特效 ================== */
+/* ================== 1. 左侧导航栏：暴力贴紧，保留特效 ================== */
 .sidebar {
   width: 260px !important;
   min-width: 260px !important;
 }
 
-/* 把父容器变成 flex，不破坏 a 标签本身的悬浮动画 */
+/* 让整体变成 flex */
 .submenu-item {
   display: flex !important; 
   align-items: center !important;
-  gap: 4px !important; /* 💥 原生文字和图标之间只留 4px 间距 */
+  /* 💥 取消 gap，改用强制负边距 */
 }
 
 /* 针对原生的 <i> 换成图片 */
 .submenu-item > i {
-  display: inline-block !important;
-  width: 16px !important;
-  height: 16px !important;
-  margin: 0 !important; /* 清除原生的 margin */
-  background-size: contain !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 20px !important;
+  height: 20px !important;
+  
+  /* 💥 核心：让图片右侧变成负 4px，强行吃掉后面的空格 */
+  margin-right: -4px !important; 
+  padding-right: 8px !important; /* 用 padding 撑开图片的真实可见区域 */
+  
+  background-size: 16px 16px !important; /* 固定图片大小 */
   background-repeat: no-repeat !important;
-  background-position: center !important;
+  background-position: left center !important;
   color: transparent !important; 
   font-size: 0 !important;       
 }
 
-/* 填入你的图片 */
+/* 图片路径（请替换你自己的链接） */
 .submenu-item[data-category*="狗谍"] > i {
   background-image: url('https://shirasu224.github.io/menav/icons/scoutspy.png') !important;
 }
@@ -578,24 +584,27 @@ html.light-theme .music-btn.playing {
 }
 
 
-/* ================== 2. 右侧主区域：绝对定位 + 强制 padding，消灭所有缝隙 ================== */
+/* ================== 2. 右侧主区域：放弃绝对定位，使用双重负边距 ================== */
+/* 先清除所有可能干扰的 padding 和定位 */
 section[data-name] .category-header h2 {
-  position: relative !important; /* 💥 必须设为相对定位作为基准 */
-  padding-left: 26px !important; /* 💥 给左侧留出 26px 空间（24px图标+2px缝隙） */
-  text-indent: 0 !important; 
-  margin-left: 0 !important;
+  position: relative !important;
+  padding-left: 0 !important;
+  margin-left: -4px !important; /* 让整个标题区块往左移一点 */
+  display: block !important;
 }
 
+/* 使用伪元素插入图片 */
 section[data-name] .category-header h2::before {
   content: "" !important;
-  position: absolute !important; /* 💥 图标绝对定位，脱离文档流 */
-  left: 0 !important;            /* 💥 紧紧贴在 h2 的最左边缘 */
-  top: 50% !important;           /* 垂直居中 */
-  transform: translateY(-50%) !important;
+  display: inline-block !important; /* 回归 inline-block */
+  vertical-align: middle !important;
   
-  width: 22px !important;  /* 图标宽度 */
-  height: 22px !important; 
-  margin: 0 !important;
+  width: 22px !important; 
+  height: 22px !important;
+  
+  /* 💥 核弹级负边距：左边往回缩，右边强行把文字拽过来 */
+  margin-left: 0 !important;
+  margin-right: -6px !important; 
   
   background-size: contain !important;
   background-repeat: no-repeat !important;
@@ -610,6 +619,12 @@ section[data-name*="支援组"] .category-header h2::before {
   background-image: url('https://shirasu224.github.io/menav/icons/food.png') !important;
 }
 
+/* 强制文字前面的隐藏元素不占位 */
+section[data-name] .category-header h2 span {
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+}
+
 
 /* ================== 3. 手机端适配 ================== */
 @media (max-width: 768px) {
@@ -617,18 +632,12 @@ section[data-name*="支援组"] .category-header h2::before {
     width: 220px !important; 
     min-width: 220px !important;
   }
-  .submenu-item {
-    gap: 2px !important;
-  }
   .submenu-item > i {
-    width: 14px !important;
-    height: 14px !important;
-  }
-  section[data-name] .category-header h2 {
-    padding-left: 22px !important;
+    background-size: 14px 14px !important;
   }
   section[data-name] .category-header h2::before {
     width: 18px !important; 
     height: 18px !important;
+    margin-right: -4px !important;
   }
 }
