@@ -411,13 +411,12 @@ section[data-name="作品集"] .site-card-content p {
   width: 42px;
   height: 42px;
   border-radius: 50%;
-  /* 💥 提高不透明度：从 0.15 改为 0.5 */
   background: rgba(30, 35, 50, 0.5);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.3);
   color: #ffffff;
-  font-size: 18px; /* 图标大小 */
+  font-size: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -426,12 +425,19 @@ section[data-name="作品集"] .site-card-content p {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
+/* 💥 魔法微调：让三角形视觉居中 */
+.music-btn .fa-play {
+  margin-left: 3px; /* 把三角形往右推 3px */
+}
+.music-btn .fa-music {
+  margin-left: 0; /* 音符不需要推 */
+}
+
 /* 上一首/下一首 小按钮 */
 .music-sub-btn {
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  /* 💥 提高不透明度 */
   background: rgba(30, 35, 50, 0.4);
   backdrop-filter: blur(5px);
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -468,12 +474,11 @@ html.light-theme .music-sub-btn:hover {
   color: #000;
 }
 
-/* 💥 播放状态：只旋转图标所在的按钮，并且发光 */
+/* 💥 播放状态 */
 .music-btn.playing {
   color: #ffc2c2; 
   border-color: rgba(255, 194, 194, 0.6);
   box-shadow: 0 0 15px rgba(255, 194, 194, 0.4);
-  /* 旋转动画绑定在这个按钮上 */
   animation: spin 4s linear infinite;
 }
 html.light-theme .music-btn.playing {
