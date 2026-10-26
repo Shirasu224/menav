@@ -490,3 +490,56 @@ html.light-theme .music-btn.playing {
 @keyframes spin {
   100% { transform: rotate(360deg); }
 }
+
+/* ================== 6. 手机端底部按钮与音乐播放器对齐优化 ================== */
+@media (max-width: 1024px) {
+  /* 1. 强行缩小原生的两个大按钮（展开/收起分类、切换主题） */
+  .category-toggle, 
+  .theme-toggle {
+    width: 42px !important;
+    height: 42px !important;
+    min-width: 42px !important;
+    min-height: 42px !important;
+    font-size: 16px !important;
+    right: 15px !important; /* 靠右对齐 */
+    border-radius: 12px !important; /* 改成圆角矩形 */
+    background: rgba(255, 255, 255, 0.15) !important;
+    backdrop-filter: blur(10px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  }
+  
+  /* 浅色模式下的底部按钮 */
+  html.light-theme .category-toggle, 
+  html.light-theme .theme-toggle {
+    background: rgba(255, 255, 255, 0.7) !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    color: #333 !important;
+  }
+
+  /* 调整这两个按钮的上下间距 */
+  .theme-toggle {
+    bottom: 20px !important; 
+  }
+  .category-toggle {
+    bottom: 75px !important;
+  }
+
+  /* 2. 把音乐播放器组拉过来，和底部按钮完美对齐 */
+  .music-player-group {
+    right: 15px !important; /* 和底部按钮的 right: 15px 对齐 */
+    bottom: 135px !important; /* 刚好放在展开按钮的上方 */
+    gap: 8px !important; /* 稍微缩小音乐按钮之间的间距 */
+  }
+
+  /* 顺便把音乐按钮的尺寸也稍微收敛一点，和底部按钮保持一致 */
+  .music-btn {
+    width: 42px !important;
+    height: 42px !important;
+    font-size: 16px !important;
+  }
+  .music-sub-btn {
+    width: 30px !important;
+    height: 30px !important;
+    font-size: 11px !important;
+  }
+}
