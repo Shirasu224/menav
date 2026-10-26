@@ -535,7 +535,7 @@ html.light-theme .music-btn.playing {
   }
 } /* 💥 闭合了 @media (max-width: 1024px) */
 
-/* ================== 1. 左侧导航栏：内部清零 + Flex 贴紧 ================== */
+/* ================== 1. 左侧导航栏：原生与自定义完美共存 ================== */
 .sidebar {
   width: 260px !important;
   min-width: 260px !important;
@@ -544,23 +544,29 @@ html.light-theme .music-btn.playing {
 .submenu-item {
   display: flex !important;
   align-items: center !important;
-  gap: 4px !important; /* 极致贴紧，只留 4px */
-  padding-left: 10px !important; 
+  gap: 4px !important; 
 }
 
-/* 彻底隐藏原生所有图标 */
+/* 💥 核心：不再隐藏 <i> 标签，而是把它变成紧凑的容器 */
 .submenu-item > i {
-  display: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 18px !important;
+  height: 18px !important;
+  margin: 0 !important;
+  flex-shrink: 0 !important;
+  font-size: 14px !important; /* 原生图标的大小 */
 }
 
-/* 💥 核心：把内部所有的文字包裹层边距清零 */
+/* 清理文字内层边距 */
 .submenu-item > span,
 .submenu-item > div {
   margin: 0 !important;
   padding: 0 !important;
 }
 
-/* 使用伪元素做图片 */
+/* 用 ::before 作为补充，如果是自定义图片，覆盖在 i 上面 */
 .submenu-item::before {
   content: "" !important;
   display: block !important;
@@ -570,10 +576,18 @@ html.light-theme .music-btn.playing {
   background-size: contain !important;
   background-repeat: no-repeat !important;
   background-position: center !important;
-  pointer-events: none !important; 
+  pointer-events: none !important;
+  display: none !important; /* 默认隐藏伪元素 */
 }
 
-/* 图片路径 */
+/* 如果你有自定义图，开启伪元素，并把原生 <i> 干掉 */
+.submenu-item[data-category*="狗谍"] > i,
+.submenu-item[data-category*="支援组"] > i { display: none !important; }
+
+.submenu-item[data-category*="狗谍"]::before,
+.submenu-item[data-category*="支援组"]::before {
+  display: block !important;
+}
 .submenu-item[data-category*="狗谍"]::before {
   background-image: url('https://shirasu224.github.io/menav/icons/scoutspy.png') !important;
 }
@@ -582,7 +596,7 @@ html.light-theme .music-btn.playing {
 }
 
 
-/* ================== 2. 右侧主区域：全面清理，强制贴合 ================== */
+/* ================== 2. 右侧主区域 ================== */
 section.category[data-name] .category-header h2 {
   display: flex !important;
   align-items: center !important;
@@ -590,31 +604,38 @@ section.category[data-name] .category-header h2 {
   margin: 0 !important;
 }
 
-/* 💥 核心：把 h2 内部所有元素的边距暴力清零，消灭原生空隙 */
 section.category[data-name] .category-header h2 > * {
   margin: 0 !important;
   padding: 0 !important;
 }
 
-/* 隐藏原生可能残留的小图标 */
+/* 原生图标默认保留 */
 section.category[data-name] .category-header h2 i {
-  display: none !important;
+  display: inline-block !important;
+  margin-right: 4px !important;
 }
 
-/* 右侧伪元素图片 */
+/* 右侧自定义图伪元素 */
 section.category[data-name] .category-header h2::before {
   content: "" !important;
-  display: block !important;
+  display: none !important; /* 默认隐藏，有图的才开启 */
   width: 24px !important;
   height: 24px !important;
-  margin-right: 6px !important; /* 强制只留 6px */
+  margin-right: 4px !important; 
   flex-shrink: 0 !important;
   background-size: contain !important;
   background-repeat: no-repeat !important;
   background-position: center !important;
 }
 
-/* 图片路径 */
+/* 针对有图的分类：隐藏原生 i，显示伪元素 */
+section.category[data-name*="狗谍"] .category-header h2 i,
+section.category[data-name*="支援组"] .category-header h2 i { display: none !important; }
+
+section.category[data-name*="狗谍"] .category-header h2::before,
+section.category[data-name*="支援组"] .category-header h2::before {
+  display: block !important;
+}
 section.category[data-name*="狗谍"] .category-header h2::before {
   background-image: url('https://shirasu224.github.io/menav/icons/scoutspy.png') !important;
 }
@@ -622,29 +643,16 @@ section.category[data-name*="支援组"] .category-header h2::before {
   background-image: url('https://shirasu224.github.io/menav/icons/food.png') !important;
 }
 
-/* 💥 弹性占位符，把原生箭头死死顶在最右边 */
 section.category[data-name] .category-header h2::after {
   content: "" !important;
   flex: 1 !important;
 }
 
-
 /* ================== 3. 手机端适配 ================== */
 @media (max-width: 768px) {
-  .sidebar {
-    width: 220px !important; 
-    min-width: 220px !important;
-  }
-  .submenu-item {
-    gap: 2px !important;
-  }
-  .submenu-item::before {
-    width: 14px !important;
-    height: 14px !important;
-  }
-  section.category[data-name] .category-header h2::before {
-    width: 20px !important; 
-    height: 20px !important;
-    margin-right: 4px !important;
-  }
+  .sidebar { width: 220px !important; min-width: 220px !important; }
+  .submenu-item { gap: 2px !important; }
+  .submenu-item > i { width: 16px !important; height: 16px !important; font-size: 12px !important; }
+  .submenu-item::before { width: 14px !important; height: 14px !important; }
+  section.category[data-name] .category-header h2::before { width: 20px !important; height: 20px !important; margin-right: 4px !important; }
 }
