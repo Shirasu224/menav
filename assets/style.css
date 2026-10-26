@@ -543,3 +543,37 @@ html.light-theme .music-btn.playing {
     font-size: 11px !important;
   }
 }
+/* ================== 右侧主区域：给分类标题加自定义图 ================== */
+
+/* 狗谍 - Cloak And Batter */
+section[data-slug="cloak"] .category-header h2::before,
+section[data-name*="狗谍"] .category-header h2::before {
+  content: "";
+  display: inline-block;
+  width: 28px; height: 28px;
+  margin-right: 10px;
+  vertical-align: text-bottom;
+  background: url('https://shirasu224.github.io/menav/icons/scoutspy.png') no-repeat center / contain;
+}
+
+/* 支援组 - Support Sandwich */
+section[data-name*="支援组"] .category-header h2::before {
+  content: "";
+  display: inline-block;
+  width: 28px; height: 28px;
+  margin-right: 10px;
+  vertical-align: text-bottom;
+  background: url('https://shirasu224.github.io/menav/icons/food.png') no-repeat center / contain;
+}
+
+/* 医谍 - Gentle Surgery */
+section[data-name*="医谍"] .category-header h2::before {
+  content: "";
+  display: inline-block;
+  width: 28px; height: 28px;
+  margin-right: 10px;
+  vertical-align: text-bottom;
+  background: url('https://shirasu224.github.io/menav/icons/medicspy2.png') no-repeat center / contain;
+}
+
+/* ... 其他分类依此类推，复制上面的代码改名字和链接就行 ... */
