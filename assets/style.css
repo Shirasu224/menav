@@ -543,39 +543,30 @@ html.light-theme .music-btn.playing {
     font-size: 11px !important;
   }
 }
-/* ================== 1. 左侧导航栏：暴力贴紧，保留特效 ================== */
+/* ================== 1. 左侧导航栏：恢复原生手感 ================== */
 .sidebar {
   width: 260px !important;
   min-width: 260px !important;
 }
 
-/* 让整体变成 flex */
-.submenu-item {
-  display: flex !important; 
-  align-items: center !important;
-  /* 💥 取消 gap，改用强制负边距 */
-}
-
-/* 针对原生的 <i> 换成图片 */
+/* 💥 核心：给 <i> 标签加鼠标穿透，让 hover 效果直接作用在父级 <a> 标签上 */
 .submenu-item > i {
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  width: 20px !important;
-  height: 20px !important;
+  display: inline-block !important;
+  width: 16px !important;
+  height: 16px !important;
+  margin-right: 6px !important; /* 恢复一点点安全的间距 */
+  vertical-align: middle !important;
   
-  /* 💥 核心：让图片右侧变成负 4px，强行吃掉后面的空格 */
-  margin-right: -4px !important; 
-  padding-right: 8px !important; /* 用 padding 撑开图片的真实可见区域 */
-  
-  background-size: 16px 16px !important; /* 固定图片大小 */
+  background-size: contain !important;
   background-repeat: no-repeat !important;
-  background-position: left center !important;
+  background-position: center !important;
+  
   color: transparent !important; 
   font-size: 0 !important;       
+  pointer-events: none !important; /* 💥 魔法：让鼠标穿透图片，恢复正常悬浮特效 */
 }
 
-/* 图片路径（请替换你自己的链接） */
+/* 填入图片（替换成你的链接） */
 .submenu-item[data-category*="狗谍"] > i {
   background-image: url('https://shirasu224.github.io/menav/icons/scoutspy.png') !important;
 }
@@ -584,45 +575,37 @@ html.light-theme .music-btn.playing {
 }
 
 
-/* ================== 2. 右侧主区域：放弃绝对定位，使用双重负边距 ================== */
-/* 先清除所有可能干扰的 padding 和定位 */
+/* ================== 2. 右侧主区域：回归正轨，绝不重叠 ================== */
+/* 清除所有可能引起紊乱的定位 */
 section[data-name] .category-header h2 {
   position: relative !important;
   padding-left: 0 !important;
-  margin-left: -4px !important; /* 让整个标题区块往左移一点 */
-  display: block !important;
+  margin-left: 0 !important;
 }
 
-/* 使用伪元素插入图片 */
+/* 使用最传统的 inline-block 伪元素插入图片 */
 section[data-name] .category-header h2::before {
   content: "" !important;
-  display: inline-block !important; /* 回归 inline-block */
+  display: inline-block !important;
   vertical-align: middle !important;
   
   width: 22px !important; 
   height: 22px !important;
   
-  /* 💥 核弹级负边距：左边往回缩，右边强行把文字拽过来 */
-  margin-left: 0 !important;
-  margin-right: -6px !important; 
+  /* 💥 核心：只用正数的 margin-right，绝不用负数！ */
+  margin-right: 6px !important; 
   
   background-size: contain !important;
   background-repeat: no-repeat !important;
   background-position: center !important;
 }
 
-/* 右侧图片 */
+/* 右侧图片（替换成你的链接） */
 section[data-name*="狗谍"] .category-header h2::before {
   background-image: url('https://shirasu224.github.io/menav/icons/scoutspy.png') !important;
 }
 section[data-name*="支援组"] .category-header h2::before {
   background-image: url('https://shirasu224.github.io/menav/icons/food.png') !important;
-}
-
-/* 强制文字前面的隐藏元素不占位 */
-section[data-name] .category-header h2 span {
-  margin-left: 0 !important;
-  padding-left: 0 !important;
 }
 
 
@@ -633,11 +616,13 @@ section[data-name] .category-header h2 span {
     min-width: 220px !important;
   }
   .submenu-item > i {
-    background-size: 14px 14px !important;
+    width: 14px !important;
+    height: 14px !important;
+    margin-right: 4px !important;
   }
   section[data-name] .category-header h2::before {
     width: 18px !important; 
     height: 18px !important;
-    margin-right: -4px !important;
+    margin-right: 4px !important;
   }
 }
