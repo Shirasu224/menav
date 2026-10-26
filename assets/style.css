@@ -397,34 +397,33 @@ section[data-name="作品集"] .site-card-content p {
 /* ================== 音乐播放器按钮组 ================== */
 .music-player-group {
   position: fixed;
-  /* 💥 保持和原生按钮一致的右侧和底部距离（如果原生是20px，这里也改20px） */
   right: 32px;    
   bottom: 140px;  
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px; /* 按钮之间的间距 */
+  gap: 12px;
   z-index: 9999;
 }
 
 /* 主播放按钮 */
 .music-btn {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%; /* 默认是圆形 */
-  background: rgba(255, 255, 255, 0.15);
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  /* 💥 提高不透明度：从 0.15 改为 0.5 */
+  background: rgba(30, 35, 50, 0.5);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 24px;
-  font-family: serif;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+  font-size: 18px; /* 图标大小 */
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 /* 上一首/下一首 小按钮 */
@@ -432,11 +431,12 @@ section[data-name="作品集"] .site-card-content p {
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.05);
+  /* 💥 提高不透明度 */
+  background: rgba(30, 35, 50, 0.4);
   backdrop-filter: blur(5px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: rgba(255, 255, 255, 0.5);
-  font-size: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -446,46 +446,42 @@ section[data-name="作品集"] .site-card-content p {
 
 /* 浅色模式适配 */
 html.light-theme .music-btn {
-  background: rgba(0, 0, 0, 0.05);
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  color: rgba(0, 0, 0, 0.7);
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  color: #333;
 }
 html.light-theme .music-sub-btn {
-  background: rgba(0, 0, 0, 0.03);
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  color: rgba(0, 0, 0, 0.5);
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: #555;
 }
 
 /* 悬浮反馈 */
-.music-btn:hover {
-  transform: translateY(-3px) scale(1.05);
-  background: rgba(255, 255, 255, 0.25);
-}
-.music-sub-btn:hover {
-  background: rgba(255, 255, 255, 0.2);
+.music-btn:hover, .music-sub-btn:hover {
+  background: rgba(50, 55, 75, 0.8);
   color: #fff;
+  transform: scale(1.1);
 }
-html.light-theme .music-btn:hover {
-  background: rgba(0, 0, 0, 0.1);
-}
+html.light-theme .music-btn:hover, 
 html.light-theme .music-sub-btn:hover {
-  background: rgba(0, 0, 0, 0.08);
+  background: rgba(255, 255, 255, 0.95);
   color: #000;
 }
 
-/* 💥 播放状态：变圆 + 发光 + 旋转 */
+/* 💥 播放状态：只旋转图标所在的按钮，并且发光 */
 .music-btn.playing {
-  border-radius: 50% !important; /* 确保转起来是圆的 */
-  animation: spin 4s linear infinite;
   color: #ffc2c2; 
-  border-color: rgba(255, 194, 194, 0.4);
-  box-shadow: 0 0 15px rgba(255, 194, 194, 0.3);
+  border-color: rgba(255, 194, 194, 0.6);
+  box-shadow: 0 0 15px rgba(255, 194, 194, 0.4);
+  /* 旋转动画绑定在这个按钮上 */
+  animation: spin 4s linear infinite;
 }
 html.light-theme .music-btn.playing {
   color: #e87d7d;
-  border-color: rgba(232, 125, 125, 0.4);
+  border-color: rgba(232, 125, 125, 0.6);
+  box-shadow: 0 0 15px rgba(232, 125, 125, 0.4);
 }
 
 @keyframes spin {
-  100% { transform: translateY(-3px) rotate(360deg); }
+  100% { transform: rotate(360deg); }
 }
