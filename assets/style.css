@@ -668,7 +668,7 @@ section.category[data-name*="支援组"] .category-header h2::before {
 }
 /* 👇 这是你新加的两个（注意替换真实链接） */
 section.category[data-name*="医谍"] .category-header h2::before {
-  background-image: url('https://shirasu224.github.io/menav/icons/medicspy31.png') !important; 
+  background-image: url('https://shirasu224.github.io/menav/icons/medicspy3.png') !important; 
 }
 section.category[data-name*="狙谍"] .category-header h2::before {
   background-image: url('https://shirasu224.github.io/menav/icons/sniperspy.png') !important; 
