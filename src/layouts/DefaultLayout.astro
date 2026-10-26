@@ -208,7 +208,7 @@ const fontAwesomePreload = `<link rel="preload" href="${fontAwesomeCssUrl}" as="
   document.addEventListener('DOMContentLoaded', () => {
     const playlist = [
       './music/Upgrade_Station.mp3',
-      // './music/Petite_Chou_Fleur.mp3' // 可以继续加歌
+      './music/Petite_Chou_Fleur.mp3',
     ];
     
     let currentIndex = 0;
@@ -218,31 +218,51 @@ const fontAwesomePreload = `<link rel="preload" href="${fontAwesomeCssUrl}" as="
     const nextBtn = document.getElementById('next-btn');
     const icon = btn.querySelector('i');
 
-    if (playlist.length > 0) bgm.src = playlist[currentIndex];
+    if (playlist.length > 0) {
+      bgm.src = playlist[currentIndex];
+    }
 
-    // 💥 核心：监听音频的真实播放/暂停状态，而不是只靠点击
-    bgm.addEventListener('play', () => {
-      btn.classList.add('playing');
-      icon.className = 'fas fa-music';
-    });
-    
-    bgm.addEventListener('pause', () => {
-      btn.classList.remove('playing');
-      icon.className = 'fas fa-play';
-    });
+    // 💥 核心：强制更新 UI 状态的函数
+    function updateUI(isPlaying) {
+      if (isPlaying) {
+        btn.classList.add('playing');
+        icon.className = 'fas fa-music';
+      } else {
+        btn.classList.remove('playing');
+        icon.className = 'fas fa-play';
+      }
+    }
 
+    // 监听音频真实状态（作为兜底）
+    bgm.addEventListener('play', () => updateUI(true));
+    bgm.addEventListener('pause', () => updateUI(false));
+
+    // 点击播放/暂停
     btn.addEventListener('click', () => {
       if (bgm.paused) {
-        bgm.play().catch(e => console.log("播放失败，请检查音乐文件路径:", e));
+        // 点击瞬间直接强制 UI 变转，不等浏览器触发事件
+        updateUI(true); 
+        bgm.play().catch(e => {
+          console.log("播放失败:", e);
+          updateUI(false); // 如果报错了，UI 恢复原状
+        });
       } else {
         bgm.pause();
+        updateUI(false);
       }
     });
 
+    // 切歌函数
     function playSong(index) {
       currentIndex = index;
+      bgm.pause(); 
       bgm.src = playlist[currentIndex];
-      bgm.play().catch(e => console.log("播放失败:", e));
+      bgm.load(); // 强制重新加载资源
+      updateUI(true); // 切歌直接让按钮转起来
+      bgm.play().catch(e => {
+        console.log("播放失败:", e);
+        updateUI(false);
+      });
     }
 
     prevBtn.addEventListener('click', () => {
