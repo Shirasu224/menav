@@ -397,7 +397,7 @@ section[data-name="作品集"] .site-card-content p {
 /* ================== 音乐播放器按钮组 ================== */
 .music-player-group {
   position: fixed;
-  right: 32px;    
+  right: 31px;    
   bottom: 140px;  
   display: flex;
   flex-direction: column;
