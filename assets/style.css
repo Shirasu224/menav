@@ -593,7 +593,7 @@ section[data-name] .category-header h2::before {
   height: 22px !important;
   
   /* 💥 核心：只用正数的 margin-right，绝不用负数！ */
-  margin-right: 6px !important; 
+  margin-right: 4px !important; 
   
   background-size: contain !important;
   background-repeat: no-repeat !important;
