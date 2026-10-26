@@ -543,3 +543,76 @@ html.light-theme .music-btn.playing {
     font-size: 11px !important;
   }
 }
+
+/* ================== 7. 分类框右上角装饰图 ================== */
+section.category {
+  position: relative !important; /* 确保父级有定位基准 */
+}
+
+section.category::after {
+  content: "";
+  position: absolute;
+  top: -25px;   /* 往上偏出一点，营造破框而出的感觉 */
+  right: -15px; /* 往右偏出 */
+  width: 100px; /* 图案宽度，可自己调 */
+  height: 100px;/* 图案高度 */
+  
+  /* 💥 换成你自己画的图 */
+  background-image: url('https://shirasu224.github.io/menav/pics/the-spycrab2.png'); 
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  
+  /* 💥 绝对不挡点击的终极魔法 */
+  pointer-events: none !important; 
+  
+  z-index: 10;
+  opacity: 0.9; /* 稍微带点透明度，更自然 */
+}
+
+/* 手机端如果觉得太大挡住视线，可以缩小或隐藏 */
+@media (max-width: 1024px) {
+  section.category::after {
+    width: 60px;
+    height: 60px;
+    top: -15px;
+    right: -10px;
+  }
+}
+/* ================== 8. 分类框右下角装饰图（跟随折叠） ================== */
+/* 💥 核心：把定位基准设为内容区，而不是外框 */
+section.category .category-content {
+  position: relative !important; 
+}
+
+/* 给内容区的右下角加图 */
+section.category .category-content::after {
+  content: "";
+  position: absolute;
+  bottom: 10px;    /* 距离底部的距离 */
+  right: 10px;     /* 距离右侧的距离 */
+  width: 90px;     /* 图案宽度 */
+  height: 90px;    /* 图案高度 */
+  
+  /* 💥 换成你自己画的图 */
+  background-image: url('https://shirasu224.github.io/menav/pics/the-spycrab2.png'); 
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: bottom right;
+  
+  /* 💥 绝对不挡点击的魔法 */
+  pointer-events: none !important; 
+  
+  z-index: 10;
+  opacity: 0.85; 
+}
+
+/* 手机端稍微缩小一点 */
+@media (max-width: 1024px) {
+  section.category .category-content::after {
+    width: 60px;
+    height: 60px;
+    bottom: 5px;
+    right: 5px;
+  }
+}
