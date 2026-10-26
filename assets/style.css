@@ -394,36 +394,61 @@ section[data-name="作品集"] .site-card-content p {
     height: 220px !important;
   }
 }
-/* 音乐播放器按钮 */
+/* ================== 音乐播放器按钮 (完美贴合原生风格) ================== */
 .music-btn {
   position: fixed;
-  bottom: 30px;
-  right: 30px;
+  /* 💥 1. 调整位置：把它推到原有按钮的上方 */
+  bottom: 140px;  /* 如果觉得太高或太低，改这个数值（比如 130px） */
+  right: 30px;    /* 保持和下面按钮右侧对齐 */
+  
   width: 50px;
   height: 50px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.2);
+  /* 💥 2. 统一风格：圆角矩形 + 半透明底色 + 毛玻璃 */
+  border-radius: 12px; 
+  background: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  color: #ffc2c2;
-  font-size: 20px;
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  
+  /* 文字颜色和排版 */
+  color: rgba(255, 255, 255, 0.8); /* 浅色字 */
+  font-size: 24px;
+  font-family: serif; /* 让 ♪ 符号显得更优雅 */
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   z-index: 9999;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
+/* 浅色模式下的按钮背景和字色适配 */
+html.light-theme .music-btn {
+  background: rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: rgba(0, 0, 0, 0.7);
+}
+
+/* 悬浮反馈 */
 .music-btn:hover {
-  transform: scale(1.1);
-  background: rgba(255, 255, 255, 0.4);
+  transform: translateY(-3px) scale(1.05);
+  background: rgba(255, 255, 255, 0.25);
+}
+html.light-theme .music-btn:hover {
+  background: rgba(0, 0, 0, 0.1);
 }
 
+/* 播放时的旋转和发光 */
 .music-btn.playing {
-  animation: spin 3s linear infinite; /* 播放时旋转 */
-  color: #b8dcff;
+  animation: spin 4s linear infinite;
+  color: #ffc2c2; /* 播放时变成你的主题粉色 */
+  border-color: rgba(255, 194, 194, 0.4);
+  box-shadow: 0 0 15px rgba(255, 194, 194, 0.3);
+}
+html.light-theme .music-btn.playing {
+  color: #e87d7d;
+  border-color: rgba(232, 125, 125, 0.4);
 }
 
 @keyframes spin {
