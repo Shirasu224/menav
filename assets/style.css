@@ -543,71 +543,74 @@ html.light-theme .music-btn.playing {
     font-size: 11px !important;
   }
 }
-/* ================== 右侧主区域：给分类标题加自定义图 ================== */
+/* ================== 右侧主区域：标题图片修复 ================== */
+section[data-name] .category-header h2::before {
+  content: "";
+  display: inline-block;
+  width: 26px; 
+  height: 26px;
+  margin-right: 6px; /* 💥 把间距从 10px 缩小到 6px */
+  vertical-align: middle; /* 💥 强制垂直居中对齐 */
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  transform: translateY(-2px); /* 💥 稍微往上提一点，让视觉重心和文字平齐 */
+}
 
-/* 狗谍 - Cloak And Batter */
-section[data-slug="cloak"] .category-header h2::before,
+/* 针对具体的分类替换你的图片 */
 section[data-name*="狗谍"] .category-header h2::before {
-  content: "";
-  display: inline-block;
-  width: 28px; height: 28px;
-  margin-right: 10px;
-  vertical-align: text-bottom;
-  background: url('https://shirasu224.github.io/menav/icons/scoutspy.png') no-repeat center / contain;
+  background-image: url('https://shirasu224.github.io/menav/icons/scoutspy.png');
 }
-
-/* 支援组 - Support Sandwich */
 section[data-name*="支援组"] .category-header h2::before {
-  content: "";
-  display: inline-block;
-  width: 28px; height: 28px;
-  margin-right: 10px;
-  vertical-align: text-bottom;
-  background: url('https://shirasu224.github.io/menav/icons/food.png') no-repeat center / contain;
+  background-image: url('https://shirasu224.github.io/menav/icons/food.png');
+}
+/* 其他分类照猫画虎... */
+
+
+/* ================== 左侧导航栏：子菜单图片修复 ================== */
+/* 💥 核心：把左侧子菜单强制变成 flex 布局，让图片和文字完美排在一行 */
+.submenu-item {
+  display: flex !important; 
+  align-items: center !important; 
+  padding-left: 15px !important; /* 保持左侧留白 */
+  padding-right: 10px !important;
 }
 
-/* 医谍 - Gentle Surgery */
-section[data-name*="医谍"] .category-header h2::before {
+.submenu-item::before {
   content: "";
-  display: inline-block;
-  width: 28px; height: 28px;
-  margin-right: 10px;
-  vertical-align: text-bottom;
-  background: url('https://shirasu224.github.io/menav/icons/medicspy2.png') no-repeat center / contain;
+  display: block;
+  width: 18px; /* 💥 左侧图片改小一点，给文字腾空间 */
+  height: 18px;
+  margin-right: 6px; /* 💥 间距缩小 */
+  flex-shrink: 0; /* 💥 防止图片被文字挤压变形 */
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
-/* ... 其他分类依此类推，复制上面的代码改名字和链接就行 ... */
-
-/* ================== 左侧导航栏：给子菜单项加自定义图 ================== */
-
-/* 狗谍 */
+/* 针对具体的分类替换你的图片 */
 .submenu-item[data-category*="狗谍"]::before {
-  content: "";
-  display: inline-block;
-  width: 20px; height: 20px;
-  margin-right: 8px;
-  vertical-align: middle;
-  background: url('https://shirasu224.github.io/menav/icons/scoutspy.png') no-repeat center / contain;
+  background-image: url('https://shirasu224.github.io/menav/icons/scoutspy.png');
 }
-
-/* 支援组 */
 .submenu-item[data-category*="支援组"]::before {
-  content: "";
-  display: inline-block;
-  width: 20px; height: 20px;
-  margin-right: 8px;
-  vertical-align: middle;
-  background: url('https://shirasu224.github.io/menav/icons/food.png') no-repeat center / contain;
+  background-image: url('https://shirasu224.github.io/menav/icons/food.png');
 }
+/* 其他分类照猫画虎... */
 
-/* 医谍 */
-.submenu-item[data-category*="医谍"]::before {
-  content: "";
-  display: inline-block;
-  width: 20px; height: 20px;
-  margin-right: 8px;
-  vertical-align: middle;
-  background: url('https://shirasu224.github.io/menav/icons/medicspy2.png') no-repeat center / contain;
+
+/* ================== 📱 手机端防挤压适配 ================== */
+@media (max-width: 768px) {
+  /* 右侧图片在手机上稍微小一丢丢 */
+  section[data-name] .category-header h2::before {
+    width: 22px; 
+    height: 22px;
+    margin-right: 4px;
+  }
+  
+  /* 左侧图片在手机上缩小 */
+  .submenu-item::before {
+    width: 14px; 
+    height: 14px;
+    margin-right: 4px;
+  }
 }
-
-/* ... 其他分类依此类推 ... */
