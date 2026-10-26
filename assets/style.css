@@ -536,32 +536,37 @@ html.light-theme .music-btn.playing {
 } /* 💥 闭合了 @media (max-width: 1024px) */
 
 
-/* ================== 7. 左侧导航栏图标 ================== */
+/* ================== 1. 左侧导航栏：Flex 紧贴布局 ================== */
 .sidebar {
   width: 260px !important;
   min-width: 260px !important;
 }
 
 .submenu-item {
-  position: relative !important;
-  padding-left: 28px !important; 
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important; /* 💥 核心：图标和文字之间只留 6px */
 }
 
+/* 隐藏原生图标，防止双重占位 */
+.submenu-item > i {
+  display: none !important;
+}
+
+/* 用伪元素做图标 */
 .submenu-item::before {
   content: "" !important;
-  position: absolute !important;
-  left: 8px !important; 
-  top: 50% !important;
-  transform: translateY(-50%) !important;
+  display: block !important;
   width: 16px !important;
   height: 16px !important;
+  flex-shrink: 0 !important; /* 防止被文字挤压变形 */
   background-size: contain !important;
   background-repeat: no-repeat !important;
   background-position: center !important;
   pointer-events: none !important; 
 }
 
-/* 填入图片（注意这里我用了 *= 匹配包含“狗谍”的属性值） */
+/* 填入图片 */
 .submenu-item[data-category*="狗谍"]::before {
   background-image: url('https://shirasu224.github.io/menav/icons/scoutspy.png') !important;
 }
@@ -570,25 +575,29 @@ html.light-theme .music-btn.playing {
 }
 
 
-/* ================== 8. 右侧分类标题图标 ================== */
+/* ================== 2. 右侧主区域：Flex 布局 + 幽灵撑开，绝不重叠 ================== */
 section.category[data-name] .category-header h2 {
-  position: relative !important;
-  padding-left: 32px !important;
+  display: flex !important;
+  align-items: center !important;
+  /* 移除之前所有的 padding 和 margin */
+  padding-left: 0 !important;
+  margin-left: 0 !important;
 }
 
+/* 右侧图标 */
 section.category[data-name] .category-header h2::before {
   content: "" !important;
-  position: absolute !important;
-  left: 0 !important; 
-  top: 50% !important;
-  transform: translateY(-50%) !important;
-  width: 26px !important;
-  height: 26px !important;
+  display: block !important;
+  width: 24px !important;
+  height: 24px !important;
+  margin-right: 6px !important; /* 💥 核心：只留 6px 间距 */
+  flex-shrink: 0 !important;
   background-size: contain !important;
   background-repeat: no-repeat !important;
   background-position: center !important;
 }
 
+/* 填入图片 */
 section.category[data-name*="狗谍"] .category-header h2::before {
   background-image: url('https://shirasu224.github.io/menav/icons/scoutspy.png') !important;
 }
@@ -596,12 +605,29 @@ section.category[data-name*="支援组"] .category-header h2::before {
   background-image: url('https://shirasu224.github.io/menav/icons/food.png') !important;
 }
 
+/* 💥 魔法：在文字后面加一个隐形的撑开元素，强行把箭头挤到最右边 */
+section.category[data-name] .category-header h2::after {
+  content: "" !important;
+  flex: 1 !important;
+}
 
-/* ================== 9. 手机端图标适配 ================== */
+
+/* ================== 3. 手机端适配 ================== */
 @media (max-width: 768px) {
-  .sidebar { width: 220px !important; min-width: 220px !important; }
-  .submenu-item { padding-left: 24px !important; }
-  .submenu-item::before { width: 14px !important; height: 14px !important; left: 6px !important; }
-  section.category[data-name] .category-header h2 { padding-left: 26px !important; }
-  section.category[data-name] .category-header h2::before { width: 22px !important; height: 22px !important; }
-} /* 💥 闭合了 @media (max-width: 768px) */
+  .sidebar {
+    width: 220px !important; 
+    min-width: 220px !important;
+  }
+  .submenu-item {
+    gap: 4px !important;
+  }
+  .submenu-item::before {
+    width: 14px !important;
+    height: 14px !important;
+  }
+  section.category[data-name] .category-header h2::before {
+    width: 20px !important; 
+    height: 20px !important;
+    margin-right: 4px !important;
+  }
+}
