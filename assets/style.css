@@ -595,8 +595,7 @@ html.light-theme .music-btn.playing {
   background-image: url('https://shirasu224.github.io/menav/icons/food.png') !important;
 }
 
-
-/* ================== 2. 右侧主区域 ================== */
+/* ================== 右侧主区域：图标紧贴 + 箭头归位 ================== */
 section.category[data-name] .category-header h2 {
   display: flex !important;
   align-items: center !important;
@@ -604,15 +603,30 @@ section.category[data-name] .category-header h2 {
   margin: 0 !important;
 }
 
+/* 清理 h2 内部所有元素的默认边距 */
 section.category[data-name] .category-header h2 > * {
   margin: 0 !important;
   padding: 0 !important;
 }
 
-/* 原生图标默认保留 */
+/* 原生图标（比如锁链）的间距 */
 section.category[data-name] .category-header h2 i {
   display: inline-block !important;
-  margin-right: 4px !important;
+  margin-right: 6px !important; 
+}
+
+/* 💥 核心修复：让文本容器自动撑满剩余空间，把箭头挤到最右边 */
+/* 原生框架通常会用 <span> 包裹文字，或者直接是文本节点，我们把 h2 本身的文本对齐处理好 */
+section.category[data-name] .category-header h2 {
+  position: relative !important;
+}
+section.category[data-name] .category-header h2 > span {
+  flex: 1 !important;
+}
+
+/* 如果原生没有 span，我们就强行给箭头（通常是最后一个子元素）加 margin-left: auto */
+section.category[data-name] .category-header h2 > *:last-child {
+  margin-left: auto !important;
 }
 
 /* 右侧自定义图伪元素 */
@@ -621,7 +635,7 @@ section.category[data-name] .category-header h2::before {
   display: none !important; /* 默认隐藏，有图的才开启 */
   width: 24px !important;
   height: 24px !important;
-  margin-right: 4px !important; 
+  margin-right: 6px !important; 
   flex-shrink: 0 !important;
   background-size: contain !important;
   background-repeat: no-repeat !important;
@@ -630,7 +644,9 @@ section.category[data-name] .category-header h2::before {
 
 /* 针对有图的分类：隐藏原生 i，显示伪元素 */
 section.category[data-name*="狗谍"] .category-header h2 i,
-section.category[data-name*="支援组"] .category-header h2 i { display: none !important; }
+section.category[data-name*="支援组"] .category-header h2 i { 
+  display: none !important; 
+}
 
 section.category[data-name*="狗谍"] .category-header h2::before,
 section.category[data-name*="支援组"] .category-header h2::before {
@@ -643,10 +659,11 @@ section.category[data-name*="支援组"] .category-header h2::before {
   background-image: url('https://shirasu224.github.io/menav/icons/food.png') !important;
 }
 
+/* 💥 终极保险：去掉之前加的幽灵 ::after */
 section.category[data-name] .category-header h2::after {
-  content: "" !important;
-  flex: 1 !important;
+  display: none !important;
 }
+
 
 /* ================== 3. 手机端适配 ================== */
 @media (max-width: 768px) {
