@@ -543,93 +543,91 @@ html.light-theme .music-btn.playing {
     font-size: 11px !important;
   }
 }
-/* ================== 右侧主区域：Flex 强制贴紧 ================== */
-/* 先把 h2 变成 flex 布局，这样就能用 gap 完美控制间距 */
+/* ================== 1. 左侧侧边栏：拉宽 + 偷梁换柱改图标 ================== */
+/* 强行把侧边栏加宽，让长名字能完整显示，告别省略号和换行 */
+.sidebar {
+  width: 260px !important;
+  min-width: 260px !important;
+}
+
+/* 重置子菜单的布局 */
+.submenu-item {
+  display: flex !important; 
+  align-items: center !important; 
+  padding: 8px 15px !important; 
+  white-space: nowrap !important; /* 禁止换行，因为侧边栏已经变宽了 */
+}
+
+/* 💥 偷梁换柱核心：直接针对框架原生的 <i> 标签下手 */
+.submenu-item > i {
+  display: inline-block !important;
+  width: 18px !important;
+  height: 18px !important;
+  margin-right: 8px !important; /* 控制图标和文字的间距 */
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  color: transparent !important; /* 把原来的字体图标颜色变透明 */
+  font-size: 0 !important;       /* 隐藏原来的字符 */
+}
+
+/* 填入你的图片 */
+.submenu-item[data-category*="狗谍"] > i {
+  background-image: url('https://shirasu224.github.io/menav/icons/scoutspy.png') !important;
+}
+.submenu-item[data-category*="支援组"] > i {
+  background-image: url('https://shirasu224.github.io/menav/icons/food.png') !important;
+}
+/* 其他分类照着加 */
+
+
+/* ================== 2. 右侧主区域：强制无间距贴合 ================== */
 section[data-name] .category-header h2 {
   display: flex !important;
   align-items: center !important;
-  gap: 4px !important; /* 💥 强行把图标和文字的间距压到 4px */
-  flex-wrap: nowrap !important;
   padding-left: 0 !important;
-  margin-left: 0 !important;
 }
 
-/* 重置之前的假元素样式 */
+/* 针对原有的伪元素插入方式，用负边距强行吸过去 */
 section[data-name] .category-header h2::before {
-  content: "";
-  display: block !important;
+  content: "" !important;
+  display: inline-block !important;
   width: 24px !important; 
   height: 24px !important;
-  margin: 0 !important; /* 清除所有 margin */
-  transform: none !important;
+  margin-right: 2px !important; /* 💥 极度贴紧，只留 2px */
   background-size: contain !important;
   background-repeat: no-repeat !important;
   background-position: center !important;
   flex-shrink: 0 !important;
 }
 
+/* 右侧图片 */
 section[data-name*="狗谍"] .category-header h2::before {
-  background-image: url('https://shirasu224.github.io/menav/icons/scoutspy.png');
+  background-image: url('https://shirasu224.github.io/menav/icons/scoutspy.png') !important;
 }
 section[data-name*="支援组"] .category-header h2::before {
-  background-image: url('https://shirasu224.github.io/menav/icons/food.png');
+  background-image: url('https://shirasu224.github.io/menav/icons/food.png') !important;
+}
+
+/* 确保右侧文字不会被推开 */
+section[data-name] .category-header h2 span,
+section[data-name] .category-header h2 {
+  margin-left: 0 !important;
 }
 
 
-/* ================== 左侧导航栏：压榨空间 + 允许换行 ================== */
-.submenu-item {
-  display: flex !important; 
-  align-items: flex-start !important;
-  padding: 6px 8px !important; /* 极限缩小内边距 */
-  gap: 4px !important; /* 💥 同样用 gap 控制间距，压到 4px */
-  line-height: 1.4 !important;
-}
-
-/* 隐藏原生的图标 */
-.submenu-item > i {
-  display: none !important; 
-}
-
-/* 左侧图片 */
-.submenu-item::before {
-  content: "";
-  display: block;
-  width: 14px !important; /* 💥 缩小到 14px */
-  height: 14px !important;
-  margin: 0 !important;
-  margin-top: 3px !important; /* 往下挪一点，和第一行文字对齐 */
-  flex-shrink: 0; 
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
-.submenu-item[data-category*="狗谍"]::before {
-  background-image: url('https://shirasu224.github.io/menav/icons/scoutspy.png');
-}
-.submenu-item[data-category*="支援组"]::before {
-  background-image: url('https://shirasu224.github.io/menav/icons/food.png');
-}
-
-/* 💥 允许文字换行，不再截断 */
-.submenu-item span {
-  white-space: normal !important;
-  word-break: break-all !important; 
-  font-size: 13px !important; /* 稍微缩小一点字体 */
-}
-
-
-/* ================== 📱 手机端适配 ================== */
+/* ================== 3. 手机端适配 ================== */
 @media (max-width: 768px) {
+  .sidebar {
+    width: 220px !important; /* 手机端侧边栏稍微窄一点 */
+    min-width: 220px !important;
+  }
+  .submenu-item > i {
+    width: 16px !important;
+    height: 16px !important;
+  }
   section[data-name] .category-header h2::before {
     width: 20px !important; 
     height: 20px !important;
-  }
-  .submenu-item::before {
-    width: 12px !important; 
-    height: 12px !important;
-  }
-  .submenu-item {
-    gap: 2px !important; /* 手机端贴得更紧 */
   }
 }
