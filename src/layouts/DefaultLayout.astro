@@ -187,29 +187,66 @@ const fontAwesomePreload = `<link rel="preload" href="${fontAwesomeCssUrl}" as="
     </div>
 
     <RuntimeScripts runtimeConfigJson={runtimeConfigJson} />
-<!-- 音乐播放器 -->
+<!-- 音乐播放器组 -->
 <audio id="bgm" loop>
   <source src="./music/bgm.mp3" type="audio/mpeg" />
 </audio>
-<button id="music-btn" class="music-btn" aria-label="播放/暂停音乐">
- ♪
-</button>
+
+<div class="music-player-group">
+  <button id="prev-btn" class="music-sub-btn" aria-label="上一首">⏮</button>
+  <button id="music-btn" class="music-btn" aria-label="播放/暂停音乐">♪</button>
+  <button id="next-btn" class="music-sub-btn" aria-label="下一首">⏭</button>
+</div>
 
 <script is:inline>
   document.addEventListener('DOMContentLoaded', () => {
+    // 你的歌单列表，往这里加文件路径即可
+    const playlist = [
+      './music/bgm.mp3',
+      './music/bgm2.mp3' // 如果你只有一首歌，这里可以删掉
+    ];
+    
+    let currentIndex = 0;
     const bgm = document.getElementById('bgm');
     const btn = document.getElementById('music-btn');
-    
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+
+    // 初始化第一首歌
+    bgm.src = playlist[currentIndex];
+
+    // 播放/暂停
     btn.addEventListener('click', () => {
-            if (bgm.paused) {
+      if (bgm.paused) {
         bgm.play();
         btn.classList.add('playing');
-        btn.innerText = '♫'; // 👈 播放时换这个
+        btn.innerText = '♫';
       } else {
         bgm.pause();
         btn.classList.remove('playing');
-        btn.innerText = '♪'; // 👈 暂停时换这个
+        btn.innerText = '♪';
       }
+    });
+
+    // 切换歌曲逻辑
+    function playSong(index) {
+      currentIndex = index;
+      bgm.src = playlist[currentIndex];
+      bgm.play();
+      btn.classList.add('playing');
+      btn.innerText = '♫';
+    }
+
+    prevBtn.addEventListener('click', () => {
+      let index = currentIndex - 1;
+      if (index < 0) index = playlist.length - 1;
+      playSong(index);
+    });
+
+    nextBtn.addEventListener('click', () => {
+      let index = currentIndex + 1;
+      if (index >= playlist.length) index = 0;
+      playSong(index);
     });
   });
 </script>
