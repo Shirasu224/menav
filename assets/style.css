@@ -535,8 +535,7 @@ html.light-theme .music-btn.playing {
   }
 } /* 💥 闭合了 @media (max-width: 1024px) */
 
-
-/* ================== 1. 左侧导航栏：Flex 紧贴布局 ================== */
+/* ================== 1. 左侧导航栏：内部清零 + Flex 贴紧 ================== */
 .sidebar {
   width: 260px !important;
   min-width: 260px !important;
@@ -545,28 +544,36 @@ html.light-theme .music-btn.playing {
 .submenu-item {
   display: flex !important;
   align-items: center !important;
-  gap: 6px !important; /* 💥 核心：图标和文字之间只留 6px */
+  gap: 4px !important; /* 极致贴紧，只留 4px */
+  padding-left: 10px !important; 
 }
 
-/* 隐藏原生图标，防止双重占位 */
+/* 彻底隐藏原生所有图标 */
 .submenu-item > i {
   display: none !important;
 }
 
-/* 用伪元素做图标 */
+/* 💥 核心：把内部所有的文字包裹层边距清零 */
+.submenu-item > span,
+.submenu-item > div {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* 使用伪元素做图片 */
 .submenu-item::before {
   content: "" !important;
   display: block !important;
   width: 16px !important;
   height: 16px !important;
-  flex-shrink: 0 !important; /* 防止被文字挤压变形 */
+  flex-shrink: 0 !important; 
   background-size: contain !important;
   background-repeat: no-repeat !important;
   background-position: center !important;
   pointer-events: none !important; 
 }
 
-/* 填入图片 */
+/* 图片路径 */
 .submenu-item[data-category*="狗谍"]::before {
   background-image: url('https://shirasu224.github.io/menav/icons/scoutspy.png') !important;
 }
@@ -575,29 +582,39 @@ html.light-theme .music-btn.playing {
 }
 
 
-/* ================== 2. 右侧主区域：Flex 布局 + 幽灵撑开，绝不重叠 ================== */
+/* ================== 2. 右侧主区域：全面清理，强制贴合 ================== */
 section.category[data-name] .category-header h2 {
   display: flex !important;
   align-items: center !important;
-  /* 移除之前所有的 padding 和 margin */
-  padding-left: 0 !important;
-  margin-left: 0 !important;
+  padding: 0 !important; 
+  margin: 0 !important;
 }
 
-/* 右侧图标 */
+/* 💥 核心：把 h2 内部所有元素的边距暴力清零，消灭原生空隙 */
+section.category[data-name] .category-header h2 > * {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* 隐藏原生可能残留的小图标 */
+section.category[data-name] .category-header h2 i {
+  display: none !important;
+}
+
+/* 右侧伪元素图片 */
 section.category[data-name] .category-header h2::before {
   content: "" !important;
   display: block !important;
   width: 24px !important;
   height: 24px !important;
-  margin-right: 6px !important; /* 💥 核心：只留 6px 间距 */
+  margin-right: 6px !important; /* 强制只留 6px */
   flex-shrink: 0 !important;
   background-size: contain !important;
   background-repeat: no-repeat !important;
   background-position: center !important;
 }
 
-/* 填入图片 */
+/* 图片路径 */
 section.category[data-name*="狗谍"] .category-header h2::before {
   background-image: url('https://shirasu224.github.io/menav/icons/scoutspy.png') !important;
 }
@@ -605,7 +622,7 @@ section.category[data-name*="支援组"] .category-header h2::before {
   background-image: url('https://shirasu224.github.io/menav/icons/food.png') !important;
 }
 
-/* 💥 魔法：在文字后面加一个隐形的撑开元素，强行把箭头挤到最右边 */
+/* 💥 弹性占位符，把原生箭头死死顶在最右边 */
 section.category[data-name] .category-header h2::after {
   content: "" !important;
   flex: 1 !important;
@@ -619,7 +636,7 @@ section.category[data-name] .category-header h2::after {
     min-width: 220px !important;
   }
   .submenu-item {
-    gap: 4px !important;
+    gap: 2px !important;
   }
   .submenu-item::before {
     width: 14px !important;
