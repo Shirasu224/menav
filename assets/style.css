@@ -535,57 +535,51 @@ html.light-theme .music-btn.playing {
   }
 } /* 💥 闭合了 @media (max-width: 1024px) */
 
-/* ================== 1. 左侧导航栏：精准缩进，原生与自定义共存 ================== */
+/* ================== 1. 左侧导航栏：只改有图的，不碰没图的 ================== */
 .sidebar {
   width: 260px !important;
   min-width: 260px !important;
 }
 
-/* 保持默认排版，清理内部多余的边距 */
 .submenu-item {
-  position: relative !important;
   display: flex !important;
   align-items: center !important;
+  position: relative !important;
 }
-.submenu-item > span,
-.submenu-item > div { margin: 0 !important; padding: 0 !important; }
 
-/* 原生图标默认紧凑显示（没写自定义图的分类） */
+/* 原生图标（没写自定义图的分类），保留原生的边距，只加一点点间距 */
 .submenu-item > i {
   display: inline-block !important;
   margin-right: 6px !important; 
-  vertical-align: middle !important;
 }
 
-/* 💥 核心：只给有图的“狗谍”和“支援组”增加左侧缩进，给伪元素腾位置 */
+/* 💥 只给有图的分类加缩进，腾出放图的位置 */
 .submenu-item[data-category*="狗谍"],
 .submenu-item[data-category*="支援组"] {
-  padding-left: 26px !important; /* 腾出 26px 放图片 */
+  padding-left: 26px !important; 
 }
-/* 隐藏这两个分类的原生 i */
-.submenu-item[data-category*="狗谍"] > i,
-.submenu-item[data-category*="支援组"] > i { display: none !important; }
 
-/* 自定义图伪元素：绝对定位，不占排版空间 */
-.submenu-item::before {
+/* 隐藏有图分类的原生图标 */
+.submenu-item[data-category*="狗谍"] > i,
+.submenu-item[data-category*="支援组"] > i {
+  display: none !important;
+}
+
+/* 贴图（绝对定位，不影响排版） */
+.submenu-item[data-category*="狗谍"]::before,
+.submenu-item[data-category*="支援组"]::before {
   content: "" !important;
-  display: none !important; /* 默认隐藏 */
+  display: block !important;
   position: absolute !important;
-  left: 8px !important;
+  left: 6px !important;
   top: 50% !important;
   transform: translateY(-50%) !important;
   width: 16px !important;
   height: 16px !important;
   background-size: contain !important;
   background-repeat: no-repeat !important;
-  background-position: center !important;
-  pointer-events: none !important; 
 }
-/* 开启这两个分类的伪元素 */
-.submenu-item[data-category*="狗谍"]::before,
-.submenu-item[data-category*="支援组"]::before { display: block !important; }
 
-/* 填入左侧图片 */
 .submenu-item[data-category*="狗谍"]::before {
   background-image: url('https://shirasu224.github.io/menav/icons/scoutspy.png') !important;
 }
@@ -594,57 +588,57 @@ html.light-theme .music-btn.playing {
 }
 
 
-/* ================== 2. 右侧主区域：只动有图的，绝不误伤其他分类 ================== */
+/* ================== 2. 右侧主区域：恢复原生空间，箭头靠右 ================== */
+/* 💥 必须用 flex 让 h2 占满全宽，这是箭头能去最右边的唯一条件 */
 section.category[data-name] .category-header h2 {
+  display: flex !important;
+  align-items: center !important;
+  width: 100% !important; 
   position: relative !important;
-  /* 移除所有强制宽高、flex、padding，交还给原生框架处理动画和箭头 */
-  margin: 0 !important;
 }
 
-/* 清理 h2 内部所有标签的默认边距（解决参考网站锁链隔太远的问题） */
-section.category[data-name] .category-header h2 > * {
-  margin: 0 !important;
-  padding: 0 !important;
+/* 💥 强行把箭头（最后一个子元素）推到最右边 */
+section.category[data-name] .category-header h2 > *:last-child {
+  margin-left: auto !important;
 }
 
-/* 原生图标（比如锁链）的紧凑间距 */
-section.category[data-name] .category-header h2 i {
-  display: inline-block !important;
-  margin-right: 4px !important; /* 极度紧凑 */
-  vertical-align: middle !important;
+/* 原生图标（没写自定义图的分类，比如锁链），保留它自带的左边距 */
+section.category[data-name] .category-header h2 > i {
+  margin-right: 6px !important; 
 }
 
-/* 💥 核心：只给有图的分类增加左侧缩进 */
+/* 💥 只给有图的分类加左侧 padding，给图腾位置 */
 section.category[data-name*="狗谍"] .category-header h2,
 section.category[data-name*="支援组"] .category-header h2 {
-  padding-left: 30px !important; /* 给图标留空间 */
+  padding-left: 32px !important; 
 }
 
-/* 自定义图伪元素：绝对定位在最左侧 */
+/* 隐藏有图分类原生的前置图标（保留展开箭头） */
+section.category[data-name*="狗谍"] .category-header h2 > i:not(:last-child),
+section.category[data-name*="支援组"] .category-header h2 > i:not(:last-child) {
+  display: none !important;
+}
+
+/* 自定义图的绝对定位 */
 section.category[data-name] .category-header h2::before {
   content: "" !important;
-  display: none !important; 
+  display: none !important;
   position: absolute !important;
   left: 0 !important;
   top: 50% !important;
-  transform: translateY(calc(-50% - 2px)) !important; /* 居中并微调高度 */
+  transform: translateY(-50%) !important;
   width: 24px !important;
   height: 24px !important;
   background-size: contain !important;
   background-repeat: no-repeat !important;
-  background-position: center !important;
 }
-/* 开启这两个分类的伪元素 */
+
+/* 开启有图分类的伪元素 */
 section.category[data-name*="狗谍"] .category-header h2::before,
-section.category[data-name*="支援组"] .category-header h2::before { display: block !important; }
-
-/* 隐藏这两个分类原生的前置 i（保留原生的展开箭头） */
-section.category[data-name*="狗谍"] .category-header h2 > i:not(:last-child),
-section.category[data-name*="支援组"] .category-header h2 > i:not(:last-child) { 
-  display: none !important; 
+section.category[data-name*="支援组"] .category-header h2::before {
+  display: block !important;
 }
 
-/* 填入右侧图片 */
 section.category[data-name*="狗谍"] .category-header h2::before {
   background-image: url('https://shirasu224.github.io/menav/icons/scoutspy.png') !important;
 }
@@ -656,9 +650,11 @@ section.category[data-name*="支援组"] .category-header h2::before {
 /* ================== 3. 手机端适配 ================== */
 @media (max-width: 768px) {
   .sidebar { width: 220px !important; min-width: 220px !important; }
+  
   .submenu-item[data-category*="狗谍"],
   .submenu-item[data-category*="支援组"] { padding-left: 22px !important; }
-  .submenu-item::before { width: 14px !important; height: 14px !important; left: 6px !important; }
+  .submenu-item[data-category*="狗谍"]::before,
+  .submenu-item[data-category*="支援组"]::before { width: 14px !important; height: 14px !important; left: 4px !important; }
   
   section.category[data-name*="狗谍"] .category-header h2,
   section.category[data-name*="支援组"] .category-header h2 { padding-left: 26px !important; }
