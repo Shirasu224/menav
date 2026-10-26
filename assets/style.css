@@ -554,7 +554,7 @@ html.light-theme .music-btn.playing {
   display: inline-block !important;
   width: 16px !important;
   height: 16px !important;
-  margin-right: 6px !important; /* 恢复一点点安全的间距 */
+  margin-right: 3px !important; /* 恢复一点点安全的间距 */
   vertical-align: middle !important;
   
   background-size: contain !important;
