@@ -543,31 +543,24 @@ html.light-theme .music-btn.playing {
     font-size: 11px !important;
   }
 }
-/* ================== 1. 左侧导航栏：利用原生结构 + 负边距贴紧 ================== */
+/* ================== 1. 左侧导航栏：只换图，不破坏原生动效 ================== */
 .sidebar {
   width: 260px !important;
   min-width: 260px !important;
 }
 
-.submenu-item {
-  display: flex !important; 
-  align-items: center !important; 
-  padding: 8px 10px !important; 
-  white-space: nowrap !important; 
-}
-
-/* 针对框架原生的 <i> 标签进行图片替换 */
+/* 保留原生的默认显示，只加一点间距 */
 .submenu-item > i {
   display: inline-block !important;
   width: 18px !important;
   height: 18px !important;
-  /* 💥 核心：用负边距把文字拉过来，同时用 padding 撑开图片大小 */
-  margin-right: -2px !important; 
-  padding-right: 4px !important; 
+  /* 💥 用相对定位微调，绝不用负 margin 影响悬浮特效 */
+  margin-right: 6px !important; 
+  vertical-align: middle !important;
   
   background-size: contain !important;
   background-repeat: no-repeat !important;
-  background-position: left center !important; /* 图片靠左对齐 */
+  background-position: center !important;
   color: transparent !important; 
   font-size: 0 !important;       
 }
@@ -581,9 +574,13 @@ html.light-theme .music-btn.playing {
 }
 
 
-/* ================== 2. 右侧主区域：不破坏原生结构，只贴图 ================== */
-/* 💥 绝不能给 .category-header h2 加 display: flex，否则箭头会跑！ */
-/* 我们只利用 h2 的 ::before 插入图片，并用负边距拉近距离 */
+/* ================== 2. 右侧主区域：暴力负边距吃掉空格 ================== */
+/* 恢复 h2 原生布局，绝不加 flex */
+section[data-name] .category-header h2 {
+  padding-left: 0 !important;
+  margin-left: 0 !important;
+  text-indent: 0 !important; /* 清除隐藏缩进 */
+}
 
 section[data-name] .category-header h2::before {
   content: "" !important;
@@ -592,9 +589,9 @@ section[data-name] .category-header h2::before {
   height: 24px !important;
   vertical-align: middle !important;
   
-  /* 💥 核心：图片往右挤，文字往左吸，只留 2px 缝隙 */
-  margin-right: 2px !important; 
+  /* 💥 终极杀招：左边负 4px 顶住，右边负 6px 把后面的字吸过来！ */
   margin-left: -4px !important; 
+  margin-right: -6px !important; 
   
   background-size: contain !important;
   background-repeat: no-repeat !important;
@@ -609,13 +606,6 @@ section[data-name*="支援组"] .category-header h2::before {
   background-image: url('https://shirasu224.github.io/menav/icons/food.png') !important;
 }
 
-/* 确保 h2 里的文字不被多余的 margin 撑开 */
-section[data-name] .category-header h2 {
-  margin-left: 0 !important;
-  padding-left: 0 !important;
-}
-
-
 /* ================== 3. 手机端适配 ================== */
 @media (max-width: 768px) {
   .sidebar {
@@ -625,9 +615,11 @@ section[data-name] .category-header h2 {
   .submenu-item > i {
     width: 16px !important;
     height: 16px !important;
+    margin-right: 4px !important;
   }
   section[data-name] .category-header h2::before {
     width: 20px !important; 
     height: 20px !important;
+    margin-right: -4px !important;
   }
 }
