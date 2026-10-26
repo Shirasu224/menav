@@ -535,120 +535,123 @@ html.light-theme .music-btn.playing {
   }
 } /* 💥 闭合了 @media (max-width: 1024px) */
 
-/* ================== 1. 左侧导航栏：统一缩进 ================== */
+/* ================== 右侧主区域：统一基准线 ================== */
+/* 统一缩进尺寸，如果你觉得 26px 还是太靠后，可以改成 22px 或 20px */
+section.category[data-name] .category-header h2 {
+  display: flex !important;
+  align-items: center !important;
+  width: 100% !important; 
+  position: relative !important;
+  padding-left: 26px !important; /* 💥 统一缩进，决定红线的位置 */
+  margin: 0 !important;
+}
+
+/* 原生图标（没写自定义图的分类，比如锁链、齿轮） */
+section.category[data-name] .category-header h2 > i {
+  margin-right: 6px !important; 
+}
+
+/* 强行把箭头（最后一个子元素）推到最右边 */
+section.category[data-name] .category-header h2 > *:last-child {
+  margin-left: auto !important;
+}
+
+/* 如果有自定义图，隐藏原生的前置 i 标签 */
+section.category[data-name*="狗谍"] .category-header h2 > i:not(:last-child),
+section.category[data-name*="支援组"] .category-header h2 > i:not(:last-child),
+/* 👇 以后加了新图，把新分类的名字也加在这个列表里 */
+section.category[data-name*="医谍"] .category-header h2 > i:not(:last-child) {
+  display: none !important;
+}
+
+/* 自定义图：绝对定位钉在最左侧，不干扰文字 */
+section.category[data-name] .category-header h2::before {
+  content: "" !important;
+  display: none !important; /* 默认关闭，写了图的才开启 */
+  position: absolute !important;
+  left: 0 !important; 
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  width: 20px !important; /* 💥 图标宽度 20px，配合 26px 缩进刚好 */
+  height: 20px !important;
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+}
+
+/* ================== 👇 在这里继续加你的新图标 👇 ================== */
+
+/* 狗谍 */
+section.category[data-name*="狗谍"] .category-header h2::before {
+  display: block !important;
+  background-image: url('https://shirasu224.github.io/menav/icons/scoutspy.png') !important;
+}
+
+/* 支援组 */
+section.category[data-name*="支援组"] .category-header h2::before {
+  display: block !important;
+  background-image: url('https://shirasu224.github.io/menav/icons/food.png') !important;
+}
+
+/* 💥 示范：如何给“医谍”加图 */
+section.category[data-name*="医谍"] .category-header h2::before {
+  display: block !important;
+  /* 把下面这个链接换成医谍的图片链接 */
+  background-image: url('https://shirasu224.github.io/menav/icons/medicspy2.png') !important; 
+}
+
+/* 💥 示范：如何给“参考网站”加图 */
+section.category[data-name*="狙谍"] .category-header h2::before {
+  display: block !important;
+  /* 把下面这个链接换成参考网站的图片链接 */
+  background-image: url('https://shirasu224.github.io/menav/icons/sniperspy.png') !important; 
+}
+
+/* ================== 👆 新图标加到这里结束 👆 ================== */
+
+
+/* ================== 左侧导航栏同步对齐（只给有图的加后退） ================== */
 .sidebar {
   width: 260px !important;
   min-width: 260px !important;
 }
-
 .submenu-item {
   display: flex !important;
   align-items: center !important;
   position: relative !important;
-  /* 💥 统一给左侧菜单加缩进，让没图的分类也往后靠 */
-  padding-left: 24px !important; 
+  /* 左侧整体统一稍微退一点 */
+  padding-left: 16px !important; 
 }
-
-/* 原生图标（没自定义图的分类） */
 .submenu-item > i {
-  display: inline-block !important;
-  margin-right: 8px !important; 
+  margin-right: 6px !important; 
 }
 
-/* 有图的分类隐藏原生图标 */
+/* 针对有图的左侧菜单，额外增加后退空间 */
+.submenu-item[data-category*="狗谍"],
+.submenu-item[data-category*="支援组"] {
+  padding-left: 26px !important; 
+}
 .submenu-item[data-category*="狗谍"] > i,
 .submenu-item[data-category*="支援组"] > i {
   display: none !important;
 }
 
-/* 自定义图的绝对定位 */
 .submenu-item[data-category*="狗谍"]::before,
 .submenu-item[data-category*="支援组"]::before {
   content: "" !important;
   display: block !important;
   position: absolute !important;
-  /* 💥 图片靠左钉死 */
-  left: 4px !important; 
+  left: 4px !important;
   top: 50% !important;
   transform: translateY(-50%) !important;
   width: 16px !important;
   height: 16px !important;
   background-size: contain !important;
   background-repeat: no-repeat !important;
-  background-position: center !important;
 }
-
 .submenu-item[data-category*="狗谍"]::before {
   background-image: url('https://shirasu224.github.io/menav/icons/scoutspy.png') !important;
 }
 .submenu-item[data-category*="支援组"]::before {
   background-image: url('https://shirasu224.github.io/menav/icons/food.png') !important;
-}
-
-
-/* ================== 2. 右侧主区域：对齐红线 + 箭头靠右 ================== */
-/* 💥 统一给所有的 h2 加缩进（这就是你的红线位置） */
-section.category[data-name] .category-header h2 {
-  display: flex !important;
-  align-items: center !important;
-  width: 100% !important; 
-  position: relative !important;
-  padding-left: 32px !important; /* 统一往里退 32px */
-  margin: 0 !important;
-}
-
-/* 原生图标（没自定义图的分类） */
-section.category[data-name] .category-header h2 > i {
-  margin-right: 8px !important; 
-}
-
-/* 💥 强行把箭头（最后一个子元素）推到最右边 */
-section.category[data-name] .category-header h2 > *:last-child {
-  margin-left: auto !important;
-}
-
-/* 有图的分类隐藏原生图标（保留箭头） */
-section.category[data-name*="狗谍"] .category-header h2 > i:not(:last-child),
-section.category[data-name*="支援组"] .category-header h2 > i:not(:last-child) {
-  display: none !important;
-}
-
-/* 自定义图的绝对定位（钉在缩进留出的左侧空间里） */
-section.category[data-name] .category-header h2::before {
-  content: "" !important;
-  display: none !important;
-  position: absolute !important;
-  left: 0 !important; /* 紧贴 red line 左侧 */
-  top: 50% !important;
-  transform: translateY(-50%) !important;
-  width: 24px !important;
-  height: 24px !important;
-  background-size: contain !important;
-  background-repeat: no-repeat !important;
-  background-position: center !important;
-}
-
-/* 开启有图分类的伪元素 */
-section.category[data-name*="狗谍"] .category-header h2::before,
-section.category[data-name*="支援组"] .category-header h2::before {
-  display: block !important;
-}
-
-section.category[data-name*="狗谍"] .category-header h2::before {
-  background-image: url('https://shirasu224.github.io/menav/icons/scoutspy.png') !important;
-}
-section.category[data-name*="支援组"] .category-header h2::before {
-  background-image: url('https://shirasu224.github.io/menav/icons/food.png') !important;
-}
-
-
-/* ================== 3. 手机端适配 ================== */
-@media (max-width: 768px) {
-  .sidebar { width: 220px !important; min-width: 220px !important; }
-  .submenu-item { padding-left: 20px !important; }
-  .submenu-item[data-category*="狗谍"]::before,
-  .submenu-item[data-category*="支援组"]::before { width: 14px !important; height: 14px !important; left: 2px !important; }
-  
-  section.category[data-name] .category-header h2 { padding-left: 26px !important; }
-  section.category[data-name] .category-header h2::before { width: 20px !important; height: 20px !important; }
 }
