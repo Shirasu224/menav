@@ -193,17 +193,22 @@ const fontAwesomePreload = `<link rel="preload" href="${fontAwesomeCssUrl}" as="
 </audio>
 
 <div class="music-player-group">
-  <button id="prev-btn" class="music-sub-btn" aria-label="上一首">⏮</button>
-  <button id="music-btn" class="music-btn" aria-label="播放/暂停音乐">♪</button>
-  <button id="next-btn" class="music-sub-btn" aria-label="下一首">⏭</button>
+  <button id="prev-btn" class="music-sub-btn" aria-label="上一首">
+    <i class="fas fa-backward-step"></i>
+  </button>
+  <button id="music-btn" class="music-btn" aria-label="播放/暂停音乐">
+    <i class="fas fa-play"></i>
+  </button>
+  <button id="next-btn" class="music-sub-btn" aria-label="下一首">
+    <i class="fas fa-forward-step"></i>
+  </button>
 </div>
 
 <script is:inline>
   document.addEventListener('DOMContentLoaded', () => {
-    // 你的歌单列表，往这里加文件路径即可
     const playlist = [
       './music/bgm.mp3',
-      './music/bgm2.mp3' // 如果你只有一首歌，这里可以删掉
+      // './music/bgm2.mp3' // 可以继续加歌
     ];
     
     let currentIndex = 0;
@@ -211,30 +216,33 @@ const fontAwesomePreload = `<link rel="preload" href="${fontAwesomeCssUrl}" as="
     const btn = document.getElementById('music-btn');
     const prevBtn = document.getElementById('prev-btn');
     const nextBtn = document.getElementById('next-btn');
+    const icon = btn.querySelector('i');
 
-    // 初始化第一首歌
-    bgm.src = playlist[currentIndex];
+    if (playlist.length > 0) bgm.src = playlist[currentIndex];
 
-    // 播放/暂停
+    // 💥 核心：监听音频的真实播放/暂停状态，而不是只靠点击
+    bgm.addEventListener('play', () => {
+      btn.classList.add('playing');
+      icon.className = 'fas fa-music';
+    });
+    
+    bgm.addEventListener('pause', () => {
+      btn.classList.remove('playing');
+      icon.className = 'fas fa-play';
+    });
+
     btn.addEventListener('click', () => {
       if (bgm.paused) {
-        bgm.play();
-        btn.classList.add('playing');
-        btn.innerText = '♫';
+        bgm.play().catch(e => console.log("播放失败，请检查音乐文件路径:", e));
       } else {
         bgm.pause();
-        btn.classList.remove('playing');
-        btn.innerText = '♪';
       }
     });
 
-    // 切换歌曲逻辑
     function playSong(index) {
       currentIndex = index;
       bgm.src = playlist[currentIndex];
-      bgm.play();
-      btn.classList.add('playing');
-      btn.innerText = '♫';
+      bgm.play().catch(e => console.log("播放失败:", e));
     }
 
     prevBtn.addEventListener('click', () => {
