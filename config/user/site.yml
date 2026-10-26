@@ -13,7 +13,7 @@ navigation:
   - name: 画廊
     icon: fas fa-bookmark  
     id: bookmarks          
-  - name: 脑洞
+  - name: 其他
     icon: fas fa-book
     id: articles  
   - name: 资源库
