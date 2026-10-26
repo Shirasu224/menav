@@ -2,11 +2,6 @@ categories:
   - name: 参考网站
     icon: fas fa-link
     sites:
-      - name: 参考案例1
-        url: https://example.com
-        icon: fas fa-globe
-        description: 这是一个参考网站
-
   - name: 作品集
     icon: fas fa-palette
     sites:
