@@ -16,3 +16,6 @@ navigation:
   - name: 脑洞
     icon: fas fa-book
     id: articles  
+  - name: 资源库
+    icon: fas fa-link
+    id: links
