@@ -595,6 +595,10 @@ html.light-theme .music-btn.playing {
   background-image: url('https://shirasu224.github.io/menav/icons/food.png') !important;
 }
 
+.submenu-item::before {
+  /* 保留你原来的代码... */
+  transform: translateY(-1px) !important; /* 💥 左侧也稍微往上提 1 像素，看着更平齐 */
+}
 /* ================== 右侧主区域：图标紧贴 + 箭头归位 + 整体右移 ================== */
 /* 💥 核心：给整个标题头部加一点左内边距，让图标整体往右挪一点 */
 section.category[data-name] .category-header {
@@ -653,6 +657,19 @@ section.category[data-name] .category-header > i {
   display: inline-block !important;
 }
 
+/* 右侧自定义图片伪元素 */
+section.category[data-name] .category-header h2::before {
+  /* 保留你原来的代码... */
+  vertical-align: middle !important;
+  transform: translateY(-2px) !important; /* 💥 核心：强行往上挪 2 像素 */
+}
+
+/* 右侧原生图标（比如参考网站的锁链） */
+section.category[data-name] .category-header h2 i {
+  /* 保留你原来的代码... */
+  vertical-align: middle !important;
+  transform: translateY(-2px) !important; /* 💥 核心：原生图标也往上挪 2 像素 */
+}
 
 /* ================== 3. 手机端适配 ================== */
 @media (max-width: 768px) {
