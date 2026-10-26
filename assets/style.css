@@ -543,87 +543,93 @@ html.light-theme .music-btn.playing {
     font-size: 11px !important;
   }
 }
-/* ================== 右侧主区域：标题图片修复 ================== */
-section[data-name] .category-header h2::before {
-  content: "";
-  display: inline-block;
-  width: 26px; 
-  height: 26px;
-  margin-right: 6px; /* 💥 把间距从 10px 缩小到 6px */
-  vertical-align: middle; /* 💥 强制垂直居中对齐 */
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  transform: translateY(-2px); /* 💥 稍微往上提一点，让视觉重心和文字平齐 */
+/* ================== 右侧主区域：Flex 强制贴紧 ================== */
+/* 先把 h2 变成 flex 布局，这样就能用 gap 完美控制间距 */
+section[data-name] .category-header h2 {
+  display: flex !important;
+  align-items: center !important;
+  gap: 4px !important; /* 💥 强行把图标和文字的间距压到 4px */
+  flex-wrap: nowrap !important;
+  padding-left: 0 !important;
+  margin-left: 0 !important;
 }
 
-/* 针对具体的分类替换你的图片 */
+/* 重置之前的假元素样式 */
+section[data-name] .category-header h2::before {
+  content: "";
+  display: block !important;
+  width: 24px !important; 
+  height: 24px !important;
+  margin: 0 !important; /* 清除所有 margin */
+  transform: none !important;
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  flex-shrink: 0 !important;
+}
+
 section[data-name*="狗谍"] .category-header h2::before {
   background-image: url('https://shirasu224.github.io/menav/icons/scoutspy.png');
 }
 section[data-name*="支援组"] .category-header h2::before {
   background-image: url('https://shirasu224.github.io/menav/icons/food.png');
 }
-/* 其他分类照猫画虎... */
 
 
-/* ================== 左侧导航栏：子菜单图片修复（极限释放空间版） ================== */
+/* ================== 左侧导航栏：压榨空间 + 允许换行 ================== */
 .submenu-item {
   display: flex !important; 
-  align-items: flex-start !important; /* 改回 flex-start，方便多行文字对齐 */
-  padding: 8px 10px 8px 5px !important; /* 💥 大幅减小左侧 padding */
-  white-space: normal !important; /* 💥 允许文字换行 */
+  align-items: flex-start !important;
+  padding: 6px 8px !important; /* 极限缩小内边距 */
+  gap: 4px !important; /* 💥 同样用 gap 控制间距，压到 4px */
   line-height: 1.4 !important;
 }
 
-/* 隐藏框架可能残留的默认空 i 标签 */
+/* 隐藏原生的图标 */
 .submenu-item > i {
   display: none !important; 
 }
 
-/* 图片伪元素 */
+/* 左侧图片 */
 .submenu-item::before {
   content: "";
   display: block;
-  width: 16px; /* 💥 图片改小到 16px */
-  height: 16px;
-  margin-right: 4px; /* 💥 间距缩小到 4px */
-  margin-top: 2px;   /* 让图片和第一行文字对齐 */
+  width: 14px !important; /* 💥 缩小到 14px */
+  height: 14px !important;
+  margin: 0 !important;
+  margin-top: 3px !important; /* 往下挪一点，和第一行文字对齐 */
   flex-shrink: 0; 
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
 }
 
-/* 强制让里面的文字容器撑满剩余空间 */
-.submenu-item span {
-  flex: 1 !important;
-  word-break: break-all !important; /* 允许长单词换行 */
-}
-
-/* 针对具体的分类替换你的图片 */
 .submenu-item[data-category*="狗谍"]::before {
   background-image: url('https://shirasu224.github.io/menav/icons/scoutspy.png');
 }
 .submenu-item[data-category*="支援组"]::before {
   background-image: url('https://shirasu224.github.io/menav/icons/food.png');
 }
-/* 其他分类照猫画虎... */
+
+/* 💥 允许文字换行，不再截断 */
+.submenu-item span {
+  white-space: normal !important;
+  word-break: break-all !important; 
+  font-size: 13px !important; /* 稍微缩小一点字体 */
+}
 
 
-/* ================== 📱 手机端防挤压适配 ================== */
+/* ================== 📱 手机端适配 ================== */
 @media (max-width: 768px) {
-  /* 右侧图片在手机上稍微小一丢丢 */
   section[data-name] .category-header h2::before {
-    width: 22px; 
-    height: 22px;
-    margin-right: 4px;
+    width: 20px !important; 
+    height: 20px !important;
   }
-  
-  /* 左侧图片在手机上缩小 */
   .submenu-item::before {
-    width: 14px; 
-    height: 14px;
-    margin-right: 4px;
+    width: 12px !important; 
+    height: 12px !important;
+  }
+  .submenu-item {
+    gap: 2px !important; /* 手机端贴得更紧 */
   }
 }
