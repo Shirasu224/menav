@@ -577,3 +577,37 @@ section[data-name*="医谍"] .category-header h2::before {
 }
 
 /* ... 其他分类依此类推，复制上面的代码改名字和链接就行 ... */
+
+/* ================== 左侧导航栏：给子菜单项加自定义图 ================== */
+
+/* 狗谍 */
+.submenu-item[data-category*="狗谍"]::before {
+  content: "";
+  display: inline-block;
+  width: 20px; height: 20px;
+  margin-right: 8px;
+  vertical-align: middle;
+  background: url('https://shirasu224.github.io/menav/icons/scoutspy.png') no-repeat center / contain;
+}
+
+/* 支援组 */
+.submenu-item[data-category*="支援组"]::before {
+  content: "";
+  display: inline-block;
+  width: 20px; height: 20px;
+  margin-right: 8px;
+  vertical-align: middle;
+  background: url('https://shirasu224.github.io/menav/icons/food.png') no-repeat center / contain;
+}
+
+/* 医谍 */
+.submenu-item[data-category*="医谍"]::before {
+  content: "";
+  display: inline-block;
+  width: 20px; height: 20px;
+  margin-right: 8px;
+  vertical-align: middle;
+  background: url('https://shirasu224.github.io/menav/icons/medicspy2.png') no-repeat center / contain;
+}
+
+/* ... 其他分类依此类推 ... */
