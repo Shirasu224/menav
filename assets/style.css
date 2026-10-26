@@ -394,3 +394,38 @@ section[data-name="作品集"] .site-card-content p {
     height: 220px !important;
   }
 }
+/* 音乐播放器按钮 */
+.music-btn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: #ffc2c2;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 9999;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.music-btn:hover {
+  transform: scale(1.1);
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.music-btn.playing {
+  animation: spin 3s linear infinite; /* 播放时旋转 */
+  color: #b8dcff;
+}
+
+@keyframes spin {
+  100% { transform: rotate(360deg); }
+}
