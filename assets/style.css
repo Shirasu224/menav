@@ -493,7 +493,6 @@ html.light-theme .music-btn.playing {
 
 /* ================== 6. 手机端底部按钮与音乐播放器对齐优化 ================== */
 @media (max-width: 1024px) {
-  /* 1. 强行缩小原生的两个大按钮（展开/收起分类、切换主题） */
   .category-toggle, 
   .theme-toggle {
     width: 42px !important;
@@ -501,14 +500,13 @@ html.light-theme .music-btn.playing {
     min-width: 42px !important;
     min-height: 42px !important;
     font-size: 16px !important;
-    right: 15px !important; /* 靠右对齐 */
-    border-radius: 12px !important; /* 改成圆角矩形 */
+    right: 15px !important; 
+    border-radius: 12px !important; 
     background: rgba(255, 255, 255, 0.15) !important;
     backdrop-filter: blur(10px) !important;
     border: 1px solid rgba(255, 255, 255, 0.2) !important;
   }
   
-  /* 浅色模式下的底部按钮 */
   html.light-theme .category-toggle, 
   html.light-theme .theme-toggle {
     background: rgba(255, 255, 255, 0.7) !important;
@@ -516,22 +514,15 @@ html.light-theme .music-btn.playing {
     color: #333 !important;
   }
 
-  /* 调整这两个按钮的上下间距 */
-  .theme-toggle {
-    bottom: 20px !important; 
-  }
-  .category-toggle {
-    bottom: 75px !important;
-  }
+  .theme-toggle { bottom: 20px !important; }
+  .category-toggle { bottom: 75px !important; }
 
-  /* 2. 把音乐播放器组拉过来，和底部按钮完美对齐 */
   .music-player-group {
-    right: 15px !important; /* 和底部按钮的 right: 15px 对齐 */
-    bottom: 135px !important; /* 刚好放在展开按钮的上方 */
-    gap: 8px !important; /* 稍微缩小音乐按钮之间的间距 */
+    right: 15px !important; 
+    bottom: 135px !important; 
+    gap: 8px !important; 
   }
 
-  /* 顺便把音乐按钮的尺寸也稍微收敛一点，和底部按钮保持一致 */
   .music-btn {
     width: 42px !important;
     height: 42px !important;
@@ -542,19 +533,20 @@ html.light-theme .music-btn.playing {
     height: 30px !important;
     font-size: 11px !important;
   }
-/* ================== 左侧导航栏图标 ================== */
+} /* 💥 闭合了 @media (max-width: 1024px) */
+
+
+/* ================== 7. 左侧导航栏图标 ================== */
 .sidebar {
   width: 260px !important;
   min-width: 260px !important;
 }
 
-/* 给左侧菜单项加定位和左侧留白 */
 .submenu-item {
   position: relative !important;
   padding-left: 28px !important; 
 }
 
-/* 强制画出左侧图标 */
 .submenu-item::before {
   content: "" !important;
   position: absolute !important;
@@ -566,15 +558,19 @@ html.light-theme .music-btn.playing {
   background-size: contain !important;
   background-repeat: no-repeat !important;
   background-position: center !important;
-  pointer-events: none !important; /* 鼠标穿透，不影响悬浮 */
+  pointer-events: none !important; 
 }
 
+/* 填入图片（注意这里我用了 *= 匹配包含“狗谍”的属性值） */
 .submenu-item[data-category*="狗谍"]::before {
   background-image: url('https://shirasu224.github.io/menav/icons/scoutspy.png') !important;
 }
+.submenu-item[data-category*="支援组"]::before {
+  background-image: url('https://shirasu224.github.io/menav/icons/food.png') !important;
+}
 
 
-/* ================== 右侧分类标题图标 ================== */
+/* ================== 8. 右侧分类标题图标 ================== */
 section.category[data-name] .category-header h2 {
   position: relative !important;
   padding-left: 32px !important;
@@ -596,13 +592,16 @@ section.category[data-name] .category-header h2::before {
 section.category[data-name*="狗谍"] .category-header h2::before {
   background-image: url('https://shirasu224.github.io/menav/icons/scoutspy.png') !important;
 }
+section.category[data-name*="支援组"] .category-header h2::before {
+  background-image: url('https://shirasu224.github.io/menav/icons/food.png') !important;
+}
 
 
-/* ================== 手机端适配 ================== */
+/* ================== 9. 手机端图标适配 ================== */
 @media (max-width: 768px) {
   .sidebar { width: 220px !important; min-width: 220px !important; }
   .submenu-item { padding-left: 24px !important; }
   .submenu-item::before { width: 14px !important; height: 14px !important; left: 6px !important; }
   section.category[data-name] .category-header h2 { padding-left: 26px !important; }
   section.category[data-name] .category-header h2::before { width: 22px !important; height: 22px !important; }
-}
+} /* 💥 闭合了 @media (max-width: 768px) */
