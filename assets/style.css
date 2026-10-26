@@ -398,7 +398,7 @@ section[data-name="作品集"] .site-card-content p {
 .music-player-group {
   position: fixed;
   /* 💥 保持和原生按钮一致的右侧和底部距离（如果原生是20px，这里也改20px） */
-  right: 40px;    
+  right: 35px;    
   bottom: 140px;  
   display: flex;
   flex-direction: column;
