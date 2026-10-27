@@ -729,3 +729,33 @@ section.category[data-name*="医谍"] .category-header h2::before {
 .page-updated-inline {
   display: none !important;
 }
+/* ================== 修复左侧导航栏收起后的错位与占位 ================== */
+/* 当侧边栏处于收起状态时，强制把宽度缩回去（根据你的原生样式微调，通常是 60px 或 70px） */
+.sidebar.collapsed {
+  width: 70px !important; 
+  min-width: 70px !important;
+}
+
+/* 收起状态下，取消文字左侧的强制缩进 */
+.sidebar.collapsed .submenu-item {
+  padding-left: 0 !important; 
+  justify-content: center !important; 
+}
+
+/* 收起状态下，让自定义的图片图标水平居中 */
+.sidebar.collapsed .submenu-item::before {
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+}
+
+/* 收起状态下，让原生的字体图标也水平居中 */
+.sidebar.collapsed .submenu-item > i {
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  margin: 0 !important;
+}
+
+/* 确保收起时文字完全消失（原生可能已经做了，这里加个保险） */
+.sidebar.collapsed .submenu-item > span {
+  display: none !important;
+}
