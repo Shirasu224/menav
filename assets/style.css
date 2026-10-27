@@ -605,13 +605,13 @@ html.light-theme .music-btn.playing {
 .submenu-item[data-category*="医谍"] > i { display: none !important; }
 .submenu-item[data-category*="医谍"]::before {
   display: block !important;
-  background-image: url('https://shirasu224.github.io/menav/icons/medicspy3.png'') !important;
+  background-image: url('https://shirasu224.github.io/menav/icons/medicspy3.png') !important;
 }
 
 .submenu-item[data-category*="狙谍"] > i { display: none !important; }
 .submenu-item[data-category*="狙谍"]::before {
   display: block !important;
-  background-image: url('https://shirasu224.github.io/menav/icons/sniperspy.png'') !important;
+  background-image: url('https://shirasu224.github.io/menav/icons/sniperspy.png') !important;
 }
 
 /* 💥 如果你左侧加了新图，照这个格式写，把名字和链接换掉就行： */
