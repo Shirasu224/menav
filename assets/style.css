@@ -535,107 +535,134 @@ html.light-theme .music-btn.playing {
   }
 } /* 💥 闭合了 @media (max-width: 1024px) */
 
-/* ================== 1. 左侧导航栏：终极对齐 ================== */
+/* ================== 1. 左侧导航栏：绝对对齐基准线 ================== */
 .sidebar {
   width: 260px !important;
   min-width: 260px !important;
 }
 
-/* 统一文字起始位置（红线） */
+/* 统一左侧留白，作为文字基准线 */
 .submenu-item {
   position: relative !important;
   display: flex !important;
   align-items: center !important;
-  padding-left: 26px !important; /* 💥 所有文字都在这里起步 */
+  padding-left: 32px !important; /* 💥 所有文字从这里起步。觉得不够后，改大这个值 */
 }
 
-/* 让原生的 <i> 标签绝对定位，不再占用排版空间 */
+/* 清空文字内层边距，防止原生样式把文字又吸回去 */
+.submenu-item > span,
+.submenu-item > div {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* 💥 原生图标：绝对定位钉死在最左侧 */
 .submenu-item > i {
   position: absolute !important;
-  left: 4px !important;
+  left: 8px !important; 
   top: 50% !important;
   transform: translateY(-50%) !important;
   width: 16px !important;
   height: 16px !important;
   margin: 0 !important;
-  font-size: 14px !important; /* 原生图标大小 */
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 14px !important;
 }
 
-/* 自定义图也是绝对定位，完全与原生图标重合在同一位置 */
-.submenu-item[data-category*="狗谍"]::before,
-.submenu-item[data-category*="医谍"]::before,
-.submenu-item[data-category*="狙谍"]::before,
-.submenu-item[data-category*="支援组"]::before {
+/* 💥 自定义图伪元素：绝对定位，与原生图标重合 */
+.submenu-item::before {
   content: "" !important;
+  display: none !important;
   position: absolute !important;
-  left: 4px !important;
+  left: 8px !important;
   top: 50% !important;
   transform: translateY(-50%) !important;
   width: 16px !important;
   height: 16px !important;
   background-size: contain !important;
   background-repeat: no-repeat !important;
+  background-position: center !important;
 }
 
-/* 隐藏有自定义图的分类的原生 i 标签 */
-.submenu-item[data-category*="狗谍"] > i,
-.submenu-item[data-category*="医谍"] > i,
-.submenu-item[data-category*="狙谍"] > i,
-.submenu-item[data-category*="支援组"] > i {
-  display: none !important;
-}
+/* ================== 👇 左侧图标定制区 👇 ================== */
 
-/* 填入左侧图片 */
+/* 狗谍 */
+.submenu-item[data-category*="狗谍"] > i { display: none !important; }
 .submenu-item[data-category*="狗谍"]::before {
+  display: block !important;
   background-image: url('https://shirasu224.github.io/menav/icons/scoutspy.png') !important;
 }
+
+/* 支援组 */
+.submenu-item[data-category*="支援组"] > i { display: none !important; }
 .submenu-item[data-category*="支援组"]::before {
+  display: block !important;
   background-image: url('https://shirasu224.github.io/menav/icons/food.png') !important;
-  
+}
+
+.submenu-item[data-category*="医谍"] > i { display: none !important; }
 .submenu-item[data-category*="医谍"]::before {
-  background-image: url('https://shirasu224.github.io/menav/icons/medicspy3.png') !important;
+  display: block !important;
+  background-image: url('https://shirasu224.github.io/menav/icons/medicspy3.png'') !important;
 }
+
+.submenu-item[data-category*="狙谍"] > i { display: none !important; }
 .submenu-item[data-category*="狙谍"]::before {
-  background-image: url('https://shirasu224.github.io/menav/icons/sniperspy.png') !important;
-}
+  display: block !important;
+  background-image: url('https://shirasu224.github.io/menav/icons/sniperspy.png'') !important;
 }
 
+/* 💥 如果你左侧加了新图，照这个格式写，把名字和链接换掉就行： */
+/*
+.submenu-item[data-category*="医谍"] > i { display: none !important; }
+.submenu-item[data-category*="医谍"]::before {
+  display: block !important;
+  background-image: url('你的医谍左侧图片链接') !important;
+}
+*/
 
-/* ================== 2. 右侧主区域：终极对齐 ================== */
-/* 统一文字起始位置（右侧的红线） */
+
+/* ================== 2. 右侧主区域：绝对对齐基准线 ================== */
+/* 统一左侧留白，作为文字基准线 */
 section.category[data-name] .category-header h2 {
   position: relative !important;
   display: flex !important;
   align-items: center !important;
   width: 100% !important;
-  padding-left: 28px !important; /* 💥 所有右侧文字都在这里起步 */
+  padding-left: 40px !important; /* 💥 统一缩进，觉得不够后，改大这个值 */
   margin: 0 !important;
 }
 
-/* 让原生的前置 <i>（比如锁链）绝对定位，脱离排版 */
+/* 清空文字内层边距 */
+section.category[data-name] .category-header h2 > span,
+section.category[data-name] .category-header h2 > div {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* 💥 原生前置图标（锁链等）：绝对定位钉死在最左侧 */
 section.category[data-name] .category-header h2 > i:not(:last-child) {
   position: absolute !important;
-  left: 0 !important;
+  left: 12px !important; 
   top: 50% !important;
   transform: translateY(-50%) !important;
   width: 24px !important;
   height: 24px !important;
   margin: 0 !important;
-  text-align: center !important;
-  line-height: 24px !important; /* 确保图标在容器里居中 */
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 18px !important;
 }
 
-/* 强行把箭头推到最右边 */
-section.category[data-name] .category-header h2 > *:last-child {
-  margin-left: auto !important;
-}
-
-/* 自定义图绝对定位，与原生图标位置重合 */
+/* 💥 自定义图伪元素：绝对定位，与原生图标重合 */
 section.category[data-name] .category-header h2::before {
   content: "" !important;
   display: none !important;
   position: absolute !important;
-  left: 0 !important;
+  left: 12px !important;
   top: 50% !important;
   transform: translateY(-50%) !important;
   width: 24px !important;
@@ -645,43 +672,56 @@ section.category[data-name] .category-header h2::before {
   background-position: center !important;
 }
 
-/* 开启自定义图并隐藏原生前置 <i> */
-section.category[data-name*="狗谍"] .category-header h2::before,
-section.category[data-name*="支援组"] .category-header h2::before,
-section.category[data-name*="狙谍"] .category-header h2::before,
-section.category[data-name*="医谍"] .category-header h2::before {
-  display: block !important;
-}
-section.category[data-name*="狗谍"] .category-header h2 > i:not(:last-child),
-section.category[data-name*="支援组"] .category-header h2 > i:not(:last-child),
-section.category[data-name*="狙谍"] .category-header h2 > i:not(:last-child),
-section.category[data-name*="医谍"] .category-header h2 > i:not(:last-child) {
-  display: none !important;
+/* 右侧箭头强制最右边 */
+section.category[data-name] .category-header h2 > *:last-child {
+  margin-left: auto !important;
 }
 
-/* 填入右侧图片（你新加的两个分类也可以这样往下写） */
+/* ================== 👇 右侧图标定制区 👇 ================== */
+
+/* 狗谍 */
+section.category[data-name*="狗谍"] .category-header h2 > i:not(:last-child) { display: none !important; }
 section.category[data-name*="狗谍"] .category-header h2::before {
+  display: block !important;
   background-image: url('https://shirasu224.github.io/menav/icons/scoutspy.png') !important;
 }
+
+/* 支援组 */
+section.category[data-name*="支援组"] .category-header h2 > i:not(:last-child) { display: none !important; }
 section.category[data-name*="支援组"] .category-header h2::before {
+  display: block !important;
   background-image: url('https://shirasu224.github.io/menav/icons/food.png') !important;
 }
-/* 👇 这是你新加的两个（注意替换真实链接） */
+
+section.category[data-name*="医谍"] .category-header h2 > i:not(:last-child) { display: none !important; }
 section.category[data-name*="医谍"] .category-header h2::before {
-  background-image: url('https://shirasu224.github.io/menav/icons/medicspy3.png') !important; 
+  display: block !important;
+  background-image: url('https://shirasu224.github.io/menav/icons/medicspy3.png') !important;
 }
+
+section.category[data-name*="狙谍"] .category-header h2 > i:not(:last-child) { display: none !important; }
 section.category[data-name*="狙谍"] .category-header h2::before {
-  background-image: url('https://shirasu224.github.io/menav/icons/sniperspy.png') !important; 
+  display: block !important;
+  background-image: url('https://shirasu224.github.io/menav/icons/sniperspy.png') !important;
 }
+
+/* 💥 如果你右侧加了新图，照这个格式写： */
+/*
+section.category[data-name*="医谍"] .category-header h2 > i:not(:last-child) { display: none !important; }
+section.category[data-name*="医谍"] .category-header h2::before {
+  display: block !important;
+  background-image: url('你的医谍右侧图片链接') !important;
+}
+*/
 
 
 /* ================== 3. 手机端适配 ================== */
 @media (max-width: 768px) {
   .sidebar { width: 220px !important; min-width: 220px !important; }
-  .submenu-item { padding-left: 22px !important; }
-  .submenu-item > i, .submenu-item::before { width: 14px !important; height: 14px !important; left: 4px !important; }
+  .submenu-item { padding-left: 26px !important; }
+  .submenu-item > i, .submenu-item::before { left: 6px !important; width: 14px !important; height: 14px !important; }
   
-  section.category[data-name] .category-header h2 { padding-left: 24px !important; }
+  section.category[data-name] .category-header h2 { padding-left: 32px !important; }
   section.category[data-name] .category-header h2 > i:not(:last-child),
-  section.category[data-name] .category-header h2::before { width: 20px !important; height: 20px !important; }
+  section.category[data-name] .category-header h2::before { left: 8px !important; width: 20px !important; height: 20px !important; }
 }
