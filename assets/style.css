@@ -665,8 +665,8 @@ section.category[data-name] .category-header h2::before {
   left: 8px !important;
   top: 50% !important;
   transform: translateY(-50%) !important;
-  width: 28px !important;
-  height: 28px !important;
+  width: 30px !important;
+  height: 30px !important;
   background-size: contain !important;
   background-repeat: no-repeat !important;
   background-position: center !important;
