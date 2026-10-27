@@ -41,7 +41,14 @@ html, body {
 /* --- 主标题基础设置 --- */
 .welcome-title,
 .dashboard-welcome h1 {
-  font-weight: 900 !important; /* 强制最高字重 */
+  /* 💥 移除 900，改用 bold，确保 iPad 能匹配到字体 */
+  font-weight: bold !important; 
+  /* 💥 强制加上这两行，修复 iPad Safari 的渲染 Bug */
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
+  /* 强制指定优先使用老宋体 */
+  font-family: "KingHwaOldSong", "KingHwa_OldSong", serif !important;
+
   margin: 0 !important; 
   padding: 0 !important;
   line-height: 1.2 !important;
