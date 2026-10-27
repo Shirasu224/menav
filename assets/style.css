@@ -725,3 +725,7 @@ section.category[data-name*="医谍"] .category-header h2::before {
   section.category[data-name] .category-header h2 > i:not(:last-child),
   section.category[data-name] .category-header h2::before { left: 8px !important; width: 20px !important; height: 20px !important; }
 }
+/* ================== 隐藏页面标题旁的更新时间提示 ================== */
+.page-updated-inline {
+  display: none !important;
+}
