@@ -624,7 +624,7 @@ html.light-theme .music-btn.playing {
 .submenu-item[data-category*="谍水仙"] > i { display: none !important; }
 .submenu-item[data-category*="谍水仙"]::before {
   display: block !important;
-  background-image: url('https://shirasu224.github.io/menav/icons/spycest3.png') !important;
+  background-image: url('https://shirasu224.github.io/menav/icons/spycest5.png') !important;
 }
 
 /* 💥 如果你左侧加了新图，照这个格式写，把名字和链接换掉就行： */
@@ -721,7 +721,7 @@ section.category[data-name*="狙谍"] .category-header h2::before {
 section.category[data-name*="谍水仙"] .category-header h2 > i:not(:last-child) { display: none !important; }
 section.category[data-name*="谍水仙"] .category-header h2::before {
   display: block !important;
-  background-image: url('https://shirasu224.github.io/menav/icons/spycest3.png') !important;
+  background-image: url('https://shirasu224.github.io/menav/icons/spycest5.png') !important;
 }
 
 /* 💥 如果你右侧加了新图，照这个格式写： */
