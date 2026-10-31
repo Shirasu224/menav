@@ -95,6 +95,13 @@ categories:
         icon: fas fa-heart-crack
         url: /menav/sample.htm
         
+  - name: "士兵谍 - Freedom Fries"
+    slug: Freedom Fries
+    sites:
+      - name: "占位符"
+        description: "占位符"
+        url: /menav/sample.htm
+        
   - name: "工程谍 - Napoleon Complex"
     slug: Napoleon Complex
     sites:
