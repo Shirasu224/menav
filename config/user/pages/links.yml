@@ -2,7 +2,7 @@ categories:
   - name: 参考网站
     icon: fas fa-link
     sites:
-      - name: 示例
-        url: https://shirasu224.github.io/menav/
-        icon: fa-solid fa-map
-        description: "占位符"
+      - name: 军团要塞2维基
+        url: https://wiki.teamfortress.com/wiki/Main_Page/zh-hans
+        faviconUrl: https://wiki.teamfortress.com/favicon.ico
+        description: "TF2 WIKI"
