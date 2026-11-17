@@ -1,7 +1,7 @@
 template: articles
 title: 全部文章
 categories:
-  - name: 翻译合集
+  - name: 写作教程
     sites:      
       - name: E标同人文写作终极指南
         url: https://shirasu224.github.io/menav/TUGWSF.htm
