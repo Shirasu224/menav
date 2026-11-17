@@ -11,6 +11,11 @@ categories:
         url: https://theportalwiki.com/wiki/Main_Page/zh-hans
         faviconUrl: https://i1.theportalwiki.net/img/thumb/5/51/Main_page_button_Story.png/128px-Main_page_button_Story.png
         description: "Portal WIKI"
+        
+      - name: 辐射维基
+        url: https://fallout.wiki/wiki/Fallout_Wiki
+        faviconUrl: https://www.google.com/s2/favicons?domain=fallout.wiki&sz=32
+        description: "Fallout WIKI"
 
   - name: 实用工具
     icon: fas fa-link
@@ -19,3 +24,41 @@ categories:
         url: https://line-of-action.com/zh
         faviconUrl: https://favicondl.com/api/proxy?url=https%3A%2F%2Fline-of-action.com%2Fandroid-chrome-512x512.png
         description: "Line Of Action"
+        
+      - name: 找英语表达词
+        url: https://motjuste.online/
+        faviconUrl: https://favicondl.com/api/proxy?url=https%3A%2F%2Fmotjuste.online%2Ffavicon.svg
+        description: "Find the words you mean."
+        
+      - name: 找中文表达词
+        url: https://shenyandayi.com/
+        faviconUrl: https://www.google.com/s2/favicons?domain=shenyandayi.com&sz=32
+        description: "深言达意"
+        
+      - name: DLC解锁
+        url: https://h.juij.fun/
+        faviconUrl: https://favicondl.com/api/proxy?url=https%3A%2F%2Fh.juij.fun%2Fjuij.png
+        description: "非线性列车"
+ 
+      - name: 文件转换
+        url: https://soconvert.com/
+        faviconUrl: https://favicondl.com/api/proxy?url=https%3A%2F%2Fsoconvert.com%2Ffav.ico%3Fv%3D3
+        description: "So Convert"
+        
+  - name: 辐射游戏相关
+    faviconUrl: data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxZW0iIGhlaWdodD0iMWVtIiB2aWV3Qm94PSIwIDAgMjQgMjQiPgoJPHBhdGggZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIgLz4KCTxwYXRoIGZpbGw9IiNmZmNhMjkiIGQ9Ik0xMiAyQzYuNSAyIDIgNi41IDIgMTJzNC41IDEwIDEwIDEwczEwLTQuNSAxMC0xMFMxNy41IDIgMTIgMm04IDEwaC00YzAtMS41LS44LTIuOC0yLTMuNGwyLTMuNWMyLjQgMS40IDQgMy45IDQgNi45bS04LTJjMS4xIDAgMiAuOSAyIDJzLS45IDItMiAycy0yLS45LTItMnMuOS0yIDItMk04IDUuMWMuNiAxIDEuMyAyLjMgMiAzLjVjLTEuMi43LTIgMi0yIDMuNEg0YzAtMyAxLjYtNS41IDQtNi45bTAgMTMuOGMuNi0xIDEuMy0yLjMgMi0zLjVjLjYuMyAxLjMuNiAyIC42czEuNC0uMiAyLS42bDIgMy41Yy0xLjIuNy0yLjUgMS4xLTQgMS4xcy0yLjgtLjQtNC0xLjEiIC8+Cjwvc3ZnPgo=
+    sites:
+      - name: 游骑兵指南
+        url: https://docs.qq.com/doc/p/76435efabd8056d47684aa5be57b60adccdb9e3e
+        faviconUrl: https://www.google.com/s2/favicons?domain=fallout.wiki&sz=32
+        description: "详细操作指导"
+        
+      - name: FNV外挂汉化
+        url: https://docs.qq.com/doc/p/c9d3d0af6bd471a575acfa8c62e2556e823cfcd7?nlc=1
+        faviconUrl: https://www.google.com/s2/favicons?domain=fallout.wiki&sz=32
+        description: "按[切换语言" 
+        
+      - name: 午夜骑行
+        url: https://themidnightride.moddinglinked.com/intro.html
+        faviconUrl: https://favicondl.com/api/proxy?url=https%3A%2F%2Fthemidnightride.moddinglinked.com%2Fimg%2FCoco%2FHead%2520Logo.webp
+        description: "辐射4模组指南"
