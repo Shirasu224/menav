@@ -95,6 +95,22 @@ categories:
         icon: fas fa-heart-crack
         url: /menav/sample.htm
         
+  - name: "医水仙 - Medicest"
+    slug: Medicest
+    sites:
+      - name: "占位符"
+        description: "占位符"
+        icon: fa-solid fa-comment-medical
+        url: /menav/sample.htm
+        
+  - name: "医狙 - Bush Medicine"
+    slug: Bush Medicine
+    sites:
+      - name: "占位符"
+        description: "占位符"
+        icon: fa-solid fa-frog
+        url: /menav/sample.htm
+        
   - name: "士兵谍 - Freedom Fries"
     slug: Freedom Fries
     sites:
