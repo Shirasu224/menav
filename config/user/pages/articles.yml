@@ -2,9 +2,11 @@ template: articles
 title: 全部文章
 categories:
   - name: 翻译合集
-    sites:
-      - name: 测试文章
-        url: https://shirasu224.github.io/menav/are_We_any_Different.html
+    sites:      
+      - name: E标同人文写作
+        url: https://shirasu224.github.io/menav/TUGWSF.htm
+        icon: fa-solid fa-book-bible
+        description: "The Ultimate Guide to Writing Smut Fic"
         
       - name: 测试文章2
         url: your_hate_for_the_other.htm
@@ -14,6 +16,3 @@ categories:
         
       - name: 测试文章4
         url: Risky_Business.htm
-
-
-
