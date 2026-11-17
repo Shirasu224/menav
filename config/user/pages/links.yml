@@ -2,6 +2,7 @@ categories:
   - name: 参考网站
     icon: fas fa-link
     sites:
-      - name: 色情同人文写作终极指南
+      - name: 黄文写作终极指南
         url: https://shirasu224.github.io/menav/TUGWSF.htm
         icon: fa-solid fa-book-bible
+        description: "写作"
