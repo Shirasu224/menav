@@ -1,5 +1,5 @@
 template: articles
-title: 全部文章
+title: 教程
 categories:
   - name: 写作教程
     icon: fa-solid fa-pen-clip
