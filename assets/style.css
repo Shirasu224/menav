@@ -627,6 +627,12 @@ html.light-theme .music-btn.playing {
   background-image: url('https://shirasu224.github.io/menav/icons/spycest6.png') !important;
 }
 
+.submenu-item[data-category*="狙烧"] > i { display: none !important; }
+.submenu-item[data-category*="狙烧"]::before {
+  display: block !important;
+  background-image: url('https://wiki.teamfortress.com/w/images/thumb/0/02/Firewatch.png/64px-Firewatch.png') !important;
+}
+
 /* 💥 如果你左侧加了新图，照这个格式写，把名字和链接换掉就行： */
 /*
 .submenu-item[data-category*="医谍"] > i { display: none !important; }
