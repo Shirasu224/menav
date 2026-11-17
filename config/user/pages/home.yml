@@ -109,16 +109,32 @@ categories:
       - name: "占位符"
         description: "占位符"
         icon: fa-solid fa-frog
+        url: /menav/sample.htm 
+        
+  - name: "狙烧 - Bush Fire"
+    slug: Bush Fire
+    sites:
+      - name: "占位符"
+        description: "占位符"
+        icon: fa-solid fa-fire-burner
+        url: /menav/sample.htm        
+        
+  - name: "谍重 - Spoovy"
+    slug: Spoovy
+    sites:
+      - name: "占位符"
+        description: "占位符"
+        icon: fa-solid fa-eye
         url: /menav/sample.htm
         
-  - name: "士兵谍 - Freedom Fries"
+  - name: "兵谍 - Freedom Fries"
     slug: Freedom Fries
     sites:
       - name: "占位符"
         description: "占位符"
         url: /menav/sample.htm
         
-  - name: "工程谍 - Napoleon Complex"
+  - name: "工谍 - Napoleon Complex"
     slug: Napoleon Complex
     sites:
       - name: "向胡椒野狼致歉"
