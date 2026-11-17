@@ -13,9 +13,9 @@ navigation:
   - name: 画廊
     icon: fas fa-bookmark  
     id: bookmarks          
-  - name: 其他
+  - name: 教程资源
     icon: fas fa-book
     id: articles  
-  - name: 资源库
+  - name: 参考网址
     icon: fas fa-link
     id: links
