@@ -35,6 +35,11 @@ categories:
         faviconUrl: https://www.google.com/s2/favicons?domain=shenyandayi.com&sz=32
         description: "深言达意"
         
+      - name: Favicon提取器
+        url: https://favicondl.com/zh/
+        faviconUrl: https://favicondl.com/api/proxy?url=https%3A%2F%2Ffavicondl.com%2Ffavicons%2Fandroid-chrome-512x512.png
+        description: "提取与下载SVG"
+        
       - name: DLC解锁
         url: https://h.juij.fun/
         faviconUrl: https://favicondl.com/api/proxy?url=https%3A%2F%2Fh.juij.fun%2Fjuij.png
