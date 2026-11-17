@@ -5,7 +5,7 @@ categories:
       - name: 军团要塞2维基
         url: https://wiki.teamfortress.com/wiki/Main_Page/zh-hans
         faviconUrl: https://cdn2.steamgriddb.com/icon/b43500a3d5362c75c3b893ca2d8a3c0f.ico
-        description: "Team Fortress2 WIKI"
+        description: "Team Fortress 2 WIKI"
         
       - name: 传送门维基
         url: https://theportalwiki.com/wiki/Main_Page/zh-hans
@@ -16,6 +16,12 @@ categories:
         url: https://fallout.wiki/wiki/Fallout_Wiki
         faviconUrl: https://www.google.com/s2/favicons?domain=fallout.wiki&sz=32
         description: "Fallout WIKI"
+        
+      - name: 影视套路维基
+        url: https://tvtropes.org/
+        faviconUrl: https://tvtropes.org/favicon.ico
+        description: "TV Tropes WIKI"
+
 
   - name: 实用工具
     icon: fa-solid fa-wrench
@@ -39,6 +45,16 @@ categories:
         url: https://favicondl.com/zh/
         faviconUrl: https://favicondl.com/api/proxy?url=https%3A%2F%2Ffavicondl.com%2Ffavicons%2Fandroid-chrome-512x512.png
         description: "提取与下载SVG"
+        
+      - name: 油管下载器
+        url: https://y2down.cc/enir/
+        faviconUrl: https://favicondl.com/api/proxy?url=https%3A%2F%2Fy2down.cc%2Ffavicon.svg
+        description: "YouTube Downloader and Converter"
+        
+      - name: iKuuuVPN
+        url: https://ikuuu.top/user
+        faviconUrl: https://favicondl.com/api/proxy?url=https%3A%2F%2Fikuuu.top%2Ffavicon.ico
+        description: "Clash For Windows"
         
       - name: DLC解锁
         url: https://h.juij.fun/
