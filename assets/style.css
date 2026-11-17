@@ -644,6 +644,12 @@ html.light-theme .music-btn.playing {
   background-image: url('https://shirasu224.github.io/menav/icons/bushfire.png') !important;
 }
 
+.submenu-item[data-category*="全员向"] > i { display: none !important; }
+.submenu-item[data-category*="全员向"]::before {
+  display: block !important;
+  background-image: url('https://cdn2.steamgriddb.com/icon/b43500a3d5362c75c3b893ca2d8a3c0f.ico') !important;
+}
+
 /* 💥 如果你左侧加了新图，照这个格式写，把名字和链接换掉就行： */
 /*
 .submenu-item[data-category*="医谍"] > i { display: none !important; }
@@ -746,15 +752,23 @@ section.category[data-name*="工谍"] .category-header h2::before {
   display: block !important;
   background-image: url('https://shirasu224.github.io/menav/icons/engiespy.png') !important;
 }
+
 section.category[data-name*="医水仙"] .category-header h2 > i:not(:last-child) { display: none !important; }
 section.category[data-name*="医水仙"] .category-header h2::before {
   display: block !important;
   background-image: url('https://shirasu224.github.io/menav/icons/medicest.png') !important;
 }
+
 section.category[data-name*="狙烧"] .category-header h2 > i:not(:last-child) { display: none !important; }
 section.category[data-name*="狙烧"] .category-header h2::before {
   display: block !important;
   background-image: url('https://shirasu224.github.io/menav/icons/bushfire.png') !important;
+}
+
+section.category[data-name*="全员向"] .category-header h2 > i:not(:last-child) { display: none !important; }
+section.category[data-name*="全员向"] .category-header h2::before {
+  display: block !important;
+  background-image: url('https://cdn2.steamgriddb.com/icon/b43500a3d5362c75c3b893ca2d8a3c0f.ico') !important;
 }
 
 /* 💥 如果你右侧加了新图，照这个格式写： */
