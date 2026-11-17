@@ -1,8 +1,8 @@
 template: articles
 title: 全部文章
-icon: fa-solid fa-pen-clip
 categories:
   - name: 写作教程
+    icon: fa-solid fa-pen-clip
     sites:      
       - name: E标同人文写作终极指南
         url: https://shirasu224.github.io/menav/TUGWSF.htm
