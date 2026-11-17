@@ -11,3 +11,11 @@ categories:
         url: https://theportalwiki.com/wiki/Main_Page/zh-hans
         faviconUrl: https://i1.theportalwiki.net/img/thumb/5/51/Main_page_button_Story.png/128px-Main_page_button_Story.png
         description: "Portal WIKI"
+
+  - name: 实用工具
+    icon: fas fa-link
+    sites:
+      - name: 速写参考
+        url: https://line-of-action.com/zh
+        faviconUrl: https://favicondl.com/api/proxy?url=https%3A%2F%2Fline-of-action.com%2Fandroid-chrome-512x512.png
+        description: "Line Of Action"
