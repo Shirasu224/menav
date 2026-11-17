@@ -1,8 +1,13 @@
 categories:
-  - name: 参考网站
+  - name: 维基
     icon: fas fa-link
     sites:
       - name: 军团要塞2维基
         url: https://wiki.teamfortress.com/wiki/Main_Page/zh-hans
         faviconUrl: https://cdn2.steamgriddb.com/icon/b43500a3d5362c75c3b893ca2d8a3c0f.ico
-        description: "TF2 WIKI"
+        description: "Team Fortress2 WIKI"
+        
+      - name: 传送门维基
+        url: https://theportalwiki.com/wiki/Main_Page/zh-hans
+        faviconUrl: https://i1.theportalwiki.net/img/thumb/5/51/Main_page_button_Story.png/128px-Main_page_button_Story.png
+        description: "Portal WIKI"
