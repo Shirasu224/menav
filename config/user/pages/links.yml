@@ -1,8 +1,8 @@
 categories:
-  - name: 写作教程
+  - name: 参考网站
     icon: fas fa-link
     sites:
-      - name: E标同人文写作
-        url: https://shirasu224.github.io/menav/TUGWSF.htm
-        icon: fa-solid fa-book-bible
-        description: "The Ultimate Guide to Writing Smut Fic"
+      - name: 示例
+        url: https://shirasu224.github.io/menav/
+        icon: fa-solid fa-map
+        description: "占位符"
