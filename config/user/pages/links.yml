@@ -21,6 +21,24 @@ categories:
         url: https://tvtropes.org/
         faviconUrl: https://tvtropes.org/favicon.ico
         description: "TV Tropes WIKI"
+        
+  - name: 创作平台
+    icon: fa-solid fa-kitchen-set
+    sites:
+      - name: AO3
+        url: https://archiveofourown.org/
+        faviconUrl: https://cdn2.steamgriddb.com/icon/b43500a3d5362c75c3b893ca2d8a3c0f.ico
+        description: "Archive Of Our Own"
+        
+      - name: 推特
+        url: https://x.com/home
+        faviconUrl: https://favicondl.com/api/proxy?url=https%3A%2F%2Fabs.twimg.com%2Fresponsive-web%2Fclient-web%2Ficon-ios.77d25eba.png
+        description: "Twitter"
+
+      - name: 汤不热
+        url: https://www.tumblr.com/
+        faviconUrl: https://favicondl.com/api/proxy?url=https%3A%2F%2Fassets.tumblr.com%2Fpop%2Fmanifest%2Ffavicon-cfddd25f.svg
+        description: "Tumblr"
 
 
   - name: 实用工具
