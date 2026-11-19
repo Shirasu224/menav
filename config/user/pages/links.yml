@@ -27,7 +27,7 @@ categories:
     sites:
       - name: AO3
         url: https://archiveofourown.org/
-        faviconUrl: https://cdn2.steamgriddb.com/icon/b43500a3d5362c75c3b893ca2d8a3c0f.ico
+        faviconUrl: https://shirasu224.github.io/menav/icons/archive-of-our-own-2.svg
         description: "Archive Of Our Own"
         
       - name: 推特
