@@ -114,8 +114,8 @@ categories:
   - name: "狙烧 - Bush Fire"
     slug: Bush Fire
     sites:
-      - name: "占位符"
-        description: "占位符"
+      - name: "火焰箭"
+        description: "Flaming Arrow"
         icon: fa-solid fa-fire-burner
         url: /menav/sample.htm        
         
