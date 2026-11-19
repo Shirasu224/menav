@@ -23,7 +23,7 @@ categories:
         description: "TV Tropes WIKI"
         
   - name: 创作平台
-    icon: fa-solid fa-kitchen-set
+    icon: fa-solid fa-utensils
     sites:
       - name: AO3
         url: https://archiveofourown.org/
