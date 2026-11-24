@@ -85,7 +85,7 @@ categories:
         description: "So Convert"
         
   - name: 建模学习
-    icon: fa-solid fa-wrench
+    icon: fa-solid fa-cube
     sites:
       - name: SFMLab
         url: https://open3dlab.com/
