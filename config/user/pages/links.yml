@@ -84,6 +84,19 @@ categories:
         faviconUrl: https://favicondl.com/api/proxy?url=https%3A%2F%2Fsoconvert.com%2Ffav.ico%3Fv%3D3
         description: "So Convert"
         
+  - name: 建模学习
+    icon: fa-solid fa-wrench
+    sites:
+      - name: SFMLab
+        url: https://open3dlab.com/
+        faviconUrl: https://favicondl.com/api/proxy?url=https%3A%2F%2Fopen3dlab.com%2Ffavicon.ico
+        description: "Open3DLab"
+        
+      - name: 龋齿一号
+        url: https://www.gfxcamp.com/
+        faviconUrl: https://www.google.com/s2/favicons?domain=gfxcamp.com&sz=32
+        description: "GFXCAMP"
+        
   - name: 辐射游戏相关
     icon: fa-solid fa-circle-radiation
     sites:
