@@ -87,7 +87,7 @@ categories:
   - name: 建模学习
     icon: fa-solid fa-cube
     sites:
-      - name: SFMLab
+      - name: 人物模型
         url: https://open3dlab.com/
         faviconUrl: https://favicondl.com/api/proxy?url=https%3A%2F%2Fopen3dlab.com%2Ffavicon.ico
         description: "Open3DLab"
